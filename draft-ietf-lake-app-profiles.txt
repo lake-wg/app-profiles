@@ -101,12 +101,14 @@ Table of Contents
      11.4.  EDHOC Information Registry
      11.5.  EDHOC Application Profiles Registry
      11.6.  EDHOC Endpoint Identity Types Registry
-     11.7.  EDHOC Transport Registry
+     11.7.  EDHOC Transports Registry
      11.8.  Expert Review Instructions
    12. References
      12.1.  Normative References
      12.2.  Informative References
    Appendix A.  CDDL Model
+   Appendix B.  Document Updates
+     B.1.  Version -00 to -01
    Acknowledgments
    Authors' Addresses
 
@@ -1163,9 +1165,9 @@ Table of Contents
    This registry has been initially populated with the values in
    Table 4.
 
-11.7.  EDHOC Transport Registry
+11.7.  EDHOC Transports Registry
 
-   IANA is requested to create a new "EDHOC Transport" registry within
+   IANA is requested to create a new "EDHOC Transports" registry within
    the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group
    defined in [RFC9528].
 
@@ -1398,6 +1400,14 @@ Appendix A.  CDDL Model
    c509_cert = 3
 
                             Figure 2: CDDL model
+
+Appendix B.  Document Updates
+
+   This section is to be removed before publishing as an RFC.
+
+B.1.  Version -00 to -01
+
+   *  Editorial improvements.
 
 Acknowledgments
 
