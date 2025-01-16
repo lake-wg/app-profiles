@@ -638,9 +638,9 @@ The columns of this registry are:
 
 This registry has been initially populated with the values in {{table-edhoc-endpoint-identity-types}}.
 
-## EDHOC Transport Registry ## {#iana-edhoc-transports}
+## EDHOC Transports Registry ## {#iana-edhoc-transports}
 
-IANA is requested to create a new "EDHOC Transport" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group defined in {{RFC9528}}.
+IANA is requested to create a new "EDHOC Transports" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group defined in {{RFC9528}}.
 
 The registration policy is either "Private Use", "Standards Action with Expert Review", or "Specification Required" per {{Section 4.6 of RFC8126}}. "Expert Review" guidelines are provided in {{iana-expert-review}}.
 
@@ -704,6 +704,13 @@ c5c = 25
 c509_cert = 3
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-model title="CDDL model" artwork-align="left"}
+
+# Document Updates # {#sec-document-updates}
+{:removeinrfc}
+
+## Version -00 to -01 ## {#sec-00-01}
+
+* Editorial improvements.
 
 # Acknowledgments # {#acknowledgments}
 {:numbered="false"}
