@@ -936,7 +936,7 @@ Table of Contents
 
    Content Coding: -
 
-   ID: TBD
+   ID: TBD (range 0-255)
 
    Reference: [RFC-XXXX]
 
@@ -1401,6 +1401,10 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -00 to -01
+
+   *  Updated IANA considerations:
+
+      -  Suggested range 0-255 for CoAP Content-Format ID.
 
    *  Updated references.
 
