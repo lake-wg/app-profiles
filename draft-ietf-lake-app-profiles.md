@@ -510,7 +510,7 @@ Content Type: application/edhoc-app-profile+cbor-seq
 
 Content Coding: -
 
-ID: TBD
+ID: TBD (range 0-255)
 
 Reference: {{&SELF}}
 
@@ -709,6 +709,10 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -00 to -01 ## {#sec-00-01}
+
+* Updated IANA considerations:
+
+  - Suggested range 0-255 for CoAP Content-Format ID.
 
 * Updated references.
 
