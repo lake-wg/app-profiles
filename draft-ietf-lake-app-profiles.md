@@ -426,6 +426,8 @@ This application profile is aligned with the example traces of EDHOC compiled in
 
 This document defines the following identifiers of well-known EDHOC application profiles.
 
+Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RFC number of this specification and delete this paragraph.
+
 | Profile ID | Name                 | Description                                                                                                                      | Reference |
 | 0          | WK-MINIMAL-CS-2      | Method 3; Cipher Suite 2; CCS; kid                                                                                               | {{&SELF}} |
 | 1          | WK-MINIMAL-CS-0      | Method 3; Cipher Suite 0; CCS; kid                                                                                               | {{&SELF}} |
@@ -441,6 +443,8 @@ This document defines the following identifiers of well-known EDHOC application 
 # EDHOC Endpoint Identity Types # {#sec-edhoc-endpoint-identity-types}
 
 This document defines the following identifier of type of endpoint identity for EDHOC.
+
+Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RFC number of this specification and delete this paragraph.
 
 | Name   | CBOR label | Description        | Reference            |
 | EUI-64 | 0          | An EUI-64 identity | {{&SELF}}{{RFC4291}} |
