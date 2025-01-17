@@ -157,10 +157,10 @@ RES: 2.05 Content
 This document defines the new parameter "app\_prof" of the EDHOC_Information object, as summarized in {{table-cbor-key-edhoc-params}} and described further below.
 
 | Name     | CBOR label | CBOR type    | Registry                            | Description                                 |
-| app_prof | 18         | int or array | EDHOC Application Profiles Registry | Set of supported EDHOC Application Profiles |
+| app_prof | 23         | int or array | EDHOC Application Profiles Registry | Set of supported EDHOC Application Profiles |
 {: #table-cbor-key-edhoc-params title="EDHOC_Information Parameter \"app_prof\"" align="center"}
 
-* app\_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app\_prof" value is an integer or an array of integers. In CBOR, "app\_prof" is an integer or an array of integers, and has label 18. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
+* app\_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app\_prof" value is an integer or an array of integers. In CBOR, "app\_prof" is an integer or an array of integers, and has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
 ### Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -263,7 +263,7 @@ The CDDL grammar describing the EDHOC_Application_Profile object is:
 EDHOC_Application_Profile = {
       1 => int / array,    ; methods
       9 => int / array,    ; cred_types
-     18 => int,            ; app_prof
+     23 => int,            ; app_prof
    * int / tstr => any
 }
 ~~~~~~~~~~~
@@ -596,7 +596,7 @@ IANA is asked to register the following entries in the "EDHOC Information" regis
 <br>
 
 * Name: app_prof
-* CBOR label: 18
+* CBOR label: 23
 * CBOR type: int or array
 * Registry: EDHOC Application Profiles Registry
 * Description: Set of supported EDHOC Application Profiles
@@ -687,7 +687,7 @@ methods = 1
 cipher_suites = 2
 cred_types = 9
 id_cred_types = 10
-app_prof = 18
+app_prof = 23
 
 ; EDHOC Application Profiles
 APP-PROF-WK-MINIMAL-CS-2 = 0
@@ -715,6 +715,8 @@ c509_cert = 3
 ## Version -00 to -01 ## {#sec-00-01}
 
 * Content-Format abbreviated as "ct" (not "cf").
+
+* CBOR abbreviation of "app_prof" changed to 23.
 
 * Updated IANA considerations:
 
