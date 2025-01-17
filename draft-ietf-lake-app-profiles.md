@@ -46,7 +46,7 @@ normative:
   RFC9200:
   RFC9423:
   RFC9528:
-  I-D.ietf-core-oscore-edhoc:
+  RFC9668:
   I-D.ietf-ace-edhoc-oscore-profile:
   COSE.Header.Parameters:
     author:
@@ -81,7 +81,7 @@ This document defines a number of means to coordinate the use and discovery of E
 
 * The new parameter "ed-prof" defined in {{web-linking}}. This parameter is employed to specify an EDHOC application profile identified by its Profile ID, and can be used as target attribute in a web link {{RFC8288}} to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources.
 
-  For instance, the target attribute can be used in a link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over CoAP {{RFC7252}} (see {{Section A.2 of RFC9528}} as well as {{I-D.ietf-core-oscore-edhoc}}).
+  For instance, the target attribute can be used in a link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over CoAP {{RFC7252}} (see {{Section A.2 of RFC9528}} as well as {{RFC9668}}).
 
 * The new parameter "app_prof" defined in {{sec-edhoc-information-object}} for the EDHOC_Information object specified in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter is employed to specify a set of EDHOC application profiles, each identified by its Profile ID.
 
@@ -99,7 +99,7 @@ Finally, this document defines a set of well-known EDHOC application profiles (s
 
 {::boilerplate bcp14-tagged}
 
-The reader is expected to be familiar with terms and concepts defined in EDHOC {{RFC9528}}, and with the use of EDHOC with CoAP {{RFC7252}} and OSCORE {{RFC8613}} defined in {{I-D.ietf-core-oscore-edhoc}}.
+The reader is expected to be familiar with terms and concepts defined in EDHOC {{RFC9528}}, and with the use of EDHOC with CoAP {{RFC7252}} and OSCORE {{RFC8613}} defined in {{RFC9668}}.
 
 Concise Binary Object Representation (CBOR) {{RFC8949}} and Concise Data Definition Language (CDDL) {{RFC8610}} are used in this document. CDDL predefined type names, especially bstr for CBOR byte strings and tstr for CBOR text strings, are used extensively in this document.
 
@@ -115,7 +115,7 @@ This section defines two means to identify EDHOC application profiles by their P
 
 ## Web Linking # {#web-linking}
 
-{{Section 6 of I-D.ietf-core-oscore-edhoc}} defines a number of target attributes that can be used in a web link {{RFC8288}} with resource type "core.edhoc" (see {{Section 10.10 of RFC9528}}). This is the case, e.g., when using a link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over CoAP {{RFC7252}} as defined in {{Section A.2 of RFC9528}}. This allows a client to obtain relevant information about the EDHOC application profile(s) to be used with a certain EDHOC resource.
+{{Section 6 of RFC9668}} defines a number of target attributes that can be used in a web link {{RFC8288}} with resource type "core.edhoc" (see {{Section 10.10 of RFC9528}}). This is the case, e.g., when using a link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over CoAP {{RFC7252}} as defined in {{Section A.2 of RFC9528}}. This allows a client to obtain relevant information about the EDHOC application profile(s) to be used with a certain EDHOC resource.
 
 In the same spirit, this section defines the following additional parameter, which can be optionally specified as a target attribute with the same name in the link to the respective EDHOC resource, or among the filter criteria in a discovery request from a client.
 
@@ -125,7 +125,7 @@ When specifying the parameter 'ed-prof' in a link to an EDHOC resource, the targ
 
 If a link to an EDHOC resource includes occurrences of the target attribute 'ed-prof', then the following applies.
 
-* The link MUST NOT include other target attributes that provide information about an EDHOC application profile (see, e.g., {{Section 6 of I-D.ietf-core-oscore-edhoc}} and {{sec-parameters-web-linking}} of this document), with the exception of the target attribute 'ed-ead' that MAY be included.
+* The link MUST NOT include other target attributes that provide information about an EDHOC application profile (see, e.g., {{Section 6 of RFC9668}} and {{sec-parameters-web-linking}} of this document), with the exception of the target attribute 'ed-ead' that MAY be included.
 
   The recipient MUST ignore other target attributes that provide information about an EDHOC application profile, with the exception of the target attribute 'ed-ead'.
 
@@ -190,7 +190,7 @@ If the EDHOC_Information object specified as value of "edhoc_info" includes the 
 
 # Additional Parameters for Web Linking # {#sec-parameters-web-linking}
 
-Building on what is defined and prescribed in {{Section 6 of I-D.ietf-core-oscore-edhoc}}, this section defines additional parameters for web linking {{RFC8288}}, which can be used to obtain relevant pieces of information from the EDHOC application profile associated with an EDHOC resource.
+Building on what is defined and prescribed in {{Section 6 of RFC9668}}, this section defines additional parameters for web linking {{RFC8288}}, which can be used to obtain relevant pieces of information from the EDHOC application profile associated with an EDHOC resource.
 
 These parameters can be optionally specified as target attributes with the same name in a link with resource type "core.edhoc" (see {{Section 10.10 of RFC9528}}) targeting an EDHOC resource, or as filter criteria in a discovery request from a client.
 
@@ -709,6 +709,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -00 to -01 ## {#sec-00-01}
+
+* Updated references.
 
 * Editorial improvements.
 
