@@ -319,7 +319,7 @@ Table of Contents
    | Name     | CBOR  | CBOR   | Registry          | Description       |
    |          | label | type   |                   |                   |
    +==========+=======+========+===================+===================+
-   | app_prof | 18    | int    | EDHOC Application | Set of supported  |
+   | app_prof | 23    | int    | EDHOC Application | Set of supported  |
    |          |       | or     | Profiles Registry | EDHOC Application |
    |          |       | array  |                   | Profiles          |
    +----------+-------+--------+-------------------+-------------------+
@@ -333,7 +333,7 @@ Table of Contents
       array of integers, where each array element encodes one Profile
       ID.  In JSON, the "app_prof" value is an integer or an array of
       integers.  In CBOR, "app_prof" is an integer or an array of
-      integers, and has label 18.  The integer values are taken from the
+      integers, and has label 23.  The integer values are taken from the
       'Profile ID' column of the "EDHOC Application Profiles" registry
       defined in Section 11.5 of this document.
 
@@ -595,7 +595,7 @@ Table of Contents
    EDHOC_Application_Profile = {
          1 => int / array,    ; methods
          9 => int / array,    ; cred_types
-        18 => int,            ; app_prof
+        23 => int,            ; app_prof
       * int / tstr => any
    }
 
@@ -1071,7 +1071,7 @@ Table of Contents
 
    *  Name: app_prof
 
-   *  CBOR label: 18
+   *  CBOR label: 23
 
    *  CBOR type: int or array
 
@@ -1380,7 +1380,7 @@ Appendix A.  CDDL Model
    cipher_suites = 2
    cred_types = 9
    id_cred_types = 10
-   app_prof = 18
+   app_prof = 23
 
    ; EDHOC Application Profiles
    APP-PROF-WK-MINIMAL-CS-2 = 0
@@ -1409,6 +1409,8 @@ Appendix B.  Document Updates
 B.1.  Version -00 to -01
 
    *  Content-Format abbreviated as "ct" (not "cf").
+
+   *  CBOR abbreviation of "app_prof" changed to 23.
 
    *  Updated IANA considerations:
 
