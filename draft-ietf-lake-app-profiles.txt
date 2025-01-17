@@ -761,6 +761,9 @@ Table of Contents
    This document defines the following identifiers of well-known EDHOC
    application profiles.
 
+   Note to RFC Editor: Please replace all occurrences of "[RFC-XXXX]"
+   with the RFC number of this specification and delete this paragraph.
+
    +=========+======================+=====================+============+
    | Profile | Name                 | Description         | Reference  |
    | ID      |                      |                     |            |
@@ -828,6 +831,9 @@ Table of Contents
 
    This document defines the following identifier of type of endpoint
    identity for EDHOC.
+
+   Note to RFC Editor: Please replace all occurrences of "[RFC-XXXX]"
+   with the RFC number of this specification and delete this paragraph.
 
     +========+============+====================+=====================+
     | Name   | CBOR label | Description        | Reference           |
