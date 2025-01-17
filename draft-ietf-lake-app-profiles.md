@@ -198,7 +198,7 @@ When specifying any of the parameters defined below in a link to an EDHOC resour
 
 * 'ed-max-msgsize', specifying the admitted maximum size of EDHOC messages in bytes. This parameter MUST specify a single unsigned integer value.
 
-* 'ed-coap-cf', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see {{Sections 3.4.1 and A.2 of RFC9528}}). A value MUST NOT be given to this parameter and any present value MUST be ignored by the recipient.
+* 'ed-coap-ct', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see {{Sections 3.4.1 and A.2 of RFC9528}}). A value MUST NOT be given to this parameter and any present value MUST be ignored by the recipient.
 
 * 'ed-idep-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter MUST specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" Registry defined in {{sec-edhoc-endpoint-identity-types}} of this document. This parameter MAY occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.
 
@@ -212,7 +212,7 @@ Editor's note: these parameters can better be defined directly in {{Section 3.4 
 
 | Name        | CBOR label | CBOR type     | Registry                               | Description                                                                                                                                                                |
 | max_msgsize | 14         | uint          |                                        | Maximum size of EDHOC messages in bytes                                                                                                                                    |
-| coap_cf     | 15         | True of False |                                        | Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier |
+| coap_ct     | 15         | True of False |                                        | Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier |
 | id_ep_types | 16         | int or array  | EDHOC Endpoint Identity Types Registry | Set of supported types of endpoint identities for EDHOC                                                                                                                    |
 | transports  | 17         | int or array  | EDHOC Transports Registry              | Set of supported means for transporting EDHOC messages                                                                                                                     |
 {: #table-cbor-key-edhoc-params-2 title="EDHOC_Information Parameters" align="center"}
@@ -525,7 +525,7 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 <br>
 
-* Attribute Name: ed-coap-cf
+* Attribute Name: ed-coap-ct
 * Brief Description: Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier
 * Change Controller: IETF
 * Reference: {{&SELF}}
@@ -564,7 +564,7 @@ IANA is asked to register the following entries in the "EDHOC Information" regis
 
 <br>
 
-* Name: coap_cf
+* Name: coap_ct
 * CBOR label: 15
 * CBOR type: True or False
 * Registry:
@@ -709,6 +709,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -00 to -01 ## {#sec-00-01}
+
+* Content-Format abbreviated as "ct" (not "cf").
 
 * Updated IANA considerations:
 
