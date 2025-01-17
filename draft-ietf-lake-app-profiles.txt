@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 20 July 2025                                    16 January 2025
+Expires: 21 July 2025                                    17 January 2025
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 July 2025.
+   This Internet-Draft will expire on 21 July 2025.
 
 Copyright Notice
 
@@ -146,7 +146,7 @@ Table of Contents
       For instance, the target attribute can be used in a link-format
       document [RFC6690] describing EDHOC resources at a server, when
       EDHOC is transferred over CoAP [RFC7252] (see Appendix A.2 of
-      [RFC9528] as well as [I-D.ietf-core-oscore-edhoc]).
+      [RFC9528] as well as [RFC9668]).
 
    *  The new parameter "app_prof" defined in Section 2.2 for the
       EDHOC_Information object specified in
@@ -199,7 +199,7 @@ Table of Contents
 
    The reader is expected to be familiar with terms and concepts defined
    in EDHOC [RFC9528], and with the use of EDHOC with CoAP [RFC7252] and
-   OSCORE [RFC8613] defined in [I-D.ietf-core-oscore-edhoc].
+   OSCORE [RFC8613] defined in [RFC9668].
 
    Concise Binary Object Representation (CBOR) [RFC8949] and Concise
    Data Definition Language (CDDL) [RFC8610] are used in this document.
@@ -233,14 +233,14 @@ Table of Contents
 
 2.1.  Web Linking
 
-   Section 6 of [I-D.ietf-core-oscore-edhoc] defines a number of target
-   attributes that can be used in a web link [RFC8288] with resource
-   type "core.edhoc" (see Section 10.10 of [RFC9528]).  This is the
-   case, e.g., when using a link-format document [RFC6690] describing
-   EDHOC resources at a server, when EDHOC is transferred over CoAP
-   [RFC7252] as defined in Appendix A.2 of [RFC9528].  This allows a
-   client to obtain relevant information about the EDHOC application
-   profile(s) to be used with a certain EDHOC resource.
+   Section 6 of [RFC9668] defines a number of target attributes that can
+   be used in a web link [RFC8288] with resource type "core.edhoc" (see
+   Section 10.10 of [RFC9528]).  This is the case, e.g., when using a
+   link-format document [RFC6690] describing EDHOC resources at a
+   server, when EDHOC is transferred over CoAP [RFC7252] as defined in
+   Appendix A.2 of [RFC9528].  This allows a client to obtain relevant
+   information about the EDHOC application profile(s) to be used with a
+   certain EDHOC resource.
 
    In the same spirit, this section defines the following additional
    parameter, which can be optionally specified as a target attribute
@@ -262,9 +262,8 @@ Table of Contents
 
    *  The link MUST NOT include other target attributes that provide
       information about an EDHOC application profile (see, e.g.,
-      Section 6 of [I-D.ietf-core-oscore-edhoc] and Section 3 of this
-      document), with the exception of the target attribute 'ed-ead'
-      that MAY be included.
+      Section 6 of [RFC9668] and Section 3 of this document), with the
+      exception of the target attribute 'ed-ead' that MAY be included.
 
       The recipient MUST ignore other target attributes that provide
       information about an EDHOC application profile, with the exception
@@ -403,11 +402,10 @@ Table of Contents
 
 3.  Additional Parameters for Web Linking
 
-   Building on what is defined and prescribed in Section 6 of
-   [I-D.ietf-core-oscore-edhoc], this section defines additional
-   parameters for web linking [RFC8288], which can be used to obtain
-   relevant pieces of information from the EDHOC application profile
-   associated with an EDHOC resource.
+   Building on what is defined and prescribed in Section 6 of [RFC9668],
+   this section defines additional parameters for web linking [RFC8288],
+   which can be used to obtain relevant pieces of information from the
+   EDHOC application profile associated with an EDHOC resource.
 
    These parameters can be optionally specified as target attributes
    with the same name in a link with resource type "core.edhoc" (see
@@ -1271,16 +1269,6 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
               edhoc-oscore-profile-06>.
 
-   [I-D.ietf-core-oscore-edhoc]
-              Palombini, F., Tiloca, M., Höglund, R., Hristozov, S., and
-              G. Selander, "Using Ephemeral Diffie-Hellman Over COSE
-              (EDHOC) with the Constrained Application Protocol (CoAP)
-              and Object Security for Constrained RESTful Environments
-              (OSCORE)", Work in Progress, Internet-Draft, draft-ietf-
-              core-oscore-edhoc-11, 9 April 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-core-
-              oscore-edhoc-11>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -1363,6 +1351,13 @@ Table of Contents
               DOI 10.17487/RFC9528, March 2024,
               <https://www.rfc-editor.org/rfc/rfc9528>.
 
+   [RFC9668]  Palombini, F., Tiloca, M., Höglund, R., Hristozov, S., and
+              G. Selander, "Using Ephemeral Diffie-Hellman Over COSE
+              (EDHOC) with the Constrained Application Protocol (CoAP)
+              and Object Security for Constrained RESTful Environments
+              (OSCORE)", RFC 9668, DOI 10.17487/RFC9668, November 2024,
+              <https://www.rfc-editor.org/rfc/rfc9668>.
+
 12.2.  Informative References
 
    [RFC9529]  Selander, G., Preuß Mattsson, J., Serafin, M., Tiloca, M.,
@@ -1406,6 +1401,8 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -00 to -01
+
+   *  Updated references.
 
    *  Editorial improvements.
 
