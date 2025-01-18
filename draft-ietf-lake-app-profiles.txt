@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 21 July 2025                                    17 January 2025
+Expires: 22 July 2025                                    18 January 2025
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 July 2025.
+   This Internet-Draft will expire on 22 July 2025.
 
 Copyright Notice
 
@@ -78,34 +78,29 @@ Table of Contents
        2.2.1.  Use in the EDHOC and OSCORE Profile of the ACE
                Framework
    3.  Additional Parameters for Web Linking
-   4.  Additional Parameters of the EDHOC_Information Object
-   5.  Representation of an EDHOC Application Profile
-   6.  Well-known EDHOC Application Profiles
-     6.1.  Well-Known Application Profile WK-MINIMAL_CS_2
-     6.2.  Well-Known Application Profile WK-MINIMAL_CS_0
-     6.3.  Well-Known Application Profile WK-BASIC_CS_2_X509
-     6.4.  Well-Known Application Profile WK-BASIC_CS_0_X509
-     6.5.  Well-Known Application Profile WK-BASIC_CS_2_C509
-     6.6.  Well-Known Application Profile WK-BASIC_CS_0_C509
-     6.7.  Well-Known Application Profile WK-INTERMEDIATE_CS_2
-     6.8.  Well-Known Application Profile WK-INTERMEDIATE_CS_0
-     6.9.  Well-Known Application Profile WK-ADVANCED
-   7.  EDHOC Well-known Application Profiles
-   8.  EDHOC Endpoint Identity Types
-   9.  EDHOC Transports
-   10. Security Considerations
-   11. IANA Considerations
-     11.1.  Media Type Registrations
-     11.2.  CoAP Content-Formats Registry
-     11.3.  Target Attributes Registry
-     11.4.  EDHOC Information Registry
-     11.5.  EDHOC Application Profiles Registry
-     11.6.  EDHOC Endpoint Identity Types Registry
-     11.7.  EDHOC Transports Registry
-     11.8.  Expert Review Instructions
-   12. References
-     12.1.  Normative References
-     12.2.  Informative References
+   4.  Representation of an EDHOC Application Profile
+   5.  Well-known EDHOC Application Profiles
+     5.1.  Well-Known Application Profile WK-MINIMAL_CS_2
+     5.2.  Well-Known Application Profile WK-MINIMAL_CS_0
+     5.3.  Well-Known Application Profile WK-BASIC_CS_2_X509
+     5.4.  Well-Known Application Profile WK-BASIC_CS_0_X509
+     5.5.  Well-Known Application Profile WK-BASIC_CS_2_C509
+     5.6.  Well-Known Application Profile WK-BASIC_CS_0_C509
+     5.7.  Well-Known Application Profile WK-INTERMEDIATE_CS_2
+     5.8.  Well-Known Application Profile WK-INTERMEDIATE_CS_0
+     5.9.  Well-Known Application Profile WK-ADVANCED
+   6.  EDHOC Well-known Application Profiles
+   7.  Security Considerations
+   8.  IANA Considerations
+     8.1.  Media Type Registrations
+     8.2.  CoAP Content-Formats Registry
+     8.3.  Target Attributes Registry
+     8.4.  EDHOC Information Registry
+     8.5.  EDHOC Application Profiles Registry
+     8.6.  Expert Review Instructions
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
      B.1.  Version -00 to -01
@@ -134,7 +129,7 @@ Table of Contents
    discovery of EDHOC application profiles, that is:
 
    *  The new IANA registry "EDHOC Application Profiles" defined in
-      Section 11.5, where to register integer identifiers of EDHOC
+      Section 8.5, where to register integer identifiers of EDHOC
       application profiles to use as corresponding Profile IDs.
 
    *  The new parameter "ed-prof" defined in Section 2.1.  This
@@ -161,20 +156,20 @@ Table of Contents
       profiles supported by an ACE resource server.
 
    *  Additional parameters that provide information about an EDHOC
-      application profile.  A subset of these parameters are to be used
-      as target attributes in a web link to an EDHOC resource, or as
-      filter criteria in a discovery request to discover EDHOC resources
-      (see Section 3).  Another subset of these parameters are to be
-      used as elements of the EDHOC_Information object (see Section 4).
+      application profile.  These parameters correspond to elements of
+      the EDHOC_Information object and are to be used as target
+      attributes in a web link to an EDHOC resource, or as filter
+      criteria in a discovery request to discover EDHOC resources (see
+      Section 3).
 
-   In order to ensure the applicability of such parameters beyond
-   transport- or setup-specific scenarios, this document also defines a
-   canonical, CBOR-based representation that can be used to describe,
-   distribute, and store EDHOC application profiles as CBOR data items
-   (see Section 5).  The defined representation is transport- and setup-
-   independent, and avoids the need to reinvent an encoding for the
-   available options to run the EDHOC protocol or the selection logic to
-   apply on those.
+   In order to ensure the applicability of such parameters and
+   information beyond transport- or setup-specific scenarios, this
+   document also defines a canonical, CBOR-based representation that can
+   be used to describe, distribute, and store EDHOC application profiles
+   as CBOR data items (see Section 4).  The defined representation is
+   transport- and setup-independent, and avoids the need to reinvent an
+   encoding for the available options to run the EDHOC protocol or the
+   selection logic to apply on those.
 
    The CBOR-based representation of an EDHOC application profile can be,
    for example: retrieved as a result of a discovery process; or
@@ -183,7 +178,7 @@ Table of Contents
    execution of a device on-boarding/registration workflow.
 
    Finally, this document defines a set of well-known EDHOC application
-   profiles (see Section 6).  These application profiles are meant to
+   profiles (see Section 5).  These application profiles are meant to
    reflect what is most common and expected to be supported by EDHOC
    peers, while they are not to be intended as "default" application
    profiles or as a deviation from what is mandatory to support for
@@ -250,7 +245,7 @@ Table of Contents
    *  'ed-prof', specifying an EDHOC application profile supported by
       the server.  This parameter MUST specify a single value, which is
       taken from the 'Profile ID' column of the "EDHOC Application
-      Profiles" registry defined in Section 11.5 of this document.  This
+      Profiles" registry defined in Section 8.5 of this document.  This
       parameter MAY occur multiple times, with each occurrence
       specifying an EDHOC application profile.
 
@@ -335,7 +330,7 @@ Table of Contents
       integers.  In CBOR, "app_prof" is an integer or an array of
       integers, and has label 23.  The integer values are taken from the
       'Profile ID' column of the "EDHOC Application Profiles" registry
-      defined in Section 11.5 of this document.
+      defined in Section 8.5 of this document.
 
 2.2.1.  Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -376,9 +371,9 @@ Table of Contents
       At the time of writing this document, such parameters are:
       "methods", "cipher_suites", "message_4", "comb_req", "osc_ms_len",
       "osc_salt_len", "osc_version", "cred_types", "id_cred_types",
-      "initiator", and "responder" (which are all defined in Section 3.4
-      of [I-D.ietf-ace-edhoc-oscore-profile]), as well as those defined
-      in Section 4 of this document.
+      "initiator", "responder", "max_msgsize", "coap_ct", "id_ep_types",
+      and "transports", which are all defined in Section 3.4 of
+      [I-D.ietf-ace-edhoc-oscore-profile].
 
    *  If the EDHOC_Information object specified in the parameter
       "edhoc_info" of the AS-to-C Access Token Response includes the
@@ -431,95 +426,20 @@ Table of Contents
    *  'ed-idep-t', specifying a type of endpoint identity for EDHOC
       supported by the server.  This parameter MUST specify a single
       value, which is taken from the 'CBOR Label' column of the "EDHOC
-      Endpoint Identity Types" Registry defined in Section 8 of this
-      document.  This parameter MAY occur multiple times, with each
-      occurrence specifying a type of endpoint identity for EDHOC.
+      Endpoint Identity Types" Registry defined in
+      [I-D.ietf-ace-edhoc-oscore-profile].  This parameter MAY occur
+      multiple times, with each occurrence specifying a type of endpoint
+      identity for EDHOC.
 
    *  'ed-tp', specifying a means for transporting EDHOC messages
       supported by the server.  This parameter MUST specify a single
       value, which is taken from the 'Transport ID' column of the "EDHOC
-      Transports" Registry defined in Section 9 of this document.  This
-      parameter MAY occur multiple times, with each occurrence
-      specifying a means for transporting EDHOC messages.
+      Transports" Registry defined in
+      [I-D.ietf-ace-edhoc-oscore-profile].  This parameter MAY occur
+      multiple times, with each occurrence specifying a means for
+      transporting EDHOC messages.
 
-4.  Additional Parameters of the EDHOC_Information Object
-
-   This section defines additional parameters of the EDHOC_Information
-   object defined in Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile].
-   These parameters are summarized in Table 2 and described further
-   below.
-
-   Editor's note: these parameters can better be defined directly in
-   Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile].
-
-   +=============+=======+=======+============+=======================+
-   | Name        | CBOR  | CBOR  | Registry   | Description           |
-   |             | label | type  |            |                       |
-   +=============+=======+=======+============+=======================+
-   | max_msgsize | 14    | uint  |            | Maximum size of EDHOC |
-   |             |       |       |            | messages in bytes     |
-   +-------------+-------+-------+------------+-----------------------+
-   | coap_ct     | 15    | True  |            | Requested use of the  |
-   |             |       | of    |            | CoAP Content-Format   |
-   |             |       | False |            | Option in CoAP        |
-   |             |       |       |            | messages whose        |
-   |             |       |       |            | payload includes      |
-   |             |       |       |            | exclusively an EDHOC  |
-   |             |       |       |            | message, possibly     |
-   |             |       |       |            | prepended by an EDHOC |
-   |             |       |       |            | connection identifier |
-   +-------------+-------+-------+------------+-----------------------+
-   | id_ep_types | 16    | int   | EDHOC      | Set of supported      |
-   |             |       | or    | Endpoint   | types of endpoint     |
-   |             |       | array | Identity   | identities for EDHOC  |
-   |             |       |       | Types      |                       |
-   |             |       |       | Registry   |                       |
-   +-------------+-------+-------+------------+-----------------------+
-   | transports  | 17    | int   | EDHOC      | Set of supported      |
-   |             |       | or    | Transports | means for             |
-   |             |       | array | Registry   | transporting EDHOC    |
-   |             |       |       |            | messages              |
-   +-------------+-------+-------+------------+-----------------------+
-
-                  Table 2: EDHOC_Information Parameters
-
-   *  max_msgsize: This parameter specifies the admitted maximum size of
-      EDHOC messages in bytes.  In JSON, the "max_msgsize" value is an
-      unsigned integer.  In CBOR, "max_msgsize" is an unsigned integer
-      and has label 14.
-
-   *  coap_cf: This parameter specifies whether it is required that CoAP
-      messages include the CoAP Content-Format Option with value 64
-      (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-
-      seq) as appropriate, when the message payload includes exclusively
-      an EDHOC message possibly prepended by an EDHOC connection
-      identifier (see Sections 3.4.1 and A.2 of [RFC9528]).  In JSON,
-      the "coap_cf" value is a boolean.  In CBOR, "coap_cf" is the
-      simple value true (0xf5) or false (0xf4), and has label 15.
-
-   *  id_ep_types: This parameter specifies a set of supported types of
-      endpoint identities for EDHOC.  If the set is composed of a single
-      type of endpoint identity, this is encoded as an integer.
-      Otherwise, the set is encoded as an array, where each array
-      element encodes one type of endpoint identity as an integer.  In
-      JSON, the "id_ep_types" value is an integer or an array of
-      integers.  In CBOR, "id_ep_types" is an integer or an array of
-      integers, and has label 16.  The integer values are taken from the
-      'CBOR Label' column of the "EDHOC Endpoint Identity Types"
-      registry defined in Section 11.6 of this document.
-
-   *  transports: This parameter specifies a set of supported means for
-      transporting EDHOC messages.  If the set is composed of a single
-      means for transporting EDHOC messages, this is encoded as an
-      integer.  Otherwise, the set is encoded as an array, where each
-      array element encodes one means for transporting EDHOC messages as
-      an integer.  In JSON, the "transports" value is an integer or an
-      array of integers.  In CBOR, "transports" is an integer or an
-      array of integers, and has label 17.  The integer values are taken
-      from the 'Transport ID' column of the "EDHOC Transports" Registry
-      defined in Section 9 of this document.
-
-5.  Representation of an EDHOC Application Profile
+4.  Representation of an EDHOC Application Profile
 
    This section defines the EDHOC_Application_Profile object, which can
    be used as a canonical representation of EDHOC application profiles
@@ -527,7 +447,7 @@ Table of Contents
 
    An EDHOC_Application_Profile object is encoded as a CBOR map
    [RFC8949].  Each element of the CBOR map is an element of the CBOR-
-   encoded EDHOC_Information object defined in Section 3.4 of
+   encoded EDHOC_Information object specified in Section 3.4 of
    [I-D.ietf-ace-edhoc-oscore-profile], and thus uses the corresponding
    CBOR abbreviations from the 'CBOR label' column of the "EDHOC
    Information" registry defined in [I-D.ietf-ace-edhoc-oscore-profile].
@@ -548,8 +468,7 @@ Table of Contents
    "responder".
 
    The CBOR map MAY include other elements defined for the
-   EDHOC_Information object.  These also comprise the new parameters
-   defined in Section 4 of this document.
+   EDHOC_Information object.
 
    Furthermore, consistent with Sections 8 and A.1 of [RFC9528] and with
    Section 5.4 of [RFC8613], the following applies:
@@ -599,7 +518,7 @@ Table of Contents
       * int / tstr => any
    }
 
-6.  Well-known EDHOC Application Profiles
+5.  Well-known EDHOC Application Profiles
 
    This section defines a set of well-known EDHOC application profiles
    that are meant to reflect what is most common and expected to be
@@ -622,13 +541,13 @@ Table of Contents
 
    The rest of this section defines the well-known application profiles,
    each of which is represented by means of an EDHOC_Application_Profile
-   object (see Section 5) using the CBOR extended diagnostic notation.
+   object (see Section 4) using the CBOR extended diagnostic notation.
 
    An entry for each well-known application profile is also registered
-   at the "EDHOC Application Profiles" registry defined in Section 11.5
+   at the "EDHOC Application Profiles" registry defined in Section 8.5
    of this document.
 
-6.1.  Well-Known Application Profile WK-MINIMAL_CS_2
+5.1.  Well-Known Application Profile WK-MINIMAL_CS_2
 
    {
            e'methods' : 3, / EDHOC Method Type 3 /
@@ -641,7 +560,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
-6.2.  Well-Known Application Profile WK-MINIMAL_CS_0
+5.2.  Well-Known Application Profile WK-MINIMAL_CS_0
 
    {
            e'methods' : 3, / EDHOC Method Type 3 /
@@ -651,7 +570,7 @@ Table of Contents
           e'app_prof' : e'APP-PROF-WK-MINIMAL-CS-0'
    }
 
-6.3.  Well-Known Application Profile WK-BASIC_CS_2_X509
+5.3.  Well-Known Application Profile WK-BASIC_CS_2_X509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -665,7 +584,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
-6.4.  Well-Known Application Profile WK-BASIC_CS_0_X509
+5.4.  Well-Known Application Profile WK-BASIC_CS_0_X509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -679,7 +598,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 2 of [RFC9529].
 
-6.5.  Well-Known Application Profile WK-BASIC_CS_2_C509
+5.5.  Well-Known Application Profile WK-BASIC_CS_2_C509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -690,7 +609,7 @@ Table of Contents
           e'app_prof' : e'APP-PROF-WK-BASIC-CS-2-C509'
    }
 
-6.6.  Well-Known Application Profile WK-BASIC_CS_0_C509
+5.6.  Well-Known Application Profile WK-BASIC_CS_0_C509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -701,7 +620,7 @@ Table of Contents
           e'app_prof' : e'APP-PROF-WK-BASIC-CS-0-C509'
    }
 
-6.7.  Well-Known Application Profile WK-INTERMEDIATE_CS_2
+5.7.  Well-Known Application Profile WK-INTERMEDIATE_CS_2
 
   {
           e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -718,7 +637,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
-6.8.  Well-Known Application Profile WK-INTERMEDIATE_CS_0
+5.8.  Well-Known Application Profile WK-INTERMEDIATE_CS_0
 
   {
           e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -735,7 +654,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 2 of [RFC9529].
 
-6.9.  Well-Known Application Profile WK-ADVANCED
+5.9.  Well-Known Application Profile WK-ADVANCED
 
  {
          e'methods' : [0, 1, 2, 3], / EDHOC Method Types
@@ -756,7 +675,7 @@ Table of Contents
    This application profile is aligned with the example traces of EDHOC
    compiled in Sections 2 and 3 of [RFC9529].
 
-7.  EDHOC Well-known Application Profiles
+6.  EDHOC Well-known Application Profiles
 
    This document defines the following identifiers of well-known EDHOC
    application profiles.
@@ -825,69 +744,20 @@ Table of Contents
    |         |                      | c5t, c5c)           |            |
    +---------+----------------------+---------------------+------------+
 
-               Table 3: EDHOC Well-known Application Profiles
+               Table 2: EDHOC Well-known Application Profiles
 
-8.  EDHOC Endpoint Identity Types
-
-   This document defines the following identifier of type of endpoint
-   identity for EDHOC.
-
-   Note to RFC Editor: Please replace all occurrences of "[RFC-XXXX]"
-   with the RFC number of this specification and delete this paragraph.
-
-    +========+============+====================+=====================+
-    | Name   | CBOR label | Description        | Reference           |
-    +========+============+====================+=====================+
-    | EUI-64 | 0          | An EUI-64 identity | [RFC-XXXX][RFC4291] |
-    +--------+------------+--------------------+---------------------+
-
-                  Table 4: EDHOC Endpoint Identity Types
-
-9.  EDHOC Transports
-
-   This document defines the following identifiers of means for
-   transporting EDHOC messages.
-
-    +===========+============+===================+====================+
-    | Transport | Name       | Description       | Reference          |
-    | ID        |            |                   |                    |
-    +===========+============+===================+====================+
-    | 0         | CoAP over  | EDHOC messages    | [RFC7252],         |
-    |           | UDP        | are transported   | Appendix A.2 of    |
-    |           |            | as payload of     | [RFC9528]          |
-    |           |            | CoAP messages, in |                    |
-    |           |            | turn transported  |                    |
-    |           |            | over UDP          |                    |
-    +-----------+------------+-------------------+--------------------+
-    | 1         | CoAP over  | EDHOC messages    | [RFC7252][RFC8323] |
-    |           | TCP        | are transported   |                    |
-    |           |            | as payload of     |                    |
-    |           |            | CoAP messages, in |                    |
-    |           |            | turn transported  |                    |
-    |           |            | over TCP          |                    |
-    +-----------+------------+-------------------+--------------------+
-    | 2         | CoAP over  | EDHOC messages    | [RFC7252][RFC8323] |
-    |           | WebSockets | are transported   |                    |
-    |           |            | as payload of     |                    |
-    |           |            | CoAP messages, in |                    |
-    |           |            | turn transported  |                    |
-    |           |            | over WebSockets   |                    |
-    +-----------+------------+-------------------+--------------------+
-
-                         Table 5: EDHOC Transports
-
-10.  Security Considerations
+7.  Security Considerations
 
    TBD
 
-11.  IANA Considerations
+8.  IANA Considerations
 
    This document has the following actions for IANA.
 
    Note to RFC Editor: Please replace all occurrences of "[RFC-XXXX]"
    with the RFC number of this specification and delete this paragraph.
 
-11.1.  Media Type Registrations
+8.1.  Media Type Registrations
 
    IANA is asked to register the media type "application/edhoc-app-
    profile+cbor-seq".  This registration follows the procedures
@@ -906,7 +776,7 @@ Table of Contents
    defined as an element of the CBOR-encoded EDHOC_Information object
    from Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile].
 
-   Security considerations: See Section 10 of [RFC-XXXX].
+   Security considerations: See Section 7 of [RFC-XXXX].
 
    Interoperability considerations: N/A
 
@@ -932,7 +802,7 @@ Table of Contents
 
    Provisional registration: No
 
-11.2.  CoAP Content-Formats Registry
+8.2.  CoAP Content-Formats Registry
 
    IANA is asked to add the following entry to the "CoAP Content-
    Formats" registry within the "Constrained RESTful Environments (CoRE)
@@ -946,55 +816,11 @@ Table of Contents
 
    Reference: [RFC-XXXX]
 
-11.3.  Target Attributes Registry
+8.3.  Target Attributes Registry
 
-   IANA is asked to register the following entries in the "Target
+   IANA is asked to register the following entry in the "Target
    Attributes" registry within the "Constrained RESTful Environments
    (CoRE) Parameters", as per [RFC9423].
-
-   *  Attribute Name: ed-max-msgsize
-
-   *  Brief Description: The admitted maximum size of EDHOC messages in
-      bytes
-
-   *  Change Controller: IETF
-
-   *  Reference: [RFC-XXXX]
-
-
-
-   *  Attribute Name: ed-coap-ct
-
-   *  Brief Description: Requested use of the CoAP Content-Format Option
-      in CoAP messages whose payload includes exclusively an EDHOC
-      message, possibly prepended by an EDHOC connection identifier
-
-   *  Change Controller: IETF
-
-   *  Reference: [RFC-XXXX]
-
-
-
-   *  Attribute Name: ed-idep-t
-
-   *  Brief Description: A supported type of endpoint identity for EDHOC
-
-   *  Change Controller: IETF
-
-   *  Reference: [RFC-XXXX]
-
-
-
-   *  Attribute Name: ed-tp
-
-   *  Brief Description: A supported means for transporting EDHOC
-      messages
-
-   *  Change Controller: IETF
-
-   *  Reference: [RFC-XXXX]
-
-
 
    *  Attribute Name: ed-prof
 
@@ -1004,70 +830,10 @@ Table of Contents
 
    *  Reference: [RFC-XXXX]
 
-11.4.  EDHOC Information Registry
+8.4.  EDHOC Information Registry
 
-   IANA is asked to register the following entries in the "EDHOC
+   IANA is asked to register the following entry in the "EDHOC
    Information" registry defined in [I-D.ietf-ace-edhoc-oscore-profile].
-
-   *  Name: max_msgsize
-
-   *  CBOR label: 14
-
-   *  CBOR type: uint
-
-   *  Registry:
-
-   *  Description: The admitted maximum size of EDHOC messages in bytes
-
-   *  Specification: [RFC-XXXX][RFC9528]
-
-
-
-   *  Name: coap_ct
-
-   *  CBOR label: 15
-
-   *  CBOR type: True or False
-
-   *  Registry:
-
-   *  Description: Requested use of the CoAP Content-Format Option in
-      CoAP messages whose payload includes exclusively an EDHOC message,
-      possibly prepended by an EDHOC connection identifier
-
-   *  Specification: [RFC-XXXX][RFC9528]
-
-
-
-   *  Name: id_ep_types
-
-   *  CBOR label: 16
-
-   *  CBOR type: int or array
-
-   *  Registry: EDHOC Endpoint Identity Types
-
-   *  Description: Set of supported types of endpoint identities for
-      EDHOC
-
-   *  Specification: [RFC-XXXX]
-
-
-
-   *  Name: transports
-
-   *  CBOR label: 17
-
-   *  CBOR type: int or array
-
-   *  Registry: EDHOC Transports Registry
-
-   *  Description: Set of supported means for transporting EDHOC
-      messages
-
-   *  Specification: [RFC-XXXX]
-
-
 
    *  Name: app_prof
 
@@ -1081,7 +847,7 @@ Table of Contents
 
    *  Specification: [RFC-XXXX][RFC9528]
 
-11.5.  EDHOC Application Profiles Registry
+8.5.  EDHOC Application Profiles Registry
 
    IANA is requested to create a new "EDHOC Application Profiles"
    registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)"
@@ -1089,7 +855,7 @@ Table of Contents
 
    The registration policy is either "Private Use", "Standards Action
    with Expert Review", or "Specification Required" per Section 4.6 of
-   [RFC8126].  "Expert Review" guidelines are provided in Section 11.8.
+   [RFC8126].  "Expert Review" guidelines are provided in Section 8.6.
 
    All assignments according to "Standards Action with Expert Review"
    are made on a "Standards Action" basis per Section 4.9 of [RFC8126],
@@ -1123,100 +889,12 @@ Table of Contents
       specification for the EDHOC application profile.
 
    This registry has been initially populated with the values in
-   Table 3.
+   Table 2.
 
-11.6.  EDHOC Endpoint Identity Types Registry
-
-   IANA is requested to create a new "EDHOC Endpoint Identity Types"
-   registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)"
-   registry group defined in [RFC9528].
-
-   The registration policy is either "Private Use", "Standards Action
-   with Expert Review", or "Specification Required" per Section 4.6 of
-   [RFC8126].  "Expert Review" guidelines are provided in Section 11.8.
-
-   All assignments according to "Standards Action with Expert Review"
-   are made on a "Standards Action" basis per Section 4.9 of [RFC8126],
-   with Expert Review additionally required per Section 4.5 of
-   [RFC8126].  The procedure for early IANA allocation of Standards
-   Track code points defined in [RFC7120] also applies.  When such a
-   procedure is used, IANA will ask the designated expert(s) to approve
-   the early allocation before registration.  In addition, WG chairs are
-   encouraged to consult the expert(s) early during the process outlined
-   in Section 3.1 of [RFC7120].
-
-   The columns of this registry are:
-
-   *  Name: This field contains the name of the EDHOC endpoint identity
-      type.
-
-   *  CBOR Label: The value to be used to identify this EDHOC endpoint
-      identity type.  These values MUST be unique.  The value can be a
-      positive integer or a negative integer.  Different ranges of
-      values use different registration policies [RFC8126].  Integer
-      values from -24 to 23 are designated as "Standards Action With
-      Expert Review".  Integer values from -65536 to -25 and from 24 to
-      65535 are designated as "Specification Required".  Integer values
-      smaller than -65536 and greater than 65535 are marked as "Private
-      Use".
-
-   *  Description: This field contains a short description of the EDHOC
-      endpoint identity type.
-
-   *  Reference: This field contains a pointer to the public
-      specification for the EDHOC endpoint identity type.
-
-   This registry has been initially populated with the values in
-   Table 4.
-
-11.7.  EDHOC Transports Registry
-
-   IANA is requested to create a new "EDHOC Transports" registry within
-   the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group
-   defined in [RFC9528].
-
-   The registration policy is either "Private Use", "Standards Action
-   with Expert Review", or "Specification Required" per Section 4.6 of
-   [RFC8126].  "Expert Review" guidelines are provided in Section 11.8.
-
-   All assignments according to "Standards Action with Expert Review"
-   are made on a "Standards Action" basis per Section 4.9 of [RFC8126],
-   with Expert Review additionally required per Section 4.5 of
-   [RFC8126].  The procedure for early IANA allocation of Standards
-   Track code points defined in [RFC7120] also applies.  When such a
-   procedure is used, IANA will ask the designated expert(s) to approve
-   the early allocation before registration.  In addition, WG chairs are
-   encouraged to consult the expert(s) early during the process outlined
-   in Section 3.1 of [RFC7120].
-
-   The columns of this registry are:
-
-   *  Transport ID: The value to be used to identify this means for
-      transporting EDHOC messages.  These values MUST be unique.  The
-      value can be a positive integer or a negative integer.  Different
-      ranges of values use different registration policies [RFC8126].
-      Integer values from -24 to 23 are designated as "Standards Action
-      With Expert Review".  Integer values from -65536 to -25 and from
-      24 to 65535 are designated as "Specification Required".  Integer
-      values smaller than -65536 and greater than 65535 are marked as
-      "Private Use".
-
-   *  Name: This field contains the name of the means for transporting
-      EDHOC messages.
-
-   *  Description: This field contains a short description of the means
-      used for transporting EDHOC messages.
-
-   *  Reference: This field contains a pointer to the public
-      specification for the means used for transporting EDHOC messages.
-
-   This registry has been initially populated with the values in
-   Table 5.
-
-11.8.  Expert Review Instructions
+8.6.  Expert Review Instructions
 
    "Standards Action with Expert Review" and "Specification Required"
-   are two of the registration policies defined for the IANA registries
+   are two of the registration policies defined for the IANA registry
    established in this document.  This section gives some general
    guidelines for what the experts should be looking for, but they are
    being designated as experts for a reason so they should be given
@@ -1226,11 +904,10 @@ Table of Contents
 
    *  Clarity and correctness of registrations.  Experts are expected to
       check the clarity of purpose and use of the requested entries.
-      Experts need to make sure that the object of registration (i.e.,
-      an EDHOC application profile, an EDHOC endpoint identity type, or
-      a means for transporting EDHOC messages) is clearly defined in the
-      corresponding specification.  Entries that do not meet these
-      objective of clarity and completeness must not be registered.
+      Experts need to make sure that the object of registration is
+      clearly defined in the corresponding specification.  Entries that
+      do not meet these objective of clarity and completeness must not
+      be registered.
 
    *  Point squatting should be discouraged.  Reviewers are encouraged
       to get sufficient information for registration requests to ensure
@@ -1256,14 +933,9 @@ Table of Contents
       it will be used on, and the number of code points left that encode
       to that size.
 
-12.  References
+9.  References
 
-12.1.  Normative References
-
-   [COSE.Header.Parameters]
-              IANA, "COSE Header Parameters",
-              <https://www.iana.org/assignments/cose/cose.xhtml#header-
-              parameters>.
+9.1.  Normative References
 
    [I-D.ietf-ace-edhoc-oscore-profile]
               Selander, G., Mattsson, J. P., Tiloca, M., and R. Höglund,
@@ -1279,10 +951,6 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC4291]  Hinden, R. and S. Deering, "IP Version 6 Addressing
-              Architecture", RFC 4291, DOI 10.17487/RFC4291, February
-              2006, <https://www.rfc-editor.org/rfc/rfc4291>.
 
    [RFC6690]  Shelby, Z., "Constrained RESTful Environments (CoRE) Link
               Format", RFC 6690, DOI 10.17487/RFC6690, August 2012,
@@ -1314,12 +982,6 @@ Table of Contents
    [RFC8288]  Nottingham, M., "Web Linking", RFC 8288,
               DOI 10.17487/RFC8288, October 2017,
               <https://www.rfc-editor.org/rfc/rfc8288>.
-
-   [RFC8323]  Bormann, C., Lemay, S., Tschofenig, H., Hartke, K.,
-              Silverajan, B., and B. Raymor, Ed., "CoAP (Constrained
-              Application Protocol) over TCP, TLS, and WebSockets",
-              RFC 8323, DOI 10.17487/RFC8323, February 2018,
-              <https://www.rfc-editor.org/rfc/rfc8323>.
 
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
               Definition Language (CDDL): A Notational Convention to
@@ -1364,7 +1026,7 @@ Table of Contents
               (OSCORE)", RFC 9668, DOI 10.17487/RFC9668, November 2024,
               <https://www.rfc-editor.org/rfc/rfc9668>.
 
-12.2.  Informative References
+9.2.  Informative References
 
    [RFC9529]  Selander, G., Preuß Mattsson, J., Serafin, M., Tiloca, M.,
               and M. Vučinić, "Traces of Ephemeral Diffie-Hellman Over
@@ -1412,9 +1074,14 @@ B.1.  Version -00 to -01
 
    *  CBOR abbreviation of "app_prof" changed to 23.
 
+   *  Moved definition of EDHOC_Information parameters to draft-ietf-
+      ace-edhoc-oscore-profile.
+
    *  Updated IANA considerations:
 
       -  Suggested range 0-255 for CoAP Content-Format ID.
+
+      -  Removed requests for registration of removed parameters.
 
    *  Updated references.
 
