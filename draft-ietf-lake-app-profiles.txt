@@ -111,7 +111,9 @@ Table of Contents
 
    Ephemeral Diffie-Hellman Over COSE (EDHOC) [RFC9528] is a lightweight
    authenticated key exchange protocol, especially intended for use in
-   constrained scenarios.
+   constrained scenarios.  A main use case for EDHOC is to establish a
+   Security Context for Object Security for Constrained RESTful
+   Environments (OSCORE) [RFC8613].
 
    In order to successfully run EDHOC, the two peers acting as Initiator
    and Responder have to agree on certain parameters.  Some of those are
@@ -140,8 +142,9 @@ Table of Contents
 
       For instance, the target attribute can be used in a link-format
       document [RFC6690] describing EDHOC resources at a server, when
-      EDHOC is transferred over CoAP [RFC7252] (see Appendix A.2 of
-      [RFC9528] as well as [RFC9668]).
+      EDHOC is transferred over the Constrained Application Protocol
+      (CoAP) [RFC7252] (see Appendix A.2 of [RFC9528] as well as
+      [RFC9668]).
 
    *  The new parameter "app_prof" defined in Section 2.2 for the
       EDHOC_Information object specified in
@@ -426,7 +429,7 @@ Table of Contents
    *  'ed-idep-t', specifying a type of endpoint identity for EDHOC
       supported by the server.  This parameter MUST specify a single
       value, which is taken from the 'CBOR Label' column of the "EDHOC
-      Endpoint Identity Types" Registry defined in
+      Endpoint Identity Types" registry defined in
       [I-D.ietf-ace-edhoc-oscore-profile].  This parameter MAY occur
       multiple times, with each occurrence specifying a type of endpoint
       identity for EDHOC.
@@ -434,7 +437,7 @@ Table of Contents
    *  'ed-tp', specifying a means for transporting EDHOC messages
       supported by the server.  This parameter MUST specify a single
       value, which is taken from the 'Transport ID' column of the "EDHOC
-      Transports" Registry defined in
+      Transports" registry defined in
       [I-D.ietf-ace-edhoc-oscore-profile].  This parameter MAY occur
       multiple times, with each occurrence specifying a means for
       transporting EDHOC messages.
@@ -475,11 +478,12 @@ Table of Contents
 
    *  If the element "cipher_suites" is not present in the CBOR map,
       this indicates that the EDHOC application profile uses the EDHOC
-      cipher suites 2 and 3.
+      cipher suites 2 and 3, and possibly other cipher suites.
 
    *  If the element "id_cred_types" is not present in the CBOR map,
       this indicates that the EDHOC application profile uses "kid" as
-      type of authentication credential identifiers for EDHOC.
+      type of authentication credential identifiers for EDHOC, and
+      possibly other types of authentication credential identifiers.
 
    *  If the element "osc_ms_len" is not present in the CBOR map, this
       indicates that, when using EDHOC to key OSCORE [RFC8613], the size
@@ -841,9 +845,9 @@ Table of Contents
 
    *  CBOR type: int or array
 
-   *  Registry: EDHOC Application Profiles Registry
+   *  Registry: EDHOC Application Profiles registry
 
-   *  Description: Set of supported EDHOC Application Profiles
+   *  Description: Set of supported EDHOC application profiles
 
    *  Specification: [RFC-XXXX][RFC9528]
 
