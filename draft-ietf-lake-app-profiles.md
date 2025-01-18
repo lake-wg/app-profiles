@@ -471,7 +471,35 @@ Reference: {{&SELF}}
 
 ## Target Attributes Registry ## {#iana-target-attributes}
 
-IANA is asked to register the following entry in the "Target Attributes" registry within the "Constrained RESTful Environments (CoRE) Parameters", as per {{RFC9423}}.
+IANA is asked to register the following entries in the "Target Attributes" registry within the "Constrained RESTful Environments (CoRE) Parameters", as per {{RFC9423}}.
+
+* Attribute Name: ed-max-msgsize
+* Brief Description: The admitted maximum size of EDHOC messages in bytes
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Attribute Name: ed-coap-ct
+* Brief Description: Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Attribute Name: ed-idep-t
+* Brief Description: A supported type of endpoint identity for EDHOC
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Attribute Name: ed-tp
+* Brief Description: A supported means for transporting EDHOC messages
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
 
 * Attribute Name: ed-prof
 * Brief Description: A supported EDHOC application profile
