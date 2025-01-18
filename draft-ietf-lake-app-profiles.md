@@ -61,7 +61,7 @@ The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Ove
 
 # Introduction # {#intro}
 
-Ephemeral Diffie-Hellman Over COSE (EDHOC) {{RFC9528}} is a lightweight authenticated key exchange protocol, especially intended for use in constrained scenarios.
+Ephemeral Diffie-Hellman Over COSE (EDHOC) {{RFC9528}} is a lightweight authenticated key exchange protocol, especially intended for use in constrained scenarios. A main use case for EDHOC is to establish a Security Context for Object Security for Constrained RESTful Environments (OSCORE) {{RFC8613}}.
 
 In order to successfully run EDHOC, the two peers acting as Initiator and Responder have to agree on certain parameters. Some of those are in-band and communicated through the protocol execution, during which a few of them may even be negotiated. However, other parameters have to be known out-of-band, before running the EDHOC protocol.
 
@@ -73,7 +73,7 @@ This document defines a number of means to coordinate the use and discovery of E
 
 * The new parameter "ed-prof" defined in {{web-linking}}. This parameter is employed to specify an EDHOC application profile identified by its Profile ID, and can be used as target attribute in a web link {{RFC8288}} to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources.
 
-  For instance, the target attribute can be used in a link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over CoAP {{RFC7252}} (see {{Section A.2 of RFC9528}} as well as {{RFC9668}}).
+  For instance, the target attribute can be used in a link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over the Constrained Application Protocol (CoAP) {{RFC7252}} (see {{Section A.2 of RFC9528}} as well as {{RFC9668}}).
 
 * The new parameter "app_prof" defined in {{sec-edhoc-information-object}} for the EDHOC_Information object specified in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter is employed to specify a set of EDHOC application profiles, each identified by its Profile ID.
 
@@ -192,9 +192,9 @@ When specifying any of the parameters defined below in a link to an EDHOC resour
 
 * 'ed-coap-ct', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see {{Sections 3.4.1 and A.2 of RFC9528}}). A value MUST NOT be given to this parameter and any present value MUST be ignored by the recipient.
 
-* 'ed-idep-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter MUST specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" Registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.
+* 'ed-idep-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter MUST specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.
 
-* 'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter MUST specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" Registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.
+* 'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter MUST specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.
 
 # Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
 
@@ -212,9 +212,9 @@ The CBOR map MAY include other elements defined for the EDHOC_Information object
 
 Furthermore, consistent with {{Sections 8 and A.1 of RFC9528}} and with {{Section 5.4 of RFC8613}}, the following applies:
 
-* If the element "cipher_suites" is not present in the CBOR map, this indicates that the EDHOC application profile uses the EDHOC cipher suites 2 and 3.
+* If the element "cipher_suites" is not present in the CBOR map, this indicates that the EDHOC application profile uses the EDHOC cipher suites 2 and 3, and possibly other cipher suites.
 
-* If the element "id_cred_types" is not present in the CBOR map, this indicates that the EDHOC application profile uses "kid" as type of authentication credential identifiers for EDHOC.
+* If the element "id_cred_types" is not present in the CBOR map, this indicates that the EDHOC application profile uses "kid" as type of authentication credential identifiers for EDHOC, and possibly other types of authentication credential identifiers.
 
 * If the element "osc_ms_len" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE {{RFC8613}}, the size of the OSCORE Master Secret in bytes is equal to the size of the key length for the application AEAD Algorithm of the selected cipher suite for the EDHOC session.
 
@@ -485,8 +485,8 @@ IANA is asked to register the following entry in the "EDHOC Information" registr
 * Name: app_prof
 * CBOR label: 23
 * CBOR type: int or array
-* Registry: EDHOC Application Profiles Registry
-* Description: Set of supported EDHOC Application Profiles
+* Registry: EDHOC Application Profiles registry
+* Description: Set of supported EDHOC application profiles
 * Specification: {{&SELF}}{{RFC9528}}
 
 ## EDHOC Application Profiles Registry ## {#iana-edhoc-application-profiles}
