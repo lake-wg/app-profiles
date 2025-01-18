@@ -31,14 +31,12 @@ author:
     email: rikard.hoglund@ri.se
 
 normative:
-  RFC4291:
   RFC6690:
   RFC6838:
   RFC7120:
   RFC7252:
   RFC8126:
   RFC8288:
-  RFC8323:
   RFC8610:
   RFC8613:
   RFC8742:
@@ -48,12 +46,6 @@ normative:
   RFC9528:
   RFC9668:
   I-D.ietf-ace-edhoc-oscore-profile:
-  COSE.Header.Parameters:
-    author:
-      org: IANA
-    date: false
-    title: COSE Header Parameters
-    target: https://www.iana.org/assignments/cose/cose.xhtml#header-parameters
 
 informative:
   RFC9529:
@@ -87,9 +79,9 @@ This document defines a number of means to coordinate the use and discovery of E
 
   For instance, the parameter can be used in the EDHOC and OSCORE profile {{I-D.ietf-ace-edhoc-oscore-profile}} of the ACE framework for authentication and authorization in constrained environments (ACE) {{RFC9200}}, in order to indicate the EDHOC application profiles supported by an ACE resource server.
 
-* Additional parameters that provide information about an EDHOC application profile. A subset of these parameters are to be used as target attributes in a web link to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources (see {{sec-parameters-web-linking}}). Another subset of these parameters are to be used as elements of the EDHOC_Information object (see {{sec-parameters-edhoc-info-object}}).
+* Additional parameters that provide information about an EDHOC application profile. These parameters correspond to elements of the EDHOC_Information object and are to be used as target attributes in a web link to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources (see {{sec-parameters-web-linking}}).
 
-In order to ensure the applicability of such parameters beyond transport- or setup-specific scenarios, this document also defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see {{sec-app-profile-cbor}}). The defined representation is transport- and setup-independent, and avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.
+In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see {{sec-app-profile-cbor}}). The defined representation is transport- and setup-independent, and avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.
 
 The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.
 
@@ -178,7 +170,7 @@ If the EDHOC_Information object specified as value of "edhoc_info" includes the 
 
   C and RS MUST ignore other parameters present in the EDHOC_Information object, with the exception of the parameter "eads".
 
-  At the time of writing this document, such parameters are: "methods", "cipher_suites", "message_4", "comb_req", "osc_ms_len", "osc_salt_len", "osc_version", "cred_types", "id_cred_types", "initiator", and "responder" (which are all defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), as well as those defined in {{sec-parameters-edhoc-info-object}} of this document.
+  At the time of writing this document, such parameters are: "methods", "cipher_suites", "message_4", "comb_req", "osc_ms_len", "osc_salt_len", "osc_version", "cred_types", "id_cred_types", "initiator", "responder", "max_msgsize", "coap_ct", "id_ep_types", and "transports", which are all defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
 
 * If the EDHOC_Information object specified in the parameter "edhoc_info" of the AS-to-C Access Token Response includes the parameter "eads", the object provides the following information.
 
@@ -200,36 +192,15 @@ When specifying any of the parameters defined below in a link to an EDHOC resour
 
 * 'ed-coap-ct', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see {{Sections 3.4.1 and A.2 of RFC9528}}). A value MUST NOT be given to this parameter and any present value MUST be ignored by the recipient.
 
-* 'ed-idep-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter MUST specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" Registry defined in {{sec-edhoc-endpoint-identity-types}} of this document. This parameter MAY occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.
+* 'ed-idep-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter MUST specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" Registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.
 
-* 'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter MUST specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" Registry defined in {{sec-edhoc-transports}} of this document. This parameter MAY occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.
-
-# Additional Parameters of the EDHOC_Information Object # {#sec-parameters-edhoc-info-object}
-
-This section defines additional parameters of the EDHOC_Information object defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}. These parameters are summarized in {{table-cbor-key-edhoc-params-2}} and described further below.
-
-Editor's note: these parameters can better be defined directly in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
-
-| Name        | CBOR label | CBOR type     | Registry                               | Description                                                                                                                                                                |
-| max_msgsize | 14         | uint          |                                        | Maximum size of EDHOC messages in bytes                                                                                                                                    |
-| coap_ct     | 15         | True of False |                                        | Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier |
-| id_ep_types | 16         | int or array  | EDHOC Endpoint Identity Types Registry | Set of supported types of endpoint identities for EDHOC                                                                                                                    |
-| transports  | 17         | int or array  | EDHOC Transports Registry              | Set of supported means for transporting EDHOC messages                                                                                                                     |
-{: #table-cbor-key-edhoc-params-2 title="EDHOC_Information Parameters" align="center"}
-
-* max\_msgsize: This parameter specifies the admitted maximum size of EDHOC messages in bytes. In JSON, the "max\_msgsize" value is an unsigned integer. In CBOR, "max\_msgsize" is an unsigned integer and has label 14.
-
-* coap\_cf: This parameter specifies whether it is required that CoAP messages include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see {{Sections 3.4.1 and A.2 of RFC9528}}). In JSON, the "coap\_cf" value is a boolean. In CBOR, "coap\_cf" is the simple value `true` (0xf5) or `false` (0xf4), and has label 15.
-
-* id\_ep\_types: This parameter specifies a set of supported types of endpoint identities for EDHOC. If the set is composed of a single type of endpoint identity, this is encoded as an integer. Otherwise, the set is encoded as an array, where each array element encodes one type of endpoint identity as an integer. In JSON, the "id\_ep\_types" value is an integer or an array of integers. In CBOR, "id\_ep\_types" is an integer or an array of integers, and has label 16. The integer values are taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in {{iana-edhoc-endpoint-identity-types}} of this document.
-
-* transports: This parameter specifies a set of supported means for transporting EDHOC messages. If the set is composed of a single means for transporting EDHOC messages, this is encoded as an integer. Otherwise, the set is encoded as an array, where each array element encodes one means for transporting EDHOC messages as an integer. In JSON, the "transports" value is an integer or an array of integers. In CBOR, "transports" is an integer or an array of integers, and has label 17. The integer values are taken from the 'Transport ID' column of the "EDHOC Transports" Registry defined in {{sec-edhoc-transports}} of this document.
+* 'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter MUST specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" Registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.
 
 # Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
 
 This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.
 
-An EDHOC_Application_Profile object is encoded as a CBOR map {{RFC8949}}. Each element of the CBOR map is an element of the CBOR-encoded EDHOC_Information object defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}, and thus uses the corresponding CBOR abbreviations from the 'CBOR label' column of the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
+An EDHOC_Application_Profile object is encoded as a CBOR map {{RFC8949}}. Each element of the CBOR map is an element of the CBOR-encoded EDHOC_Information object specified in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}, and thus uses the corresponding CBOR abbreviations from the 'CBOR label' column of the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
 The CBOR map encoding an EDHOC_Application_Profile object MUST include the element "app_prof" defined in this document. The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the EDHOC_Application_Profile object, taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document, and encoded as a CBOR integer.
 
@@ -237,7 +208,7 @@ The CBOR map MUST include the following elements defined for the EDHOC_Informati
 
 The CBOR map MUST NOT include the following elements defined for the EDHOC_Information object: "session_id", "uri_path", "initiator", and "responder".
 
-The CBOR map MAY include other elements defined for the EDHOC_Information object. These also comprise the new parameters defined in {{sec-parameters-edhoc-info-object}} of this document.
+The CBOR map MAY include other elements defined for the EDHOC_Information object.
 
 Furthermore, consistent with {{Sections 8 and A.1 of RFC9528}} and with {{Section 5.4 of RFC8613}}, the following applies:
 
@@ -440,26 +411,6 @@ Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RF
 | 8          | WK-ADVANCED          | Methods (0, 1, 2, 3); Cipher Suites (0, 1, 2, 3); (CCS, CWT, X.509/C509 certificates); (kid, kccs, kcwt, x5t, x5chain, c5t, c5c) | {{&SELF}} |
 {: #table-edhoc-well-known-app-profiles title="EDHOC Well-known Application Profiles" align="center"}
 
-# EDHOC Endpoint Identity Types # {#sec-edhoc-endpoint-identity-types}
-
-This document defines the following identifier of type of endpoint identity for EDHOC.
-
-Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RFC number of this specification and delete this paragraph.
-
-| Name   | CBOR label | Description        | Reference            |
-| EUI-64 | 0          | An EUI-64 identity | {{&SELF}}{{RFC4291}} |
-{: #table-edhoc-endpoint-identity-types title="EDHOC Endpoint Identity Types" align="center"}
-
-# EDHOC Transports # {#sec-edhoc-transports}
-
-This document defines the following identifiers of means for transporting EDHOC messages.
-
-| Transport ID | Name                 | Description                                                                                     | Reference                               |
-| 0            | CoAP over UDP        | EDHOC messages are transported as payload of CoAP messages, in turn transported over UDP        | {{RFC7252}}, {{Section A.2 of RFC9528}} |
-| 1            | CoAP over TCP        | EDHOC messages are transported as payload of CoAP messages, in turn transported over TCP        | {{RFC7252}}{{RFC8323}}                  |
-| 2            | CoAP over WebSockets | EDHOC messages are transported as payload of CoAP messages, in turn transported over WebSockets | {{RFC7252}}{{RFC8323}}                  |
-{: #table-edhoc-transports title="EDHOC Transports" align="center"}
-
 # Security Considerations # {#sec-security-considerations}
 
 TBD
@@ -520,35 +471,7 @@ Reference: {{&SELF}}
 
 ## Target Attributes Registry ## {#iana-target-attributes}
 
-IANA is asked to register the following entries in the "Target Attributes" registry within the "Constrained RESTful Environments (CoRE) Parameters", as per {{RFC9423}}.
-
-* Attribute Name: ed-max-msgsize
-* Brief Description: The admitted maximum size of EDHOC messages in bytes
-* Change Controller: IETF
-* Reference: {{&SELF}}
-
-<br>
-
-* Attribute Name: ed-coap-ct
-* Brief Description: Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier
-* Change Controller: IETF
-* Reference: {{&SELF}}
-
-<br>
-
-* Attribute Name: ed-idep-t
-* Brief Description: A supported type of endpoint identity for EDHOC
-* Change Controller: IETF
-* Reference: {{&SELF}}
-
-<br>
-
-* Attribute Name: ed-tp
-* Brief Description: A supported means for transporting EDHOC messages
-* Change Controller: IETF
-* Reference: {{&SELF}}
-
-<br>
+IANA is asked to register the following entry in the "Target Attributes" registry within the "Constrained RESTful Environments (CoRE) Parameters", as per {{RFC9423}}.
 
 * Attribute Name: ed-prof
 * Brief Description: A supported EDHOC application profile
@@ -557,43 +480,7 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 ## EDHOC Information Registry ## {#iana-edhoc-information-registry}
 
-IANA is asked to register the following entries in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
-
-* Name: max_msgsize
-* CBOR label: 14
-* CBOR type: uint
-* Registry:
-* Description: The admitted maximum size of EDHOC messages in bytes
-* Specification: {{&SELF}}{{RFC9528}}
-
-<br>
-
-* Name: coap_ct
-* CBOR label: 15
-* CBOR type: True or False
-* Registry:
-* Description: Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier
-* Specification: {{&SELF}}{{RFC9528}}
-
-<br>
-
-* Name: id_ep_types
-* CBOR label: 16
-* CBOR type: int or array
-* Registry: EDHOC Endpoint Identity Types
-* Description: Set of supported types of endpoint identities for EDHOC
-* Specification: {{&SELF}}
-
-<br>
-
-* Name: transports
-* CBOR label: 17
-* CBOR type: int or array
-* Registry: EDHOC Transports Registry
-* Description: Set of supported means for transporting EDHOC messages
-* Specification: {{&SELF}}
-
-<br>
+IANA is asked to register the following entry in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
 * Name: app_prof
 * CBOR label: 23
@@ -622,53 +509,13 @@ The columns of this registry are:
 
 This registry has been initially populated with the values in {{table-edhoc-well-known-app-profiles}}.
 
-## EDHOC Endpoint Identity Types Registry ## {#iana-edhoc-endpoint-identity-types}
-
-IANA is requested to create a new "EDHOC Endpoint Identity Types" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group defined in {{RFC9528}}.
-
-The registration policy is either "Private Use", "Standards Action with Expert Review", or "Specification Required" per {{Section 4.6 of RFC8126}}. "Expert Review" guidelines are provided in {{iana-expert-review}}.
-
-All assignments according to "Standards Action with Expert Review" are made on a "Standards Action" basis per {{Section 4.9 of RFC8126}}, with Expert Review additionally required per {{Section 4.5 of RFC8126}}. The procedure for early IANA allocation of Standards Track code points defined in {{RFC7120}} also applies. When such a procedure is used, IANA will ask the designated expert(s) to approve the early allocation before registration. In addition, WG chairs are encouraged to consult the expert(s) early during the process outlined in {{Section 3.1 of RFC7120}}.
-
-The columns of this registry are:
-
-* Name: This field contains the name of the EDHOC endpoint identity type.
-
-* CBOR Label: The value to be used to identify this EDHOC endpoint identity type. These values MUST be unique. The value can be a positive integer or a negative integer. Different ranges of values use different registration policies {{RFC8126}}. Integer values from -24 to 23 are designated as "Standards Action With Expert Review". Integer values from -65536 to -25 and from 24 to 65535 are designated as "Specification Required". Integer values smaller than -65536 and greater than 65535 are marked as "Private Use".
-
-* Description: This field contains a short description of the EDHOC endpoint identity type.
-
-* Reference: This field contains a pointer to the public specification for the EDHOC endpoint identity type.
-
-This registry has been initially populated with the values in {{table-edhoc-endpoint-identity-types}}.
-
-## EDHOC Transports Registry ## {#iana-edhoc-transports}
-
-IANA is requested to create a new "EDHOC Transports" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group defined in {{RFC9528}}.
-
-The registration policy is either "Private Use", "Standards Action with Expert Review", or "Specification Required" per {{Section 4.6 of RFC8126}}. "Expert Review" guidelines are provided in {{iana-expert-review}}.
-
-All assignments according to "Standards Action with Expert Review" are made on a "Standards Action" basis per {{Section 4.9 of RFC8126}}, with Expert Review additionally required per {{Section 4.5 of RFC8126}}. The procedure for early IANA allocation of Standards Track code points defined in {{RFC7120}} also applies. When such a procedure is used, IANA will ask the designated expert(s) to approve the early allocation before registration. In addition, WG chairs are encouraged to consult the expert(s) early during the process outlined in {{Section 3.1 of RFC7120}}.
-
-The columns of this registry are:
-
-* Transport ID: The value to be used to identify this means for transporting EDHOC messages. These values MUST be unique. The value can be a positive integer or a negative integer. Different ranges of values use different registration policies {{RFC8126}}. Integer values from -24 to 23 are designated as "Standards Action With Expert Review". Integer values from -65536 to -25 and from 24 to 65535 are designated as "Specification Required". Integer values smaller than -65536 and greater than 65535 are marked as "Private Use".
-
-* Name: This field contains the name of the means for transporting EDHOC messages.
-
-* Description: This field contains a short description of the means used for transporting EDHOC messages.
-
-* Reference: This field contains a pointer to the public specification for the means used for transporting EDHOC messages.
-
-This registry has been initially populated with the values in {{table-edhoc-transports}}.
-
 ## Expert Review Instructions ## {#iana-expert-review}
 
-"Standards Action with Expert Review" and "Specification Required" are two of the registration policies defined for the IANA registries established in this document. This section gives some general guidelines for what the experts should be looking for, but they are being designated as experts for a reason so they should be given substantial latitude.
+"Standards Action with Expert Review" and "Specification Required" are two of the registration policies defined for the IANA registry established in this document. This section gives some general guidelines for what the experts should be looking for, but they are being designated as experts for a reason so they should be given substantial latitude.
 
 Expert reviewers should take into consideration the following points:
 
-* Clarity and correctness of registrations. Experts are expected to check the clarity of purpose and use of the requested entries. Experts need to make sure that the object of registration (i.e., an EDHOC application profile, an EDHOC endpoint identity type, or a means for transporting EDHOC messages) is clearly defined in the corresponding specification. Entries that do not meet these objective of clarity and completeness must not be registered.
+* Clarity and correctness of registrations. Experts are expected to check the clarity of purpose and use of the requested entries. Experts need to make sure that the object of registration is clearly defined in the corresponding specification. Entries that do not meet these objective of clarity and completeness must not be registered.
 
 * Point squatting should be discouraged. Reviewers are encouraged to get sufficient information for registration requests to ensure that the usage is not going to duplicate one that is already registered and that the point is likely to be used in deployments. The zones tagged as "Private Use" are intended for testing purposes and closed environments. Code points in other ranges should not be assigned for testing.
 
@@ -718,9 +565,13 @@ c509_cert = 3
 
 * CBOR abbreviation of "app_prof" changed to 23.
 
+* Moved definition of EDHOC_Information parameters to draft-ietf-ace-edhoc-oscore-profile.
+
 * Updated IANA considerations:
 
   - Suggested range 0-255 for CoAP Content-Format ID.
+
+  - Removed requests for registration of removed parameters.
 
 * Updated references.
 
