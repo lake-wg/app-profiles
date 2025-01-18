@@ -1852,19 +1852,79 @@ EDHOC_Application_Profile = {
         <h3 id="name-target-attributes-registry">
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-target-attributes-registry" class="section-name selfRef">Target Attributes Registry</a>
         </h3>
-<p id="section-8.3-1">IANA is asked to register the following entry in the "Target Attributes" registry within the "Constrained RESTful Environments (CoRE) Parameters", as per <span>[<a href="#RFC9423" class="cite xref">RFC9423</a>]</span>.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.3-1">IANA is asked to register the following entries in the "Target Attributes" registry within the "Constrained RESTful Environments (CoRE) Parameters", as per <span>[<a href="#RFC9423" class="cite xref">RFC9423</a>]</span>.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-8.3-2.1">
-            <p id="section-8.3-2.1.1">Attribute Name: ed-prof<a href="#section-8.3-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-2.1.1">Attribute Name: ed-max-msgsize<a href="#section-8.3-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-2.2">
-            <p id="section-8.3-2.2.1">Brief Description: A supported EDHOC application profile<a href="#section-8.3-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-2.2.1">Brief Description: The admitted maximum size of EDHOC messages in bytes<a href="#section-8.3-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-2.3">
             <p id="section-8.3-2.3.1">Change Controller: IETF<a href="#section-8.3-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-2.4">
             <p id="section-8.3-2.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-2.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.3-3"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-4.1">
+            <p id="section-8.3-4.1.1">Attribute Name: ed-coap-ct<a href="#section-8.3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-4.2">
+            <p id="section-8.3-4.2.1">Brief Description: Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier<a href="#section-8.3-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-4.3">
+            <p id="section-8.3-4.3.1">Change Controller: IETF<a href="#section-8.3-4.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-4.4">
+            <p id="section-8.3-4.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-4.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.3-5"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-6.1">
+            <p id="section-8.3-6.1.1">Attribute Name: ed-idep-t<a href="#section-8.3-6.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-6.2">
+            <p id="section-8.3-6.2.1">Brief Description: A supported type of endpoint identity for EDHOC<a href="#section-8.3-6.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-6.3">
+            <p id="section-8.3-6.3.1">Change Controller: IETF<a href="#section-8.3-6.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-6.4">
+            <p id="section-8.3-6.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-6.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.3-7"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-8.1">
+            <p id="section-8.3-8.1.1">Attribute Name: ed-tp<a href="#section-8.3-8.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-8.2">
+            <p id="section-8.3-8.2.1">Brief Description: A supported means for transporting EDHOC messages<a href="#section-8.3-8.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-8.3">
+            <p id="section-8.3-8.3.1">Change Controller: IETF<a href="#section-8.3-8.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-8.4">
+            <p id="section-8.3-8.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-8.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.3-9"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-10.1">
+            <p id="section-8.3-10.1.1">Attribute Name: ed-prof<a href="#section-8.3-10.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-10.2">
+            <p id="section-8.3-10.2.1">Brief Description: A supported EDHOC application profile<a href="#section-8.3-10.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-10.3">
+            <p id="section-8.3-10.3.1">Change Controller: IETF<a href="#section-8.3-10.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-10.4">
+            <p id="section-8.3-10.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-10.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
