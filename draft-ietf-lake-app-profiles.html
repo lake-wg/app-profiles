@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 22 July 2025</td>
+<td class="center">Expires 23 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lake-app-profiles-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-18" class="published">18 January 2025</time>
+<time datetime="2025-01-19" class="published">19 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-22">22 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-23">23 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1116,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1463,6 +1463,24 @@ When using the target EDHOC resource as per any EDHOC application profile indica
 </li>
         <li class="normal" id="section-3-4.4">
           <p id="section-3-4.4.1">'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.<a href="#section-3-4.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-4.5">
+          <p id="section-3-4.5.1">'ed-ta-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the UUID in its string format (see Section 4 of <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>). This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-4.6">
+          <p id="section-3-4.6.1">'ed-ta-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a binary key identifier. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-4.7">
+          <p id="section-3-4.7.1">'ed-ta-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a hash of a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-4.8">
+          <p id="section-3-4.8.1">'ed-ta-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-4.9">
+          <p id="section-3-4.9.1">'ed-ta-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a hash of an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.9.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-4.10">
+          <p id="section-3-4.10.1">'ed-ta-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.10.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1927,6 +1945,96 @@ EDHOC_Application_Profile = {
             <p id="section-8.3-10.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-10.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
+<p id="section-8.3-11"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-12.1">
+            <p id="section-8.3-12.1.1">Attribute Name: ed-ta-uuid<a href="#section-8.3-12.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-12.2">
+            <p id="section-8.3-12.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a UUID<a href="#section-8.3-12.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-12.3">
+            <p id="section-8.3-12.3.1">Change Controller: IETF<a href="#section-8.3-12.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-12.4">
+            <p id="section-8.3-12.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-12.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.3-13"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-14.1">
+            <p id="section-8.3-14.1.1">Attribute Name: ed-ta-kid<a href="#section-8.3-14.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-14.2">
+            <p id="section-8.3-14.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a binary key identifier<a href="#section-8.3-14.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-14.3">
+            <p id="section-8.3-14.3.1">Change Controller: IETF<a href="#section-8.3-14.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-14.4">
+            <p id="section-8.3-14.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-14.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.3-15"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-16.1">
+            <p id="section-8.3-16.1.1">Attribute Name: ed-ta-c5t<a href="#section-8.3-16.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-16.2">
+            <p id="section-8.3-16.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a hash of a C509 certificate<a href="#section-8.3-16.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-16.3">
+            <p id="section-8.3-16.3.1">Change Controller: IETF<a href="#section-8.3-16.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-16.4">
+            <p id="section-8.3-16.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-16.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.3-17"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-18.1">
+            <p id="section-8.3-18.1.1">Attribute Name: ed-ta-x5u<a href="#section-8.3-18.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-18.2">
+            <p id="section-8.3-18.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to a C509 certificate<a href="#section-8.3-18.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-18.3">
+            <p id="section-8.3-18.3.1">Change Controller: IETF<a href="#section-8.3-18.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-18.4">
+            <p id="section-8.3-18.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-18.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.3-19"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-20.1">
+            <p id="section-8.3-20.1.1">Attribute Name: ed-ta-x5t<a href="#section-8.3-20.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-20.2">
+            <p id="section-8.3-20.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a hash of an X.509 certificate<a href="#section-8.3-20.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-20.3">
+            <p id="section-8.3-20.3.1">Change Controller: IETF<a href="#section-8.3-20.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-20.4">
+            <p id="section-8.3-20.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-20.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-8.3-21"><br></p>
+<ul class="normal">
+<li class="normal" id="section-8.3-22.1">
+            <p id="section-8.3-22.1.1">Attribute Name: ed-ta-c5u<a href="#section-8.3-22.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-22.2">
+            <p id="section-8.3-22.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to an X.509 certificate<a href="#section-8.3-22.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-22.3">
+            <p id="section-8.3-22.3.1">Change Controller: IETF<a href="#section-8.3-22.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-8.3-22.4">
+            <p id="section-8.3-22.4.1">Reference: [RFC-XXXX]<a href="#section-8.3-22.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 </section>
 </div>
 <div id="iana-edhoc-information-registry">
@@ -2023,9 +2131,21 @@ EDHOC_Application_Profile = {
         <dd>
 <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Tiloca, M.</span>, and <span class="refAuthor">R. Höglund</span>, <span class="refTitle">"Ephemeral Diffie-Hellman Over COSE (EDHOC) and Object Security for Constrained Environments (OSCORE) Profile for Authentication and Authorization for Constrained Environments (ACE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ace-edhoc-oscore-profile-06</span>, <time datetime="2024-10-21" class="refDate">21 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-06">https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-cose-cbor-encoded-cert">[I-D.ietf-cose-cbor-encoded-cert]</dt>
+        <dd>
+<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, and <span class="refAuthor">M. Furuhed</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-12</span>, <time datetime="2025-01-08" class="refDate">8 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-12">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-12</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3986">[RFC3986]</dt>
+        <dd>
+<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5280">[RFC5280]</dt>
+        <dd>
+<span class="refAuthor">Cooper, D.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Boeyen, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">W. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 5280</span>, <span class="seriesInfo">DOI 10.17487/RFC5280</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5280">https://www.rfc-editor.org/rfc/rfc5280</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6690">[RFC6690]</dt>
         <dd>
@@ -2075,6 +2195,10 @@ EDHOC_Application_Profile = {
         <dd>
 <span class="refAuthor">Seitz, L.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Authentication and Authorization for Constrained Environments Using the OAuth 2.0 Framework (ACE-OAuth)"</span>, <span class="seriesInfo">RFC 9200</span>, <span class="seriesInfo">DOI 10.17487/RFC9200</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9200">https://www.rfc-editor.org/rfc/rfc9200</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9360">[RFC9360]</dt>
+        <dd>
+<span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Header Parameters for Carrying and Referencing X.509 Certificates"</span>, <span class="seriesInfo">RFC 9360</span>, <span class="seriesInfo">DOI 10.17487/RFC9360</span>, <time datetime="2023-02" class="refDate">February 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9360">https://www.rfc-editor.org/rfc/rfc9360</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9423">[RFC9423]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Target Attributes Registry"</span>, <span class="seriesInfo">RFC 9423</span>, <span class="seriesInfo">DOI 10.17487/RFC9423</span>, <time datetime="2024-04" class="refDate">April 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9423">https://www.rfc-editor.org/rfc/rfc9423</a>&gt;</span>. </dd>
@@ -2082,6 +2206,10 @@ EDHOC_Application_Profile = {
 <dt id="RFC9528">[RFC9528]</dt>
         <dd>
 <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Preuß Mattsson, J.</span>, and <span class="refAuthor">F. Palombini</span>, <span class="refTitle">"Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="seriesInfo">RFC 9528</span>, <span class="seriesInfo">DOI 10.17487/RFC9528</span>, <time datetime="2024-03" class="refDate">March 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9528">https://www.rfc-editor.org/rfc/rfc9528</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9562">[RFC9562]</dt>
+        <dd>
+<span class="refAuthor">Davis, K.</span>, <span class="refAuthor">Peabody, B.</span>, and <span class="refAuthor">P. Leach</span>, <span class="refTitle">"Universally Unique IDentifiers (UUIDs)"</span>, <span class="seriesInfo">RFC 9562</span>, <span class="seriesInfo">DOI 10.17487/RFC9562</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9562">https://www.rfc-editor.org/rfc/rfc9562</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9668">[RFC9668]</dt>
       <dd>
@@ -2096,6 +2224,10 @@ EDHOC_Application_Profile = {
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.serafin-lake-ta-hint">[I-D.serafin-lake-ta-hint]</dt>
+        <dd>
+<span class="refAuthor">Serafin, M.</span> and <span class="refAuthor">G. Selander</span>, <span class="refTitle">"Trust Anchor Hints in Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-serafin-lake-ta-hint-00</span>, <time datetime="2024-10-21" class="refDate">21 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-serafin-lake-ta-hint-00">https://datatracker.ietf.org/doc/html/draft-serafin-lake-ta-hint-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9529">[RFC9529]</dt>
       <dd>
 <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Preuß Mattsson, J.</span>, <span class="refAuthor">Serafin, M.</span>, <span class="refAuthor">Tiloca, M.</span>, and <span class="refAuthor">M. Vučinić</span>, <span class="refTitle">"Traces of Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="seriesInfo">RFC 9529</span>, <span class="seriesInfo">DOI 10.17487/RFC9529</span>, <time datetime="2024-03" class="refDate">March 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9529">https://www.rfc-editor.org/rfc/rfc9529</a>&gt;</span>. </dd>
@@ -2166,24 +2298,30 @@ c509_cert = 3
             <p id="appendix-B.1-1.2.1">CBOR abbreviation of "app_prof" changed to 23.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">Moved definition of EDHOC_Information parameters to draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.3.1">Defined target attributes "ed-ta-*" for specifying supported trust anchors.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.4">
-            <p id="appendix-B.1-1.4.1">Updated IANA considerations:<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="appendix-B.1-1.4.2.1">
-                <p id="appendix-B.1-1.4.2.1.1">Suggested range 0-255 for CoAP Content-Format ID.<a href="#appendix-B.1-1.4.2.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.4.1">Moved definition of EDHOC_Information parameters to draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.4.2.2">
-                <p id="appendix-B.1-1.4.2.2.1">Removed requests for registration of removed parameters.<a href="#appendix-B.1-1.4.2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.1-1.5">
+            <p id="appendix-B.1-1.5.1">Updated IANA considerations:<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.1-1.5.2.1">
+                <p id="appendix-B.1-1.5.2.1.1">Suggested range 0-255 for CoAP Content-Format ID.<a href="#appendix-B.1-1.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.5.2.2">
+                <p id="appendix-B.1-1.5.2.2.1">Requested registration for target attributes "ed-ta-*".<a href="#appendix-B.1-1.5.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.5.2.3">
+                <p id="appendix-B.1-1.5.2.3.1">Removed requests for registration of removed parameters.<a href="#appendix-B.1-1.5.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Updated references.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
-</li>
           <li class="normal" id="appendix-B.1-1.6">
-            <p id="appendix-B.1-1.6.1">Editorial improvements.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.6.1">Updated references.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.7">
+            <p id="appendix-B.1-1.7.1">Editorial improvements.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2196,7 +2334,8 @@ c509_cert = 3
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-C-1">The authors sincerely thank <span class="contact-name">Christian Amsüss</span>, <span class="contact-name">Geovane Fedrecheski</span>, <span class="contact-name">Michael Richardson</span>, <span class="contact-name">Göran Selander</span>, and <span class="contact-name">Brian Sipos</span> for their feedback and comments.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<p id="appendix-C-2">This work was supported by the Sweden's Innovation Agency VINNOVA within the EUREKA CELTIC-NEXT project CYPRESS.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">The target attributes "ed-ta-*" for specifying supported trust anchors build on a proposal originally described in <span>[<a href="#I-D.serafin-lake-ta-hint" class="cite xref">I-D.serafin-lake-ta-hint</a>]</span>.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">This work was supported by the Sweden's Innovation Agency VINNOVA within the EUREKA CELTIC-NEXT project CYPRESS.<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">

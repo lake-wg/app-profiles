@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 22 July 2025                                    18 January 2025
+Expires: 23 July 2025                                    19 January 2025
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 July 2025.
+   This Internet-Draft will expire on 23 July 2025.
 
 Copyright Notice
 
@@ -441,6 +441,55 @@ Table of Contents
       [I-D.ietf-ace-edhoc-oscore-profile].  This parameter MAY occur
       multiple times, with each occurrence specifying a means for
       transporting EDHOC messages.
+
+   *  'ed-ta-uuid', specifying the identifier of a trust anchor
+      supported by the server for verifying authentication credentials
+      of EDHOC peers, as a UUID [RFC9562].  This parameter MUST specify
+      a single value, which is the UUID in its string format (see
+      Section 4 of [RFC9562]).  This parameter MAY occur multiple times,
+      with each occurrence specifying one trust anchor identifier.
+
+   *  'ed-ta-kid', specifying the identifier of a trust anchor supported
+      by the server for verifying authentication credentials of EDHOC
+      peers, as a binary key identifier.  This parameter MUST specify a
+      single value, which is the base64url-encoded text string of the
+      binary representation of the key identifier.  This parameter MAY
+      occur multiple times, with each occurrence specifying one trust
+      anchor identifier.
+
+   *  'ed-ta-c5t', specifying the identifier of a trust anchor supported
+      by the server for verifying authentication credentials of EDHOC
+      peers, as a hash of a C509 certificate
+      [I-D.ietf-cose-cbor-encoded-cert].  This parameter MUST specify a
+      single value, which is the base64url-encoded text string of the
+      binary representation of the certificate hash encoded as a
+      COSE_CertHash [RFC9360].  This parameter MAY occur multiple times,
+      with each occurrence specifying one trust anchor identifier.
+
+   *  'ed-ta-c5u', specifying the identifier of a trust anchor supported
+      by the server for verifying authentication credentials of EDHOC
+      peers, as a URI [RFC3986] pointing to a C509 certificate
+      [I-D.ietf-cose-cbor-encoded-cert].  This parameter MUST specify a
+      single value, which is the URI pointing to the certificate.  This
+      parameter MAY occur multiple times, with each occurrence
+      specifying one trust anchor identifier.
+
+   *  'ed-ta-x5t', specifying the identifier of a trust anchor supported
+      by the server for verifying authentication credentials of EDHOC
+      peers, as a hash of an X.509 certificate [RFC5280].  This
+      parameter MUST specify a single value, which is the base64url-
+      encoded text string of the binary representation of the
+      certificate hash encoded as a COSE_CertHash [RFC9360].  This
+      parameter MAY occur multiple times, with each occurrence
+      specifying one trust anchor identifier.
+
+   *  'ed-ta-x5u', specifying the identifier of a trust anchor supported
+      by the server for verifying authentication credentials of EDHOC
+      peers, as a URI [RFC3986] pointing to an X.509 certificate
+      [RFC5280].  This parameter MUST specify a single value, which is
+      the URI pointing to the certificate.  This parameter MAY occur
+      multiple times, with each occurrence specifying one trust anchor
+      identifier.
 
 4.  Representation of an EDHOC Application Profile
 
@@ -878,6 +927,77 @@ Table of Contents
 
    *  Reference: [RFC-XXXX]
 
+
+
+   *  Attribute Name: ed-ta-uuid
+
+   *  Brief Description: Identifier of a supported trust anchor for
+      verifying authentication credentials of EDHOC peers, as a UUID
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+
+
+   *  Attribute Name: ed-ta-kid
+
+   *  Brief Description: Identifier of a supported trust anchor for
+      verifying authentication credentials of EDHOC peers, as a binary
+      key identifier
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+
+
+   *  Attribute Name: ed-ta-c5t
+
+   *  Brief Description: Identifier of a supported trust anchor for
+      verifying authentication credentials of EDHOC peers, as a hash of
+      a C509 certificate
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+
+
+   *  Attribute Name: ed-ta-x5u
+
+   *  Brief Description: Identifier of a supported trust anchor for
+      verifying authentication credentials of EDHOC peers, as a URI
+      pointing to a C509 certificate
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+
+
+   *  Attribute Name: ed-ta-x5t
+
+   *  Brief Description: Identifier of a supported trust anchor for
+      verifying authentication credentials of EDHOC peers, as a hash of
+      an X.509 certificate
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+
+
+   *  Attribute Name: ed-ta-c5u
+
+   *  Brief Description: Identifier of a supported trust anchor for
+      verifying authentication credentials of EDHOC peers, as a URI
+      pointing to an X.509 certificate
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
 8.4.  EDHOC Information Registry
 
    IANA is asked to register the following entry in the "EDHOC
@@ -995,10 +1115,29 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
               edhoc-oscore-profile-06>.
 
+   [I-D.ietf-cose-cbor-encoded-cert]
+              Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
+              M. Furuhed, "CBOR Encoded X.509 Certificates (C509
+              Certificates)", Work in Progress, Internet-Draft, draft-
+              ietf-cose-cbor-encoded-cert-12, 8 January 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
+              cbor-encoded-cert-12>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, DOI 10.17487/RFC3986, January 2005,
+              <https://www.rfc-editor.org/rfc/rfc3986>.
+
+   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+              Housley, R., and W. Polk, "Internet X.509 Public Key
+              Infrastructure Certificate and Certificate Revocation List
+              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5280>.
 
    [RFC6690]  Shelby, Z., "Constrained RESTful Environments (CoRE) Link
               Format", RFC 6690, DOI 10.17487/RFC6690, August 2012,
@@ -1057,6 +1196,11 @@ Table of Contents
               (ACE-OAuth)", RFC 9200, DOI 10.17487/RFC9200, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9200>.
 
+   [RFC9360]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Header Parameters for Carrying and Referencing X.509
+              Certificates", RFC 9360, DOI 10.17487/RFC9360, February
+              2023, <https://www.rfc-editor.org/rfc/rfc9360>.
+
    [RFC9423]  Bormann, C., "Constrained RESTful Environments (CoRE)
               Target Attributes Registry", RFC 9423,
               DOI 10.17487/RFC9423, April 2024,
@@ -1067,6 +1211,10 @@ Table of Contents
               DOI 10.17487/RFC9528, March 2024,
               <https://www.rfc-editor.org/rfc/rfc9528>.
 
+   [RFC9562]  Davis, K., Peabody, B., and P. Leach, "Universally Unique
+              IDentifiers (UUIDs)", RFC 9562, DOI 10.17487/RFC9562, May
+              2024, <https://www.rfc-editor.org/rfc/rfc9562>.
+
    [RFC9668]  Palombini, F., Tiloca, M., Höglund, R., Hristozov, S., and
               G. Selander, "Using Ephemeral Diffie-Hellman Over COSE
               (EDHOC) with the Constrained Application Protocol (CoAP)
@@ -1075,6 +1223,13 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc9668>.
 
 9.2.  Informative References
+
+   [I-D.serafin-lake-ta-hint]
+              Serafin, M. and G. Selander, "Trust Anchor Hints in
+              Ephemeral Diffie-Hellman Over COSE (EDHOC)", Work in
+              Progress, Internet-Draft, draft-serafin-lake-ta-hint-00,
+              21 October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-serafin-lake-ta-hint-00>.
 
    [RFC9529]  Selander, G., Preuß Mattsson, J., Serafin, M., Tiloca, M.,
               and M. Vučinić, "Traces of Ephemeral Diffie-Hellman Over
@@ -1122,12 +1277,17 @@ B.1.  Version -00 to -01
 
    *  CBOR abbreviation of "app_prof" changed to 23.
 
+   *  Defined target attributes "ed-ta-*" for specifying supported trust
+      anchors.
+
    *  Moved definition of EDHOC_Information parameters to draft-ietf-
       ace-edhoc-oscore-profile.
 
    *  Updated IANA considerations:
 
       -  Suggested range 0-255 for CoAP Content-Format ID.
+
+      -  Requested registration for target attributes "ed-ta-*".
 
       -  Removed requests for registration of removed parameters.
 
@@ -1140,6 +1300,10 @@ Acknowledgments
    The authors sincerely thank Christian Amsüss, Geovane Fedrecheski,
    Michael Richardson, Göran Selander, and Brian Sipos for their
    feedback and comments.
+
+   The target attributes "ed-ta-*" for specifying supported trust
+   anchors build on a proposal originally described in
+   [I-D.serafin-lake-ta-hint].
 
    This work was supported by the Sweden's Innovation Agency VINNOVA
    within the EUREKA CELTIC-NEXT project CYPRESS.
