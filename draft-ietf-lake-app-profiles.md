@@ -31,6 +31,8 @@ author:
     email: rikard.hoglund@ri.se
 
 normative:
+  RFC3986:
+  RFC5280:
   RFC6690:
   RFC6838:
   RFC7120:
@@ -42,13 +44,17 @@ normative:
   RFC8742:
   RFC8949:
   RFC9200:
+  RFC9360:
   RFC9423:
   RFC9528:
+  RFC9562:
   RFC9668:
   I-D.ietf-ace-edhoc-oscore-profile:
+  I-D.ietf-cose-cbor-encoded-cert:
 
 informative:
   RFC9529:
+  I-D.serafin-lake-ta-hint:
 
 entity:
   SELF: "[RFC-XXXX]"
@@ -195,6 +201,18 @@ When specifying any of the parameters defined below in a link to an EDHOC resour
 * 'ed-idep-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter MUST specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.
 
 * 'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter MUST specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.
+
+* 'ed-ta-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a UUID {{RFC9562}}. This parameter MUST specify a single value, which is the UUID in its string format (see Section 4 of {{RFC9562}}). This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+
+* 'ed-ta-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a binary key identifier. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+
+* 'ed-ta-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a hash of a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+
+* 'ed-ta-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a URI {{RFC3986}} pointing to a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+
+* 'ed-ta-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a hash of an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+
+* 'ed-ta-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a URI {{RFC3986}} pointing to an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
 # Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
 
@@ -506,6 +524,48 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 * Change Controller: IETF
 * Reference: {{&SELF}}
 
+<br>
+
+* Attribute Name: ed-ta-uuid
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a UUID
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Attribute Name: ed-ta-kid
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a binary key identifier
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Attribute Name: ed-ta-c5t
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a hash of a C509 certificate
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Attribute Name: ed-ta-x5u
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to a C509 certificate
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Attribute Name: ed-ta-x5t
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a hash of an X.509 certificate
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Attribute Name: ed-ta-c5u
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to an X.509 certificate
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
 ## EDHOC Information Registry ## {#iana-edhoc-information-registry}
 
 IANA is asked to register the following entry in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
@@ -593,11 +653,15 @@ c509_cert = 3
 
 * CBOR abbreviation of "app_prof" changed to 23.
 
+* Defined target attributes "ed-ta-*" for specifying supported trust anchors.
+
 * Moved definition of EDHOC_Information parameters to draft-ietf-ace-edhoc-oscore-profile.
 
 * Updated IANA considerations:
 
   - Suggested range 0-255 for CoAP Content-Format ID.
+
+  - Requested registration for target attributes "ed-ta-*".
 
   - Removed requests for registration of removed parameters.
 
@@ -609,5 +673,7 @@ c509_cert = 3
 {:numbered="false"}
 
 The authors sincerely thank {{{Christian Amsüss}}}, {{{Geovane Fedrecheski}}}, {{{Michael Richardson}}}, {{{Göran Selander}}}, and {{{Brian Sipos}}} for their feedback and comments.
+
+The target attributes "ed-ta-*" for specifying supported trust anchors build on a proposal originally described in {{I-D.serafin-lake-ta-hint}}.
 
 This work was supported by the Sweden's Innovation Agency VINNOVA within the EUREKA CELTIC-NEXT project CYPRESS.
