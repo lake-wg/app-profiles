@@ -547,7 +547,7 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 <br>
 
-* Attribute Name: ed-ta-x5u
+* Attribute Name: ed-ta-c5u
 * Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to a C509 certificate
 * Change Controller: IETF
 * Reference: {{&SELF}}
@@ -561,7 +561,7 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 <br>
 
-* Attribute Name: ed-ta-c5u
+* Attribute Name: ed-ta-x5u
 * Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to an X.509 certificate
 * Change Controller: IETF
 * Reference: {{&SELF}}
