@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 23 July 2025                                    19 January 2025
+Expires: 24 July 2025                                    20 January 2025
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 July 2025.
+   This Internet-Draft will expire on 24 July 2025.
 
 Copyright Notice
 
@@ -964,7 +964,7 @@ Table of Contents
 
 
 
-   *  Attribute Name: ed-ta-x5u
+   *  Attribute Name: ed-ta-c5u
 
    *  Brief Description: Identifier of a supported trust anchor for
       verifying authentication credentials of EDHOC peers, as a URI
@@ -988,7 +988,7 @@ Table of Contents
 
 
 
-   *  Attribute Name: ed-ta-c5u
+   *  Attribute Name: ed-ta-x5u
 
    *  Brief Description: Identifier of a supported trust anchor for
       verifying authentication credentials of EDHOC peers, as a URI
