@@ -1465,22 +1465,22 @@ When using the target EDHOC resource as per any EDHOC application profile indica
           <p id="section-3-4.4.1">'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.<a href="#section-3-4.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-4.5">
-          <p id="section-3-4.5.1">'ed-ta-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the UUID in its string format (see Section 4 of <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>). This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.5.1" class="pilcrow">¶</a></p>
+          <p id="section-3-4.5.1">'ed-ta-edcred-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the UUID in its string format (see Section 4 of <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>). This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-4.6">
-          <p id="section-3-4.6.1">'ed-ta-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a binary key identifier. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.6.1" class="pilcrow">¶</a></p>
+          <p id="section-3-4.6.1">'ed-ta-edcred-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a binary key identifier. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-4.7">
-          <p id="section-3-4.7.1">'ed-ta-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a hash of a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.7.1" class="pilcrow">¶</a></p>
+          <p id="section-3-4.7.1">'ed-ta-edcred-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-4.8">
-          <p id="section-3-4.8.1">'ed-ta-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.8.1" class="pilcrow">¶</a></p>
+          <p id="section-3-4.8.1">'ed-ta-edcred-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.8.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-4.9">
-          <p id="section-3-4.9.1">'ed-ta-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a hash of an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.9.1" class="pilcrow">¶</a></p>
+          <p id="section-3-4.9.1">'ed-ta-edcred-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.9.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-4.10">
-          <p id="section-3-4.10.1">'ed-ta-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.10.1" class="pilcrow">¶</a></p>
+          <p id="section-3-4.10.1">'ed-ta-edcred-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.10.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1948,10 +1948,10 @@ EDHOC_Application_Profile = {
 <p id="section-8.3-11"><br></p>
 <ul class="normal">
 <li class="normal" id="section-8.3-12.1">
-            <p id="section-8.3-12.1.1">Attribute Name: ed-ta-uuid<a href="#section-8.3-12.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-12.1.1">Attribute Name: ed-ta-edcred-uuid<a href="#section-8.3-12.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-12.2">
-            <p id="section-8.3-12.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a UUID<a href="#section-8.3-12.2.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-12.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a UUID<a href="#section-8.3-12.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-12.3">
             <p id="section-8.3-12.3.1">Change Controller: IETF<a href="#section-8.3-12.3.1" class="pilcrow">¶</a></p>
@@ -1963,10 +1963,10 @@ EDHOC_Application_Profile = {
 <p id="section-8.3-13"><br></p>
 <ul class="normal">
 <li class="normal" id="section-8.3-14.1">
-            <p id="section-8.3-14.1.1">Attribute Name: ed-ta-kid<a href="#section-8.3-14.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-14.1.1">Attribute Name: ed-ta-edcred-kid<a href="#section-8.3-14.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-14.2">
-            <p id="section-8.3-14.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a binary key identifier<a href="#section-8.3-14.2.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-14.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a binary key identifier<a href="#section-8.3-14.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-14.3">
             <p id="section-8.3-14.3.1">Change Controller: IETF<a href="#section-8.3-14.3.1" class="pilcrow">¶</a></p>
@@ -1978,10 +1978,10 @@ EDHOC_Application_Profile = {
 <p id="section-8.3-15"><br></p>
 <ul class="normal">
 <li class="normal" id="section-8.3-16.1">
-            <p id="section-8.3-16.1.1">Attribute Name: ed-ta-c5t<a href="#section-8.3-16.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-16.1.1">Attribute Name: ed-ta-edcred-c5t<a href="#section-8.3-16.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-16.2">
-            <p id="section-8.3-16.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a hash of a C509 certificate<a href="#section-8.3-16.2.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-16.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate<a href="#section-8.3-16.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-16.3">
             <p id="section-8.3-16.3.1">Change Controller: IETF<a href="#section-8.3-16.3.1" class="pilcrow">¶</a></p>
@@ -1993,10 +1993,10 @@ EDHOC_Application_Profile = {
 <p id="section-8.3-17"><br></p>
 <ul class="normal">
 <li class="normal" id="section-8.3-18.1">
-            <p id="section-8.3-18.1.1">Attribute Name: ed-ta-c5u<a href="#section-8.3-18.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-18.1.1">Attribute Name: ed-ta-edcred-c5u<a href="#section-8.3-18.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-18.2">
-            <p id="section-8.3-18.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to a C509 certificate<a href="#section-8.3-18.2.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-18.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to a C509 certificate<a href="#section-8.3-18.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-18.3">
             <p id="section-8.3-18.3.1">Change Controller: IETF<a href="#section-8.3-18.3.1" class="pilcrow">¶</a></p>
@@ -2008,10 +2008,10 @@ EDHOC_Application_Profile = {
 <p id="section-8.3-19"><br></p>
 <ul class="normal">
 <li class="normal" id="section-8.3-20.1">
-            <p id="section-8.3-20.1.1">Attribute Name: ed-ta-x5t<a href="#section-8.3-20.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-20.1.1">Attribute Name: ed-ta-edcred-x5t<a href="#section-8.3-20.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-20.2">
-            <p id="section-8.3-20.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a hash of an X.509 certificate<a href="#section-8.3-20.2.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-20.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate<a href="#section-8.3-20.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-20.3">
             <p id="section-8.3-20.3.1">Change Controller: IETF<a href="#section-8.3-20.3.1" class="pilcrow">¶</a></p>
@@ -2023,10 +2023,10 @@ EDHOC_Application_Profile = {
 <p id="section-8.3-21"><br></p>
 <ul class="normal">
 <li class="normal" id="section-8.3-22.1">
-            <p id="section-8.3-22.1.1">Attribute Name: ed-ta-x5u<a href="#section-8.3-22.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-22.1.1">Attribute Name: ed-ta-edcred-x5u<a href="#section-8.3-22.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-22.2">
-            <p id="section-8.3-22.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to an X.509 certificate<a href="#section-8.3-22.2.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-22.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to an X.509 certificate<a href="#section-8.3-22.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-22.3">
             <p id="section-8.3-22.3.1">Change Controller: IETF<a href="#section-8.3-22.3.1" class="pilcrow">¶</a></p>
