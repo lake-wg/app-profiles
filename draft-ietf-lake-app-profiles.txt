@@ -1007,7 +1007,7 @@ Table of Contents
 
    *  Name: app_prof
 
-   *  CBOR label: 23
+   *  CBOR label: 23 (suggested)
 
    *  CBOR type: int or array
 
