@@ -202,17 +202,17 @@ When specifying any of the parameters defined below in a link to an EDHOC resour
 
 * 'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter MUST specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.
 
-* 'ed-ta-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a UUID {{RFC9562}}. This parameter MUST specify a single value, which is the UUID in its string format (see Section 4 of {{RFC9562}}). This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a UUID {{RFC9562}}. This parameter MUST specify a single value, which is the UUID in its string format (see Section 4 of {{RFC9562}}). This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a binary key identifier. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a binary key identifier. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a hash of a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a URI {{RFC3986}} pointing to a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI {{RFC3986}} pointing to a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a hash of an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of EDHOC peers, as a URI {{RFC3986}} pointing to an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI {{RFC3986}} pointing to an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
 # Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
 
@@ -526,43 +526,43 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 <br>
 
-* Attribute Name: ed-ta-uuid
-* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a UUID
+* Attribute Name: ed-ta-edcred-uuid
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a UUID
 * Change Controller: IETF
 * Reference: {{&SELF}}
 
 <br>
 
-* Attribute Name: ed-ta-kid
-* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a binary key identifier
+* Attribute Name: ed-ta-edcred-kid
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a binary key identifier
 * Change Controller: IETF
 * Reference: {{&SELF}}
 
 <br>
 
-* Attribute Name: ed-ta-c5t
-* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a hash of a C509 certificate
+* Attribute Name: ed-ta-edcred-c5t
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate
 * Change Controller: IETF
 * Reference: {{&SELF}}
 
 <br>
 
-* Attribute Name: ed-ta-c5u
-* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to a C509 certificate
+* Attribute Name: ed-ta-edcred-c5u
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to a C509 certificate
 * Change Controller: IETF
 * Reference: {{&SELF}}
 
 <br>
 
-* Attribute Name: ed-ta-x5t
-* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a hash of an X.509 certificate
+* Attribute Name: ed-ta-edcred-x5t
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate
 * Change Controller: IETF
 * Reference: {{&SELF}}
 
 <br>
 
-* Attribute Name: ed-ta-x5u
-* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of EDHOC peers, as a URI pointing to an X.509 certificate
+* Attribute Name: ed-ta-edcred-x5u
+* Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to an X.509 certificate
 * Change Controller: IETF
 * Reference: {{&SELF}}
 
