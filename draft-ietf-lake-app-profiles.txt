@@ -78,29 +78,35 @@ Table of Contents
        2.2.1.  Use in the EDHOC and OSCORE Profile of the ACE
                Framework
    3.  Additional Parameters for Web Linking
-   4.  Representation of an EDHOC Application Profile
-   5.  Well-known EDHOC Application Profiles
-     5.1.  Well-Known Application Profile WK-MINIMAL_CS_2
-     5.2.  Well-Known Application Profile WK-MINIMAL_CS_0
-     5.3.  Well-Known Application Profile WK-BASIC_CS_2_X509
-     5.4.  Well-Known Application Profile WK-BASIC_CS_0_X509
-     5.5.  Well-Known Application Profile WK-BASIC_CS_2_C509
-     5.6.  Well-Known Application Profile WK-BASIC_CS_0_C509
-     5.7.  Well-Known Application Profile WK-INTERMEDIATE_CS_2
-     5.8.  Well-Known Application Profile WK-INTERMEDIATE_CS_0
-     5.9.  Well-Known Application Profile WK-ADVANCED
-   6.  EDHOC Well-known Application Profiles
-   7.  Security Considerations
-   8.  IANA Considerations
-     8.1.  Media Type Registrations
-     8.2.  CoAP Content-Formats Registry
-     8.3.  Target Attributes Registry
-     8.4.  EDHOC Information Registry
-     8.5.  EDHOC Application Profiles Registry
-     8.6.  Expert Review Instructions
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   4.  Advertising Supported EDHOC Application Profiles during an
+           EDHOC Session
+     4.1.  EDHOC Message 1 and Message 2
+     4.2.  EDHOC Error Message
+   5.  Representation of an EDHOC Application Profile
+   6.  Well-known EDHOC Application Profiles
+     6.1.  Well-Known Application Profile WK-MINIMAL_CS_2
+     6.2.  Well-Known Application Profile WK-MINIMAL_CS_0
+     6.3.  Well-Known Application Profile WK-BASIC_CS_2_X509
+     6.4.  Well-Known Application Profile WK-BASIC_CS_0_X509
+     6.5.  Well-Known Application Profile WK-BASIC_CS_2_C509
+     6.6.  Well-Known Application Profile WK-BASIC_CS_0_C509
+     6.7.  Well-Known Application Profile WK-INTERMEDIATE_CS_2
+     6.8.  Well-Known Application Profile WK-INTERMEDIATE_CS_0
+     6.9.  Well-Known Application Profile WK-ADVANCED
+   7.  Identifiers of Well-known EDHOC Application Profiles
+   8.  Security Considerations
+   9.  IANA Considerations
+     9.1.  Media Type Registrations
+     9.2.  CoAP Content-Formats Registry
+     9.3.  Target Attributes Registry
+     9.4.  EDHOC Information Registry
+     9.5.  EDHOC External Authorization Data Registry
+     9.6.  EDHOC Error Codes Registry
+     9.7.  EDHOC Application Profiles Registry
+     9.8.  Expert Review Instructions
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
      B.1.  Version -00 to -01
@@ -131,7 +137,7 @@ Table of Contents
    discovery of EDHOC application profiles, that is:
 
    *  The new IANA registry "EDHOC Application Profiles" defined in
-      Section 8.5, where to register integer identifiers of EDHOC
+      Section 9.7, where to register integer identifiers of EDHOC
       application profiles to use as corresponding Profile IDs.
 
    *  The new parameter "ed-prof" defined in Section 2.1.  This
@@ -169,7 +175,7 @@ Table of Contents
    information beyond transport- or setup-specific scenarios, this
    document also defines a canonical, CBOR-based representation that can
    be used to describe, distribute, and store EDHOC application profiles
-   as CBOR data items (see Section 4).  The defined representation is
+   as CBOR data items (see Section 5).  The defined representation is
    transport- and setup-independent, and avoids the need to reinvent an
    encoding for the available options to run the EDHOC protocol or the
    selection logic to apply on those.
@@ -181,7 +187,7 @@ Table of Contents
    execution of a device on-boarding/registration workflow.
 
    Finally, this document defines a set of well-known EDHOC application
-   profiles (see Section 5).  These application profiles are meant to
+   profiles (see Section 6).  These application profiles are meant to
    reflect what is most common and expected to be supported by EDHOC
    peers, while they are not to be intended as "default" application
    profiles or as a deviation from what is mandatory to support for
@@ -248,7 +254,7 @@ Table of Contents
    *  'ed-prof', specifying an EDHOC application profile supported by
       the server.  This parameter MUST specify a single value, which is
       taken from the 'Profile ID' column of the "EDHOC Application
-      Profiles" registry defined in Section 8.5 of this document.  This
+      Profiles" registry defined in Section 9.7 of this document.  This
       parameter MAY occur multiple times, with each occurrence
       specifying an EDHOC application profile.
 
@@ -333,7 +339,7 @@ Table of Contents
       integers.  In CBOR, "app_prof" is an integer or an array of
       integers, and has label 23.  The integer values are taken from the
       'Profile ID' column of the "EDHOC Application Profiles" registry
-      defined in Section 8.5 of this document.
+      defined in Section 9.7 of this document.
 
 2.2.1.  Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -492,7 +498,20 @@ Table of Contents
       parameter MAY occur multiple times, with each occurrence
       specifying one trust anchor identifier.
 
-4.  Representation of an EDHOC Application Profile
+4.  Advertising Supported EDHOC Application Profiles during an EDHOC
+    Session
+
+   TBD
+
+4.1.  EDHOC Message 1 and Message 2
+
+   TBD
+
+4.2.  EDHOC Error Message
+
+   TBD
+
+5.  Representation of an EDHOC Application Profile
 
    This section defines the EDHOC_Application_Profile object, which can
    be used as a canonical representation of EDHOC application profiles
@@ -572,7 +591,7 @@ Table of Contents
       * int / tstr => any
    }
 
-5.  Well-known EDHOC Application Profiles
+6.  Well-known EDHOC Application Profiles
 
    This section defines a set of well-known EDHOC application profiles
    that are meant to reflect what is most common and expected to be
@@ -595,13 +614,13 @@ Table of Contents
 
    The rest of this section defines the well-known application profiles,
    each of which is represented by means of an EDHOC_Application_Profile
-   object (see Section 4) using the CBOR extended diagnostic notation.
+   object (see Section 5) using the CBOR extended diagnostic notation.
 
    An entry for each well-known application profile is also registered
-   at the "EDHOC Application Profiles" registry defined in Section 8.5
+   at the "EDHOC Application Profiles" registry defined in Section 9.7
    of this document.
 
-5.1.  Well-Known Application Profile WK-MINIMAL_CS_2
+6.1.  Well-Known Application Profile WK-MINIMAL_CS_2
 
    {
            e'methods' : 3, / EDHOC Method Type 3 /
@@ -614,7 +633,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
-5.2.  Well-Known Application Profile WK-MINIMAL_CS_0
+6.2.  Well-Known Application Profile WK-MINIMAL_CS_0
 
    {
            e'methods' : 3, / EDHOC Method Type 3 /
@@ -624,7 +643,7 @@ Table of Contents
           e'app_prof' : e'APP-PROF-WK-MINIMAL-CS-0'
    }
 
-5.3.  Well-Known Application Profile WK-BASIC_CS_2_X509
+6.3.  Well-Known Application Profile WK-BASIC_CS_2_X509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -638,7 +657,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
-5.4.  Well-Known Application Profile WK-BASIC_CS_0_X509
+6.4.  Well-Known Application Profile WK-BASIC_CS_0_X509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -652,7 +671,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 2 of [RFC9529].
 
-5.5.  Well-Known Application Profile WK-BASIC_CS_2_C509
+6.5.  Well-Known Application Profile WK-BASIC_CS_2_C509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -663,7 +682,7 @@ Table of Contents
           e'app_prof' : e'APP-PROF-WK-BASIC-CS-2-C509'
    }
 
-5.6.  Well-Known Application Profile WK-BASIC_CS_0_C509
+6.6.  Well-Known Application Profile WK-BASIC_CS_0_C509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -674,7 +693,7 @@ Table of Contents
           e'app_prof' : e'APP-PROF-WK-BASIC-CS-0-C509'
    }
 
-5.7.  Well-Known Application Profile WK-INTERMEDIATE_CS_2
+6.7.  Well-Known Application Profile WK-INTERMEDIATE_CS_2
 
   {
           e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -691,7 +710,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
-5.8.  Well-Known Application Profile WK-INTERMEDIATE_CS_0
+6.8.  Well-Known Application Profile WK-INTERMEDIATE_CS_0
 
   {
           e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -708,7 +727,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 2 of [RFC9529].
 
-5.9.  Well-Known Application Profile WK-ADVANCED
+6.9.  Well-Known Application Profile WK-ADVANCED
 
  {
          e'methods' : [0, 1, 2, 3], / EDHOC Method Types
@@ -729,7 +748,7 @@ Table of Contents
    This application profile is aligned with the example traces of EDHOC
    compiled in Sections 2 and 3 of [RFC9529].
 
-6.  EDHOC Well-known Application Profiles
+7.  Identifiers of Well-known EDHOC Application Profiles
 
    This document defines the following identifiers of well-known EDHOC
    application profiles.
@@ -800,18 +819,18 @@ Table of Contents
 
                Table 2: EDHOC Well-known Application Profiles
 
-7.  Security Considerations
+8.  Security Considerations
 
    TBD
 
-8.  IANA Considerations
+9.  IANA Considerations
 
    This document has the following actions for IANA.
 
    Note to RFC Editor: Please replace all occurrences of "[RFC-XXXX]"
    with the RFC number of this specification and delete this paragraph.
 
-8.1.  Media Type Registrations
+9.1.  Media Type Registrations
 
    IANA is asked to register the media type "application/edhoc-app-
    profile+cbor-seq".  This registration follows the procedures
@@ -830,7 +849,7 @@ Table of Contents
    defined as an element of the CBOR-encoded EDHOC_Information object
    from Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile].
 
-   Security considerations: See Section 7 of [RFC-XXXX].
+   Security considerations: See Section 8 of [RFC-XXXX].
 
    Interoperability considerations: N/A
 
@@ -856,7 +875,7 @@ Table of Contents
 
    Provisional registration: No
 
-8.2.  CoAP Content-Formats Registry
+9.2.  CoAP Content-Formats Registry
 
    IANA is asked to add the following entry to the "CoAP Content-
    Formats" registry within the "Constrained RESTful Environments (CoRE)
@@ -870,7 +889,7 @@ Table of Contents
 
    Reference: [RFC-XXXX]
 
-8.3.  Target Attributes Registry
+9.3.  Target Attributes Registry
 
    IANA is asked to register the following entries in the "Target
    Attributes" registry within the "Constrained RESTful Environments
@@ -1000,7 +1019,7 @@ Table of Contents
 
    *  Reference: [RFC-XXXX]
 
-8.4.  EDHOC Information Registry
+9.4.  EDHOC Information Registry
 
    IANA is asked to register the following entry in the "EDHOC
    Information" registry defined in [I-D.ietf-ace-edhoc-oscore-profile].
@@ -1017,7 +1036,37 @@ Table of Contents
 
    *  Specification: [RFC-XXXX][RFC9528]
 
-8.5.  EDHOC Application Profiles Registry
+9.5.  EDHOC External Authorization Data Registry
+
+   IANA is asked to register the following entry in the "EDHOC External
+   Authorization Data" registry within the "Ephemeral Diffie-Hellman
+   Over COSE (EDHOC)" registry group defined in [RFC9528].
+
+   *  Name: Supported Application Profiles
+
+   *  Label: TBD (range 0-23)
+
+   *  Description: Set of supported EDHOC application profiles
+
+   *  Reference: [RFC-XXXX]
+
+9.6.  EDHOC Error Codes Registry
+
+   IANA is asked to register the following entry in the "EDHOC Error
+   Codes" registry within the "Ephemeral Diffie-Hellman Over COSE
+   (EDHOC)" registry group defined in [RFC9528].
+
+   *  ERR_CODE: TBD (range -24 to 23)
+
+   *  ERR_INFO Type: app_profiles
+
+   *  Description: Supported EDHOC application profiles
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+9.7.  EDHOC Application Profiles Registry
 
    IANA is requested to create a new "EDHOC Application Profiles"
    registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)"
@@ -1025,7 +1074,7 @@ Table of Contents
 
    The registration policy is either "Private Use", "Standards Action
    with Expert Review", or "Specification Required" per Section 4.6 of
-   [RFC8126].  "Expert Review" guidelines are provided in Section 8.6.
+   [RFC8126].  "Expert Review" guidelines are provided in Section 9.8.
 
    All assignments according to "Standards Action with Expert Review"
    are made on a "Standards Action" basis per Section 4.9 of [RFC8126],
@@ -1061,7 +1110,7 @@ Table of Contents
    This registry has been initially populated with the values in
    Table 2.
 
-8.6.  Expert Review Instructions
+9.8.  Expert Review Instructions
 
    "Standards Action with Expert Review" and "Specification Required"
    are two of the registration policies defined for the IANA registry
@@ -1103,9 +1152,9 @@ Table of Contents
       it will be used on, and the number of code points left that encode
       to that size.
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
 
    [I-D.ietf-ace-edhoc-oscore-profile]
               Selander, G., Mattsson, J. P., Tiloca, M., and R. Höglund,
@@ -1224,7 +1273,7 @@ Table of Contents
               (OSCORE)", RFC 9668, DOI 10.17487/RFC9668, November 2024,
               <https://www.rfc-editor.org/rfc/rfc9668>.
 
-9.2.  Informative References
+10.2.  Informative References
 
    [I-D.serafin-lake-ta-hint]
               Serafin, M. and G. Selander, "Trust Anchor Hints in
