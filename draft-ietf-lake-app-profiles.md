@@ -198,7 +198,7 @@ When specifying any of the parameters defined below in a link to an EDHOC resour
 
 * 'ed-coap-ct', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see {{Sections 3.4.1 and A.2 of RFC9528}}). A value MUST NOT be given to this parameter and any present value MUST be ignored by the recipient.
 
-* 'ed-idep-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter MUST specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.
+* 'ed-epid-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter MUST specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.
 
 * 'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter MUST specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.
 
@@ -505,7 +505,7 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 <br>
 
-* Attribute Name: ed-idep-t
+* Attribute Name: ed-epid-t
 * Brief Description: A supported type of endpoint identity for EDHOC
 * Change Controller: IETF
 * Reference: {{&SELF}}
@@ -648,6 +648,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -00 to -01 ## {#sec-00-01}
+
+* Renamed ed-idep-t x as ed-epid-t.
 
 * Content-Format abbreviated as "ct" (not "cf").
 
