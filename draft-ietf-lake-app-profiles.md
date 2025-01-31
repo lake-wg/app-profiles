@@ -214,6 +214,18 @@ When specifying any of the parameters defined below in a link to an EDHOC resour
 
 * 'ed-ta-edcred-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI {{RFC3986}} pointing to an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
+# Advertising Supported EDHOC Application Profiles during an EDHOC Session # {#sec-app-profile-edhoc-messages}
+
+TBD
+
+## EDHOC Message 1 and Message 2 # {#sec-app-profile-edhoc-message_1_2}
+
+TBD
+
+## EDHOC Error Message # {#sec-app-profile-edhoc-error-message}
+
+TBD
+
 # Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
 
 This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.
@@ -411,7 +423,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 
 This application profile is aligned with the example traces of EDHOC compiled in {{Sections 2 and 3 of RFC9529}}.
 
-# EDHOC Well-known Application Profiles # {#sec-edhoc-well-known-app-profiles}
+# Identifiers of Well-known EDHOC Application Profiles # {#sec-edhoc-well-known-app-profiles}
 
 This document defines the following identifiers of well-known EDHOC application profiles.
 
@@ -576,6 +588,25 @@ IANA is asked to register the following entry in the "EDHOC Information" registr
 * Registry: EDHOC Application Profiles registry
 * Description: Set of supported EDHOC application profiles
 * Specification: {{&SELF}}{{RFC9528}}
+
+## EDHOC External Authorization Data Registry ## {#iana-edhoc-ead-registry}
+
+IANA is asked to register the following entry in the "EDHOC External Authorization Data" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group defined in {{RFC9528}}.
+
+* Name: Supported Application Profiles
+* Label: TBD (range 0-23)
+* Description: Set of supported EDHOC application profiles
+* Reference: {{&SELF}}
+
+## EDHOC Error Codes Registry ## {#iana-edhoc-error-codes-registry}
+
+IANA is asked to register the following entry in the "EDHOC Error Codes" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group defined in {{RFC9528}}.
+
+* ERR_CODE: TBD (range -24 to 23)
+* ERR_INFO Type: app_profiles
+* Description: Supported EDHOC application profiles
+* Change Controller: IETF
+* Reference: {{&SELF}}
 
 ## EDHOC Application Profiles Registry ## {#iana-edhoc-application-profiles}
 
