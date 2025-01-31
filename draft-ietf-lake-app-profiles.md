@@ -571,7 +571,7 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 IANA is asked to register the following entry in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
 * Name: app_prof
-* CBOR label: 23
+* CBOR label: 23 (suggested)
 * CBOR type: int or array
 * Registry: EDHOC Application Profiles registry
 * Description: Set of supported EDHOC application profiles
