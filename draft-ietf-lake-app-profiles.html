@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 24 July 2025</td>
+<td class="center">Expires 4 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lake-app-profiles-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-20" class="published">20 January 2025</time>
+<time datetime="2025-01-31" class="published">31 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-24">24 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-04">4 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1116,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1459,7 +1459,7 @@ When using the target EDHOC resource as per any EDHOC application profile indica
           <p id="section-3-4.2.1">'ed-coap-ct', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see Sections <a href="https://rfc-editor.org/rfc/rfc9528#section-3.4.1" class="relref">3.4.1</a> and <a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">A.2</a> of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). A value <span class="bcp14">MUST NOT</span> be given to this parameter and any present value <span class="bcp14">MUST</span> be ignored by the recipient.<a href="#section-3-4.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-4.3">
-          <p id="section-3-4.3.1">'ed-idep-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.<a href="#section-3-4.3.1" class="pilcrow">¶</a></p>
+          <p id="section-3-4.3.1">'ed-epid-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.<a href="#section-3-4.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-4.4">
           <p id="section-3-4.4.1">'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.<a href="#section-3-4.4.1" class="pilcrow">¶</a></p>
@@ -1903,7 +1903,7 @@ EDHOC_Application_Profile = {
 <p id="section-8.3-5"><br></p>
 <ul class="normal">
 <li class="normal" id="section-8.3-6.1">
-            <p id="section-8.3-6.1.1">Attribute Name: ed-idep-t<a href="#section-8.3-6.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-6.1.1">Attribute Name: ed-epid-t<a href="#section-8.3-6.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.3-6.2">
             <p id="section-8.3-6.2.1">Brief Description: A supported type of endpoint identity for EDHOC<a href="#section-8.3-6.2.1" class="pilcrow">¶</a></p>
@@ -2292,36 +2292,39 @@ c509_cert = 3
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Content-Format abbreviated as "ct" (not "cf").<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Renamed ed-idep-t x as ed-epid-t.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">CBOR abbreviation of "app_prof" changed to 23.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.2.1">Content-Format abbreviated as "ct" (not "cf").<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">Defined target attributes "ed-ta-*" for specifying supported trust anchors.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.3.1">CBOR abbreviation of "app_prof" changed to 23.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.4">
-            <p id="appendix-B.1-1.4.1">Moved definition of EDHOC_Information parameters to draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.4.1">Defined target attributes "ed-ta-*" for specifying supported trust anchors.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Updated IANA considerations:<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.5.1">Moved definition of EDHOC_Information parameters to draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.6">
+            <p id="appendix-B.1-1.6.1">Updated IANA considerations:<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1-1.5.2.1">
-                <p id="appendix-B.1-1.5.2.1.1">Suggested range 0-255 for CoAP Content-Format ID.<a href="#appendix-B.1-1.5.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.1-1.6.2.1">
+                <p id="appendix-B.1-1.6.2.1.1">Suggested range 0-255 for CoAP Content-Format ID.<a href="#appendix-B.1-1.6.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.5.2.2">
-                <p id="appendix-B.1-1.5.2.2.1">Requested registration for target attributes "ed-ta-*".<a href="#appendix-B.1-1.5.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.6.2.2">
+                <p id="appendix-B.1-1.6.2.2.1">Requested registration for target attributes "ed-ta-*".<a href="#appendix-B.1-1.6.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.5.2.3">
-                <p id="appendix-B.1-1.5.2.3.1">Removed requests for registration of removed parameters.<a href="#appendix-B.1-1.5.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.6.2.3">
+                <p id="appendix-B.1-1.6.2.3.1">Removed requests for registration of removed parameters.<a href="#appendix-B.1-1.6.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="appendix-B.1-1.6">
-            <p id="appendix-B.1-1.6.1">Updated references.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
-</li>
           <li class="normal" id="appendix-B.1-1.7">
-            <p id="appendix-B.1-1.7.1">Editorial improvements.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.7.1">Updated references.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.8">
+            <p id="appendix-B.1-1.8.1">Editorial improvements.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>

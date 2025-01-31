@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 24 July 2025                                    20 January 2025
+Expires: 4 August 2025                                   31 January 2025
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 July 2025.
+   This Internet-Draft will expire on 4 August 2025.
 
 Copyright Notice
 
@@ -426,7 +426,7 @@ Table of Contents
       and A.2 of [RFC9528]).  A value MUST NOT be given to this
       parameter and any present value MUST be ignored by the recipient.
 
-   *  'ed-idep-t', specifying a type of endpoint identity for EDHOC
+   *  'ed-epid-t', specifying a type of endpoint identity for EDHOC
       supported by the server.  This parameter MUST specify a single
       value, which is taken from the 'CBOR Label' column of the "EDHOC
       Endpoint Identity Types" registry defined in
@@ -898,7 +898,7 @@ Table of Contents
 
 
 
-   *  Attribute Name: ed-idep-t
+   *  Attribute Name: ed-epid-t
 
    *  Brief Description: A supported type of endpoint identity for EDHOC
 
@@ -1272,6 +1272,8 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -00 to -01
+
+   *  Renamed ed-idep-t x as ed-epid-t.
 
    *  Content-Format abbreviated as "ct" (not "cf").
 
