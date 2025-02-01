@@ -45,7 +45,6 @@ normative:
   RFC8949:
   RFC9200:
   RFC9360:
-  RFC9423:
   RFC9528:
   RFC9562:
   RFC9668:
@@ -53,6 +52,7 @@ normative:
   I-D.ietf-cose-cbor-encoded-cert:
 
 informative:
+  RFC9423:
   RFC9529:
   I-D.serafin-lake-ta-hint:
 
