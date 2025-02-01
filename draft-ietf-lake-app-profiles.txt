@@ -385,10 +385,11 @@ Table of Contents
       "eads".
 
       At the time of writing this document, such parameters are:
-      "methods", "cipher_suites", "message_4", "comb_req", "osc_ms_len",
-      "osc_salt_len", "osc_version", "cred_types", "id_cred_types",
-      "initiator", "responder", "max_msgsize", "coap_ct", "id_ep_types",
-      and "transports", which are all defined in Section 3.4 of
+      "methods", "cipher_suites", "message_4", "comb_req", "uri_path",
+      "osc_ms_len", "osc_salt_len", "osc_version", "cred_types",
+      "id_cred_types", "initiator", "responder", "max_msgsize",
+      "coap_ct", "ep_id_types", "transports", and "trust_anchors", which
+      are all defined in Section 3.4 of
       [I-D.ietf-ace-edhoc-oscore-profile].
 
    *  If the EDHOC_Information object specified in the parameter
