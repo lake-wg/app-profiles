@@ -111,7 +111,19 @@ Note to RFC Editor: Please delete the paragraph immediately preceding this note.
 
 # Identifying EDHOC Application Profiles by Profile ID
 
-This section defines two means to identify EDHOC application profiles by their Profile IDs, i.e., the parameter "ed-prof" for web linking (see {{web-linking}}) and the parameter "app_prof" of the EDHOC_Information object (see {{sec-edhoc-information-object}}).
+This document introduces the concept of Profile IDs, i.e., integer values that uniquely identify EDHOC application profiles, for which an IANA registry is defined in {{iana-edhoc-application-profiles}}.
+
+This section defines two parameters to convey such Profile IDs, i.e.:
+
+* The parameter "ed-prof" for web linking {{RFC8288}} (see {{web-linking}}).
+
+* The parameter "app_prof" of the EDHOC_Information object specified in {{I-D.ietf-ace-edhoc-oscore-profile}} (see {{sec-edhoc-information-object}}).
+
+As defined later in this document, Profile IDs can be used to identiy EDHOC application profiles also:
+
+* Within certain EDHOC messages, sent during an EDHOC session by a peer that supports such EDHOC application profiles (see {{sec-app-profile-edhoc-messages}}).
+
+* Within the canonical, CBOR-encoded representation of such EDHOC application profiles (see {{sec-app-profile-cbor}}).
 
 ## In Web Linking # {#web-linking}
 
@@ -758,6 +770,8 @@ c509_cert = 3
 * Content-Format abbreviated as "ct" (not "cf").
 
 * CBOR abbreviation of "app_prof" changed to 23.
+
+* Added preamble on identifying application profiles by Profile ID.
 
 * Defined target attributes "ed-ta-*" for specifying supported trust anchors.
 
