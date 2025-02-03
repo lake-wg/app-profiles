@@ -113,7 +113,7 @@ Note to RFC Editor: Please delete the paragraph immediately preceding this note.
 
 This section defines two means to identify EDHOC application profiles by their Profile IDs, i.e., the parameter "ed-prof" for web linking (see {{web-linking}}) and the parameter "app_prof" of the EDHOC_Information object (see {{sec-edhoc-information-object}}).
 
-## Web Linking # {#web-linking}
+## In Web Linking # {#web-linking}
 
 {{Section 6 of RFC9668}} defines a number of target attributes that can be used in a web link {{RFC8288}} with resource type "core.edhoc" (see {{Section 10.10 of RFC9528}}). This is the case, e.g., when using a link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over CoAP {{RFC7252}} as defined in {{Section A.2 of RFC9528}}. This allows a client to obtain relevant information about the EDHOC application profile(s) to be used with a certain EDHOC resource.
 
@@ -150,7 +150,7 @@ RES: 2.05 Content
 ~~~~~~~~~~~~~~~~~
 {: #fig-web-link-example title="The Web Link." artwork-align="center"}
 
-## EDHOC_Information Object # {#sec-edhoc-information-object}
+## In the EDHOC_Information Object # {#sec-edhoc-information-object}
 
 {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}} defines the EDHOC_Information object, as including information that guides two peers towards executing the EDHOC protocol, and defines an initial set of its parameters.
 
@@ -295,7 +295,7 @@ When replying to an EDHOC message_1 with an error message, the Responder has to 
 
 When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR sequence formatted like APP_PROF_SEQ defined in {{sec-app-profile-edhoc-message_1_2}}. Note that the CBOR sequence specified in ERR_INFO is not wrapped into a CBOR byte string.
 
-# Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
+# Canonical Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
 
 This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.
 
