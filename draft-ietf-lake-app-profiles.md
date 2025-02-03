@@ -353,7 +353,7 @@ The rest of this section defines the well-known application profiles, each of wh
 
 An entry for each well-known application profile is also registered at the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
-## Well-Known Application Profile WK-MINIMAL_CS_2
+## Well-Known Application Profile MINIMAL_CS_2
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 {
@@ -361,13 +361,13 @@ An entry for each well-known application profile is also registered at the "EDHO
   e'cipher_suites' : 2, / EDHOC Cipher Suite 2 /
      e'cred_types' : 1, / CWT Claims Set (CCS) /
   e'id_cred_types' : 4, / kid /
-       e'app_prof' : e'APP-PROF-WK-MINIMAL-CS-2'
+       e'app_prof' : e'APP-PROF-MINIMAL-CS-2'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 3 of RFC9529}}.
 
-## Well-Known Application Profile WK-MINIMAL_CS_0
+## Well-Known Application Profile MINIMAL_CS_0
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 {
@@ -375,11 +375,11 @@ This application profile is aligned with the example trace of EDHOC compiled in 
   e'cipher_suites' : 0, / EDHOC Cipher Suite 0 /
      e'cred_types' : 1, / CWT Claims Set (CCS) /
   e'id_cred_types' : 4, / kid /
-       e'app_prof' : e'APP-PROF-WK-MINIMAL-CS-0'
+       e'app_prof' : e'APP-PROF-MINIMAL-CS-0'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-## Well-Known Application Profile WK-BASIC_CS_2_X509
+## Well-Known Application Profile BASIC_CS_2_X509
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 {
@@ -388,13 +388,13 @@ This application profile is aligned with the example trace of EDHOC compiled in 
      e'cred_types' : [1, 2], / CWT Claims Set (CCS)
                              and X.509 certificate /
   e'id_cred_types' : [4, 34], / kid and x5t /
-       e'app_prof' : e'APP-PROF-WK-BASIC-CS-2-X509'
+       e'app_prof' : e'APP-PROF-BASIC-CS-2-X509'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 3 of RFC9529}}.
 
-## Well-Known Application Profile WK-BASIC_CS_0_X509
+## Well-Known Application Profile BASIC_CS_0_X509
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 {
@@ -403,13 +403,13 @@ This application profile is aligned with the example trace of EDHOC compiled in 
      e'cred_types' : [1, 2], / CWT Claims Set (CCS)
                              and X.509 certificate /
   e'id_cred_types' : [4, 34], / kid and x5t /
-       e'app_prof' : e'APP-PROF-WK-BASIC-CS-0-X509'
+       e'app_prof' : e'APP-PROF-BASIC-CS-0-X509'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 2 of RFC9529}}.
 
-## Well-Known Application Profile WK-BASIC_CS_2_C509
+## Well-Known Application Profile BASIC_CS_2_C509
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 {
@@ -418,11 +418,11 @@ This application profile is aligned with the example trace of EDHOC compiled in 
      e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
                                         and C509 certificate /
   e'id_cred_types' : [4, e'c5t'], / kid and c5t /
-       e'app_prof' : e'APP-PROF-WK-BASIC-CS-2-C509'
+       e'app_prof' : e'APP-PROF-BASIC-CS-2-C509'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-## Well-Known Application Profile WK-BASIC_CS_0_C509
+## Well-Known Application Profile BASIC_CS_0_C509
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 {
@@ -431,11 +431,11 @@ This application profile is aligned with the example trace of EDHOC compiled in 
      e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
                                         and C509 certificate /
   e'id_cred_types' : [4, e'c5t'], / kid and c5t /
-       e'app_prof' : e'APP-PROF-WK-BASIC-CS-0-C509'
+       e'app_prof' : e'APP-PROF-BASIC-CS-0-C509'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-## Well-Known Application Profile WK-INTERMEDIATE_CS_2
+## Well-Known Application Profile INTERMEDIATE_CS_2
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 {
@@ -447,13 +447,13 @@ This application profile is aligned with the example trace of EDHOC compiled in 
   e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
                                                       x5t, x5chain,
                                                       c5t, and c5c /
-       e'app_prof' : e'APP-PROF-WK-INTERMEDIATE-CS-2'
+       e'app_prof' : e'APP-PROF-INTERMEDIATE-CS-2'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 3 of RFC9529}}.
 
-## Well-Known Application Profile WK-INTERMEDIATE_CS_0
+## Well-Known Application Profile INTERMEDIATE_CS_0
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 {
@@ -465,13 +465,13 @@ This application profile is aligned with the example trace of EDHOC compiled in 
   e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
                                                       x5t, x5chain,
                                                       c5t, and c5c /
-       e'app_prof' : e'APP-PROF-WK-INTERMEDIATE-CS-0'
+       e'app_prof' : e'APP-PROF-INTERMEDIATE-CS-0'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 2 of RFC9529}}.
 
-## Well-Known Application Profile WK-ADVANCED
+## Well-Known Application Profile EXTENSIVE
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 {
@@ -488,7 +488,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
                                                           x5chain,
                                                           c5t, and
                                                           c5c /
-       e'app_prof' : e'APP-PROF-WK-ADVANCED'
+       e'app_prof' : e'APP-PROF-EXTENSIVE'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -500,16 +500,16 @@ This document defines the following identifiers of well-known EDHOC application 
 
 Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RFC number of this specification and delete this paragraph.
 
-| Profile ID | Name                 | Description                                                                                                                      | Reference |
-| 0          | WK-MINIMAL-CS-2      | Method 3; Cipher Suite 2; CCS; kid                                                                                               | {{&SELF}} |
-| 1          | WK-MINIMAL-CS-0      | Method 3; Cipher Suite 0; CCS; kid                                                                                               | {{&SELF}} |
-| 2          | WK-BASIC-CS-2-X509   | Methods (0, 3); Cipher Suite 2; (CCS, X.509 certificates); (kid, x5t)                                                            | {{&SELF}} |
-| 3          | WK-BASIC-CS-0-X509   | Methods (0, 3); Cipher Suite 0; (CCS, X.509 certificates); (kid, x5t)                                                            | {{&SELF}} |
-| 4          | WK-BASIC-CS-2-C509   | Methods (0, 3); Cipher Suite 2; (CCS, C509 certificates); (kid, c5t)                                                             | {{&SELF}} |
-| 5          | WK-BASIC-CS_0-C509   | Methods (0, 3); Cipher Suite 0; (CCS, C509 certificates); (kid, c5t)                                                             | {{&SELF}} |
-| 6          | WK-INTERMEDIATE-CS-2 | Methods (0, 3); Cipher Suite 2; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | {{&SELF}} |
-| 7          | WK-INTERMEDIATE-CS-0 | Methods (0, 3); Cipher Suite 0; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | {{&SELF}} |
-| 8          | WK-ADVANCED          | Methods (0, 1, 2, 3); Cipher Suites (0, 1, 2, 3); (CCS, CWT, X.509/C509 certificates); (kid, kccs, kcwt, x5t, x5chain, c5t, c5c) | {{&SELF}} |
+| Profile ID | Name              | Description                                                                                                                      | Reference |
+| 0          | MINIMAL-CS-2      | Method 3; Cipher Suite 2; CCS; kid                                                                                               | {{&SELF}} |
+| 1          | MINIMAL-CS-0      | Method 3; Cipher Suite 0; CCS; kid                                                                                               | {{&SELF}} |
+| 2          | BASIC-CS-2-X509   | Methods (0, 3); Cipher Suite 2; (CCS, X.509 certificates); (kid, x5t)                                                            | {{&SELF}} |
+| 3          | BASIC-CS-0-X509   | Methods (0, 3); Cipher Suite 0; (CCS, X.509 certificates); (kid, x5t)                                                            | {{&SELF}} |
+| 4          | BASIC-CS-2-C509   | Methods (0, 3); Cipher Suite 2; (CCS, C509 certificates); (kid, c5t)                                                             | {{&SELF}} |
+| 5          | BASIC-CS_0-C509   | Methods (0, 3); Cipher Suite 0; (CCS, C509 certificates); (kid, c5t)                                                             | {{&SELF}} |
+| 6          | INTERMEDIATE-CS-2 | Methods (0, 3); Cipher Suite 2; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | {{&SELF}} |
+| 7          | INTERMEDIATE-CS-0 | Methods (0, 3); Cipher Suite 0; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | {{&SELF}} |
+| 8          | EXTENSIVE         | Methods (0, 1, 2, 3); Cipher Suites (0, 1, 2, 3); (CCS, CWT, X.509/C509 certificates); (kid, kccs, kcwt, x5t, x5chain, c5t, c5c) | {{&SELF}} |
 {: #table-edhoc-well-known-app-profiles title="EDHOC Well-known Application Profiles" align="center"}
 
 # Security Considerations # {#sec-security-considerations}
@@ -727,15 +727,15 @@ id_cred_types = 10
 app_prof = 23
 
 ; EDHOC Application Profiles
-APP-PROF-WK-MINIMAL-CS-2 = 0
-APP-PROF-WK-MINIMAL-CS-0 = 1
-APP-PROF-WK-BASIC-CS-2-X509 = 2
-APP-PROF-WK-BASIC-CS-0-X509 = 3
-APP-PROF-WK-BASIC-CS-2-C509 = 4
-APP-PROF-WK-BASIC-CS-0-C509 = 5
-APP-PROF-WK-INTERMEDIATE-CS-2 = 6
-APP-PROF-WK-INTERMEDIATE-CS-0 = 7
-APP-PROF-WK-ADVANCED = 8
+APP-PROF-MINIMAL-CS-2 = 0
+APP-PROF-MINIMAL-CS-0 = 1
+APP-PROF-BASIC-CS-2-X509 = 2
+APP-PROF-BASIC-CS-0-X509 = 3
+APP-PROF-BASIC-CS-2-C509 = 4
+APP-PROF-BASIC-CS-0-C509 = 5
+APP-PROF-INTERMEDIATE-CS-2 = 6
+APP-PROF-INTERMEDIATE-CS-0 = 7
+APP-PROF-EXTENSIVE = 8
 
 ; COSE Header Parameters
 c5t = 22
@@ -764,6 +764,8 @@ c509_cert = 3
 * Defined new EAD item and error code to advertise supported EDHOC application profiles.
 
 * Defined how to handle non admitted parameters.
+
+* Renamed well-known EDHOC application profiles.
 
 * Updated IANA considerations:
 
