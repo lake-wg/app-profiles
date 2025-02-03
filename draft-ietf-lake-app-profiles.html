@@ -1341,7 +1341,25 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
       <h2 id="name-identifying-edhoc-applicati">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-identifying-edhoc-applicati" class="section-name selfRef">Identifying EDHOC Application Profiles by Profile ID</a>
       </h2>
-<p id="section-2-1">This section defines two means to identify EDHOC application profiles by their Profile IDs, i.e., the parameter "ed-prof" for web linking (see <a href="#web-linking" class="auto internal xref">Section 2.1</a>) and the parameter "app_prof" of the EDHOC_Information object (see <a href="#sec-edhoc-information-object" class="auto internal xref">Section 2.2</a>).<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-1">This document introduces the concept of Profile IDs, i.e., integer values that uniquely identify EDHOC application profiles, for which an IANA registry is defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 9.7</a>.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">This section defines two parameters to convey such Profile IDs, i.e.:<a href="#section-2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-3.1">
+          <p id="section-2-3.1.1">The parameter "ed-prof" for web linking <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> (see <a href="#web-linking" class="auto internal xref">Section 2.1</a>).<a href="#section-2-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-3.2">
+          <p id="section-2-3.2.1">The parameter "app_prof" of the EDHOC_Information object specified in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span> (see <a href="#sec-edhoc-information-object" class="auto internal xref">Section 2.2</a>).<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-4">As defined later in this document, Profile IDs can be used to identiy EDHOC application profiles also:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-5.1">
+          <p id="section-2-5.1.1">Within certain EDHOC messages, sent during an EDHOC session by a peer that supports such EDHOC application profiles (see <a href="#sec-app-profile-edhoc-messages" class="auto internal xref">Section 4</a>).<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-5.2">
+          <p id="section-2-5.2.1">Within the canonical, CBOR-encoded representation of such EDHOC application profiles (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>).<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 <div id="web-linking">
 <section id="section-2.1">
         <h3 id="name-in-web-linking">
@@ -2481,36 +2499,39 @@ c509_cert = 3
             <p id="appendix-B.1-1.4.1">CBOR abbreviation of "app_prof" changed to 23.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Defined target attributes "ed-ta-*" for specifying supported trust anchors.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.5.1">Added preamble on identifying application profiles by Profile ID.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.6">
-            <p id="appendix-B.1-1.6.1">Defined new EAD item and error code to advertise supported EDHOC application profiles.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.6.1">Defined target attributes "ed-ta-*" for specifying supported trust anchors.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.7">
-            <p id="appendix-B.1-1.7.1">Defined how to handle non admitted parameters.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.7.1">Defined new EAD item and error code to advertise supported EDHOC application profiles.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.8">
-            <p id="appendix-B.1-1.8.1">Renamed well-known EDHOC application profiles.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.8.1">Defined how to handle non admitted parameters.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.9">
-            <p id="appendix-B.1-1.9.1">Updated IANA considerations:<a href="#appendix-B.1-1.9.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.9.1">Renamed well-known EDHOC application profiles.<a href="#appendix-B.1-1.9.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.10">
+            <p id="appendix-B.1-1.10.1">Updated IANA considerations:<a href="#appendix-B.1-1.10.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1-1.9.2.1">
-                <p id="appendix-B.1-1.9.2.1.1">Suggested range 0-255 for CoAP Content-Format ID.<a href="#appendix-B.1-1.9.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.1-1.10.2.1">
+                <p id="appendix-B.1-1.10.2.1.1">Suggested range 0-255 for CoAP Content-Format ID.<a href="#appendix-B.1-1.10.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.9.2.2">
-                <p id="appendix-B.1-1.9.2.2.1">Requested registration for target attributes "ed-ta-*".<a href="#appendix-B.1-1.9.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.10.2.2">
+                <p id="appendix-B.1-1.10.2.2.1">Requested registration for target attributes "ed-ta-*".<a href="#appendix-B.1-1.10.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.9.2.3">
-                <p id="appendix-B.1-1.9.2.3.1">Removed requests for registration of removed parameters.<a href="#appendix-B.1-1.9.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.10.2.3">
+                <p id="appendix-B.1-1.10.2.3.1">Removed requests for registration of removed parameters.<a href="#appendix-B.1-1.10.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="appendix-B.1-1.10">
-            <p id="appendix-B.1-1.10.1">Updated references.<a href="#appendix-B.1-1.10.1" class="pilcrow">¶</a></p>
-</li>
           <li class="normal" id="appendix-B.1-1.11">
-            <p id="appendix-B.1-1.11.1">Editorial improvements.<a href="#appendix-B.1-1.11.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.11.1">Updated references.<a href="#appendix-B.1-1.11.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.12">
+            <p id="appendix-B.1-1.12.1">Editorial improvements.<a href="#appendix-B.1-1.12.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
