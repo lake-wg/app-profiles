@@ -73,8 +73,8 @@ Table of Contents
    1.  Introduction
      1.1.  Terminology
    2.  Identifying EDHOC Application Profiles by Profile ID
-     2.1.  Web Linking
-     2.2.  EDHOC_Information Object
+     2.1.  In Web Linking
+     2.2.  In the EDHOC_Information Object
        2.2.1.  Use in the EDHOC and OSCORE Profile of the ACE
                Framework
    3.  Additional Parameters for Web Linking
@@ -82,7 +82,7 @@ Table of Contents
            EDHOC Session
      4.1.  In EDHOC Message 1 and Message 2
      4.2.  In the EDHOC Error Message
-   5.  Representation of an EDHOC Application Profile
+   5.  Canonical Representation of an EDHOC Application Profile
    6.  Well-known EDHOC Application Profiles
      6.1.  Well-Known Application Profile MINIMAL_CS_2
      6.2.  Well-Known Application Profile MINIMAL_CS_0
@@ -241,7 +241,7 @@ Table of Contents
    (see Section 2.1) and the parameter "app_prof" of the
    EDHOC_Information object (see Section 2.2).
 
-2.1.  Web Linking
+2.1.  In Web Linking
 
    Section 6 of [RFC9668] defines a number of target attributes that can
    be used in a web link [RFC8288] with resource type "core.edhoc" (see
@@ -315,7 +315,7 @@ Table of Contents
 
                           Figure 1: The Web Link.
 
-2.2.  EDHOC_Information Object
+2.2.  In the EDHOC_Information Object
 
    Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile] defines the
    EDHOC_Information object, as including information that guides two
@@ -640,7 +640,7 @@ Table of Contents
    defined in Section 4.1.  Note that the CBOR sequence specified in
    ERR_INFO is not wrapped into a CBOR byte string.
 
-5.  Representation of an EDHOC Application Profile
+5.  Canonical Representation of an EDHOC Application Profile
 
    This section defines the EDHOC_Application_Profile object, which can
    be used as a canonical representation of EDHOC application profiles
