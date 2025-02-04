@@ -119,7 +119,7 @@ This section defines two parameters to convey such Profile IDs, i.e.:
 
 * The parameter "app_prof" of the EDHOC_Information object specified in {{I-D.ietf-ace-edhoc-oscore-profile}} (see {{sec-edhoc-information-object}}).
 
-As defined later in this document, Profile IDs can be used to identiy EDHOC application profiles also:
+As defined later in this document, Profile IDs can be used to identify EDHOC application profiles also:
 
 * Within certain EDHOC messages, sent during an EDHOC session by a peer that supports such EDHOC application profiles (see {{sec-app-profile-edhoc-messages}}).
 
