@@ -257,8 +257,8 @@ Table of Contents
    *  The parameter "app_prof" of the EDHOC_Information object specified
       in [I-D.ietf-ace-edhoc-oscore-profile] (see Section 2.2).
 
-   As defined later in this document, Profile IDs can be used to identiy
-   EDHOC application profiles also:
+   As defined later in this document, Profile IDs can be used to
+   identify EDHOC application profiles also:
 
    *  Within certain EDHOC messages, sent during an EDHOC session by a
       peer that supports such EDHOC application profiles (see
