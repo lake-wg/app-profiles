@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 7 August 2025                                   3 February 2025
+Expires: 8 August 2025                                   4 February 2025
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -18,7 +18,9 @@ Abstract
    Hellman Over COSE (EDHOC) requires certain parameters to be agreed
    out-of-band, in order to ensure its successful completion.  To this
    end, application profiles specify the intended use of EDHOC to allow
-   for the relevant processing and verifications to be made.  This
+   for the relevant processing and verifications to be made.  In order
+   to facilitate interoperability between EDHOC implementations and
+   support EDHOC extensibility for additional integrations, this
    document defines a number of means to coordinate the use of EDHOC
    application profiles.  Also, it defines a canonical, CBOR-based
    representation that can be used to describe, distribute, and store
@@ -52,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2025.
+   This Internet-Draft will expire on 8 August 2025.
 
 Copyright Notice
 
@@ -133,8 +135,12 @@ Table of Contents
    particular, an EDHOC application profile may include both in-band and
    out-of-band parameters.
 
-   This document defines a number of means to coordinate the use of
-   EDHOC application profiles, that is:
+   In order to facilitate interoperability between EDHOC implementations
+   and to support EDHOC extensibility for additional integrations (e.g.,
+   of external security applications, handling of authentication
+   credentials, and message transports), this document defines a number
+   of means to coordinate the use of EDHOC application profiles, that
+   is:
 
    *  The new IANA registry "EDHOC Application Profiles" defined in
       Section 9.7, where to register integer identifiers of EDHOC
@@ -197,7 +203,10 @@ Table of Contents
    reflect what is most common and expected to be supported by EDHOC
    peers, while they are not to be intended as "default" application
    profiles or as a deviation from what is mandatory to support for
-   EDHOC peers (see Section 8 of [RFC9528]).
+   EDHOC peers (see Section 8 of [RFC9528]).  On the other hand, they
+   provide implementers and users with a quick overview of the several,
+   available options to run the EDHOC protocol and of their most
+   expected combinations.
 
 1.1.  Terminology
 
@@ -1469,6 +1478,8 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -00 to -01
+
+   *  Clarified motivation in the abstract and introduction.
 
    *  Moved definition of EDHOC_Information parameters to draft-ietf-
       ace-edhoc-oscore-profile.

@@ -8,7 +8,7 @@
 <meta content="Marco Tiloca" name="author">
 <meta content="Rikard Höglund" name="author">
 <meta content="
-       The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. This document defines a number of means to coordinate the use of EDHOC application profiles. Also, it defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles. 
+       The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Also, it defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles. 
     " name="description">
 <meta content="xml2rfc 3.26.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 7 August 2025</td>
+<td class="center">Expires 8 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lake-app-profiles-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-03" class="published">3 February 2025</time>
+<time datetime="2025-02-04" class="published">4 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-07">7 August 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-08">8 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1084,7 +1084,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Coordinating the Use of Application Profiles for Ephemeral Diffie-Hellman Over COSE (EDHOC)</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. This document defines a number of means to coordinate the use of EDHOC application profiles. Also, it defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Also, it defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1116,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1293,7 +1293,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1-1">Ephemeral Diffie-Hellman Over COSE (EDHOC) <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> is a lightweight authenticated key exchange protocol, especially intended for use in constrained scenarios. A main use case for EDHOC is to establish a Security Context for Object Security for Constrained RESTful Environments (OSCORE) <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">In order to successfully run EDHOC, the two peers acting as Initiator and Responder have to agree on certain parameters. Some of those are in-band and communicated through the protocol execution, during which a few of them may even be negotiated. However, other parameters have to be known out-of-band, before running the EDHOC protocol.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">As discussed in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, applications can use EDHOC application profiles, which specify the intended usage of EDHOC to allow for the relevant processing and verifications to be made. In particular, an EDHOC application profile may include both in-band and out-of-band parameters.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">This document defines a number of means to coordinate the use of EDHOC application profiles, that is:<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-4">In order to facilitate interoperability between EDHOC implementations and to support EDHOC extensibility for additional integrations (e.g., of external security applications, handling of authentication credentials, and message transports), this document defines a number of means to coordinate the use of EDHOC application profiles, that is:<a href="#section-1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-5.1">
           <p id="section-1-5.1.1">The new IANA registry "EDHOC Application Profiles" defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 9.7</a>, where to register integer identifiers of EDHOC application profiles to use as corresponding Profile IDs.<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
@@ -1317,7 +1317,7 @@ For instance, the parameter can be used in the EDHOC and OSCORE profile <span>[<
       </ul>
 <p id="section-1-6">In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>). The defined representation is transport- and setup-independent, and avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.<a href="#section-1-7" class="pilcrow">¶</a></p>
-<p id="section-1-8">Finally, this document defines a set of well-known EDHOC application profiles (see <a href="#sec-well-known-app-profiles" class="auto internal xref">Section 6</a>). These application profiles are meant to reflect what is most common and expected to be supported by EDHOC peers, while they are not to be intended as "default" application profiles or as a deviation from what is mandatory to support for EDHOC peers (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-8">Finally, this document defines a set of well-known EDHOC application profiles (see <a href="#sec-well-known-app-profiles" class="auto internal xref">Section 6</a>). These application profiles are meant to reflect what is most common and expected to be supported by EDHOC peers, while they are not to be intended as "default" application profiles or as a deviation from what is mandatory to support for EDHOC peers (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). On the other hand, they provide implementers and users with a quick overview of the several, available options to run the EDHOC protocol and of their most expected combinations.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">
@@ -2487,51 +2487,54 @@ c509_cert = 3
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Moved definition of EDHOC_Information parameters to draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Clarified motivation in the abstract and introduction.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">Renamed ed-idep-t x as ed-epid-t.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.2.1">Moved definition of EDHOC_Information parameters to draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">Content-Format abbreviated as "ct" (not "cf").<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.3.1">Renamed ed-idep-t x as ed-epid-t.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.4">
-            <p id="appendix-B.1-1.4.1">CBOR abbreviation of "app_prof" changed to 23.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.4.1">Content-Format abbreviated as "ct" (not "cf").<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Added preamble on identifying application profiles by Profile ID.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.5.1">CBOR abbreviation of "app_prof" changed to 23.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.6">
-            <p id="appendix-B.1-1.6.1">Defined target attributes "ed-ta-*" for specifying supported trust anchors.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.6.1">Added preamble on identifying application profiles by Profile ID.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.7">
-            <p id="appendix-B.1-1.7.1">Defined new EAD item and error code to advertise supported EDHOC application profiles.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.7.1">Defined target attributes "ed-ta-*" for specifying supported trust anchors.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.8">
-            <p id="appendix-B.1-1.8.1">Defined how to handle non admitted parameters.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.8.1">Defined new EAD item and error code to advertise supported EDHOC application profiles.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.9">
-            <p id="appendix-B.1-1.9.1">Renamed well-known EDHOC application profiles.<a href="#appendix-B.1-1.9.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.9.1">Defined how to handle non admitted parameters.<a href="#appendix-B.1-1.9.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.10">
-            <p id="appendix-B.1-1.10.1">Updated IANA considerations:<a href="#appendix-B.1-1.10.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.10.1">Renamed well-known EDHOC application profiles.<a href="#appendix-B.1-1.10.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.11">
+            <p id="appendix-B.1-1.11.1">Updated IANA considerations:<a href="#appendix-B.1-1.11.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1-1.10.2.1">
-                <p id="appendix-B.1-1.10.2.1.1">Suggested range 0-255 for CoAP Content-Format ID.<a href="#appendix-B.1-1.10.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.1-1.11.2.1">
+                <p id="appendix-B.1-1.11.2.1.1">Suggested range 0-255 for CoAP Content-Format ID.<a href="#appendix-B.1-1.11.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.10.2.2">
-                <p id="appendix-B.1-1.10.2.2.1">Requested registration for target attributes "ed-ta-*".<a href="#appendix-B.1-1.10.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.11.2.2">
+                <p id="appendix-B.1-1.11.2.2.1">Requested registration for target attributes "ed-ta-*".<a href="#appendix-B.1-1.11.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.10.2.3">
-                <p id="appendix-B.1-1.10.2.3.1">Removed requests for registration of removed parameters.<a href="#appendix-B.1-1.10.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.11.2.3">
+                <p id="appendix-B.1-1.11.2.3.1">Removed requests for registration of removed parameters.<a href="#appendix-B.1-1.11.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="appendix-B.1-1.11">
-            <p id="appendix-B.1-1.11.1">Updated references.<a href="#appendix-B.1-1.11.1" class="pilcrow">¶</a></p>
-</li>
           <li class="normal" id="appendix-B.1-1.12">
-            <p id="appendix-B.1-1.12.1">Editorial improvements.<a href="#appendix-B.1-1.12.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.12.1">Updated references.<a href="#appendix-B.1-1.12.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.13">
+            <p id="appendix-B.1-1.13.1">Editorial improvements.<a href="#appendix-B.1-1.13.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
