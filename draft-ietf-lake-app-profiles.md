@@ -734,8 +734,8 @@ Expert reviewers should take into consideration the following points:
 ; EDHOC Information
 methods = 1
 cipher_suites = 2
-cred_types = 9
-id_cred_types = 10
+cred_types = 6
+id_cred_types = 7
 app_prof = 23
 
 ; EDHOC Application Profiles
@@ -760,6 +760,12 @@ c509_cert = 3
 
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
+
+## Version -01 to -02 ## {#sec-01-02}
+
+* Update integer abbreviations for the EDHOC_Information parameters.
+
+* Editorial improvements.
 
 ## Version -00 to -01 ## {#sec-00-01}
 
