@@ -244,7 +244,7 @@ The EAD item MAY be included:
 
 * In the EAD_2 field of EDHOC message_2, in order to specify EDHOC application profiles supported by the Responder.
 
-The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4.
+The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. The recipient peer MUST silently ignore the EAD item if this is specified in the EAD_3 field of EDHOC message_3 or in the EAD_4 field of EDHOC message_4.
 
 Within an EAD_1 field or EAD_2 field, the EAD item MUST NOT occur more than once. When the EAD item is present, its ead_label TBD_EAD_LABEL MUST be used only with positive sign, i.e., the use of the EAD item is always non-critical (see {{Section 3.8 of RFC9528}}).
 
@@ -763,7 +763,11 @@ c509_cert = 3
 
 ## Version -01 to -02 ## {#sec-01-02}
 
-* Update integer abbreviations for the EDHOC_Information parameters.
+* Error handling:
+
+  * EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.
+
+* Updated integer abbreviations for the EDHOC_Information parameters.
 
 * Editorial improvements.
 
