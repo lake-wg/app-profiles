@@ -1548,49 +1548,50 @@ When using the target EDHOC resource as per any EDHOC application profile indica
             <p id="section-4.1-3.2.1">In the EAD_2 field of EDHOC message_2, in order to specify EDHOC application profiles supported by the Responder.<a href="#section-4.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.1-4">The EAD item <span class="bcp14">MUST NOT</span> be included in the EAD fields of EDHOC message_3 or message_4. The recipient peer <span class="bcp14">MUST</span> silently ignore the EAD item if this is specified in the EAD_3 field of EDHOC message_3 or in the EAD_4 field of EDHOC message_4.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.1-5">Within an EAD_1 field or EAD_2 field, the EAD item <span class="bcp14">MUST NOT</span> occur more than once. When the EAD item is present, its ead_label TBD_EAD_LABEL <span class="bcp14">MUST</span> be used only with positive sign, i.e., the use of the EAD item is always non-critical (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.8" class="relref">Section 3.8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-4.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.1-6">The EAD item <span class="bcp14">MUST</span> specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. The CBOR sequence is composed of one or more items, whose order has no meaning.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
-<p id="section-4.1-7">Each item of the CBOR sequence <span class="bcp14">MUST</span> be either of the following:<a href="#section-4.1-7" class="pilcrow">¶</a></p>
+<p id="section-4.1-4">The EAD item <span class="bcp14">MUST NOT</span> occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message with error code (ERR_CODE) 1 if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1-5">The EAD item <span class="bcp14">MUST NOT</span> be included in the EAD fields of EDHOC message_3 or message_4. The recipient peer <span class="bcp14">MUST</span> silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">When the EAD item is present, its ead_label TBD_EAD_LABEL <span class="bcp14">MUST</span> be used only with positive sign, i.e., the use of the EAD item is always non-critical (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.8" class="relref">Section 3.8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.1-7">The EAD item <span class="bcp14">MUST</span> specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. The CBOR sequence is composed of one or more items, whose order has no meaning.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
+<p id="section-4.1-8">Each item of the CBOR sequence <span class="bcp14">MUST</span> be either of the following:<a href="#section-4.1-8" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1-8.1">
-            <p id="section-4.1-8.1.1">A CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 9.7</a> of this document.<a href="#section-4.1-8.1.1" class="pilcrow">¶</a></p>
-<p id="section-4.1-8.1.2">
-This item of the CBOR sequence indicates that the message sender supports the EDHOC application profile identified by the Profile ID.<a href="#section-4.1-8.1.2" class="pilcrow">¶</a></p>
+<li class="normal" id="section-4.1-9.1">
+            <p id="section-4.1-9.1.1">A CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 9.7</a> of this document.<a href="#section-4.1-9.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-9.1.2">
+This item of the CBOR sequence indicates that the message sender supports the EDHOC application profile identified by the Profile ID.<a href="#section-4.1-9.1.2" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.1-8.2">
-            <p id="section-4.1-8.2.1">A CBOR array including at least one element. In particular:<a href="#section-4.1-8.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-4.1-9.2">
+            <p id="section-4.1-9.2.1">A CBOR array including at least one element. In particular:<a href="#section-4.1-9.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1-8.2.2.1">
-                <p id="section-4.1-8.2.2.1.1">The first element <span class="bcp14">MUST</span> be a CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry.<a href="#section-4.1-8.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-4.1-9.2.2.1">
+                <p id="section-4.1-9.2.2.1.1">The first element <span class="bcp14">MUST</span> be a CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry.<a href="#section-4.1-9.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-4.1-8.2.2.2">
-                <p id="section-4.1-8.2.2.2.1">Each of the elements following the first one <span class="bcp14">MUST</span> be a CBOR unsigned integer, specifying the ead_label of an EAD item.<a href="#section-4.1-8.2.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-4.1-9.2.2.2">
+                <p id="section-4.1-9.2.2.2.1">Each of the elements following the first one <span class="bcp14">MUST</span> be a CBOR unsigned integer, specifying the ead_label of an EAD item.<a href="#section-4.1-9.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-4.1-8.2.3">
-This item of the CBOR sequence indicates that the message sender supports:<a href="#section-4.1-8.2.3" class="pilcrow">¶</a></p>
+<p id="section-4.1-9.2.3">
+This item of the CBOR sequence indicates that the message sender supports:<a href="#section-4.1-9.2.3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1-8.2.4.1">
-                <p id="section-4.1-8.2.4.1.1">The EDHOC application profile PROFILE identified by the Profile ID in the first element of the array; and<a href="#section-4.1-8.2.4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-4.1-9.2.4.1">
+                <p id="section-4.1-9.2.4.1.1">The EDHOC application profile PROFILE identified by the Profile ID in the first element of the array; and<a href="#section-4.1-9.2.4.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-4.1-8.2.4.2">
-                <p id="section-4.1-8.2.4.2.1">The EAD items identified by the ead_label in the elements following the first one, in addition to the EAD items that are specified in the definition of the EDHOC application profile PROFILE.<a href="#section-4.1-8.2.4.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-4.1-9.2.4.2">
+                <p id="section-4.1-9.2.4.2.1">The EAD items identified by the ead_label in the elements following the first one, in addition to the EAD items that are specified in the definition of the EDHOC application profile PROFILE.<a href="#section-4.1-9.2.4.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="section-4.1-8.3">
-            <p id="section-4.1-8.3.1">An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-4.1-8.3.1" class="pilcrow">¶</a></p>
-<p id="section-4.1-8.3.2">
-The EDHOC_Information object <span class="bcp14">MUST NOT</span> include the elements "session_id" and "app_prof". The recipient <span class="bcp14">MUST</span> ignore those elements if they are included in the EDHOC_Information object.<a href="#section-4.1-8.3.2" class="pilcrow">¶</a></p>
-<p id="section-4.1-8.3.3">
-This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.<a href="#section-4.1-8.3.3" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-4.1-9.3">
+            <p id="section-4.1-9.3.1">An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-4.1-9.3.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-9.3.2">
+The EDHOC_Information object <span class="bcp14">MUST NOT</span> include the elements "session_id" and "app_prof". The recipient <span class="bcp14">MUST</span> ignore those elements if they are included in the EDHOC_Information object.<a href="#section-4.1-9.3.2" class="pilcrow">¶</a></p>
+<p id="section-4.1-9.3.3">
+This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.<a href="#section-4.1-9.3.3" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.1-9">The CDDL grammar describing the ead_value for the EAD item "Supported EDHOC application profiles" is:<a href="#section-4.1-9" class="pilcrow">¶</a></p>
+<p id="section-4.1-10">The CDDL grammar describing the ead_value for the EAD item "Supported EDHOC application profiles" is:<a href="#section-4.1-10" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-ead_valu"></span><div id="fig-cddl-ead-value">
 <figure id="figure-2">
-          <div class="alignLeft art-CDDL art-text artwork" id="section-4.1-10.1">
+          <div class="alignLeft art-CDDL art-text artwork" id="section-4.1-11.1">
 <pre>
 ead_value = &lt;&lt; APP_PROF_SEQ &gt;&gt;
 
@@ -2493,7 +2494,10 @@ c509_cert = 3
             <p id="appendix-B.1-1.1.1">Error handling:<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1.2.1">
-                <p id="appendix-B.1-1.1.2.1.1">EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.<a href="#appendix-B.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.1.2.1.1">EAD item "Supported EDHOC application profiles" occurring multiple times in EDHOC message_1 or message_2.<a href="#appendix-B.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.1.2.2">
+                <p id="appendix-B.1-1.1.2.2.1">EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.<a href="#appendix-B.1-1.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
