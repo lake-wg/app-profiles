@@ -244,9 +244,11 @@ The EAD item MAY be included:
 
 * In the EAD_2 field of EDHOC message_2, in order to specify EDHOC application profiles supported by the Responder.
 
-The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. The recipient peer MUST silently ignore the EAD item if this is specified in the EAD_3 field of EDHOC message_3 or in the EAD_4 field of EDHOC message_4.
+The EAD item MUST NOT occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1 if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.
 
-Within an EAD_1 field or EAD_2 field, the EAD item MUST NOT occur more than once. When the EAD item is present, its ead_label TBD_EAD_LABEL MUST be used only with positive sign, i.e., the use of the EAD item is always non-critical (see {{Section 3.8 of RFC9528}}).
+The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. The recipient peer MUST silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.
+
+When the EAD item is present, its ead_label TBD_EAD_LABEL MUST be used only with positive sign, i.e., the use of the EAD item is always non-critical (see {{Section 3.8 of RFC9528}}).
 
 The EAD item MUST specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. The CBOR sequence is composed of one or more items, whose order has no meaning.
 
@@ -764,6 +766,8 @@ c509_cert = 3
 ## Version -01 to -02 ## {#sec-01-02}
 
 * Error handling:
+
+  * EAD item "Supported EDHOC application profiles" occurring multiple times in EDHOC message_1 or message_2.
 
   * EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.
 
