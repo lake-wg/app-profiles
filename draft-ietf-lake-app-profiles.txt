@@ -415,10 +415,9 @@ Table of Contents
 
       At the time of writing this document, such parameters are:
       "methods", "cipher_suites", "message_4", "comb_req", "uri_path",
-      "osc_ms_len", "osc_salt_len", "osc_version", "cred_types",
-      "id_cred_types", "initiator", "responder", "max_msgsize",
-      "coap_ct", "ep_id_types", "transports", and "trust_anchors", which
-      are all defined in Section 3.4 of
+      "cred_types", "id_cred_types", "initiator", "responder",
+      "max_msgsize", "coap_ct", "ep_id_types", "transports", and
+      "trust_anchors", which are all defined in Section 3.4 of
       [I-D.ietf-ace-edhoc-oscore-profile].
 
    *  If the EDHOC_Information object specified in the parameter
@@ -741,20 +740,6 @@ Table of Contents
       type of authentication credential identifiers for EDHOC, and
       possibly other types of authentication credential identifiers.
 
-   *  If the element "osc_ms_len" is not present in the CBOR map, this
-      indicates that, when using EDHOC to key OSCORE [RFC8613], the size
-      of the OSCORE Master Secret in bytes is equal to the size of the
-      key length for the application AEAD Algorithm of the selected
-      cipher suite for the EDHOC session.
-
-   *  If the element "osc_salt_len" is not present in the CBOR map, this
-      indicates that, when using EDHOC to key OSCORE, the size of the
-      OSCORE Master Salt in bytes is 8.
-
-   *  If the element "osc_version" is not present in the CBOR map, this
-      indicates that, when using EDHOC to key OSCORE, the OSCORE Version
-      Number has value 1.
-
    *  The absence of any other elements in the CBOR map MUST NOT result
       in assuming any value.
 
@@ -773,7 +758,7 @@ Table of Contents
 
    EDHOC_Application_Profile = {
          1 => int / array,    ; methods
-         9 => int / array,    ; cred_types
+         6 => int / array,    ; cred_types
         23 => int,            ; app_prof
       * int / tstr => any
    }
@@ -1509,6 +1494,9 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -01 to -02
+
+   *  Use of parameters aligned with corresponding updates in draft-
+      ietf-ace-edhoc-oscore-profile.
 
    *  The EAD item "Supported EDHOC application profiles" can be used
       only in a critical way.
