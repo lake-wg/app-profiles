@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 2 January 2026                                      1 July 2025
+Expires: 4 January 2026                                      3 July 2025
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2026.
+   This Internet-Draft will expire on 4 January 2026.
 
 Copyright Notice
 
@@ -558,9 +558,9 @@ Table of Contents
 
    The EAD item MUST NOT occur more than once in the EAD fields of EDHOC
    message_1 or message_2.  The recipient peer MUST abort the EDHOC
-   session and MUST reply with an EDHOC error message with error code
-   (ERR_CODE) 1 if the EAD item occurs multiple times in the EAD fields
-   of EDHOC message_1 or message_2.
+   session and MUST reply with an EDHOC error message if the EAD item
+   occurs multiple times in the EAD fields of EDHOC message_1 or
+   message_2.
 
    The EAD item MUST NOT be included in the EAD fields of EDHOC
    message_3 or message_4.  The recipient peer MUST silently ignore the
@@ -619,8 +619,12 @@ Table of Contents
       supports an EDHOC application profile consistent with the pieces
       of information specified by the EDHOC_Information object.
 
-   The CDDL grammar describing the ead_value for the EAD item "Supported
-   EDHOC application profiles" is:
+   The CDDL grammar describing ead_value for the EAD item "Supported
+   EDHOC application profiles" is shown in Figure 2.
+
+   The recipient peer MUST abort the EDHOC session and MUST reply with
+   an EDHOC error message if ead_value is malformed or does not conform
+   with the format defined above.
 
    ead_value = << APP_PROF_SEQ >>
 
@@ -1494,6 +1498,9 @@ B.1.  Version -01 to -02
 
       -  EAD item "Supported EDHOC application profiles" in EDHOC
          message_3 or message_4.
+
+      -  Invalid ead_value in EAD item "Supported EDHOC application
+         profiles".
 
    *  Updated integer abbreviations for the EDHOC_Information
       parameters.
