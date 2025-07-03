@@ -1550,7 +1550,7 @@ When using the target EDHOC resource as per any EDHOC application profile indica
         </ul>
 <p id="section-4.1-4">The EAD item <span class="bcp14">MUST NOT</span> occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.1-5">The EAD item <span class="bcp14">MUST NOT</span> be included in the EAD fields of EDHOC message_3 or message_4. The recipient peer <span class="bcp14">MUST</span> silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.1-6">When the EAD item is present, its ead_label TBD_EAD_LABEL <span class="bcp14">MUST</span> be used only with positive sign, i.e., the use of the EAD item is always non-critical (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.8" class="relref">Section 3.8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">When the EAD item is present, its ead_label TBD_EAD_LABEL <span class="bcp14">MUST</span> be used only with negative sign, i.e., the use of the EAD item is always critical (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.8" class="relref">Section 3.8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-4.1-6" class="pilcrow">¶</a></p>
 <p id="section-4.1-7">The EAD item <span class="bcp14">MUST</span> specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. The CBOR sequence is composed of one or more items, whose order has no meaning.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
 <p id="section-4.1-8">Each item of the CBOR sequence <span class="bcp14">MUST</span> be either of the following:<a href="#section-4.1-8" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2492,24 +2492,27 @@ c509_cert = 3
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Error handling:<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">The EAD item "Supported EDHOC application profiles" can be used only in a critical way.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.2">
+            <p id="appendix-B.1-1.2.1">Error handling:<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1-1.1.2.1">
-                <p id="appendix-B.1-1.1.2.1.1">EAD item "Supported EDHOC application profiles" occurring multiple times in EDHOC message_1 or message_2.<a href="#appendix-B.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.1-1.2.2.1">
+                <p id="appendix-B.1-1.2.2.1.1">EAD item "Supported EDHOC application profiles" occurring multiple times in EDHOC message_1 or message_2.<a href="#appendix-B.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.1.2.2">
-                <p id="appendix-B.1-1.1.2.2.1">EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.<a href="#appendix-B.1-1.1.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.2.2.2">
+                <p id="appendix-B.1-1.2.2.2.1">EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.<a href="#appendix-B.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.1.2.3">
-                <p id="appendix-B.1-1.1.2.3.1">Invalid ead_value in EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.1.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.2.2.3">
+                <p id="appendix-B.1-1.2.2.3.1">Invalid ead_value in EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">Updated integer abbreviations for the EDHOC_Information parameters.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
-</li>
           <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">Editorial improvements.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.3.1">Updated integer abbreviations for the EDHOC_Information parameters.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.4">
+            <p id="appendix-B.1-1.4.1">Editorial improvements.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>

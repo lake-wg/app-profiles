@@ -568,8 +568,8 @@ Table of Contents
    message_4.
 
    When the EAD item is present, its ead_label TBD_EAD_LABEL MUST be
-   used only with positive sign, i.e., the use of the EAD item is always
-   non-critical (see Section 3.8 of [RFC9528]).
+   used only with negative sign, i.e., the use of the EAD item is always
+   critical (see Section 3.8 of [RFC9528]).
 
    The EAD item MUST specify an ead_value, as a CBOR byte string with
    value the binary representation of a CBOR sequence APP_PROF_SEQ.  The
@@ -1490,6 +1490,9 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -01 to -02
+
+   *  The EAD item "Supported EDHOC application profiles" can be used
+      only in a critical way.
 
    *  Error handling:
 
