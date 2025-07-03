@@ -1627,6 +1627,7 @@ EDHOC_Information : map
 <p id="section-4.2-3">The Responder <span class="bcp14">MUST NOT</span> abort an EDHOC session exclusively due to the wish of sending an error message with error code TBD_ERROR_CODE. Instead, the Responder can advertise the EDHOC application profiles that it supports to the Initiator by means of the EAD item "Supported EDHOC application profiles" defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>, specifying it in the EAD_2 field of the EDHOC message_2 to send in the EDHOC session.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2-4">When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-6.3" class="relref">Section 6.3</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), the error message <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.2-5">When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO <span class="bcp14">MUST</span> be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. This CBOR sequence is formatted like the one used for ead_value of the EAD item "Supported EDHOC application profiles" (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>).<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+<p id="section-4.2-6">The recipient peer <span class="bcp14">MUST</span> silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2505,6 +2506,9 @@ c509_cert = 3
 </li>
               <li class="normal" id="appendix-B.1-1.2.2.3">
                 <p id="appendix-B.1-1.2.2.3.1">Invalid ead_value in EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.2.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.2.2.4">
+                <p id="appendix-B.1-1.2.2.4.1">Invalid information in EDHOC error message with new error code.<a href="#appendix-B.1-1.2.2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
