@@ -309,7 +309,7 @@ The Responder MUST NOT abort an EDHOC session exclusively due to the wish of sen
 
 When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and MUST NOT specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see {{Section 6.3 of RFC9528}}), the error message MUST NOT specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.
 
-When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR sequence formatted like APP_PROF_SEQ defined in {{sec-app-profile-edhoc-message_1_2}}. Note that the CBOR sequence specified in ERR_INFO is not wrapped into a CBOR byte string.
+When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. This CBOR sequence is formatted like the one used for ead_value of the EAD item "Supported EDHOC application profiles" (see {{sec-app-profile-edhoc-message_1_2}}).
 
 # Canonical Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
 
@@ -776,6 +776,8 @@ c509_cert = 3
   * EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.
 
   * Invalid ead_value in EAD item "Supported EDHOC application profiles".
+
+* Fixed encoding of ERR_INFO for the EDHOC error_message with the new error code.
 
 * Updated integer abbreviations for the EDHOC_Information parameters.
 
