@@ -244,7 +244,7 @@ The EAD item MAY be included:
 
 * In the EAD_2 field of EDHOC message_2, in order to specify EDHOC application profiles supported by the Responder.
 
-The EAD item MUST NOT occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1 if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.
+The EAD item MUST NOT occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.
 
 The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. The recipient peer MUST silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.
 
@@ -276,7 +276,9 @@ Each item of the CBOR sequence MUST be either of the following:
 
   This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.
 
-The CDDL grammar describing the ead_value for the EAD item "Supported EDHOC application profiles" is:
+The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in {{fig-cddl-ead-value}}.
+
+The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message if ead_value is malformed or does not conform with the format defined above.
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 ead_value = << APP_PROF_SEQ >>
@@ -770,6 +772,8 @@ c509_cert = 3
   * EAD item "Supported EDHOC application profiles" occurring multiple times in EDHOC message_1 or message_2.
 
   * EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.
+
+  * Invalid ead_value in EAD item "Supported EDHOC application profiles".
 
 * Updated integer abbreviations for the EDHOC_Information parameters.
 
