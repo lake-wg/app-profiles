@@ -246,7 +246,7 @@ The EAD item MAY be included:
 
 The EAD item MUST NOT occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.
 
-The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. The recipient peer MUST silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.
+The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. In case the recipient peer supports the EAD item, the recipient peer MUST silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.
 
 When the EAD item is present, its ead_label TBD_EAD_LABEL MUST be used only with negative sign, i.e., the use of the EAD item is always critical (see {{Section 3.8 of RFC9528}}).
 
