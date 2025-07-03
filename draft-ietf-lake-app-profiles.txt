@@ -677,8 +677,9 @@ Table of Contents
    When using error code TBD_ERROR_CODE, the error information specified
    in ERR_INFO MUST be a CBOR byte string with value the binary
    representation of a CBOR sequence APP_PROF_SEQ.  This CBOR sequence
-   is formatted like the one used for ead_value of the EAD item
-   "Supported EDHOC application profiles" (see Section 4.1).
+   has the same format and semantics of the one used for ead_value of
+   the EAD item "Supported EDHOC application profiles" (see
+   Section 4.1).
 
    The recipient peer MUST silently ignore elements of the CBOR sequence
    APP_PROF_SEQ that are malformed or do not conform with the intended
