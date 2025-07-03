@@ -186,17 +186,21 @@ In turn, the EDHOC_Information object can include the parameter "app_prof" defin
 
 If the EDHOC_Information object specified as value of "edhoc_info" includes the "app_prof" parameter, then the following applies.
 
-* The object MUST NOT include other parameters that provide information pertaining to an EDHOC application profile, with the exception of the parameter "eads" that MAY be included.
+* The object MUST NOT include other parameters except for the following ones:
 
-  C and RS MUST ignore other parameters present in the EDHOC_Information object, with the exception of the parameter "eads".
+  * The parameter "eads".
 
-  At the time of writing this document, such parameters are: "methods", "cipher_suites", "message_4", "comb_req", "uri_path", "cred_types", "id_cred_types", "initiator", "responder", "max_msgsize", "coap_ct", "ep_id_types", "transports", and "trust_anchors", which are all defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
+  * The parameters that are not allowed in the EDHOC\_Application\_Profile object defined in {{sec-app-profile-edhoc-message_1_2}}.
 
-* If the EDHOC_Information object specified in the parameter "edhoc_info" of the AS-to-C Access Token Response includes the parameter "eads", the object provides the following information.
+    These include the parameter "session_id", which the EDHOC_Information object has to include (see {{Sections 3.3 and 3.3.1 of I-D.ietf-ace-edhoc-oscore-profile}}).
+
+  C and RS MUST ignore other parameters that are not admitted if they are present in the EDHOC_Information object.
+
+* If the EDHOC_Information object specified in the parameter "edhoc_info" of the AS-to-C Access Token Response includes the parameter "eads", then the following applies.
 
   When using the target EDHOC resource as per any EDHOC application profile indicated by the parameter "app_prof", the ACE RS for which the access token is issued supports the EAD items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the parameter "eads".
 
-* If the EDHOC_Information object specified in the claim "edhoc_info" of the access token includes the parameter "eads", the object provides the following information.
+* If the EDHOC_Information object specified in the claim "edhoc_info" of the access token includes the parameter "eads", then the following applies.
 
   When using the target EDHOC resource as per any EDHOC application profile indicated by the parameter "app_prof", the ACE client to which the access token is issued supports the EAD items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the parameter "eads".
 
@@ -272,7 +276,7 @@ Each item of the CBOR sequence MUST be either of the following:
 
 * An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
-  The EDHOC_Information object MUST NOT include the element "app_prof" and MUST NOT include elements that are not allowed within the EDHOC_Application_Profile object defined in {{sec-app-profile-cbor}}, with the exception of the element "trust_anchor" that MAY be included. The recipient peer MUST ignore elements that are not admitted if they are present in the EDHOC_Information object.
+  The EDHOC_Information object MUST NOT include the element "app_prof" and MUST NOT include elements that are not allowed within the EDHOC_Application_Profile object defined in {{sec-app-profile-cbor}}, with the exception of the element "trust_anchor" that MAY be included. The recipient peer MUST ignore elements that are not allowed if they are present in the EDHOC_Information object.
 
   This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.
 
@@ -772,6 +776,8 @@ c509_cert = 3
   * It can be used only in a critical way.
 
   * Improved semantics of ead_value.
+
+* Improved use of the parameter "app_prof" in draft-ietf-ace-edhoc-oscore-profile.
 
 * Error handling:
 
