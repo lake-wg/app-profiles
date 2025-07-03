@@ -1184,7 +1184,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-canonical-representation-of" class="internal xref">Canonical Representation of an EDHOC Application Profile</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-edhoc_application_profile" class="internal xref">EDHOC_Application_Profile</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-well-known-edhoc-applicatio" class="internal xref">Well-known EDHOC Application Profiles</a></p>
@@ -1318,7 +1318,7 @@ For instance, the parameter can be used in the EDHOC and OSCORE profile <span>[<
           <p id="section-1-5.5.1">A new EDHOC External Authorization Data (EAD) item (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>) and a new error code for the EDHOC error message (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 4.2</a>). When running EDHOC, a peer can use those in order to advertise the EDHOC application profiles that it supports to the other peer.<a href="#section-1-5.5.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-6">In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>). The defined representation is transport- and setup-independent, and avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-6">In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>). The defined representation is transport- and setup-independent, and avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.<a href="#section-1-7" class="pilcrow">¶</a></p>
 <p id="section-1-8">Finally, this document defines a set of well-known EDHOC application profiles (see <a href="#sec-well-known-app-profiles" class="auto internal xref">Section 6</a>). These application profiles are meant to reflect what is most common and expected to be supported by EDHOC peers, while they are not to be intended as "default" application profiles or as a deviation from what is mandatory to support for EDHOC peers (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). On the other hand, they provide implementers and users with a quick overview of the several, available options to run the EDHOC protocol and of their most expected combinations.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <div id="terminology">
@@ -1360,7 +1360,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
           <p id="section-2-5.1.1">Within certain EDHOC messages, sent during an EDHOC session by a peer that supports such EDHOC application profiles (see <a href="#sec-app-profile-edhoc-messages" class="auto internal xref">Section 4</a>).<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-5.2">
-          <p id="section-2-5.2.1">Within the canonical, CBOR-encoded representation of such EDHOC application profiles (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>).<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.2.1">Within an EDHOC_Application_Profile object, i.e., the canonical, CBOR-encoded representation of such EDHOC application profiles (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>).<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="web-linking">
@@ -1634,42 +1634,43 @@ EDHOC_Information : map
 </div>
 <div id="sec-app-profile-cbor">
 <section id="section-5">
-      <h2 id="name-canonical-representation-of">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-canonical-representation-of" class="section-name selfRef">Canonical Representation of an EDHOC Application Profile</a>
+      <h2 id="name-edhoc_application_profile">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-edhoc_application_profile" class="section-name selfRef">EDHOC_Application_Profile</a>
       </h2>
 <p id="section-5-1">This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">An EDHOC_Application_Profile object is encoded as a CBOR map <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>. Each element of the CBOR map is an element of the CBOR-encoded EDHOC_Information object specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>, and thus uses the corresponding CBOR abbreviations from the 'CBOR label' column of the "EDHOC Information" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">The CBOR map encoding an EDHOC_Application_Profile object <span class="bcp14">MUST</span> include the element "app_prof" defined in this document. The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the EDHOC_Application_Profile object, taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document, and encoded as a CBOR integer.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">The CBOR map <span class="bcp14">MUST</span> include the following elements defined for the EDHOC_Information object: "methods" and "cred_types".<a href="#section-5-4" class="pilcrow">¶</a></p>
-<p id="section-5-5">The CBOR map <span class="bcp14">MUST NOT</span> include the following elements defined for the EDHOC_Information object: "session_id", "uri_path", "initiator", and "responder". A consumer <span class="bcp14">MUST</span> ignore those elements if they are included in the EDHOC_Application_Profile object.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<p id="section-5-6">The CBOR map <span class="bcp14">MAY</span> include other elements defined for the EDHOC_Information object.<a href="#section-5-6" class="pilcrow">¶</a></p>
-<p id="section-5-7">Furthermore, consistent with Sections <a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">8</a> and <a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.1" class="relref">A.1</a> of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> and with <span><a href="https://rfc-editor.org/rfc/rfc8613#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>, the following applies:<a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-5-2">An EDHOC_Application_Profile object is encoded as a CBOR map <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>. Elements of the EDHOC_Application_Profile object can also be elements of the CBOR-encoded EDHOC_Information object specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. In particular, they use the same CBOR abbreviations from the 'CBOR label' column of the "EDHOC Information" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">By construction, an EDHOC_Application_Profile object conveys information that pertains to the execution of EDHOC. This includes, e.g., information about transporting and processing EDHOC messages during an EDHOC session. An EDHOC_Application_Profile object does not convey information that does not play a role in completing an EDHOC execution. For instance, this includes the size of outputs of the EDHOC_Exporter interface (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-4.2.1" class="relref">Section 4.2.1</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), or properties and features of protocols other than EDHOC itself that build on the results from an EDHOC session (e.g., the version of the application protocol subsequently used).<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">The CBOR map encoding an EDHOC_Application_Profile object <span class="bcp14">MUST</span> include the element "app_prof" defined in this document. The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the EDHOC_Application_Profile object. The identifier is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document and encoded as a CBOR integer.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">In addition to "app_prof", the CBOR map <span class="bcp14">MUST</span> include the elements "methods" and "cred_types".<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">The CBOR map <span class="bcp14">MUST NOT</span> include the following elements: "session_id", "uri_path", "initiator", and "responder". A consumer <span class="bcp14">MUST</span> ignore those elements if they are included in the EDHOC_Application_Profile object.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-7">The CBOR map <span class="bcp14">MAY</span> include other elements.<a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-5-8">Furthermore, consistent with Sections <a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">8</a> and <a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.1" class="relref">A.1</a> of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> and with <span><a href="https://rfc-editor.org/rfc/rfc8613#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>, the following applies:<a href="#section-5-8" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-8.1">
-          <p id="section-5-8.1.1">If the element "cipher_suites" is not present in the CBOR map, this indicates that the EDHOC application profile uses the EDHOC cipher suites 2 and 3, and possibly other cipher suites.<a href="#section-5-8.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5-9.1">
+          <p id="section-5-9.1.1">If the element "cipher_suites" is not present in the CBOR map, this indicates that the EDHOC application profile uses the EDHOC cipher suites 2 and 3, and possibly other cipher suites.<a href="#section-5-9.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-8.2">
-          <p id="section-5-8.2.1">If the element "id_cred_types" is not present in the CBOR map, this indicates that the EDHOC application profile uses "kid" as type of authentication credential identifiers for EDHOC, and possibly other types of authentication credential identifiers.<a href="#section-5-8.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-9.2">
+          <p id="section-5-9.2.1">If the element "id_cred_types" is not present in the CBOR map, this indicates that the EDHOC application profile uses "kid" as type of authentication credential identifiers for EDHOC, and possibly other types of authentication credential identifiers.<a href="#section-5-9.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-8.3">
-          <p id="section-5-8.3.1">If the element "osc_ms_len" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>, the size of the OSCORE Master Secret in bytes is equal to the size of the key length for the application AEAD Algorithm of the selected cipher suite for the EDHOC session.<a href="#section-5-8.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-9.3">
+          <p id="section-5-9.3.1">If the element "osc_ms_len" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>, the size of the OSCORE Master Secret in bytes is equal to the size of the key length for the application AEAD Algorithm of the selected cipher suite for the EDHOC session.<a href="#section-5-9.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-8.4">
-          <p id="section-5-8.4.1">If the element "osc_salt_len" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE, the size of the OSCORE Master Salt in bytes is 8.<a href="#section-5-8.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-9.4">
+          <p id="section-5-9.4.1">If the element "osc_salt_len" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE, the size of the OSCORE Master Salt in bytes is 8.<a href="#section-5-9.4.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-8.5">
-          <p id="section-5-8.5.1">If the element "osc_version" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE, the OSCORE Version Number has value 1.<a href="#section-5-8.5.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-9.5">
+          <p id="section-5-9.5.1">If the element "osc_version" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE, the OSCORE Version Number has value 1.<a href="#section-5-9.5.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-8.6">
-          <p id="section-5-8.6.1">The absence of any other elements in the CBOR map <span class="bcp14">MUST NOT</span> result in assuming any value.<a href="#section-5-8.6.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-9.6">
+          <p id="section-5-9.6.1">The absence of any other elements in the CBOR map <span class="bcp14">MUST NOT</span> result in assuming any value.<a href="#section-5-9.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-5-9">If an element is present in the CBOR map and the information that it specifies is intrinsically a set of one or more co-existing alternatives, then all the specified alternatives apply for the EDHOC application profile in question.<a href="#section-5-9" class="pilcrow">¶</a></p>
-<p id="section-5-10">For example, the element "cipher_suites" with value the CBOR array [0, 2] means that, in order to adhere to the EDHOC application profile in question, an EDHOC peer has to implement both the EDHOC cipher suites 0 and 2, because either of them can be used by another EDHOC peer also adhering to the same EDHOC application profile.<a href="#section-5-10" class="pilcrow">¶</a></p>
-<p id="section-5-11">The CDDL grammar describing the EDHOC_Application_Profile object is:<a href="#section-5-11" class="pilcrow">¶</a></p>
+<p id="section-5-10">If an element is present in the CBOR map and the information that it specifies is intrinsically a set of one or more co-existing alternatives, then all the specified alternatives apply for the EDHOC application profile in question.<a href="#section-5-10" class="pilcrow">¶</a></p>
+<p id="section-5-11">For example, the element "cipher_suites" with value the CBOR array [0, 2] means that, in order to adhere to the EDHOC application profile in question, an EDHOC peer has to implement both the EDHOC cipher suites 0 and 2, because either of them can be used by another EDHOC peer also adhering to the same EDHOC application profile.<a href="#section-5-11" class="pilcrow">¶</a></p>
+<p id="section-5-12">The CDDL grammar describing the EDHOC_Application_Profile object is:<a href="#section-5-12" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-edho"></span><div id="fig-cddl-edhoc_application-profile-object">
 <figure id="figure-3">
-        <div class="alignLeft art-CDDL art-text artwork" id="section-5-12.1">
+        <div class="alignLeft art-CDDL art-text artwork" id="section-5-13.1">
 <pre>
 EDHOC_Application_Profile = {
       1 =&gt; int / array,    ; methods
@@ -2516,10 +2517,13 @@ c509_cert = 3
             <p id="appendix-B.1-1.3.1">Fixed encoding of ERR_INFO for the EDHOC error_message with the new error code.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.4">
-            <p id="appendix-B.1-1.4.1">Updated integer abbreviations for the EDHOC_Information parameters.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.4.1">Clarified scope of the EDHOC_Application_Profile object.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Editorial improvements.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.5.1">Updated integer abbreviations for the EDHOC_Information parameters.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.6">
+            <p id="appendix-B.1-1.6.1">Editorial improvements.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
