@@ -325,7 +325,7 @@ The CBOR map encoding an EDHOC_Application_Profile object MUST include the eleme
 
 In addition to "app_prof", the CBOR map MUST include the elements "methods" and "cred_types".
 
-The CBOR map MUST NOT include the following elements: "session_id", "uri_path", "initiator", and "responder". A consumer MUST ignore those elements if they are included in the EDHOC_Application_Profile object.
+The CBOR map MUST NOT include the following elements: "session_id", "uri_path", "initiator", "responder", and "trust_anchors". A consumer MUST ignore those elements if they are included in the EDHOC_Application_Profile object.
 
 The CBOR map MAY include other elements.
 
@@ -781,7 +781,11 @@ c509_cert = 3
 
 * Fixed encoding of ERR_INFO for the EDHOC error_message with the new error code.
 
-* Clarified scope of the EDHOC_Application_Profile object.
+* EDHOC_Application_Profile object
+
+  - Clarified scope.
+
+  - Forbid the presence of the element "trust_anchors".
 
 * Updated integer abbreviations for the EDHOC_Information parameters.
 
