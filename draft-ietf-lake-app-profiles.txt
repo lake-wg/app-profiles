@@ -674,9 +674,10 @@ Table of Contents
    conveys SUITES_R as ERR_INFO.
 
    When using error code TBD_ERROR_CODE, the error information specified
-   in ERR_INFO MUST be a CBOR sequence formatted like APP_PROF_SEQ
-   defined in Section 4.1.  Note that the CBOR sequence specified in
-   ERR_INFO is not wrapped into a CBOR byte string.
+   in ERR_INFO MUST be a CBOR byte string with value the binary
+   representation of a CBOR sequence APP_PROF_SEQ.  This CBOR sequence
+   is formatted like the one used for ead_value of the EAD item
+   "Supported EDHOC application profiles" (see Section 4.1).
 
 5.  Canonical Representation of an EDHOC Application Profile
 
@@ -1504,6 +1505,9 @@ B.1.  Version -01 to -02
 
       -  Invalid ead_value in EAD item "Supported EDHOC application
          profiles".
+
+   *  Fixed encoding of ERR_INFO for the EDHOC error_message with the
+      new error code.
 
    *  Updated integer abbreviations for the EDHOC_Information
       parameters.
