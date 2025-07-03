@@ -89,7 +89,7 @@ In order to facilitate interoperability between EDHOC implementations and to sup
 
 * A new EDHOC External Authorization Data (EAD) item (see {{sec-app-profile-edhoc-message_1_2}}) and a new error code for the EDHOC error message (see {{sec-app-profile-edhoc-error-message}}). When running EDHOC, a peer can use those in order to advertise the EDHOC application profiles that it supports to the other peer.
 
-In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see {{sec-app-profile-cbor}}). The defined representation is transport- and setup-independent, and avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.
+In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see {{sec-app-profile-cbor}}). The defined representation is transport- and setup-independent, and avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.
 
 The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.
 
@@ -123,7 +123,7 @@ As defined later in this document, Profile IDs can be used to identify EDHOC app
 
 * Within certain EDHOC messages, sent during an EDHOC session by a peer that supports such EDHOC application profiles (see {{sec-app-profile-edhoc-messages}}).
 
-* Within the canonical, CBOR-encoded representation of such EDHOC application profiles (see {{sec-app-profile-cbor}}).
+* Within an EDHOC_Application_Profile object, i.e., the canonical, CBOR-encoded representation of such EDHOC application profiles (see {{sec-app-profile-cbor}}).
 
 ## In Web Linking # {#web-linking}
 
@@ -313,19 +313,21 @@ When using error code TBD_ERROR_CODE, the error information specified in ERR_INF
 
 The recipient peer MUST silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format.
 
-# Canonical Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
+# EDHOC\_Application\_Profile # {#sec-app-profile-cbor}
 
 This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.
 
-An EDHOC_Application_Profile object is encoded as a CBOR map {{RFC8949}}. Each element of the CBOR map is an element of the CBOR-encoded EDHOC_Information object specified in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}, and thus uses the corresponding CBOR abbreviations from the 'CBOR label' column of the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
+An EDHOC_Application_Profile object is encoded as a CBOR map {{RFC8949}}. Elements of the EDHOC_Application_Profile object can also be elements of the CBOR-encoded EDHOC_Information object specified in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}. In particular, they use the same CBOR abbreviations from the 'CBOR label' column of the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
-The CBOR map encoding an EDHOC_Application_Profile object MUST include the element "app_prof" defined in this document. The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the EDHOC_Application_Profile object, taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document, and encoded as a CBOR integer.
+By construction, an EDHOC_Application_Profile object conveys information that pertains to the execution of EDHOC. This includes, e.g., information about transporting and processing EDHOC messages during an EDHOC session. An EDHOC_Application_Profile object does not convey information that does not play a role in completing an EDHOC execution. For instance, this includes the size of outputs of the EDHOC_Exporter interface (see {{Section 4.2.1 of RFC9528}}), or properties and features of protocols other than EDHOC itself that build on the results from an EDHOC session (e.g., the version of the application protocol subsequently used).
 
-The CBOR map MUST include the following elements defined for the EDHOC_Information object: "methods" and "cred_types".
+The CBOR map encoding an EDHOC_Application_Profile object MUST include the element "app_prof" defined in this document. The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the EDHOC_Application_Profile object. The identifier is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document and encoded as a CBOR integer.
 
-The CBOR map MUST NOT include the following elements defined for the EDHOC_Information object: "session_id", "uri_path", "initiator", and "responder". A consumer MUST ignore those elements if they are included in the EDHOC_Application_Profile object.
+In addition to "app_prof", the CBOR map MUST include the elements "methods" and "cred_types".
 
-The CBOR map MAY include other elements defined for the EDHOC_Information object.
+The CBOR map MUST NOT include the following elements: "session_id", "uri_path", "initiator", and "responder". A consumer MUST ignore those elements if they are included in the EDHOC_Application_Profile object.
+
+The CBOR map MAY include other elements.
 
 Furthermore, consistent with {{Sections 8 and A.1 of RFC9528}} and with {{Section 5.4 of RFC8613}}, the following applies:
 
@@ -782,6 +784,8 @@ c509_cert = 3
   * Invalid information in EDHOC error message with new error code.
 
 * Fixed encoding of ERR_INFO for the EDHOC error_message with the new error code.
+
+* Clarified scope of the EDHOC_Application_Profile object.
 
 * Updated integer abbreviations for the EDHOC_Information parameters.
 
