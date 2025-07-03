@@ -317,7 +317,7 @@ The recipient peer MUST silently ignore elements of the CBOR sequence APP_PROF_S
 
 This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.
 
-An EDHOC_Application_Profile object is encoded as a CBOR map {{RFC8949}}. Elements of the EDHOC_Application_Profile object can also be elements of the CBOR-encoded EDHOC_Information object specified in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}. In particular, they use the same CBOR abbreviations from the 'CBOR label' column of the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
+An EDHOC_Application_Profile object is encoded as a CBOR map {{RFC8949}}. Elements of the EDHOC_Application_Profile object can also be elements of the CBOR-encoded EDHOC_Information object specified in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}. In particular, they use the same CBOR abbreviations from the 'CBOR label' column of the IANA registry "EDHOC Information" defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
 By construction, an EDHOC_Application_Profile object conveys information that pertains to the execution of EDHOC. This includes, e.g., information about transporting and processing EDHOC messages during an EDHOC session. An EDHOC_Application_Profile object does not convey information that does not play a role in completing an EDHOC execution. For instance, this includes the size of outputs of the EDHOC_Exporter interface (see {{Section 4.2.1 of RFC9528}}), or properties and features of protocols other than EDHOC itself that build on the results from an EDHOC session (e.g., the version of the application protocol subsequently used).
 
@@ -337,9 +337,9 @@ Furthermore, consistent with {{Sections 8 and A.1 of RFC9528}} and with {{Sectio
 
 * The absence of any other elements in the CBOR map MUST NOT result in assuming any value.
 
-If an element is present in the CBOR map and the information that it specifies is intrinsically a set of one or more co-existing alternatives, then all the specified alternatives apply for the EDHOC application profile in question.
+If an element is present in the CBOR map and the corresponding entry in the IANA registry "EDHOC Information" specifies "NP" (non-prescriptive) in the 'Type' column and "True or False" in the 'CBOR type' column, then the following applies. An EDHOC peer that adheres to the EDHOC application profile in question is required or not to support the property or feature of EDHOC associated with the element in the CBOR map, if that element encodes the CBOR simple value `true` (0xf5) or `false` (0xf4), respectively. For example, the presence of the parameter "comb_req" denotes whether EDHOC peers adhering to the EDHOC application profile have to support the EDHOC + OSCORE combined request defined in {{RFC9668}}, or instead do not have to but might if they are willing to.
 
-For example, the element "cipher_suites" with value the CBOR array \[0, 2\] means that, in order to adhere to the EDHOC application profile in question, an EDHOC peer has to implement both the EDHOC cipher suites 0 and 2, because either of them can be used by another EDHOC peer also adhering to the same EDHOC application profile.
+If an element present in the CBOR map specifies an information that is intrinsically a set of one or more co-existing alternatives, then all the specified alternatives apply for the EDHOC application profile in question. For example, the element "cipher_suites" with value the CBOR array \[0, 2\] means that, in order to adhere to the EDHOC application profile in question, an EDHOC peer has to implement both the EDHOC cipher suites 0 and 2, because either of them can be used by another EDHOC peer also adhering to the same EDHOC application profile.
 
 The CDDL grammar describing the EDHOC_Application_Profile object is:
 
@@ -784,6 +784,8 @@ c509_cert = 3
 * EDHOC_Application_Profile object
 
   - Clarified scope.
+
+  * Clarified meaning of boolean parameters that are non-prescriptive.
 
   - Forbid the presence of the element "trust_anchors".
 
