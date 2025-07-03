@@ -186,7 +186,7 @@ In turn, the EDHOC_Information object can include the parameter "app_prof" defin
 
 If the EDHOC_Information object specified as value of "edhoc_info" includes the "app_prof" parameter, then the following applies.
 
-* The object MUST NOT include other parameters except for the following ones:
+* The object MUST NOT include other parameters, with the following exceptions:
 
   * The parameter "eads".
 
