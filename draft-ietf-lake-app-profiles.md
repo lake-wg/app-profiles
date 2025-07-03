@@ -190,7 +190,7 @@ If the EDHOC_Information object specified as value of "edhoc_info" includes the 
 
   C and RS MUST ignore other parameters present in the EDHOC_Information object, with the exception of the parameter "eads".
 
-  At the time of writing this document, such parameters are: "methods", "cipher_suites", "message_4", "comb_req", "uri_path", "osc_ms_len", "osc_salt_len", "osc_version", "cred_types", "id_cred_types", "initiator", "responder", "max_msgsize", "coap_ct", "ep_id_types", "transports", and "trust_anchors", which are all defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
+  At the time of writing this document, such parameters are: "methods", "cipher_suites", "message_4", "comb_req", "uri_path", "cred_types", "id_cred_types", "initiator", "responder", "max_msgsize", "coap_ct", "ep_id_types", "transports", and "trust_anchors", which are all defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
 
 * If the EDHOC_Information object specified in the parameter "edhoc_info" of the AS-to-C Access Token Response includes the parameter "eads", the object provides the following information.
 
@@ -335,12 +335,6 @@ Furthermore, consistent with {{Sections 8 and A.1 of RFC9528}} and with {{Sectio
 
 * If the element "id_cred_types" is not present in the CBOR map, this indicates that the EDHOC application profile uses "kid" as type of authentication credential identifiers for EDHOC, and possibly other types of authentication credential identifiers.
 
-* If the element "osc_ms_len" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE {{RFC8613}}, the size of the OSCORE Master Secret in bytes is equal to the size of the key length for the application AEAD Algorithm of the selected cipher suite for the EDHOC session.
-
-* If the element "osc_salt_len" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE, the size of the OSCORE Master Salt in bytes is 8.
-
-* If the element "osc_version" is not present in the CBOR map, this indicates that, when using EDHOC to key OSCORE, the OSCORE Version Number has value 1.
-
 * The absence of any other elements in the CBOR map MUST NOT result in assuming any value.
 
 If an element is present in the CBOR map and the information that it specifies is intrinsically a set of one or more co-existing alternatives, then all the specified alternatives apply for the EDHOC application profile in question.
@@ -352,7 +346,7 @@ The CDDL grammar describing the EDHOC_Application_Profile object is:
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 EDHOC_Application_Profile = {
       1 => int / array,    ; methods
-      9 => int / array,    ; cred_types
+      6 => int / array,    ; cred_types
      23 => int,            ; app_prof
    * int / tstr => any
 }
@@ -770,6 +764,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -01 to -02 ## {#sec-01-02}
+
+* Use of parameters aligned with corresponding updates in draft-ietf-ace-edhoc-oscore-profile.
 
 * The EAD item "Supported EDHOC application profiles" can be used only in a critical way.
 
