@@ -1583,7 +1583,7 @@ This item of the CBOR sequence indicates that the message sender supports:<a hre
           <li class="normal" id="section-4.1-9.3">
             <p id="section-4.1-9.3.1">An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-4.1-9.3.1" class="pilcrow">¶</a></p>
 <p id="section-4.1-9.3.2">
-The EDHOC_Information object <span class="bcp14">MUST NOT</span> include the elements "session_id" and "app_prof". The recipient <span class="bcp14">MUST</span> ignore those elements if they are included in the EDHOC_Information object.<a href="#section-4.1-9.3.2" class="pilcrow">¶</a></p>
+The EDHOC_Information object <span class="bcp14">MUST NOT</span> include the element "app_prof" and <span class="bcp14">MUST NOT</span> include elements that are not allowed within the EDHOC_Application_Profile object defined in <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>, with the exception of the element "trust_anchor" that <span class="bcp14">MAY</span> be included. The recipient peer <span class="bcp14">MUST</span> ignore elements that are not admitted if they are present in the EDHOC_Information object.<a href="#section-4.1-9.3.2" class="pilcrow">¶</a></p>
 <p id="section-4.1-9.3.3">
 This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.<a href="#section-4.1-9.3.3" class="pilcrow">¶</a></p>
 </li>
@@ -2488,7 +2488,15 @@ c509_cert = 3
             <p id="appendix-B.1-1.1.1">Use of parameters aligned with corresponding updates in draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">The EAD item "Supported EDHOC application profiles" can be used only in a critical way.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.2.1">EAD item "Supported EDHOC application profiles":<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.1-1.2.2.1">
+                <p id="appendix-B.1-1.2.2.1.1">It can be used only in a critical way.<a href="#appendix-B.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.2.2.2">
+                <p id="appendix-B.1-1.2.2.2.1">Improved semantics of ead_value.<a href="#appendix-B.1-1.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.3">
             <p id="appendix-B.1-1.3.1">Error handling:<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
