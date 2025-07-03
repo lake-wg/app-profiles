@@ -311,6 +311,8 @@ When replying to an EDHOC message_1 with an error message, the Responder has to 
 
 When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. This CBOR sequence is formatted like the one used for ead_value of the EAD item "Supported EDHOC application profiles" (see {{sec-app-profile-edhoc-message_1_2}}).
 
+The recipient peer MUST silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format.
+
 # Canonical Representation of an EDHOC Application Profile # {#sec-app-profile-cbor}
 
 This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.
@@ -776,6 +778,8 @@ c509_cert = 3
   * EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.
 
   * Invalid ead_value in EAD item "Supported EDHOC application profiles".
+
+  * Invalid information in EDHOC error message with new error code.
 
 * Fixed encoding of ERR_INFO for the EDHOC error_message with the new error code.
 
