@@ -272,7 +272,7 @@ Each item of the CBOR sequence MUST be either of the following:
 
 * An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
-  The EDHOC_Information object MUST NOT include the elements "session_id" and "app_prof". The recipient MUST ignore those elements if they are included in the EDHOC_Information object.
+  The EDHOC_Information object MUST NOT include the element "app_prof" and MUST NOT include elements that are not allowed within the EDHOC_Application_Profile object defined in {{sec-app-profile-cbor}}, with the exception of the element "trust_anchor" that MAY be included. The recipient peer MUST ignore elements that are not admitted if they are present in the EDHOC_Information object.
 
   This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.
 
@@ -767,7 +767,11 @@ c509_cert = 3
 
 * Use of parameters aligned with corresponding updates in draft-ietf-ace-edhoc-oscore-profile.
 
-* The EAD item "Supported EDHOC application profiles" can be used only in a critical way.
+* EAD item "Supported EDHOC application profiles":
+
+  * It can be used only in a critical way.
+
+  * Improved semantics of ead_value.
 
 * Error handling:
 
@@ -783,11 +787,11 @@ c509_cert = 3
 
 * EDHOC_Application_Profile object
 
-  - Clarified scope.
+  * Clarified scope.
 
   * Clarified meaning of boolean parameters that are non-prescriptive.
 
-  - Forbid the presence of the element "trust_anchors".
+  * Forbid the presence of the element "trust_anchors".
 
 * Updated integer abbreviations for the EDHOC_Information parameters.
 
