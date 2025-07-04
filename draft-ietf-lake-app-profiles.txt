@@ -86,30 +86,33 @@ Table of Contents
        4.1.1.  Content Restrictions
      4.2.  In the EDHOC Error Message
    5.  EDHOC_Application_Profile
-   6.  Well-known EDHOC Application Profiles
-     6.1.  Well-Known Application Profile MINIMAL_CS_2
-     6.2.  Well-Known Application Profile MINIMAL_CS_0
-     6.3.  Well-Known Application Profile BASIC_CS_2_X509
-     6.4.  Well-Known Application Profile BASIC_CS_0_X509
-     6.5.  Well-Known Application Profile BASIC_CS_2_C509
-     6.6.  Well-Known Application Profile BASIC_CS_0_C509
-     6.7.  Well-Known Application Profile INTERMEDIATE_CS_2
-     6.8.  Well-Known Application Profile INTERMEDIATE_CS_0
-     6.9.  Well-Known Application Profile EXTENSIVE
-   7.  Identifiers of Well-known EDHOC Application Profiles
-   8.  Security Considerations
-   9.  IANA Considerations
-     9.1.  Media Type Registrations
-     9.2.  CoAP Content-Formats Registry
-     9.3.  Target Attributes Registry
-     9.4.  EDHOC Information Registry
-     9.5.  EDHOC External Authorization Data Registry
-     9.6.  EDHOC Error Codes Registry
-     9.7.  EDHOC Application Profiles Registry
-     9.8.  Expert Review Instructions
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   6.  Advertising Supported EDHOC Application Profiles using SVCB
+           Resource Records
+   7.  Well-known EDHOC Application Profiles
+     7.1.  Well-Known Application Profile MINIMAL_CS_2
+     7.2.  Well-Known Application Profile MINIMAL_CS_0
+     7.3.  Well-Known Application Profile BASIC_CS_2_X509
+     7.4.  Well-Known Application Profile BASIC_CS_0_X509
+     7.5.  Well-Known Application Profile BASIC_CS_2_C509
+     7.6.  Well-Known Application Profile BASIC_CS_0_C509
+     7.7.  Well-Known Application Profile INTERMEDIATE_CS_2
+     7.8.  Well-Known Application Profile INTERMEDIATE_CS_0
+     7.9.  Well-Known Application Profile EXTENSIVE
+   8.  Identifiers of Well-known EDHOC Application Profiles
+   9.  Security Considerations
+   10. IANA Considerations
+     10.1.  Media Type Registrations
+     10.2.  CoAP Content-Formats Registry
+     10.3.  Target Attributes Registry
+     10.4.  EDHOC Information Registry
+     10.5.  EDHOC External Authorization Data Registry
+     10.6.  EDHOC Error Codes Registry
+     10.7.  EDHOC Application Profiles Registry
+     10.8.  DNS SVCB Service Parameter Keys (SvcParamKeys)
+     10.9.  Expert Review Instructions
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
      B.1.  Version -01 to -02
@@ -145,7 +148,7 @@ Table of Contents
    is:
 
    *  The new IANA registry "EDHOC Application Profiles" defined in
-      Section 9.7, where to register integer identifiers of EDHOC
+      Section 10.7, where to register integer identifiers of EDHOC
       application profiles to use as corresponding Profile IDs.
 
    *  The new parameter "ed-prof" defined in Section 2.1.  This
@@ -202,7 +205,7 @@ Table of Contents
    execution of a device on-boarding/registration workflow.
 
    Finally, this document defines a set of well-known EDHOC application
-   profiles (see Section 6).  These application profiles are meant to
+   profiles (see Section 7).  These application profiles are meant to
    reflect what is most common and expected to be supported by EDHOC
    peers, while they are not to be intended as "default" application
    profiles or as a deviation from what is mandatory to support for
@@ -250,7 +253,7 @@ Table of Contents
 
    This document introduces the concept of Profile IDs, i.e., integer
    values that uniquely identify EDHOC application profiles, for which
-   an IANA registry is defined in Section 9.7.
+   an IANA registry is defined in Section 10.7.
 
    This section defines two parameters to convey such Profile IDs, i.e.:
 
@@ -290,7 +293,7 @@ Table of Contents
    *  'ed-prof', specifying an EDHOC application profile supported by
       the server.  This parameter MUST specify a single value, which is
       taken from the 'Profile ID' column of the "EDHOC Application
-      Profiles" registry defined in Section 9.7 of this document.  This
+      Profiles" registry defined in Section 10.7 of this document.  This
       parameter MAY occur multiple times, with each occurrence
       specifying an EDHOC application profile.
 
@@ -376,7 +379,7 @@ Table of Contents
       integers.  In CBOR, "app_prof" is an integer or an array of
       integers, and has label 23.  The integer values are taken from the
       'Profile ID' column of the "EDHOC Application Profiles" registry
-      defined in Section 9.7 of this document.
+      defined in Section 10.7 of this document.
 
 2.2.1.  Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -568,7 +571,7 @@ Table of Contents
 4.1.  In EDHOC Message 1 and Message 2
 
    This section defines the EDHOC EAD item "Supported EDHOC application
-   profiles", which is registered in Section 9.5 of this document.
+   profiles", which is registered in Section 10.5 of this document.
 
    The EAD item MAY be included:
 
@@ -603,7 +606,7 @@ Table of Contents
    *  A CBOR integer, specifying the Profile ID of an EDHOC application
       profile.  The integer value is taken from the 'Profile ID' column
       of the "EDHOC Application Profiles" registry defined in
-      Section 9.7 of this document.
+      Section 10.7 of this document.
 
       This item of the CBOR sequence indicates that the message sender
       supports the EDHOC application profile identified by the Profile
@@ -711,7 +714,7 @@ Table of Contents
 4.2.  In the EDHOC Error Message
 
    This section defines the error code TBD_ERROR_CODE, which is
-   registered in Section 9.6 of this document.
+   registered in Section 10.6 of this document.
 
    Error code TBD_ERROR_CODE MUST only be used when replying to EDHOC
    message_1.  If an EDHOC error message with error code TBD_ERROR_CODE
@@ -839,7 +842,92 @@ Table of Contents
 
      Figure 3: CDDL Definition of the EDHOC_Application_Profile object
 
-6.  Well-known EDHOC Application Profiles
+6.  Advertising Supported EDHOC Application Profiles using SVCB Resource
+    Records
+
+   Given a server, its support for EDHOC and for EDHOC application
+   profiles can be advertised using SVCB Resource Records (RR)
+   [RFC9460][RFC9461].
+
+   To this end, this document specifies the SvcParamKeys "edhocpath" and
+   "edhoc-app-prof", which are defined below and are registered in
+   Section 10.8.
+
+   *  "edhocpath" - The SvcParamKey "edhocpath" is single-valued and its
+      value MUST be a CBOR data item PATH_OUTER, which MUST be a CBOR
+      byte string PATH_BSTR or a CBOR array.  In the latter case, the
+      array MUST include at least two elements, each of which MUST be a
+      CBOR byte string PATH_BSTR.  The SVCB RR MUST be considered
+      malformed if the SvcParamValue ends within PATH_OUTER or if
+      PATH_OUTER is malformed.
+
+      The value of each CBOR byte string PATH_BSTR is the binary
+      representation of a CBOR sequence PATH_SEQ composed of 0 or more
+      CBOR text strings.  In particular, each PATH_SEQ specifies the URI
+      path of an EDHOC resource at the server, with each CBOR text
+      string within that PATH_SEQ specifying a URI path segment.
+
+      Editor's note: consider to add the same explanation about the
+      chosen encoding for the URI path as a CBOR sequence that is given
+      in Section 3.2 of draft-ietf-core-dns-over-coap-15.
+
+   *  "edhoc-app-prof" - The SvcParamKey "edhoc-app-prof" is single-
+      valued and its value MUST be a CBOR data item APP_OUTER, which
+      MUST be a CBOR byte string APP_BSTR or a CBOR array.  In the
+      latter case, the array MUST include at least two elements, each of
+      which MUST be a CBOR byte string APP_BSTR.  The SVCB RR MUST be
+      considered malformed if the SvcParamValue ends within APP_OUTER or
+      if APP_OUTER is malformed.
+
+      The value of each CBOR byte string APP_BSTR is the binary
+      representation of a CBOR sequence APP_PROF_SEQ, which has the same
+      format and semantics specified in Section 4.1.  The SVCB RR MUST
+      be considered malformed if APP_PROF_SEQ is malformed or does not
+      conform with the format defined in Section 4.1.
+
+      Each CBOR sequence APP_PROF_SEQ specifies a set of EDHOC
+      application profiles that the server supports.
+
+   If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR,
+   then the SvcParamKey "edhocpath", if present, specifies the URI paths
+   of the EDHOC resources at the server.
+
+   If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then
+   the following applies.
+
+   *  If the SvcParamKey "edhocpath" is not present in the SVCB RR, then
+      the value of the SvcParamKey "edhoc-app-prof" MUST be a CBOR byte
+      string.
+
+      The information specified by the SvcParamKey "edhoc-app-prof"
+      pertains to the EDHOC resource at the server with URI path
+      "/.well-known/edhoc".
+
+   *  If the SvcParamKey "edhocpath" is present in the SVCB RR, then the
+      following applies.
+
+      -  If the value of the SvcParamKey "edhocpath" is a CBOR byte
+         string, then the value of the SvcParamKey "edhoc-app-prof" MUST
+         also be a CBOR byte string.
+
+         The information specified by the SvcParamKey "edhoc-app-prof"
+         pertains to the EDHOC resource at the server with URI path
+         specified by the SvcParamKey "edhocpath".
+
+      -  If the value of the SvcParamKey "edhocpath" is a CBOR array
+         including N elements, then the value of the SvcParamKey "edhoc-
+         app-prof" MUST also be a CBOR array including N elements.
+
+         The information specified by the i-th element of the CBOR array
+         within the SvcParamKey "edhoc-app-prof" pertains to the EDHOC
+         resource at the server with URI path specified by the i-th
+         element of the CBOR array within the SvcParamKey "edhocpath".
+
+   A consumer MUST treat as malformed an RR, in case the SvcParamKeys
+   "edhocpath" and "edhoc-app-prof", if present, do not comply with the
+   format and restrictions defined above.
+
+7.  Well-known EDHOC Application Profiles
 
    This section defines a set of well-known EDHOC application profiles
    that are meant to reflect what is most common and expected to be
@@ -865,10 +953,10 @@ Table of Contents
    object (see Section 5) using the CBOR extended diagnostic notation.
 
    An entry for each well-known application profile is also registered
-   at the "EDHOC Application Profiles" registry defined in Section 9.7
+   at the "EDHOC Application Profiles" registry defined in Section 10.7
    of this document.
 
-6.1.  Well-Known Application Profile MINIMAL_CS_2
+7.1.  Well-Known Application Profile MINIMAL_CS_2
 
    {
            e'methods' : 3, / EDHOC Method Type 3 /
@@ -881,7 +969,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
-6.2.  Well-Known Application Profile MINIMAL_CS_0
+7.2.  Well-Known Application Profile MINIMAL_CS_0
 
    {
            e'methods' : 3, / EDHOC Method Type 3 /
@@ -891,7 +979,7 @@ Table of Contents
           e'app_prof' : e'APP-PROF-MINIMAL-CS-0'
    }
 
-6.3.  Well-Known Application Profile BASIC_CS_2_X509
+7.3.  Well-Known Application Profile BASIC_CS_2_X509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -905,7 +993,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
-6.4.  Well-Known Application Profile BASIC_CS_0_X509
+7.4.  Well-Known Application Profile BASIC_CS_0_X509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -919,7 +1007,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 2 of [RFC9529].
 
-6.5.  Well-Known Application Profile BASIC_CS_2_C509
+7.5.  Well-Known Application Profile BASIC_CS_2_C509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -930,7 +1018,7 @@ Table of Contents
           e'app_prof' : e'APP-PROF-BASIC-CS-2-C509'
    }
 
-6.6.  Well-Known Application Profile BASIC_CS_0_C509
+7.6.  Well-Known Application Profile BASIC_CS_0_C509
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -941,7 +1029,7 @@ Table of Contents
           e'app_prof' : e'APP-PROF-BASIC-CS-0-C509'
    }
 
-6.7.  Well-Known Application Profile INTERMEDIATE_CS_2
+7.7.  Well-Known Application Profile INTERMEDIATE_CS_2
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -958,7 +1046,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
-6.8.  Well-Known Application Profile INTERMEDIATE_CS_0
+7.8.  Well-Known Application Profile INTERMEDIATE_CS_0
 
    {
            e'methods' : [0, 3], / EDHOC Method Types 0 and 3 /
@@ -975,7 +1063,7 @@ Table of Contents
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 2 of [RFC9529].
 
-6.9.  Well-Known Application Profile EXTENSIVE
+7.9.  Well-Known Application Profile EXTENSIVE
 
    {
            e'methods' : [0, 1, 2, 3], / EDHOC Method Types
@@ -997,7 +1085,7 @@ Table of Contents
    This application profile is aligned with the example traces of EDHOC
    compiled in Sections 2 and 3 of [RFC9529].
 
-7.  Identifiers of Well-known EDHOC Application Profiles
+8.  Identifiers of Well-known EDHOC Application Profiles
 
    This document defines the following identifiers of well-known EDHOC
    application profiles.
@@ -1064,18 +1152,18 @@ Table of Contents
 
                Table 2: EDHOC Well-known Application Profiles
 
-8.  Security Considerations
+9.  Security Considerations
 
    TBD
 
-9.  IANA Considerations
+10.  IANA Considerations
 
    This document has the following actions for IANA.
 
    Note to RFC Editor: Please replace all occurrences of "[RFC-XXXX]"
    with the RFC number of this specification and delete this paragraph.
 
-9.1.  Media Type Registrations
+10.1.  Media Type Registrations
 
    IANA is asked to register the media type "application/edhoc-app-
    profile+cbor-seq".  This registration follows the procedures
@@ -1094,7 +1182,7 @@ Table of Contents
    defined as an element of the CBOR-encoded EDHOC_Information object
    from Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile].
 
-   Security considerations: See Section 8 of [RFC-XXXX].
+   Security considerations: See Section 9 of [RFC-XXXX].
 
    Interoperability considerations: N/A
 
@@ -1120,7 +1208,7 @@ Table of Contents
 
    Provisional registration: No
 
-9.2.  CoAP Content-Formats Registry
+10.2.  CoAP Content-Formats Registry
 
    IANA is asked to add the following entry to the "CoAP Content-
    Formats" registry within the "Constrained RESTful Environments (CoRE)
@@ -1134,7 +1222,7 @@ Table of Contents
 
    Reference: [RFC-XXXX]
 
-9.3.  Target Attributes Registry
+10.3.  Target Attributes Registry
 
    IANA is asked to register the following entries in the "Target
    Attributes" registry within the "Constrained RESTful Environments
@@ -1264,7 +1352,7 @@ Table of Contents
 
    *  Reference: [RFC-XXXX]
 
-9.4.  EDHOC Information Registry
+10.4.  EDHOC Information Registry
 
    IANA is asked to register the following entry in the "EDHOC
    Information" registry defined in [I-D.ietf-ace-edhoc-oscore-profile].
@@ -1281,7 +1369,7 @@ Table of Contents
 
    *  Specification: [RFC-XXXX][RFC9528]
 
-9.5.  EDHOC External Authorization Data Registry
+10.5.  EDHOC External Authorization Data Registry
 
    IANA is asked to register the following entry in the "EDHOC External
    Authorization Data" registry within the "Ephemeral Diffie-Hellman
@@ -1295,7 +1383,7 @@ Table of Contents
 
    *  Reference: [RFC-XXXX]
 
-9.6.  EDHOC Error Codes Registry
+10.6.  EDHOC Error Codes Registry
 
    IANA is asked to register the following entry in the "EDHOC Error
    Codes" registry within the "Ephemeral Diffie-Hellman Over COSE
@@ -1311,7 +1399,7 @@ Table of Contents
 
    *  Reference: [RFC-XXXX]
 
-9.7.  EDHOC Application Profiles Registry
+10.7.  EDHOC Application Profiles Registry
 
    IANA is requested to create a new "EDHOC Application Profiles"
    registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)"
@@ -1319,7 +1407,7 @@ Table of Contents
 
    The registration policy is either "Private Use", "Standards Action
    with Expert Review", or "Specification Required" per Section 4.6 of
-   [RFC8126].  "Expert Review" guidelines are provided in Section 9.8.
+   [RFC8126].  "Expert Review" guidelines are provided in Section 10.9.
 
    All assignments according to "Standards Action with Expert Review"
    are made on a "Standards Action" basis per Section 4.9 of [RFC8126],
@@ -1355,7 +1443,36 @@ Table of Contents
    This registry has been initially populated with the values in
    Table 2.
 
-9.8.  Expert Review Instructions
+10.8.  DNS SVCB Service Parameter Keys (SvcParamKeys)
+
+   IANA is asked to add the following entries to the "Service Parameter
+   Keys (SvcParamKeys)" registry within the "DNS Service Bindings
+   (SVCB)" registry group.  The definition of this parameter can be
+   found in Section 6.
+
+   *  Number: 11 (suggested)
+
+   *  Name: edhocpath
+
+   *  Meaning: EDHOC resource path
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+
+
+   *  Number: 12 (suggested)
+
+   *  Name: edhoc-app-prof
+
+   *  Meaning: Supported EDHOC application profiles
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+10.9.  Expert Review Instructions
 
    "Standards Action with Expert Review" and "Specification Required"
    are two of the registration policies defined for the IANA registry
@@ -1397,9 +1514,9 @@ Table of Contents
       it will be used on, and the number of code points left that encode
       to that size.
 
-10.  References
+11.  References
 
-10.1.  Normative References
+11.1.  Normative References
 
    [I-D.ietf-ace-edhoc-oscore-profile]
               Selander, G., Mattsson, J. P., Tiloca, M., and R. Höglund,
@@ -1497,6 +1614,15 @@ Table of Contents
               Certificates", RFC 9360, DOI 10.17487/RFC9360, February
               2023, <https://www.rfc-editor.org/rfc/rfc9360>.
 
+   [RFC9460]  Schwartz, B., Bishop, M., and E. Nygren, "Service Binding
+              and Parameter Specification via the DNS (SVCB and HTTPS
+              Resource Records)", RFC 9460, DOI 10.17487/RFC9460,
+              November 2023, <https://www.rfc-editor.org/rfc/rfc9460>.
+
+   [RFC9461]  Schwartz, B., "Service Binding Mapping for DNS Servers",
+              RFC 9461, DOI 10.17487/RFC9461, November 2023,
+              <https://www.rfc-editor.org/rfc/rfc9461>.
+
    [RFC9528]  Selander, G., Preuß Mattsson, J., and F. Palombini,
               "Ephemeral Diffie-Hellman Over COSE (EDHOC)", RFC 9528,
               DOI 10.17487/RFC9528, March 2024,
@@ -1513,7 +1639,7 @@ Table of Contents
               (OSCORE)", RFC 9668, DOI 10.17487/RFC9668, November 2024,
               <https://www.rfc-editor.org/rfc/rfc9668>.
 
-10.2.  Informative References
+11.2.  Informative References
 
    [I-D.serafin-lake-ta-hint]
               Serafin, M. and G. Selander, "Trust Anchor Hints in
@@ -1611,6 +1737,9 @@ B.1.  Version -01 to -02
          prescriptive.
 
       -  Forbid the presence of the element "trust_anchors".
+
+   *  Advertisement of Supported EDHOC Application Profiles using SVCB
+      Resource Records.
 
    *  Updated integer abbreviations for the EDHOC_Information
       parameters.
