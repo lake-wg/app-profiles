@@ -1344,8 +1344,8 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 <p id="section-1.1-2">The reader is expected to be familiar with terms and concepts defined in EDHOC <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, and with the use of EDHOC with CoAP <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> and OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span> defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">Concise Binary Object Representation (CBOR) <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and Concise Data Definition Language (CDDL) <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> are used in this document. CDDL predefined type names, especially bstr for CBOR byte strings and tstr for CBOR text strings, are used extensively in this document.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <p id="section-1.1-4">CBOR data items are represented using the CBOR extended diagnostic notation as defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">Section 8</a> of [<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> ("diagnostic notation"). Diagnostic notation comments are used to provide a textual representation of the parameters' keys and values.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
-<p id="section-1.1-5">In the CBOR diagnostic notation used in this document, constructs of the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 4</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. For example, {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0, 1, 2, 3], 2 : 3}.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
-<p id="section-1.1-6">Note to RFC Editor: Please delete the paragraph immediately preceding this note. Also, in the CBOR diagnostic notation used in this document, please replace the constructs of the form e'SOME_NAME' with the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 4</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. Finally, please delete this note.<a href="#section-1.1-6" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">In the CBOR diagnostic notation used in this document, constructs of the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 6</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. For example, {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0, 1, 2, 3], 2 : 3}.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<p id="section-1.1-6">Note to RFC Editor: Please delete the paragraph immediately preceding this note. Also, in the CBOR diagnostic notation used in this document, please replace the constructs of the form e'SOME_NAME' with the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 6</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. Finally, please delete this note.<a href="#section-1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1625,13 +1625,13 @@ ead_value = &lt;&lt; APP_PROF_SEQ &gt;&gt;
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence APP_PROF_SEQ:
-APP_PROF_SEQ = [ 1* element ]
+APP_PROF_SEQ = [1* element]
 
 element = profile_id / profile_id_with_eads / EDHOC_Information
 
 profile_id = int
 
-profile_id_with_eads = [ profile_id, 1* uint ]
+profile_id_with_eads = [profile_id, 1* uint]
 
 ; The full definition is provided in
 ; draft-ietf-ace-edhoc-oscore-profile
@@ -1737,17 +1737,21 @@ EDHOC_Application_Profile = {
 <p id="section-6-3.1.2">
 The value of each CBOR byte string PATH_BSTR is the binary representation of a CBOR sequence PATH_SEQ composed of 0 or more CBOR text strings. In particular, each PATH_SEQ specifies the URI path of an EDHOC resource at the server, with each CBOR text string within that PATH_SEQ specifying a URI path segment.<a href="#section-6-3.1.2" class="pilcrow">¶</a></p>
 <p id="section-6-3.1.3">
-Editor's note: consider to add the same explanation about the chosen encoding for the URI path as a CBOR sequence that is given in Section 3.2 of draft-ietf-core-dns-over-coap-15.<a href="#section-6-3.1.3" class="pilcrow">¶</a></p>
+The CDDL grammar describing the value of the SvcParamKey "edhocpath" is shown in <a href="#fig-cddl-edhocpath-value" class="auto internal xref">Figure 4</a>.<a href="#section-6-3.1.3" class="pilcrow">¶</a></p>
+<p id="section-6-3.1.4">
+Editor's note: consider to add the same explanation about the chosen encoding for the URI path as a CBOR sequence that is given in Section 3.2 of draft-ietf-core-dns-over-coap-15.<a href="#section-6-3.1.4" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-3.2">
           <p id="section-6-3.2.1">"edhoc-app-prof" - The SvcParamKey "edhoc-app-prof" is single-valued and its value <span class="bcp14">MUST</span> be a CBOR data item APP_OUTER, which <span class="bcp14">MUST</span> be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array <span class="bcp14">MUST</span> include at least two elements, each of which <span class="bcp14">MUST</span> be a CBOR byte string APP_BSTR. The SVCB RR <span class="bcp14">MUST</span> be considered malformed if the SvcParamValue ends within APP_OUTER or if APP_OUTER is malformed.<a href="#section-6-3.2.1" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2">
 The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>. The SVCB RR <span class="bcp14">MUST</span> be considered malformed if APP_PROF_SEQ is malformed or does not conform with the format defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>.<a href="#section-6-3.2.2" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.3">
-Each CBOR sequence APP_PROF_SEQ specifies a set of EDHOC application profiles that the server supports.<a href="#section-6-3.2.3" class="pilcrow">¶</a></p>
+The CDDL grammar describing the value of the SvcParamKey "edhocpath" is shown in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 5</a>.<a href="#section-6-3.2.3" class="pilcrow">¶</a></p>
+<p id="section-6-3.2.4">
+Each CBOR sequence APP_PROF_SEQ specifies a set of EDHOC application profiles that the server supports.<a href="#section-6-3.2.4" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-6-4">If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR, then the SvcParamKey "edhocpath", if present, specifies the URI paths of the EDHOC resources at the server.<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-4">If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR, then the SvcParamKey "edhocpath", if present, specifies the URI paths of EDHOC resources at the server.<a href="#section-6-4" class="pilcrow">¶</a></p>
 <p id="section-6-5">If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then the following applies.<a href="#section-6-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6-6.1">
@@ -1772,6 +1776,44 @@ The information specified by the i-th element of the CBOR array within the SvcPa
 </li>
       </ul>
 <p id="section-6-7">A consumer <span class="bcp14">MUST</span> treat as malformed an RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.<a href="#section-6-7" class="pilcrow">¶</a></p>
+<span id="name-cddl-definition-of-the-valu"></span><div id="fig-cddl-edhocpath-value">
+<figure id="figure-4">
+        <div class="alignLeft art-CDDL art-text artwork" id="section-6-8.1">
+<pre>
+edhocpath-value = PATH_OUTER
+
+PATH_OUTER = PATH_BSTR / [2* PATH_BSTR]
+
+PATH_BSTR = &lt;&lt; PATH_SEQ &gt;&gt;
+
+; This defines an array, the elements of which
+; are to be used in the CBOR Sequence PATH_SEQ:
+PATH_SEQ = [* path_segment]
+
+path_segment = tstr
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-cddl-definition-of-the-valu" class="selfRef">CDDL Definition of the value of the SvcParamKey "edhocpath"</a>
+        </figcaption></figure>
+</div>
+<span id="name-cddl-definition-of-the-value"></span><div id="fig-cddl-edhoc-app-prof-value">
+<figure id="figure-5">
+        <div class="alignLeft art-CDDL art-text artwork" id="section-6-9.1">
+<pre>
+edhoc-app-prof-value = APP_OUTER
+
+APP_OUTER = APP_BSTR / [2* APP_BSTR]
+
+; The full definition of APP_PROF_SEQ
+; is provided in Section 4.1
+APP_BSTR = &lt;&lt; APP_PROF_SEQ &gt;&gt;
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-cddl-definition-of-the-value" class="selfRef">CDDL Definition of the value of the SvcParamKey "edhoc-app-prof"</a>
+        </figcaption></figure>
+</div>
 </section>
 </div>
 <div id="sec-well-known-app-profiles">
@@ -2585,7 +2627,7 @@ The information specified by the i-th element of the CBOR array within the SvcPa
       </h2>
 <p id="appendix-A-1">This section is to be removed before publishing as an RFC.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-model-2"></span><div id="fig-cddl-model">
-<figure id="figure-4">
+<figure id="figure-6">
         <div class="alignLeft art-CDDL art-text artwork" id="appendix-A-2.1">
 <pre>
 ; EDHOC Information
@@ -2614,7 +2656,7 @@ c5c = 25
 c509_cert = 3
 </pre>
 </div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
 <a href="#name-cddl-model-2" class="selfRef">CDDL model</a>
         </figcaption></figure>
 </div>

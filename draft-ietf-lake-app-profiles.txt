@@ -239,14 +239,14 @@ Table of Contents
 
    In the CBOR diagnostic notation used in this document, constructs of
    the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME
-   in the CDDL model shown in Figure 4 of Appendix A.  For example,
+   in the CDDL model shown in Figure 6 of Appendix A.  For example,
    {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0,
    1, 2, 3], 2 : 3}.
 
    Note to RFC Editor: Please delete the paragraph immediately preceding
    this note.  Also, in the CBOR diagnostic notation used in this
    document, please replace the constructs of the form e'SOME_NAME' with
-   the value assigned to SOME_NAME in the CDDL model shown in Figure 4
+   the value assigned to SOME_NAME in the CDDL model shown in Figure 6
    of Appendix A.  Finally, please delete this note.
 
 2.  Identifying EDHOC Application Profiles by Profile ID
@@ -661,13 +661,13 @@ Table of Contents
 
    ; This defines an array, the elements of which
    ; are to be used in the CBOR Sequence APP_PROF_SEQ:
-   APP_PROF_SEQ = [ 1* element ]
+   APP_PROF_SEQ = [1* element]
 
    element = profile_id / profile_id_with_eads / EDHOC_Information
 
    profile_id = int
 
-   profile_id_with_eads = [ profile_id, 1* uint ]
+   profile_id_with_eads = [profile_id, 1* uint]
 
    ; The full definition is provided in
    ; draft-ietf-ace-edhoc-oscore-profile
@@ -867,6 +867,9 @@ Table of Contents
       path of an EDHOC resource at the server, with each CBOR text
       string within that PATH_SEQ specifying a URI path segment.
 
+      The CDDL grammar describing the value of the SvcParamKey
+      "edhocpath" is shown in Figure 4.
+
       Editor's note: consider to add the same explanation about the
       chosen encoding for the URI path as a CBOR sequence that is given
       in Section 3.2 of draft-ietf-core-dns-over-coap-15.
@@ -885,12 +888,15 @@ Table of Contents
       be considered malformed if APP_PROF_SEQ is malformed or does not
       conform with the format defined in Section 4.1.
 
+      The CDDL grammar describing the value of the SvcParamKey
+      "edhocpath" is shown in Figure 5.
+
       Each CBOR sequence APP_PROF_SEQ specifies a set of EDHOC
       application profiles that the server supports.
 
    If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR,
    then the SvcParamKey "edhocpath", if present, specifies the URI paths
-   of the EDHOC resources at the server.
+   of EDHOC resources at the server.
 
    If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then
    the following applies.
@@ -926,6 +932,31 @@ Table of Contents
    A consumer MUST treat as malformed an RR, in case the SvcParamKeys
    "edhocpath" and "edhoc-app-prof", if present, do not comply with the
    format and restrictions defined above.
+
+   edhocpath-value = PATH_OUTER
+
+   PATH_OUTER = PATH_BSTR / [2* PATH_BSTR]
+
+   PATH_BSTR = << PATH_SEQ >>
+
+   ; This defines an array, the elements of which
+   ; are to be used in the CBOR Sequence PATH_SEQ:
+   PATH_SEQ = [* path_segment]
+
+   path_segment = tstr
+
+   Figure 4: CDDL Definition of the value of the SvcParamKey "edhocpath"
+
+   edhoc-app-prof-value = APP_OUTER
+
+   APP_OUTER = APP_BSTR / [2* APP_BSTR]
+
+   ; The full definition of APP_PROF_SEQ
+   ; is provided in Section 4.1
+   APP_BSTR = << APP_PROF_SEQ >>
+
+     Figure 5: CDDL Definition of the value of the SvcParamKey "edhoc-
+                                 app-prof"
 
 7.  Well-known EDHOC Application Profiles
 
@@ -1687,7 +1718,7 @@ Appendix A.  CDDL Model
    ; EDHOC Authentication Credential Types
    c509_cert = 3
 
-                            Figure 4: CDDL model
+                            Figure 6: CDDL model
 
 Appendix B.  Document Updates
 
