@@ -8,7 +8,7 @@
 <meta content="Marco Tiloca" name="author">
 <meta content="Rikard Höglund" name="author">
 <meta content="
-       The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Also, it defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles. 
+       The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Furthermore, In order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles. 
     " name="description">
 <meta content="xml2rfc 3.29.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1084,7 +1084,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Coordinating the Use of Application Profiles for Ephemeral Diffie-Hellman Over COSE (EDHOC)</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Also, it defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Furthermore, In order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1154,42 +1154,42 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-identifying-edhoc-applicati" class="internal xref">Identifying EDHOC Application Profiles by Profile ID</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-in-web-linking" class="internal xref">In Web Linking</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-in-the-edhoc_information-ob" class="internal xref">In the EDHOC_Information Object</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.1">
-                    <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="auto internal xref">2.2.1</a>.  <a href="#name-use-in-the-edhoc-and-oscore" class="internal xref">Use in the EDHOC and OSCORE Profile of the ACE Framework</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-edhoc_application_profile" class="internal xref">EDHOC_Application_Profile</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-additional-parameters-for-w" class="internal xref">Additional Parameters for Web Linking</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-identifying-edhoc-applicati" class="internal xref">Identifying EDHOC Application Profiles by Profile ID</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-in-web-linking" class="internal xref">In Web Linking</a></p>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-advertising-supported-edhoc" class="internal xref">Advertising Supported EDHOC Application Profiles during an EDHOC Session</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-in-the-edhoc_information-ob" class="internal xref">In the EDHOC_Information Object</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-in-edhoc-message-1-and-mess" class="internal xref">In EDHOC Message 1 and Message 2</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
-                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-content-restrictions" class="internal xref">Content Restrictions</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-use-in-the-edhoc-and-oscore" class="internal xref">Use in the EDHOC and OSCORE Profile of the ACE Framework</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-in-the-edhoc-error-message" class="internal xref">In the EDHOC Error Message</a></p>
-</li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-additional-parameters-for-w" class="internal xref">Additional Parameters for Web Linking</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-edhoc_application_profile" class="internal xref">EDHOC_Application_Profile</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-advertising-supported-edhoc" class="internal xref">Advertising Supported EDHOC Application Profiles during an EDHOC Session</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-in-edhoc-message-1-and-mess" class="internal xref">In EDHOC Message 1 and Message 2</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.1">
+                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.  <a href="#name-content-restrictions" class="internal xref">Content Restrictions</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-in-the-edhoc-error-message" class="internal xref">In the EDHOC Error Message</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-advertising-supported-edhoc-" class="internal xref">Advertising Supported EDHOC Application Profiles using SVCB Resource Records</a></p>
@@ -1307,31 +1307,36 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1-1">Ephemeral Diffie-Hellman Over COSE (EDHOC) <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> is a lightweight authenticated key exchange protocol, especially intended for use in constrained scenarios. A main use case for EDHOC is to establish a Security Context for Object Security for Constrained RESTful Environments (OSCORE) <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">In order to successfully run EDHOC, the two peers acting as Initiator and Responder have to agree on certain parameters. Some of those are in-band and communicated through the protocol execution, during which a few of them may even be negotiated. However, other parameters have to be known out-of-band, before running the EDHOC protocol.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">As discussed in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, applications can use EDHOC application profiles, which specify the intended usage of EDHOC to allow for the relevant processing and verifications to be made. In particular, an EDHOC application profile may include both in-band and out-of-band parameters.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">In order to facilitate interoperability between EDHOC implementations and to support EDHOC extensibility for additional integrations (e.g., of external security applications, handling of authentication credentials, and message transports), this document defines a number of means to coordinate the use of EDHOC application profiles, that is:<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-4">In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>). The defined representation is transport- and setup-independent, and avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">Furthermore, in order to facilitate interoperability between EDHOC implementations and to support EDHOC extensibility for additional integrations (e.g., of external security applications, handling of authentication credentials, and message transports), this document defines a number of means to coordinate the use of EDHOC application profiles, that is:<a href="#section-1-6" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-5.1">
-          <p id="section-1-5.1.1">The new IANA registry "EDHOC Application Profiles" defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a>, where to register integer identifiers of EDHOC application profiles to use as corresponding Profile IDs.<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1-7.1">
+          <p id="section-1-7.1.1">The new IANA registry "EDHOC Application Profiles" defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a>, where to register integer identifiers of EDHOC application profiles to use as corresponding Profile IDs.<a href="#section-1-7.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-5.2">
-          <p id="section-1-5.2.1">The new parameter "ed-prof" defined in <a href="#web-linking" class="auto internal xref">Section 2.1</a>. This parameter is employed to specify an EDHOC application profile identified by its Profile ID, and can be used as target attribute in a web link <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources.<a href="#section-1-5.2.1" class="pilcrow">¶</a></p>
-<p id="section-1-5.2.2">
-For instance, the target attribute can be used in a link-format document <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> describing EDHOC resources at a server, when EDHOC is transferred over the Constrained Application Protocol (CoAP) <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> (see <span><a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">Appendix A.2</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> as well as <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>).<a href="#section-1-5.2.2" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-7.2">
+          <p id="section-1-7.2.1">The new parameter "ed-prof" defined in <a href="#web-linking" class="auto internal xref">Section 3.1</a>. This parameter is employed to specify an EDHOC application profile identified by its Profile ID and can be used as target attribute in a web link <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> to an EDHOC resource, or as filter criterion in a discovery request to discover EDHOC resources.<a href="#section-1-7.2.1" class="pilcrow">¶</a></p>
+<p id="section-1-7.2.2">
+For instance, the target attribute can be used in a link-format document <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> describing EDHOC resources at a server, when EDHOC is transferred over the Constrained Application Protocol (CoAP) <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> (see <span><a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">Appendix A.2</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> as well as <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>).<a href="#section-1-7.2.2" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-5.3">
-          <p id="section-1-5.3.1">The new parameter "app_prof" defined in <a href="#sec-edhoc-information-object" class="auto internal xref">Section 2.2</a> for the EDHOC_Information object specified in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter is employed to specify a set of EDHOC application profiles, each identified by its Profile ID.<a href="#section-1-5.3.1" class="pilcrow">¶</a></p>
-<p id="section-1-5.3.2">
-For instance, the parameter can be used in the EDHOC and OSCORE profile <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span> of the ACE framework for authentication and authorization in constrained environments (ACE) <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span>, in order to indicate the EDHOC application profiles supported by an ACE resource server.<a href="#section-1-5.3.2" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-7.3">
+          <p id="section-1-7.3.1">The new parameter "app_prof" defined in <a href="#sec-edhoc-information-object" class="auto internal xref">Section 3.2</a> for the EDHOC_Information object specified in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter is employed to specify a set of EDHOC application profiles, each identified by its Profile ID.<a href="#section-1-7.3.1" class="pilcrow">¶</a></p>
+<p id="section-1-7.3.2">
+For instance, the parameter can be used in the EDHOC and OSCORE profile <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span> of the ACE framework for authentication and authorization in constrained environments (ACE) <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span>, in order to indicate the EDHOC application profiles supported by an ACE resource server.<a href="#section-1-7.3.2" class="pilcrow">¶</a></p>
+<p id="section-1-7.3.3">
+This parameter is also used in the EDHOC_Application_Profile object defined in this document, in order to encode the Profile ID of the EDHOC application profile described by an instance of that object.<a href="#section-1-7.3.3" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-5.4">
-          <p id="section-1-5.4.1">Additional parameters that provide information about an EDHOC application profile. These parameters correspond to elements of the EDHOC_Information object and are to be used as target attributes in a web link to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources (see <a href="#sec-parameters-web-linking" class="auto internal xref">Section 3</a>).<a href="#section-1-5.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-7.4">
+          <p id="section-1-7.4.1">Additional parameters that provide information about an EDHOC application profile. These parameters correspond to elements of the EDHOC_Information object and are to be used as target attributes in a web link to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources (see <a href="#sec-parameters-web-linking" class="auto internal xref">Section 4</a>).<a href="#section-1-7.4.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-5.5">
-          <p id="section-1-5.5.1">A new EDHOC External Authorization Data (EAD) item (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>) and a new error code for the EDHOC error message (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 4.2</a>). When running EDHOC, a peer can use those in order to advertise the EDHOC application profiles that it supports to the other peer.<a href="#section-1-5.5.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-7.5">
+          <p id="section-1-7.5.1">A new EDHOC External Authorization Data (EAD) item (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>) and a new error code for the EDHOC error message (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>). When running EDHOC, a peer can use those in order to advertise the EDHOC application profiles that it supports to the other peer.<a href="#section-1-7.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-7.6">
+          <p id="section-1-7.6.1">The use of SVCB Resource Records (RR) <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span><span>[<a href="#RFC9461" class="cite xref">RFC9461</a>]</span> to advertise the support for EDHOC and for EDHOC application profiles of a given server (see <a href="#sec-svcb" class="auto internal xref">Section 6</a>).<a href="#section-1-7.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-6">In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>). The defined representation is transport- and setup-independent, and avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7">The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.<a href="#section-1-7" class="pilcrow">¶</a></p>
-<p id="section-1-8">Finally, this document defines a set of well-known EDHOC application profiles (see <a href="#sec-well-known-app-profiles" class="auto internal xref">Section 7</a>). These application profiles are meant to reflect what is most common and expected to be supported by EDHOC peers, while they are not to be intended as "default" application profiles or as a deviation from what is mandatory to support for EDHOC peers (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). On the other hand, they provide implementers and users with a quick overview of the several, available options to run the EDHOC protocol and of their most expected combinations.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-8">Finally, this document defines a set of well-known EDHOC application profiles (see <a href="#sec-well-known-app-profiles" class="auto internal xref">Section 7</a>). These application profiles are meant to reflect what is most common and expected to be supported by EDHOC peers, while they are not to be intended as "default" application profiles or as a deviation from what is mandatory to support for EDHOC peers (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). On the other hand, they provide implementers and users with a quick overview of the several available options to run the EDHOC protocol and of their most expected combinations.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">
@@ -1350,60 +1355,107 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 </div>
 </section>
 </div>
-<div id="identifying-edhoc-application-profiles-by-profile-id">
+<div id="sec-app-profile-cbor">
 <section id="section-2">
-      <h2 id="name-identifying-edhoc-applicati">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-identifying-edhoc-applicati" class="section-name selfRef">Identifying EDHOC Application Profiles by Profile ID</a>
+      <h2 id="name-edhoc_application_profile">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-edhoc_application_profile" class="section-name selfRef">EDHOC_Application_Profile</a>
       </h2>
-<p id="section-2-1">This document introduces the concept of Profile IDs, i.e., integer values that uniquely identify EDHOC application profiles, for which an IANA registry is defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a>.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">This section defines two parameters to convey such Profile IDs, i.e.:<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-1">This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">An EDHOC_Application_Profile object is encoded as a CBOR map <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>. All elements that can be included in the EDHOC_Application_Profile object are elements that can be included in the CBOR-encoded EDHOC_Information object specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. In particular, they use the same CBOR abbreviations from the 'CBOR label' column of the IANA registry "EDHOC Information" defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">By construction, an EDHOC_Application_Profile object conveys information that pertains to the execution of EDHOC. This includes, e.g., information about transporting and processing EDHOC messages during an EDHOC session. An EDHOC_Application_Profile object does not convey information that does not play a role in completing an EDHOC execution. For instance, this includes the size of outputs of the EDHOC_Exporter interface (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-4.2.1" class="relref">Section 4.2.1</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), or properties and features of protocols other than EDHOC itself that build on the results from an EDHOC session (e.g., the version of the application protocol subsequently used).<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-4">The CBOR map encoding an EDHOC_Application_Profile object <span class="bcp14">MUST</span> include the element "app_prof" defined in <a href="#sec-edhoc-information-object" class="auto internal xref">Section 3.2</a> of this document, as well as the elements "methods" and "cred_types" defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-5">The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the instance of the EDHOC_Application_Profile object in question. The identifier is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document and encoded as a CBOR integer.<a href="#section-2-5" class="pilcrow">¶</a></p>
+<p id="section-2-6">The CBOR map <span class="bcp14">MUST NOT</span> include the following elements: "session_id", "uri_path", "initiator", "responder", and "trust_anchors". A consumer <span class="bcp14">MUST</span> ignore those elements if they are included in the EDHOC_Application_Profile object.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-7">The CBOR map <span class="bcp14">MAY</span> include other elements.<a href="#section-2-7" class="pilcrow">¶</a></p>
+<p id="section-2-8">Furthermore, consistent with Sections <a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">8</a> and <a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.1" class="relref">A.1</a> of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> and with <span><a href="https://rfc-editor.org/rfc/rfc8613#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>, the following applies:<a href="#section-2-8" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-3.1">
-          <p id="section-2-3.1.1">The parameter "ed-prof" for web linking <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> (see <a href="#web-linking" class="auto internal xref">Section 2.1</a>).<a href="#section-2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2-9.1">
+          <p id="section-2-9.1.1">If the element "cipher_suites" is not present in the CBOR map, this indicates that the EDHOC application profile uses the EDHOC cipher suites 2 and 3, and possibly other cipher suites.<a href="#section-2-9.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-3.2">
-          <p id="section-2-3.2.1">The parameter "app_prof" of the EDHOC_Information object specified in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span> (see <a href="#sec-edhoc-information-object" class="auto internal xref">Section 2.2</a>).<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-9.2">
+          <p id="section-2-9.2.1">If the element "id_cred_types" is not present in the CBOR map, this indicates that the EDHOC application profile uses "kid" as type of authentication credential identifiers for EDHOC, and possibly other types of authentication credential identifiers.<a href="#section-2-9.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-9.3">
+          <p id="section-2-9.3.1">The absence of any other elements in the CBOR map <span class="bcp14">MUST NOT</span> result in assuming any value.<a href="#section-2-9.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-4">As defined later in this document, Profile IDs can be used to identify EDHOC application profiles also:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-10">If an element is present in the CBOR map and the corresponding entry in the IANA registry "EDHOC Information" specifies "NP" (non-prescriptive) in the 'Type' column and "True or False" in the 'CBOR type' column, then the following applies. An EDHOC peer that adheres to the EDHOC application profile in question is required or not to support the property or feature of EDHOC associated with the element in the CBOR map, if that element encodes the CBOR simple value <code>true</code> (0xf5) or <code>false</code> (0xf4), respectively. For example, the presence of the parameter "comb_req" denotes whether EDHOC peers adhering to the EDHOC application profile have to support the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>, or instead do not have to but might if they are willing to.<a href="#section-2-10" class="pilcrow">¶</a></p>
+<p id="section-2-11">If an element present in the CBOR map specifies an information that is intrinsically a set of one or more co-existing alternatives, then all the specified alternatives apply for the EDHOC application profile in question. For example, the element "cipher_suites" with value the CBOR array [0, 2] means that, in order to adhere to the EDHOC application profile in question, an EDHOC peer has to implement both the EDHOC cipher suites 0 and 2, because either of them can be used by another EDHOC peer also adhering to the same EDHOC application profile.<a href="#section-2-11" class="pilcrow">¶</a></p>
+<p id="section-2-12">The CDDL grammar describing the EDHOC_Application_Profile object is:<a href="#section-2-12" class="pilcrow">¶</a></p>
+<span id="name-cddl-definition-of-the-edho"></span><div id="fig-cddl-edhoc_application-profile-object">
+<figure id="figure-1">
+        <div class="alignLeft art-CDDL art-text artwork" id="section-2-13.1">
+<pre>
+EDHOC_Application_Profile = {
+      1 =&gt; int / array,    ; methods
+      6 =&gt; int / array,    ; cred_types
+     23 =&gt; int,            ; app_prof
+   * int / tstr =&gt; any
+}
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-cddl-definition-of-the-edho" class="selfRef">CDDL Definition of the EDHOC_Application_Profile object</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="identifying-edhoc-application-profiles-by-profile-id">
+<section id="section-3">
+      <h2 id="name-identifying-edhoc-applicati">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-identifying-edhoc-applicati" class="section-name selfRef">Identifying EDHOC Application Profiles by Profile ID</a>
+      </h2>
+<p id="section-3-1">This document introduces the concept of Profile IDs, i.e., integer values that uniquely identify EDHOC application profiles, for which an IANA registry is defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">This section defines two parameters to convey such Profile IDs, i.e.:<a href="#section-3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-5.1">
-          <p id="section-2-5.1.1">Within certain EDHOC messages, sent during an EDHOC session by a peer that supports such EDHOC application profiles (see <a href="#sec-app-profile-edhoc-messages" class="auto internal xref">Section 4</a>).<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3-3.1">
+          <p id="section-3-3.1.1">The parameter "ed-prof" for web linking <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> (see <a href="#web-linking" class="auto internal xref">Section 3.1</a>).<a href="#section-3-3.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-5.2">
-          <p id="section-2-5.2.1">Within an EDHOC_Application_Profile object, i.e., the canonical, CBOR-encoded representation of such EDHOC application profiles (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>).<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-3-3.2">
+          <p id="section-3-3.2.1">The parameter "app_prof" of the EDHOC_Information object specified in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span> (see <a href="#sec-edhoc-information-object" class="auto internal xref">Section 3.2</a>).<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
+<p id="section-3-3.2.2">
+As defined in <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>, Profile IDs are also conveyed by the parameter "app_prof" in the EDHOC_Application_Profile object, in order to identify the EDHOC application profile described by a given instance of that object.<a href="#section-3-3.2.2" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-4">As defined later in this document, Profile IDs can be used to identify EDHOC application profiles also:<a href="#section-3-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-5.1">
+          <p id="section-3-5.1.1">Within certain EDHOC messages sent during an EDHOC session by a peer that supports such EDHOC application profiles (see <a href="#sec-app-profile-edhoc-messages" class="auto internal xref">Section 5</a>).<a href="#section-3-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-5.2">
+          <p id="section-3-5.2.1">When using SVCB Resource Records (RR) <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span><span>[<a href="#RFC9461" class="cite xref">RFC9461</a>]</span> to advertise the support for EDHOC and for EDHOC application profiles of a given server (see <a href="#sec-svcb" class="auto internal xref">Section 6</a>).<a href="#section-3-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="web-linking">
-<section id="section-2.1">
+<section id="section-3.1">
         <h3 id="name-in-web-linking">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-in-web-linking" class="section-name selfRef">In Web Linking</a>
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-in-web-linking" class="section-name selfRef">In Web Linking</a>
         </h3>
-<p id="section-2.1-1"><span><a href="https://rfc-editor.org/rfc/rfc9668#section-6" class="relref">Section 6</a> of [<a href="#RFC9668" class="cite xref">RFC9668</a>]</span> defines a number of target attributes that can be used in a web link <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> with resource type "core.edhoc" (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-10.10" class="relref">Section 10.10</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). This is the case, e.g., when using a link-format document <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> describing EDHOC resources at a server, when EDHOC is transferred over CoAP <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> as defined in <span><a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">Appendix A.2</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>. This allows a client to obtain relevant information about the EDHOC application profile(s) to be used with a certain EDHOC resource.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1-2">In the same spirit, this section defines the following additional parameter, which can be optionally specified as a target attribute with the same name in the link to the respective EDHOC resource, or among the filter criteria in a discovery request from a client.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-1"><span><a href="https://rfc-editor.org/rfc/rfc9668#section-6" class="relref">Section 6</a> of [<a href="#RFC9668" class="cite xref">RFC9668</a>]</span> defines a number of target attributes that can be used in a web link <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> with resource type "core.edhoc" (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-10.10" class="relref">Section 10.10</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). This is the case, e.g., when using a link-format document <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> describing EDHOC resources at a server, when EDHOC is transferred over CoAP <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> as defined in <span><a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">Appendix A.2</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>. This allows a client to obtain relevant information about the EDHOC application profile(s) to be used with a certain EDHOC resource.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">In the same spirit, this section defines the following additional parameter, which can be optionally specified as a target attribute with the same name in the link to the respective EDHOC resource, or among the filter criteria in a discovery request from a client.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2.1-3.1">
-            <p id="section-2.1-3.1.1">'ed-prof', specifying an EDHOC application profile supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying an EDHOC application profile.<a href="#section-2.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1-3.1">
+            <p id="section-3.1-3.1.1">'ed-prof', specifying an EDHOC application profile supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying an EDHOC application profile.<a href="#section-3.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-2.1-4">When specifying the parameter 'ed-prof' in a link to an EDHOC resource, the target attribute rt="core.edhoc" <span class="bcp14">MUST</span> be included.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
-<p id="section-2.1-5">If a link to an EDHOC resource includes occurrences of the target attribute 'ed-prof', then the following applies.<a href="#section-2.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">When specifying the parameter 'ed-prof' in a link to an EDHOC resource, the target attribute rt="core.edhoc" <span class="bcp14">MUST</span> be included.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">If a link to an EDHOC resource includes occurrences of the target attribute 'ed-prof', then the following applies.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2.1-6.1">
-            <p id="section-2.1-6.1.1">The link <span class="bcp14">MUST NOT</span> include other target attributes that provide information about an EDHOC application profile (see, e.g., <span><a href="https://rfc-editor.org/rfc/rfc9668#section-6" class="relref">Section 6</a> of [<a href="#RFC9668" class="cite xref">RFC9668</a>]</span> and <a href="#sec-parameters-web-linking" class="auto internal xref">Section 3</a> of this document), with the exception of the target attribute 'ed-ead' that <span class="bcp14">MAY</span> be included.<a href="#section-2.1-6.1.1" class="pilcrow">¶</a></p>
-<p id="section-2.1-6.1.2">
-The recipient <span class="bcp14">MUST</span> ignore other target attributes that provide information about an EDHOC application profile, with the exception of the target attribute 'ed-ead'.<a href="#section-2.1-6.1.2" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1-6.1">
+            <p id="section-3.1-6.1.1">The link <span class="bcp14">MUST NOT</span> include other target attributes that provide information about an EDHOC application profile (see, e.g., <span><a href="https://rfc-editor.org/rfc/rfc9668#section-6" class="relref">Section 6</a> of [<a href="#RFC9668" class="cite xref">RFC9668</a>]</span> and <a href="#sec-parameters-web-linking" class="auto internal xref">Section 4</a> of this document), with the exception of the target attribute 'ed-ead' that <span class="bcp14">MAY</span> be included.<a href="#section-3.1-6.1.1" class="pilcrow">¶</a></p>
+<p id="section-3.1-6.1.2">
+The recipient <span class="bcp14">MUST</span> ignore other target attributes that provide information about an EDHOC application profile, with the exception of the target attribute 'ed-ead'.<a href="#section-3.1-6.1.2" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-2.1-6.2">
-            <p id="section-2.1-6.2.1">If the link includes occurrences of the target attribute 'ed-ead', the link provides the following information: when using the target EDHOC resource as per the EDHOC application profile indicated by any occurrence of the target attribute 'ed-prof', the server supports the External Authorization Data (EAD) items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the occurrences of the target attribute 'ed-ead'.<a href="#section-2.1-6.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-6.2">
+            <p id="section-3.1-6.2.1">If the link includes occurrences of the target attribute 'ed-ead', the link provides the following information: when using the target EDHOC resource as per the EDHOC application profile indicated by any occurrence of the target attribute 'ed-prof', the server supports the External Authorization Data (EAD) items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the occurrences of the target attribute 'ed-ead'.<a href="#section-3.1-6.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-2.1-7">The example in <a href="#fig-web-link-example" class="auto internal xref">Figure 1</a> shows how a CoAP client discovers two EDHOC resources at a CoAP server, and obtains information about the application profile corresponding to each of those resources. The Link Format notation from <span><a href="https://rfc-editor.org/rfc/rfc6690#section-5" class="relref">Section 5</a> of [<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> is used.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
-<p id="section-2.1-8">The example assumes the existence of an EDHOC application profile identified by the integer Profile ID 500, which is supported by the EDHOC resource at /edhoc-alt and whose definition includes the support for the EAD items with EAD label 111 and 222.<a href="#section-2.1-8" class="pilcrow">¶</a></p>
-<p id="section-2.1-9">Therefore, the link to the EDHOC resource at /edhoc-alt indicates that, when using that EDHOC resource as per the EDHOC application profile with Profile ID 500, the server supports the EAD items with EAD label 111, 222, and 333.<a href="#section-2.1-9" class="pilcrow">¶</a></p>
+<p id="section-3.1-7">The example in <a href="#fig-web-link-example" class="auto internal xref">Figure 2</a> shows how a CoAP client discovers two EDHOC resources at a CoAP server, and obtains information about the application profile corresponding to each of those resources. The Link Format notation from <span><a href="https://rfc-editor.org/rfc/rfc6690#section-5" class="relref">Section 5</a> of [<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> is used.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1-8">The example assumes the existence of an EDHOC application profile identified by the integer Profile ID 500, which is supported by the EDHOC resource at /edhoc-alt and whose definition includes the support for the EAD items with EAD label 111 and 222.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
+<p id="section-3.1-9">Therefore, the link to the EDHOC resource at /edhoc-alt indicates that, when using that EDHOC resource as per the EDHOC application profile with Profile ID 500, the server supports the EAD items with EAD label 111, 222, and 333.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
 <span id="name-the-web-link"></span><div id="fig-web-link-example">
-<figure id="figure-1">
-          <div class="alignCenter art-text artwork" id="section-2.1-10.1">
+<figure id="figure-2">
+          <div class="alignCenter art-text artwork" id="section-3.1-10.1">
 <pre>
 REQ: GET /.well-known/core
 
@@ -1416,19 +1468,19 @@ RES: 2.05 Content
     &lt;/edhoc-alt&gt;;rt=core.edhoc;ed-prof=500;ed-ead=333
 </pre>
 </div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
 <a href="#name-the-web-link" class="selfRef">The Web Link.</a>
           </figcaption></figure>
 </div>
 </section>
 </div>
 <div id="sec-edhoc-information-object">
-<section id="section-2.2">
+<section id="section-3.2">
         <h3 id="name-in-the-edhoc_information-ob">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-in-the-edhoc_information-ob" class="section-name selfRef">In the EDHOC_Information Object</a>
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-in-the-edhoc_information-ob" class="section-name selfRef">In the EDHOC_Information Object</a>
         </h3>
-<p id="section-2.2-1"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span> defines the EDHOC_Information object, as including information that guides two peers towards executing the EDHOC protocol, and defines an initial set of its parameters.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">This document defines the new parameter "app_prof" of the EDHOC_Information object, as summarized in <a href="#_table-cbor-key-edhoc-params" class="auto internal xref">Table 1</a> and described further below.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-1"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span> defines the EDHOC_Information object, as including information that guides two peers towards executing the EDHOC protocol, and defines an initial set of its parameters.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">This document defines the new parameter "app_prof" of the EDHOC_Information object, as summarized in <a href="#_table-cbor-key-edhoc-params" class="auto internal xref">Table 1</a> and described further below.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <span id="name-edhoc_information-parameter"></span><div id="_table-cbor-key-edhoc-params">
 <table class="center" id="table-1">
           <caption>
@@ -1456,52 +1508,52 @@ RES: 2.05 Content
         </table>
 </div>
 <ul class="normal">
-<li class="normal" id="section-2.2-4.1">
-            <p id="section-2.2-4.1.1">app_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app_prof" value is an integer or an array of integers. In CBOR, "app_prof" is an integer or an array of integers, and has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document.<a href="#section-2.2-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2-4.1">
+            <p id="section-3.2-4.1.1">app_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app_prof" value is an integer or an array of integers. In CBOR, "app_prof" is an integer or an array of integers, and has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document.<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <div id="use-in-the-edhoc-and-oscore-profile-of-the-ace-framework">
-<section id="section-2.2.1">
+<section id="section-3.2.1">
           <h4 id="name-use-in-the-edhoc-and-oscore">
-<a href="#section-2.2.1" class="section-number selfRef">2.2.1. </a><a href="#name-use-in-the-edhoc-and-oscore" class="section-name selfRef">Use in the EDHOC and OSCORE Profile of the ACE Framework</a>
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-use-in-the-edhoc-and-oscore" class="section-name selfRef">Use in the EDHOC and OSCORE Profile of the ACE Framework</a>
           </h4>
-<p id="section-2.2.1-1"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span> defines how the EDHOC_Information object can be used within the workflow of the EDHOC and OSCORE transport profile of the ACE framework for authentication and authorization in constrained environments (ACE) <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span>.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-2">In particular, the AS-to-C Access Token Response includes the parameter "edhoc_info", with value an EDHOC_Information object. This allows the ACE authorization server (AS) to provide the ACE client (C) with information about how to run the EDHOC protocol with the ACE resource server (RS) for which the access token is issued.<a href="#section-2.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-3">Similarly, the access token includes the corresponding claim "edhoc_info", with value an EDHOC_Information object. This allows the AS to provide the ACE RS with information about how to run the EDHOC protocol with the ACE client, according to the issued access token.<a href="#section-2.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-4">In turn, the EDHOC_Information object can include the parameter "app_prof" defined in this document. This parameter indicates a set of EDHOC application profiles associated with the EDHOC resource to use at the RS, which is either implied or specified by the parameter "uri_path" within the same EDHOC_Information object.<a href="#section-2.2.1-4" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-5">If the EDHOC_Information object specified as value of "edhoc_info" includes the "app_prof" parameter, then the following applies.<a href="#section-2.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-1"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span> defines how the EDHOC_Information object can be used within the workflow of the EDHOC and OSCORE transport profile of the ACE framework for authentication and authorization in constrained environments (ACE) <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span>.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-2">In particular, the AS-to-C Access Token Response includes the parameter "edhoc_info", with value an EDHOC_Information object. This allows the ACE authorization server (AS) to provide the ACE client (C) with information about how to run the EDHOC protocol with the ACE resource server (RS) for which the access token is issued.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-3">Similarly, the access token includes the corresponding claim "edhoc_info", with value an EDHOC_Information object. This allows the AS to provide the ACE RS with information about how to run the EDHOC protocol with the ACE client, according to the issued access token.<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-4">In turn, the EDHOC_Information object can include the parameter "app_prof" defined in this document. This parameter indicates a set of EDHOC application profiles associated with the EDHOC resource to use at the RS, which is either implied or specified by the parameter "uri_path" within the same EDHOC_Information object.<a href="#section-3.2.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-5">If the EDHOC_Information object specified as value of "edhoc_info" includes the "app_prof" parameter, then the following applies.<a href="#section-3.2.1-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2.2.1-6.1">
-              <p id="section-2.2.1-6.1.1">The object <span class="bcp14">MUST NOT</span> include other parameters, with the following exceptions:<a href="#section-2.2.1-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2.1-6.1">
+              <p id="section-3.2.1-6.1.1">The object <span class="bcp14">MUST NOT</span> include other parameters, with the following exceptions:<a href="#section-3.2.1-6.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2.2.1-6.1.2.1">
-                  <p id="section-2.2.1-6.1.2.1.1">The parameter "eads".<a href="#section-2.2.1-6.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2.1-6.1.2.1">
+                  <p id="section-3.2.1-6.1.2.1.1">The parameter "eads".<a href="#section-3.2.1-6.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-2.2.1-6.1.2.2">
-                  <p id="section-2.2.1-6.1.2.2.1">The parameters that are not allowed in the EDHOC_Application_Profile object defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>.<a href="#section-2.2.1-6.1.2.2.1" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-6.1.2.2.2">
-These include the parameter "session_id", which the EDHOC_Information object has to include (see Sections <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.3" class="relref">3.3</a> and <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.3.1" class="relref">3.3.1</a> of <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-2.2.1-6.1.2.2.2" class="pilcrow">¶</a></p>
+                <li class="normal" id="section-3.2.1-6.1.2.2">
+                  <p id="section-3.2.1-6.1.2.2.1">The parameters that are not allowed in the EDHOC_Application_Profile object defined in <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>.<a href="#section-3.2.1-6.1.2.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-6.1.2.2.2">
+These include the parameter "session_id", which the EDHOC_Information object has to include (see Sections <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.3" class="relref">3.3</a> and <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.3.1" class="relref">3.3.1</a> of <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-3.2.1-6.1.2.2.2" class="pilcrow">¶</a></p>
 </li>
               </ul>
-<p id="section-2.2.1-6.1.3">
-C and RS <span class="bcp14">MUST</span> ignore other parameters that are not admitted if they are present in the EDHOC_Information object.<a href="#section-2.2.1-6.1.3" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-6.1.3">
+C and RS <span class="bcp14">MUST</span> ignore other parameters that are not admitted if they are present in the EDHOC_Information object.<a href="#section-3.2.1-6.1.3" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-2.2.1-6.2">
-              <p id="section-2.2.1-6.2.1">The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4" or "max_msgsize". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-2.2.1-6.2.1" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-6.2.2">
-If the object specifies such an information multiple times, then each occurrence of that information <span class="bcp14">MUST</span> convey exactly the same content. This <span class="bcp14">MUST</span> take into account prescriptive parameters that are included: i) as elements of the EDHOC_Information object; or ii) as elements of an EDHOC_Application_Profile object (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>) encoding an EDHOC application profile, which is identified by its Profile ID specified in the "app_prof" parameter of the EDHOC_Information object.<a href="#section-2.2.1-6.2.2" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-6.2.3">
-A consumer <span class="bcp14">MUST</span> treat as malformed an EDHOC_Information object that does not comply with the restriction above.<a href="#section-2.2.1-6.2.3" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.2.1-6.2">
+              <p id="section-3.2.1-6.2.1">The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4" or "max_msgsize". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-3.2.1-6.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-6.2.2">
+If the object specifies such an information multiple times, then each occurrence of that information <span class="bcp14">MUST</span> convey exactly the same content. This <span class="bcp14">MUST</span> take into account prescriptive parameters that are included: i) as elements of the EDHOC_Information object; or ii) as elements of an EDHOC_Application_Profile object (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>) encoding an EDHOC application profile, which is identified by its Profile ID specified in the "app_prof" parameter of the EDHOC_Information object.<a href="#section-3.2.1-6.2.2" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-6.2.3">
+A consumer <span class="bcp14">MUST</span> treat as malformed an EDHOC_Information object that does not comply with the restriction above.<a href="#section-3.2.1-6.2.3" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-2.2.1-6.3">
-              <p id="section-2.2.1-6.3.1">If the EDHOC_Information object specified in the parameter "edhoc_info" of the AS-to-C Access Token Response includes the parameter "eads", then the following applies.<a href="#section-2.2.1-6.3.1" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-6.3.2">
-When using the target EDHOC resource as per any EDHOC application profile indicated by the parameter "app_prof", the ACE RS for which the access token is issued supports the EAD items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the parameter "eads".<a href="#section-2.2.1-6.3.2" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.2.1-6.3">
+              <p id="section-3.2.1-6.3.1">If the EDHOC_Information object specified in the parameter "edhoc_info" of the AS-to-C Access Token Response includes the parameter "eads", then the following applies.<a href="#section-3.2.1-6.3.1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-6.3.2">
+When using the target EDHOC resource as per any EDHOC application profile indicated by the parameter "app_prof", the ACE RS for which the access token is issued supports the EAD items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the parameter "eads".<a href="#section-3.2.1-6.3.2" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-2.2.1-6.4">
-              <p id="section-2.2.1-6.4.1">If the EDHOC_Information object specified in the claim "edhoc_info" of the access token includes the parameter "eads", then the following applies.<a href="#section-2.2.1-6.4.1" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-6.4.2">
-When using the target EDHOC resource as per any EDHOC application profile indicated by the parameter "app_prof", the ACE client to which the access token is issued supports the EAD items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the parameter "eads".<a href="#section-2.2.1-6.4.2" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.2.1-6.4">
+              <p id="section-3.2.1-6.4.1">If the EDHOC_Information object specified in the claim "edhoc_info" of the access token includes the parameter "eads", then the following applies.<a href="#section-3.2.1-6.4.1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-6.4.2">
+When using the target EDHOC resource as per any EDHOC application profile indicated by the parameter "app_prof", the ACE client to which the access token is issued supports the EAD items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the parameter "eads".<a href="#section-3.2.1-6.4.2" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -1511,115 +1563,115 @@ When using the target EDHOC resource as per any EDHOC application profile indica
 </section>
 </div>
 <div id="sec-parameters-web-linking">
-<section id="section-3">
+<section id="section-4">
       <h2 id="name-additional-parameters-for-w">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-additional-parameters-for-w" class="section-name selfRef">Additional Parameters for Web Linking</a>
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-additional-parameters-for-w" class="section-name selfRef">Additional Parameters for Web Linking</a>
       </h2>
-<p id="section-3-1">Building on what is defined and prescribed in <span><a href="https://rfc-editor.org/rfc/rfc9668#section-6" class="relref">Section 6</a> of [<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>, this section defines additional parameters for web linking <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>, which can be used to obtain relevant pieces of information from the EDHOC application profile associated with an EDHOC resource.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">These parameters can be optionally specified as target attributes with the same name in a link with resource type "core.edhoc" (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-10.10" class="relref">Section 10.10</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>) targeting an EDHOC resource, or as filter criteria in a discovery request from a client.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">When specifying any of the parameters defined below in a link to an EDHOC resource, the target attribute rt="core.edhoc" <span class="bcp14">MUST</span> be included.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-4-1">Building on what is defined and prescribed in <span><a href="https://rfc-editor.org/rfc/rfc9668#section-6" class="relref">Section 6</a> of [<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>, this section defines additional parameters for web linking <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>, which can be used to obtain relevant pieces of information from the EDHOC application profile associated with an EDHOC resource.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">These parameters can be optionally specified as target attributes with the same name in a link with resource type "core.edhoc" (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-10.10" class="relref">Section 10.10</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>) targeting an EDHOC resource, or as filter criteria in a discovery request from a client.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">When specifying any of the parameters defined below in a link to an EDHOC resource, the target attribute rt="core.edhoc" <span class="bcp14">MUST</span> be included.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3-4.1">
-          <p id="section-3-4.1.1">'ed-max-msgsize', specifying the admitted maximum size of EDHOC messages in bytes. This parameter <span class="bcp14">MUST</span> specify a single unsigned integer value.<a href="#section-3-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-4-4.1">
+          <p id="section-4-4.1.1">'ed-max-msgsize', specifying the admitted maximum size of EDHOC messages in bytes. This parameter <span class="bcp14">MUST</span> specify a single unsigned integer value.<a href="#section-4-4.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-3-4.2">
-          <p id="section-3-4.2.1">'ed-coap-ct', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see Sections <a href="https://rfc-editor.org/rfc/rfc9528#section-3.4.1" class="relref">3.4.1</a> and <a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">A.2</a> of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). A value <span class="bcp14">MUST NOT</span> be given to this parameter and any present value <span class="bcp14">MUST</span> be ignored by the recipient.<a href="#section-3-4.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-4.2">
+          <p id="section-4-4.2.1">'ed-coap-ct', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see Sections <a href="https://rfc-editor.org/rfc/rfc9528#section-3.4.1" class="relref">3.4.1</a> and <a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">A.2</a> of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). A value <span class="bcp14">MUST NOT</span> be given to this parameter and any present value <span class="bcp14">MUST</span> be ignored by the recipient.<a href="#section-4-4.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-3-4.3">
-          <p id="section-3-4.3.1">'ed-epid-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.<a href="#section-3-4.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-4.3">
+          <p id="section-4-4.3.1">'ed-epid-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.<a href="#section-4-4.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-3-4.4">
-          <p id="section-3-4.4.1">'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.<a href="#section-3-4.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-4.4">
+          <p id="section-4-4.4.1">'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.<a href="#section-4-4.4.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-3-4.5">
-          <p id="section-3-4.5.1">'ed-ta-edcred-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the UUID in its string format (see Section 4 of <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>). This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.5.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-4.5">
+          <p id="section-4-4.5.1">'ed-ta-edcred-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the UUID in its string format (see Section 4 of <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>). This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.5.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-3-4.6">
-          <p id="section-3-4.6.1">'ed-ta-edcred-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a binary key identifier. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.6.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-4.6">
+          <p id="section-4-4.6.1">'ed-ta-edcred-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a binary key identifier. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.6.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-3-4.7">
-          <p id="section-3-4.7.1">'ed-ta-edcred-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.7.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-4.7">
+          <p id="section-4-4.7.1">'ed-ta-edcred-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.7.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-3-4.8">
-          <p id="section-3-4.8.1">'ed-ta-edcred-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.8.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-4.8">
+          <p id="section-4-4.8.1">'ed-ta-edcred-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.8.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-3-4.9">
-          <p id="section-3-4.9.1">'ed-ta-edcred-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.9.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-4.9">
+          <p id="section-4-4.9.1">'ed-ta-edcred-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.9.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-3-4.10">
-          <p id="section-3-4.10.1">'ed-ta-edcred-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-3-4.10.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-4.10">
+          <p id="section-4-4.10.1">'ed-ta-edcred-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.10.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
 </div>
 <div id="sec-app-profile-edhoc-messages">
-<section id="section-4">
+<section id="section-5">
       <h2 id="name-advertising-supported-edhoc">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-advertising-supported-edhoc" class="section-name selfRef">Advertising Supported EDHOC Application Profiles during an EDHOC Session</a>
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-advertising-supported-edhoc" class="section-name selfRef">Advertising Supported EDHOC Application Profiles during an EDHOC Session</a>
       </h2>
-<p id="section-4-1">The rest of this section defines means that an EDHOC peer can use in order to advertise the EDHOC application profiles that it supports to another EDHOC peer, when running EDHOC with that other peer.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">Such means are an EDHOC EAD item (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>) and an error code for the EDHOC error message (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 4.2</a>).<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-5-1">The rest of this section defines means that an EDHOC peer can use in order to advertise the EDHOC application profiles that it supports to another EDHOC peer, when running EDHOC with that other peer.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Such means are an EDHOC EAD item (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>) and an error code for the EDHOC error message (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>).<a href="#section-5-2" class="pilcrow">¶</a></p>
 <div id="sec-app-profile-edhoc-message_1_2">
-<section id="section-4.1">
+<section id="section-5.1">
         <h3 id="name-in-edhoc-message-1-and-mess">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-in-edhoc-message-1-and-mess" class="section-name selfRef">In EDHOC Message 1 and Message 2</a>
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-in-edhoc-message-1-and-mess" class="section-name selfRef">In EDHOC Message 1 and Message 2</a>
         </h3>
-<p id="section-4.1-1">This section defines the EDHOC EAD item "Supported EDHOC application profiles", which is registered in <a href="#iana-edhoc-ead-registry" class="auto internal xref">Section 10.5</a> of this document.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">The EAD item <span class="bcp14">MAY</span> be included:<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">This section defines the EDHOC EAD item "Supported EDHOC application profiles", which is registered in <a href="#iana-edhoc-ead-registry" class="auto internal xref">Section 10.5</a> of this document.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">The EAD item <span class="bcp14">MAY</span> be included:<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1-3.1">
-            <p id="section-4.1-3.1.1">In the EAD_1 field of EDHOC message_1, in order to specify EDHOC application profiles supported by the Initiator.<a href="#section-4.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-3.1">
+            <p id="section-5.1-3.1.1">In the EAD_1 field of EDHOC message_1, in order to specify EDHOC application profiles supported by the Initiator.<a href="#section-5.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.1-3.2">
-            <p id="section-4.1-3.2.1">In the EAD_2 field of EDHOC message_2, in order to specify EDHOC application profiles supported by the Responder.<a href="#section-4.1-3.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.1-3.2">
+            <p id="section-5.1-3.2.1">In the EAD_2 field of EDHOC message_2, in order to specify EDHOC application profiles supported by the Responder.<a href="#section-5.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.1-4">The EAD item <span class="bcp14">MUST NOT</span> occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.1-5">The EAD item <span class="bcp14">MUST NOT</span> be included in the EAD fields of EDHOC message_3 or message_4. In case the recipient peer supports the EAD item, the recipient peer <span class="bcp14">MUST</span> silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.1-6">When the EAD item is present, its ead_label TBD_EAD_LABEL <span class="bcp14">MUST</span> be used only with negative sign, i.e., the use of the EAD item is always critical (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.8" class="relref">Section 3.8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-4.1-6" class="pilcrow">¶</a></p>
-<p id="section-4.1-7">The EAD item <span class="bcp14">MUST</span> specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. The CBOR sequence is composed of one or more items, whose order has no meaning.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
-<p id="section-4.1-8">Each item of the CBOR sequence <span class="bcp14">MUST</span> be either of the following:<a href="#section-4.1-8" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">When the EAD item is present, its ead_label TBD_EAD_LABEL <span class="bcp14">MUST</span> be used only with negative sign, i.e., the use of the EAD item is always critical (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.8" class="relref">Section 3.8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-5">The EAD item <span class="bcp14">MUST NOT</span> occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.1-6">The EAD item <span class="bcp14">MUST NOT</span> be included in the EAD fields of EDHOC message_3 or message_4. In case the recipient peer supports the EAD item, the recipient peer <span class="bcp14">MUST</span> silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
+<p id="section-5.1-7">The EAD item <span class="bcp14">MUST</span> specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence <span>[<a href="#RFC8742" class="cite xref">RFC8742</a>]</span>, namely APP_PROF_SEQ. The CBOR sequence is composed of one or more items, whose order has no meaning.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
+<p id="section-5.1-8">Each item of the CBOR sequence <span class="bcp14">MUST</span> be either of the following:<a href="#section-5.1-8" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1-9.1">
-            <p id="section-4.1-9.1.1">A CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document.<a href="#section-4.1-9.1.1" class="pilcrow">¶</a></p>
-<p id="section-4.1-9.1.2">
-This item of the CBOR sequence indicates that the message sender supports the EDHOC application profile identified by the Profile ID.<a href="#section-4.1-9.1.2" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-9.1">
+            <p id="section-5.1-9.1.1">A CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document.<a href="#section-5.1-9.1.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-9.1.2">
+This item of the CBOR sequence indicates that the message sender supports the EDHOC application profile identified by the Profile ID.<a href="#section-5.1-9.1.2" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.1-9.2">
-            <p id="section-4.1-9.2.1">A CBOR array including at least one element. In particular:<a href="#section-4.1-9.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.1-9.2">
+            <p id="section-5.1-9.2.1">A CBOR array including at least one element. In particular:<a href="#section-5.1-9.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1-9.2.2.1">
-                <p id="section-4.1-9.2.2.1.1">The first element <span class="bcp14">MUST</span> be a CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry.<a href="#section-4.1-9.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-9.2.2.1">
+                <p id="section-5.1-9.2.2.1.1">The first element <span class="bcp14">MUST</span> be a CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry.<a href="#section-5.1-9.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-4.1-9.2.2.2">
-                <p id="section-4.1-9.2.2.2.1">Each of the elements following the first one <span class="bcp14">MUST</span> be a CBOR unsigned integer, specifying the ead_label of an EAD item.<a href="#section-4.1-9.2.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.1-9.2.2.2">
+                <p id="section-5.1-9.2.2.2.1">Each of the elements following the first one <span class="bcp14">MUST</span> be a CBOR unsigned integer, specifying the ead_label of an EAD item.<a href="#section-5.1-9.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-4.1-9.2.3">
-This item of the CBOR sequence indicates that the message sender supports:<a href="#section-4.1-9.2.3" class="pilcrow">¶</a></p>
+<p id="section-5.1-9.2.3">
+This item of the CBOR sequence indicates that the message sender supports:<a href="#section-5.1-9.2.3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1-9.2.4.1">
-                <p id="section-4.1-9.2.4.1.1">The EDHOC application profile PROFILE identified by the Profile ID in the first element of the array; and<a href="#section-4.1-9.2.4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-9.2.4.1">
+                <p id="section-5.1-9.2.4.1.1">The EDHOC application profile PROFILE identified by the Profile ID in the first element of the array; and<a href="#section-5.1-9.2.4.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-4.1-9.2.4.2">
-                <p id="section-4.1-9.2.4.2.1">The EAD items identified by the ead_label in the elements following the first one, in addition to the EAD items that are specified in the definition of the EDHOC application profile PROFILE.<a href="#section-4.1-9.2.4.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-5.1-9.2.4.2">
+                <p id="section-5.1-9.2.4.2.1">The EAD items identified by the ead_label in the elements following the first one, in addition to the EAD items that are specified in the definition of the EDHOC application profile PROFILE.<a href="#section-5.1-9.2.4.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="section-4.1-9.3">
-            <p id="section-4.1-9.3.1">An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-4.1-9.3.1" class="pilcrow">¶</a></p>
-<p id="section-4.1-9.3.2">
-The EDHOC_Information object <span class="bcp14">MUST NOT</span> include the element "app_prof" and <span class="bcp14">MUST NOT</span> include elements that are not allowed within the EDHOC_Application_Profile object defined in <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>, with the exception of the element "trust_anchor" that <span class="bcp14">MAY</span> be included. The recipient peer <span class="bcp14">MUST</span> ignore elements that are not allowed if they are present in the EDHOC_Information object.<a href="#section-4.1-9.3.2" class="pilcrow">¶</a></p>
-<p id="section-4.1-9.3.3">
-This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.<a href="#section-4.1-9.3.3" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.1-9.3">
+            <p id="section-5.1-9.3.1">An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-5.1-9.3.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-9.3.2">
+The EDHOC_Information object <span class="bcp14">MUST NOT</span> include the element "app_prof" and <span class="bcp14">MUST NOT</span> include elements that are not allowed within the EDHOC_Application_Profile object defined in <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>, with the exception of the element "trust_anchor" that <span class="bcp14">MAY</span> be included. The recipient peer <span class="bcp14">MUST</span> ignore elements that are not allowed if they are present in the EDHOC_Information object.<a href="#section-5.1-9.3.2" class="pilcrow">¶</a></p>
+<p id="section-5.1-9.3.3">
+This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.<a href="#section-5.1-9.3.3" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.1-10">When composing ead_value, the sender peer <span class="bcp14">MUST</span> comply with the content restrictions specified in <a href="#sec-app-profile-edhoc-message_1_2-restrictions" class="auto internal xref">Section 4.1.1</a>.<a href="#section-4.1-10" class="pilcrow">¶</a></p>
-<p id="section-4.1-11">The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message if ead_value is malformed or does not conform with the format defined above.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
-<p id="section-4.1-12">The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 2</a>.<a href="#section-4.1-12" class="pilcrow">¶</a></p>
+<p id="section-5.1-10">When composing ead_value, the sender peer <span class="bcp14">MUST</span> comply with the content restrictions specified in <a href="#sec-app-profile-edhoc-message_1_2-restrictions" class="auto internal xref">Section 5.1.1</a>.<a href="#section-5.1-10" class="pilcrow">¶</a></p>
+<p id="section-5.1-11">The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message if ead_value is malformed or does not conform with the format defined above.<a href="#section-5.1-11" class="pilcrow">¶</a></p>
+<p id="section-5.1-12">The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 3</a>.<a href="#section-5.1-12" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-ead_valu"></span><div id="fig-cddl-ead-value">
-<figure id="figure-2">
-          <div class="alignLeft art-CDDL art-text artwork" id="section-4.1-13.1">
+<figure id="figure-3">
+          <div class="alignLeft art-CDDL art-text artwork" id="section-5.1-13.1">
 <pre>
 ead_value = &lt;&lt; APP_PROF_SEQ &gt;&gt;
 
@@ -1638,89 +1690,44 @@ profile_id_with_eads = [profile_id, 1* uint]
 EDHOC_Information : map
 </pre>
 </div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-cddl-definition-of-ead_valu" class="selfRef">CDDL Definition of ead_value for the EAD item "Supported EDHOC application profiles"</a>
           </figcaption></figure>
 </div>
 <div id="sec-app-profile-edhoc-message_1_2-restrictions">
-<section id="section-4.1.1">
+<section id="section-5.1.1">
           <h4 id="name-content-restrictions">
-<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-content-restrictions" class="section-name selfRef">Content Restrictions</a>
+<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-content-restrictions" class="section-name selfRef">Content Restrictions</a>
           </h4>
-<p id="section-4.1.1-1">When the sender peer composes ead_value of the EDHOC EAD item "Supported EDHOC application profiles", the following applies.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">It is possible that ead_value provides an information that corresponds to an EDHOC_Information prescriptive parameter (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4" or "max_msgsize". The type of such a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-3">If ead_value specifies such an information multiple times, then each occurrence of that information <span class="bcp14">MUST</span> convey exactly the same content. With reference to the CBOR sequence APP_PROF_SEQ defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>, the enforcement of these content restrictions <span class="bcp14">MUST</span> take into account prescriptive parameters that are included:<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-1">When the sender peer composes ead_value of the EDHOC EAD item "Supported EDHOC application profiles", the following applies.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-2">It is possible that ead_value provides an information that corresponds to an EDHOC_Information prescriptive parameter (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4" or "max_msgsize". The type of such a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-3">If ead_value specifies such an information multiple times, then each occurrence of that information <span class="bcp14">MUST</span> convey exactly the same content. With reference to the CBOR sequence APP_PROF_SEQ defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>, the enforcement of these content restrictions <span class="bcp14">MUST</span> take into account prescriptive parameters that are included:<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1.1-4.1">
-              <p id="section-4.1.1-4.1.1">As elements of an EDHOC_Information object specified within APP_PROF_SEQ; or<a href="#section-4.1.1-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1.1-4.1">
+              <p id="section-5.1.1-4.1.1">As elements of an EDHOC_Information object specified within APP_PROF_SEQ; or<a href="#section-5.1.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-4.1.1-4.2">
-              <p id="section-4.1.1-4.2.1">As elements of an EDHOC_Application_Profile object encoding an EDHOC application profile, which is identified by its Profile ID specified within APP_PROF_SEQ.<a href="#section-4.1.1-4.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-5.1.1-4.2">
+              <p id="section-5.1.1-4.2.1">As elements of an EDHOC_Application_Profile object encoding an EDHOC application profile, which is identified by its Profile ID specified within APP_PROF_SEQ.<a href="#section-5.1.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-4.1.1-5">If the Responder receives the EAD item in the EAD_1 field of EDHOC message_1 and intends to include the EAD item in the EAD_2 field of EDHOC message_2, then the Responder <span class="bcp14">MUST</span> further take into account the presence of such information in the received EAD item when composing ead_value.<a href="#section-4.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-6">A consumer <span class="bcp14">MUST</span> treat as malformed an EDHOC_Information object that does not comply with the restrictions above.<a href="#section-4.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-5">If the Responder receives the EAD item in the EAD_1 field of EDHOC message_1 and intends to include the EAD item in the EAD_2 field of EDHOC message_2, then the Responder <span class="bcp14">MUST</span> further take into account the presence of such information in the received EAD item when composing ead_value.<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-6">A consumer <span class="bcp14">MUST</span> treat as malformed an EDHOC_Information object that does not comply with the restrictions above.<a href="#section-5.1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="sec-app-profile-edhoc-error-message">
-<section id="section-4.2">
+<section id="section-5.2">
         <h3 id="name-in-the-edhoc-error-message">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-in-the-edhoc-error-message" class="section-name selfRef">In the EDHOC Error Message</a>
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-in-the-edhoc-error-message" class="section-name selfRef">In the EDHOC Error Message</a>
         </h3>
-<p id="section-4.2-1">This section defines the error code TBD_ERROR_CODE, which is registered in <a href="#iana-edhoc-error-codes-registry" class="auto internal xref">Section 10.6</a> of this document.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">Error code TBD_ERROR_CODE <span class="bcp14">MUST</span> only be used when replying to EDHOC message_1. If an EDHOC error message with error code TBD_ERROR_CODE is received as reply to an EDHOC message different from EDHOC message_1, then the recipient of the error message <span class="bcp14">MUST</span> ignore what is specified in ERR_INFO.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">The Responder <span class="bcp14">MUST NOT</span> abort an EDHOC session exclusively due to the wish of sending an error message with error code TBD_ERROR_CODE. Instead, the Responder can advertise the EDHOC application profiles that it supports to the Initiator by means of the EAD item "Supported EDHOC application profiles" defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>, specifying it in the EAD_2 field of the EDHOC message_2 to send in the EDHOC session.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
-<p id="section-4.2-4">When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-6.3" class="relref">Section 6.3</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), the error message <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
-<p id="section-4.2-5">When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO <span class="bcp14">MUST</span> be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. This CBOR sequence has the same format and semantics of the one used for ead_value of the EAD item "Supported EDHOC application profiles" (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>).<a href="#section-4.2-5" class="pilcrow">¶</a></p>
-<p id="section-4.2-6">The recipient peer <span class="bcp14">MUST</span> silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">This section defines the error code TBD_ERROR_CODE, which is registered in <a href="#iana-edhoc-error-codes-registry" class="auto internal xref">Section 10.6</a> of this document.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">Error code TBD_ERROR_CODE <span class="bcp14">MUST</span> only be used when replying to EDHOC message_1. If an EDHOC error message with error code TBD_ERROR_CODE is received as reply to an EDHOC message different from EDHOC message_1, then the recipient of the error message <span class="bcp14">MUST</span> ignore what is specified in ERR_INFO.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">The Responder <span class="bcp14">MUST NOT</span> abort an EDHOC session exclusively due to the wish of sending an error message with error code TBD_ERROR_CODE. Instead, the Responder can advertise the EDHOC application profiles that it supports to the Initiator by means of the EAD item "Supported EDHOC application profiles" defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>, specifying it in the EAD_2 field of the EDHOC message_2 to send in the EDHOC session.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-4">When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-6.3" class="relref">Section 6.3</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), the error message <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.2-5">When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO <span class="bcp14">MUST</span> be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. This CBOR sequence has the same format and semantics of the one used for ead_value of the EAD item "Supported EDHOC application profiles" (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>).<a href="#section-5.2-5" class="pilcrow">¶</a></p>
+<p id="section-5.2-6">The recipient peer <span class="bcp14">MUST</span> silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
 </section>
-</div>
-</section>
-</div>
-<div id="sec-app-profile-cbor">
-<section id="section-5">
-      <h2 id="name-edhoc_application_profile">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-edhoc_application_profile" class="section-name selfRef">EDHOC_Application_Profile</a>
-      </h2>
-<p id="section-5-1">This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">An EDHOC_Application_Profile object is encoded as a CBOR map <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>. Elements of the EDHOC_Application_Profile object can also be elements of the CBOR-encoded EDHOC_Information object specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-07#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. In particular, they use the same CBOR abbreviations from the 'CBOR label' column of the IANA registry "EDHOC Information" defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">By construction, an EDHOC_Application_Profile object conveys information that pertains to the execution of EDHOC. This includes, e.g., information about transporting and processing EDHOC messages during an EDHOC session. An EDHOC_Application_Profile object does not convey information that does not play a role in completing an EDHOC execution. For instance, this includes the size of outputs of the EDHOC_Exporter interface (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-4.2.1" class="relref">Section 4.2.1</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), or properties and features of protocols other than EDHOC itself that build on the results from an EDHOC session (e.g., the version of the application protocol subsequently used).<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">The CBOR map encoding an EDHOC_Application_Profile object <span class="bcp14">MUST</span> include the element "app_prof" defined in this document, as well as the elements "methods" and "cred_types".<a href="#section-5-4" class="pilcrow">¶</a></p>
-<p id="section-5-5">The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the instance of the EDHOC_Application_Profile object in question. The identifier is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document and encoded as a CBOR integer.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<p id="section-5-6">The CBOR map <span class="bcp14">MUST NOT</span> include the following elements: "session_id", "uri_path", "initiator", "responder", and "trust_anchors". A consumer <span class="bcp14">MUST</span> ignore those elements if they are included in the EDHOC_Application_Profile object.<a href="#section-5-6" class="pilcrow">¶</a></p>
-<p id="section-5-7">The CBOR map <span class="bcp14">MAY</span> include other elements.<a href="#section-5-7" class="pilcrow">¶</a></p>
-<p id="section-5-8">Furthermore, consistent with Sections <a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">8</a> and <a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.1" class="relref">A.1</a> of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> and with <span><a href="https://rfc-editor.org/rfc/rfc8613#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>, the following applies:<a href="#section-5-8" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5-9.1">
-          <p id="section-5-9.1.1">If the element "cipher_suites" is not present in the CBOR map, this indicates that the EDHOC application profile uses the EDHOC cipher suites 2 and 3, and possibly other cipher suites.<a href="#section-5-9.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-5-9.2">
-          <p id="section-5-9.2.1">If the element "id_cred_types" is not present in the CBOR map, this indicates that the EDHOC application profile uses "kid" as type of authentication credential identifiers for EDHOC, and possibly other types of authentication credential identifiers.<a href="#section-5-9.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-5-9.3">
-          <p id="section-5-9.3.1">The absence of any other elements in the CBOR map <span class="bcp14">MUST NOT</span> result in assuming any value.<a href="#section-5-9.3.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-5-10">If an element is present in the CBOR map and the corresponding entry in the IANA registry "EDHOC Information" specifies "NP" (non-prescriptive) in the 'Type' column and "True or False" in the 'CBOR type' column, then the following applies. An EDHOC peer that adheres to the EDHOC application profile in question is required or not to support the property or feature of EDHOC associated with the element in the CBOR map, if that element encodes the CBOR simple value <code>true</code> (0xf5) or <code>false</code> (0xf4), respectively. For example, the presence of the parameter "comb_req" denotes whether EDHOC peers adhering to the EDHOC application profile have to support the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>, or instead do not have to but might if they are willing to.<a href="#section-5-10" class="pilcrow">¶</a></p>
-<p id="section-5-11">If an element present in the CBOR map specifies an information that is intrinsically a set of one or more co-existing alternatives, then all the specified alternatives apply for the EDHOC application profile in question. For example, the element "cipher_suites" with value the CBOR array [0, 2] means that, in order to adhere to the EDHOC application profile in question, an EDHOC peer has to implement both the EDHOC cipher suites 0 and 2, because either of them can be used by another EDHOC peer also adhering to the same EDHOC application profile.<a href="#section-5-11" class="pilcrow">¶</a></p>
-<p id="section-5-12">The CDDL grammar describing the EDHOC_Application_Profile object is:<a href="#section-5-12" class="pilcrow">¶</a></p>
-<span id="name-cddl-definition-of-the-edho"></span><div id="fig-cddl-edhoc_application-profile-object">
-<figure id="figure-3">
-        <div class="alignLeft art-CDDL art-text artwork" id="section-5-13.1">
-<pre>
-EDHOC_Application_Profile = {
-      1 =&gt; int / array,    ; methods
-      6 =&gt; int / array,    ; cred_types
-     23 =&gt; int,            ; app_prof
-   * int / tstr =&gt; any
-}
-</pre>
-</div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-cddl-definition-of-the-edho" class="selfRef">CDDL Definition of the EDHOC_Application_Profile object</a>
-        </figcaption></figure>
 </div>
 </section>
 </div>
@@ -1735,7 +1742,7 @@ EDHOC_Application_Profile = {
 <li class="normal" id="section-6-3.1">
           <p id="section-6-3.1.1">"edhocpath" - The SvcParamKey "edhocpath" is single-valued and its value <span class="bcp14">MUST</span> be a CBOR data item PATH_OUTER, which <span class="bcp14">MUST</span> be a CBOR byte string PATH_BSTR or a CBOR array. In the latter case, the array <span class="bcp14">MUST</span> include at least two elements, each of which <span class="bcp14">MUST</span> be a CBOR byte string PATH_BSTR. The SVCB RR <span class="bcp14">MUST</span> be considered malformed if the SvcParamValue ends within PATH_OUTER or if PATH_OUTER is malformed.<a href="#section-6-3.1.1" class="pilcrow">¶</a></p>
 <p id="section-6-3.1.2">
-The value of each CBOR byte string PATH_BSTR is the binary representation of a CBOR sequence PATH_SEQ composed of 0 or more CBOR text strings. In particular, each PATH_SEQ specifies the URI path of an EDHOC resource at the server, with each CBOR text string within that PATH_SEQ specifying a URI path segment.<a href="#section-6-3.1.2" class="pilcrow">¶</a></p>
+The value of each CBOR byte string PATH_BSTR is the binary representation of a CBOR sequence PATH_SEQ composed of zero or more CBOR text strings. In particular, each PATH_SEQ specifies the URI path of an EDHOC resource at the server, with each CBOR text string within that PATH_SEQ specifying a URI path segment.<a href="#section-6-3.1.2" class="pilcrow">¶</a></p>
 <p id="section-6-3.1.3">
 The CDDL grammar describing the value of the SvcParamKey "edhocpath" is shown in <a href="#fig-cddl-edhocpath-value" class="auto internal xref">Figure 4</a>.<a href="#section-6-3.1.3" class="pilcrow">¶</a></p>
 <p id="section-6-3.1.4">
@@ -1744,9 +1751,9 @@ Editor's note: consider to add the same explanation about the chosen encoding fo
         <li class="normal" id="section-6-3.2">
           <p id="section-6-3.2.1">"edhoc-app-prof" - The SvcParamKey "edhoc-app-prof" is single-valued and its value <span class="bcp14">MUST</span> be a CBOR data item APP_OUTER, which <span class="bcp14">MUST</span> be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array <span class="bcp14">MUST</span> include at least two elements, each of which <span class="bcp14">MUST</span> be a CBOR byte string APP_BSTR. The SVCB RR <span class="bcp14">MUST</span> be considered malformed if the SvcParamValue ends within APP_OUTER or if APP_OUTER is malformed.<a href="#section-6-3.2.1" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2">
-The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>. The SVCB RR <span class="bcp14">MUST</span> be considered malformed if APP_PROF_SEQ is malformed or does not conform with the format defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 4.1</a>.<a href="#section-6-3.2.2" class="pilcrow">¶</a></p>
+The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>. The SVCB RR <span class="bcp14">MUST</span> be considered malformed if APP_PROF_SEQ is malformed or does not conform with the format defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>.<a href="#section-6-3.2.2" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.3">
-The CDDL grammar describing the value of the SvcParamKey "edhocpath" is shown in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 5</a>.<a href="#section-6-3.2.3" class="pilcrow">¶</a></p>
+The CDDL grammar describing the value of the SvcParamKey "edhoc-app-prof" is shown in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 5</a>.<a href="#section-6-3.2.3" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.4">
 Each CBOR sequence APP_PROF_SEQ specifies a set of EDHOC application profiles that the server supports.<a href="#section-6-3.2.4" class="pilcrow">¶</a></p>
 </li>
@@ -1775,7 +1782,7 @@ The information specified by the i-th element of the CBOR array within the SvcPa
           </ul>
 </li>
       </ul>
-<p id="section-6-7">A consumer <span class="bcp14">MUST</span> treat as malformed an RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.<a href="#section-6-7" class="pilcrow">¶</a></p>
+<p id="section-6-7">A consumer <span class="bcp14">MUST</span> treat as malformed an SVCB RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.<a href="#section-6-7" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-valu"></span><div id="fig-cddl-edhocpath-value">
 <figure id="figure-4">
         <div class="alignLeft art-CDDL art-text artwork" id="section-6-8.1">
@@ -1806,7 +1813,7 @@ edhoc-app-prof-value = APP_OUTER
 APP_OUTER = APP_BSTR / [2* APP_BSTR]
 
 ; The full definition of APP_PROF_SEQ
-; is provided in Section 4.1
+; is provided in Section 5.1
 APP_BSTR = &lt;&lt; APP_PROF_SEQ &gt;&gt;
 </pre>
 </div>
@@ -1825,7 +1832,7 @@ APP_BSTR = &lt;&lt; APP_PROF_SEQ &gt;&gt;
 <p id="section-7-2">The well-known application profiles are <em>not</em> to be intended as "default" profiles to use, in case no other indication is provided to EDHOC peers.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">In particular, an EDHOC peer <span class="bcp14">MUST NOT</span> assume that, unless otherwise indicated, any of such profiles is used when running EDHOC through a well-known EDHOC resource, such as the resource at /.well-known/edhoc when EDHOC messages are transported as payload of CoAP messages (see <span><a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">Appendix A.2</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">Building on the above, the well-known application profiles are <em>not</em> intended to deviate from what is mandatory to support for EDHOC peers, which is defined by the compliance requirements in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-7-4" class="pilcrow">¶</a></p>
-<p id="section-7-5">The rest of this section defines the well-known application profiles, each of which is represented by means of an EDHOC_Application_Profile object (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 5</a>) using the CBOR extended diagnostic notation.<a href="#section-7-5" class="pilcrow">¶</a></p>
+<p id="section-7-5">The rest of this section defines the well-known application profiles, each of which is represented by means of an EDHOC_Application_Profile object (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>) using the CBOR extended diagnostic notation.<a href="#section-7-5" class="pilcrow">¶</a></p>
 <p id="section-7-6">An entry for each well-known application profile is also registered at the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document.<a href="#section-7-6" class="pilcrow">¶</a></p>
 <div id="well-known-application-profile-minimalcs2">
 <section id="section-7.1">
@@ -2675,75 +2682,78 @@ c509_cert = 3
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Use of parameters aligned with corresponding updates in draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Revised order of sections.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">EAD item "Supported EDHOC application profiles":<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="appendix-B.1-1.2.2.1">
-                <p id="appendix-B.1-1.2.2.1.1">It can be used only in a critical way.<a href="#appendix-B.1-1.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.2.2.2">
-                <p id="appendix-B.1-1.2.2.2.1">Improved semantics of ead_value.<a href="#appendix-B.1-1.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.2.2.3">
-                <p id="appendix-B.1-1.2.2.3.1">Content restrictions to avoid inconsistent information.<a href="#appendix-B.1-1.2.2.3.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
+            <p id="appendix-B.1-1.2.1">Use of parameters aligned with corresponding updates in draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">Use of the parameter "app_prof" in draft-ietf-ace-edhoc-oscore-profile:<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.3.1">EAD item "Supported EDHOC application profiles":<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.3.2.1">
-                <p id="appendix-B.1-1.3.2.1.1">Improved co-existence with other parameters.<a href="#appendix-B.1-1.3.2.1.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.3.2.1.1">It can be used only in a critical way.<a href="#appendix-B.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.3.2.2">
-                <p id="appendix-B.1-1.3.2.2.1">Content restrictions to avoid inconsistent information.<a href="#appendix-B.1-1.3.2.2.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.3.2.2.1">Improved semantics of ead_value.<a href="#appendix-B.1-1.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.3.2.3">
+                <p id="appendix-B.1-1.3.2.3.1">Content restrictions to avoid inconsistent information.<a href="#appendix-B.1-1.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.4">
-            <p id="appendix-B.1-1.4.1">Error handling:<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.4.1">Use of the parameter "app_prof" in draft-ietf-ace-edhoc-oscore-profile:<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.4.2.1">
-                <p id="appendix-B.1-1.4.2.1.1">EAD item "Supported EDHOC application profiles" occurring multiple times in EDHOC message_1 or message_2.<a href="#appendix-B.1-1.4.2.1.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.4.2.1.1">Improved co-existence with other parameters.<a href="#appendix-B.1-1.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.4.2.2">
-                <p id="appendix-B.1-1.4.2.2.1">EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.<a href="#appendix-B.1-1.4.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.4.2.3">
-                <p id="appendix-B.1-1.4.2.3.1">Invalid ead_value in EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.4.2.3.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.4.2.4">
-                <p id="appendix-B.1-1.4.2.4.1">Invalid information in EDHOC error message with new error code.<a href="#appendix-B.1-1.4.2.4.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.4.2.2.1">Content restrictions to avoid inconsistent information.<a href="#appendix-B.1-1.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Fixed encoding of ERR_INFO for the EDHOC error message with the new error code.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-B.1-1.6">
-            <p id="appendix-B.1-1.6.1">EDHOC_Application_Profile object<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.5.1">Error handling:<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1-1.6.2.1">
-                <p id="appendix-B.1-1.6.2.1.1">Clarified scope.<a href="#appendix-B.1-1.6.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.1-1.5.2.1">
+                <p id="appendix-B.1-1.5.2.1.1">EAD item "Supported EDHOC application profiles" occurring multiple times in EDHOC message_1 or message_2.<a href="#appendix-B.1-1.5.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.6.2.2">
-                <p id="appendix-B.1-1.6.2.2.1">Clarified meaning of boolean parameters that are non-prescriptive.<a href="#appendix-B.1-1.6.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.5.2.2">
+                <p id="appendix-B.1-1.5.2.2.1">EAD item "Supported EDHOC application profiles" in EDHOC message_3 or message_4.<a href="#appendix-B.1-1.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="appendix-B.1-1.6.2.3">
-                <p id="appendix-B.1-1.6.2.3.1">Forbid the presence of the element "trust_anchors".<a href="#appendix-B.1-1.6.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="appendix-B.1-1.5.2.3">
+                <p id="appendix-B.1-1.5.2.3.1">Invalid ead_value in EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.5.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.5.2.4">
+                <p id="appendix-B.1-1.5.2.4.1">Invalid information in EDHOC error message with new error code.<a href="#appendix-B.1-1.5.2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
+          <li class="normal" id="appendix-B.1-1.6">
+            <p id="appendix-B.1-1.6.1">Fixed encoding of ERR_INFO for the EDHOC error message with the new error code.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+</li>
           <li class="normal" id="appendix-B.1-1.7">
-            <p id="appendix-B.1-1.7.1">Advertisement of Supported EDHOC Application Profiles using SVCB Resource Records.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.7.1">EDHOC_Application_Profile object<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.1-1.7.2.1">
+                <p id="appendix-B.1-1.7.2.1.1">Clarified scope.<a href="#appendix-B.1-1.7.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.7.2.2">
+                <p id="appendix-B.1-1.7.2.2.1">Clarified meaning of boolean parameters that are non-prescriptive.<a href="#appendix-B.1-1.7.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.7.2.3">
+                <p id="appendix-B.1-1.7.2.3.1">Forbid the presence of the element "trust_anchors".<a href="#appendix-B.1-1.7.2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.8">
-            <p id="appendix-B.1-1.8.1">Updated integer abbreviations for the EDHOC_Information parameters.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.8.1">Advertisement of Supported EDHOC Application Profiles using SVCB Resource Records.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.9">
-            <p id="appendix-B.1-1.9.1">Editorial improvements.<a href="#appendix-B.1-1.9.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.9.1">Updated integer abbreviations for the EDHOC_Information parameters.<a href="#appendix-B.1-1.9.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.10">
+            <p id="appendix-B.1-1.10.1">Editorial improvements.<a href="#appendix-B.1-1.10.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
