@@ -196,6 +196,12 @@ If the EDHOC_Information object specified as value of "edhoc_info" includes the 
 
   C and RS MUST ignore other parameters that are not admitted if they are present in the EDHOC_Information object.
 
+* The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4" or "max_msgsize". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
+
+  If the object specifies such an information multiple times, then each occurrence of that information MUST convey exactly the same content. This MUST take into account prescriptive parameters that are included: i) as elements of the EDHOC_Information object; or ii) as elements of an EDHOC_Application_Profile object (see {{sec-app-profile-cbor}}) encoding an EDHOC application profile, which is identified by its Profile ID specified in the "app_prof" parameter of the EDHOC_Information object.
+
+  A consumer MUST treat as malformed an EDHOC_Information object that does not comply with the restriction above.
+
 * If the EDHOC_Information object specified in the parameter "edhoc_info" of the AS-to-C Access Token Response includes the parameter "eads", then the following applies.
 
   When using the target EDHOC resource as per any EDHOC application profile indicated by the parameter "app_prof", the ACE RS for which the access token is issued supports the EAD items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the parameter "eads".
@@ -280,9 +286,11 @@ Each item of the CBOR sequence MUST be either of the following:
 
   This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.
 
-The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in {{fig-cddl-ead-value}}.
+When composing ead_value, the sender peer MUST comply with the content restrictions specified in {{sec-app-profile-edhoc-message_1_2-restrictions}}.
 
 The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message if ead_value is malformed or does not conform with the format defined above.
+
+The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in {{fig-cddl-ead-value}}.
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
 ead_value = << APP_PROF_SEQ >>
@@ -302,6 +310,22 @@ profile_id_with_eads = [ profile_id, 1* uint ]
 EDHOC_Information : map
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-ead-value title="CDDL Definition of ead_value for the EAD item \"Supported EDHOC application profiles\"" artwork-align="left"}
+
+### Content Restrictions # {#sec-app-profile-edhoc-message_1_2-restrictions}
+
+When the sender peer composes ead_value of the EDHOC EAD item "Supported EDHOC application profiles", the following applies.
+
+It is possible that ead_value provides an information that corresponds to an EDHOC_Information prescriptive parameter (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4" or "max_msgsize". The type of such a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
+
+If ead_value specifies such an information multiple times, then each occurrence of that information MUST convey exactly the same content. With reference to the CBOR sequence APP_PROF_SEQ defined in {{sec-app-profile-edhoc-message_1_2}}, the enforcement of these content restrictions MUST take into account prescriptive parameters that are included:
+
+* As elements of an EDHOC_Information object specified within APP_PROF_SEQ; or
+
+* As elements of an EDHOC_Application_Profile object encoding an EDHOC application profile, which is identified by its Profile ID specified within APP_PROF_SEQ.
+
+If the Responder receives the EAD item in the EAD_1 field of EDHOC message_1 and intends to include the EAD item in the EAD_2 field of EDHOC message_2, then the Responder MUST further take into account the presence of such information in the received EAD item when composing ead_value.
+
+A consumer MUST treat as malformed an EDHOC_Information object that does not comply with the restrictions above.
 
 ## In the EDHOC Error Message # {#sec-app-profile-edhoc-error-message}
 
@@ -777,7 +801,13 @@ c509_cert = 3
 
   * Improved semantics of ead_value.
 
-* Improved use of the parameter "app_prof" in draft-ietf-ace-edhoc-oscore-profile.
+  * Content restrictions to avoid inconsistent information.
+
+* Use of the parameter "app_prof" in draft-ietf-ace-edhoc-oscore-profile:
+
+  * Improved co-existence with other parameters.
+
+  * Content restrictions to avoid inconsistent information.
 
 * Error handling:
 
