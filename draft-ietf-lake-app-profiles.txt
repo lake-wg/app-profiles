@@ -107,8 +107,8 @@ Table of Contents
      10.4.  EDHOC Information Registry
      10.5.  EDHOC External Authorization Data Registry
      10.6.  EDHOC Error Codes Registry
-     10.7.  EDHOC Application Profiles Registry
-     10.8.  DNS SVCB Service Parameter Keys (SvcParamKeys)
+     10.7.  DNS SVCB Service Parameter Keys (SvcParamKeys)
+     10.8.  EDHOC Application Profiles Registry
      10.9.  Expert Review Instructions
    11. References
      11.1.  Normative References
@@ -148,7 +148,7 @@ Table of Contents
    is:
 
    *  The new IANA registry "EDHOC Application Profiles" defined in
-      Section 10.7, where to register integer identifiers of EDHOC
+      Section 10.8, where to register integer identifiers of EDHOC
       application profiles to use as corresponding Profile IDs.
 
    *  The new parameter "ed-prof" defined in Section 2.1.  This
@@ -253,7 +253,7 @@ Table of Contents
 
    This document introduces the concept of Profile IDs, i.e., integer
    values that uniquely identify EDHOC application profiles, for which
-   an IANA registry is defined in Section 10.7.
+   an IANA registry is defined in Section 10.8.
 
    This section defines two parameters to convey such Profile IDs, i.e.:
 
@@ -293,7 +293,7 @@ Table of Contents
    *  'ed-prof', specifying an EDHOC application profile supported by
       the server.  This parameter MUST specify a single value, which is
       taken from the 'Profile ID' column of the "EDHOC Application
-      Profiles" registry defined in Section 10.7 of this document.  This
+      Profiles" registry defined in Section 10.8 of this document.  This
       parameter MAY occur multiple times, with each occurrence
       specifying an EDHOC application profile.
 
@@ -379,7 +379,7 @@ Table of Contents
       integers.  In CBOR, "app_prof" is an integer or an array of
       integers, and has label 23.  The integer values are taken from the
       'Profile ID' column of the "EDHOC Application Profiles" registry
-      defined in Section 10.7 of this document.
+      defined in Section 10.8 of this document.
 
 2.2.1.  Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -606,7 +606,7 @@ Table of Contents
    *  A CBOR integer, specifying the Profile ID of an EDHOC application
       profile.  The integer value is taken from the 'Profile ID' column
       of the "EDHOC Application Profiles" registry defined in
-      Section 10.7 of this document.
+      Section 10.8 of this document.
 
       This item of the CBOR sequence indicates that the message sender
       supports the EDHOC application profile identified by the Profile
@@ -851,7 +851,7 @@ Table of Contents
 
    To this end, this document specifies the SvcParamKeys "edhocpath" and
    "edhoc-app-prof", which are defined below and are registered in
-   Section 10.8.
+   Section 10.7.
 
    *  "edhocpath" - The SvcParamKey "edhocpath" is single-valued and its
       value MUST be a CBOR data item PATH_OUTER, which MUST be a CBOR
@@ -984,7 +984,7 @@ Table of Contents
    object (see Section 5) using the CBOR extended diagnostic notation.
 
    An entry for each well-known application profile is also registered
-   at the "EDHOC Application Profiles" registry defined in Section 10.7
+   at the "EDHOC Application Profiles" registry defined in Section 10.8
    of this document.
 
 7.1.  Well-Known Application Profile MINIMAL_CS_2
@@ -1430,7 +1430,36 @@ Table of Contents
 
    *  Reference: [RFC-XXXX]
 
-10.7.  EDHOC Application Profiles Registry
+10.7.  DNS SVCB Service Parameter Keys (SvcParamKeys)
+
+   IANA is asked to add the following entries to the "Service Parameter
+   Keys (SvcParamKeys)" registry within the "DNS Service Bindings
+   (SVCB)" registry group.  The definition of these parameters can be
+   found in Section 6.
+
+   *  Number: 11 (suggested)
+
+   *  Name: edhocpath
+
+   *  Meaning: EDHOC resource path
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+
+
+   *  Number: 12 (suggested)
+
+   *  Name: edhoc-app-prof
+
+   *  Meaning: Supported EDHOC application profiles
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX]
+
+10.8.  EDHOC Application Profiles Registry
 
    IANA is requested to create a new "EDHOC Application Profiles"
    registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)"
@@ -1473,35 +1502,6 @@ Table of Contents
 
    This registry has been initially populated with the values in
    Table 2.
-
-10.8.  DNS SVCB Service Parameter Keys (SvcParamKeys)
-
-   IANA is asked to add the following entries to the "Service Parameter
-   Keys (SvcParamKeys)" registry within the "DNS Service Bindings
-   (SVCB)" registry group.  The definition of this parameter can be
-   found in Section 6.
-
-   *  Number: 11 (suggested)
-
-   *  Name: edhocpath
-
-   *  Meaning: EDHOC resource path
-
-   *  Change Controller: IETF
-
-   *  Reference: [RFC-XXXX]
-
-
-
-   *  Number: 12 (suggested)
-
-   *  Name: edhoc-app-prof
-
-   *  Meaning: Supported EDHOC application profiles
-
-   *  Change Controller: IETF
-
-   *  Reference: [RFC-XXXX]
 
 10.9.  Expert Review Instructions
 
@@ -1757,7 +1757,7 @@ B.1.  Version -01 to -02
 
       -  Invalid information in EDHOC error message with new error code.
 
-   *  Fixed encoding of ERR_INFO for the EDHOC error_message with the
+   *  Fixed encoding of ERR_INFO for the EDHOC error message with the
       new error code.
 
    *  EDHOC_Application_Profile object
