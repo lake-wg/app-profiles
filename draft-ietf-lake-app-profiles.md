@@ -299,13 +299,13 @@ ead_value = << APP_PROF_SEQ >>
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence APP_PROF_SEQ:
-APP_PROF_SEQ = [ 1* element ]
+APP_PROF_SEQ = [1* element]
 
 element = profile_id / profile_id_with_eads / EDHOC_Information
 
 profile_id = int
 
-profile_id_with_eads = [ profile_id, 1* uint ]
+profile_id_with_eads = [profile_id, 1* uint]
 
 ; The full definition is provided in
 ; draft-ietf-ace-edhoc-oscore-profile
@@ -393,15 +393,19 @@ To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app
 
   The value of each CBOR byte string PATH_BSTR is the binary representation of a CBOR sequence PATH_SEQ composed of 0 or more CBOR text strings. In particular, each PATH_SEQ specifies the URI path of an EDHOC resource at the server, with each CBOR text string within that PATH_SEQ specifying a URI path segment.
 
+  The CDDL grammar describing the value of the SvcParamKey "edhocpath" is shown in {{fig-cddl-edhocpath-value}}.
+
   Editor's note: consider to add the same explanation about the chosen encoding for the URI path as a CBOR sequence that is given in Section 3.2 of draft-ietf-core-dns-over-coap-15.
 
 * "edhoc-app-prof" - The SvcParamKey "edhoc-app-prof" is single-valued and its value MUST be a CBOR data item APP_OUTER, which MUST be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string APP_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within APP_OUTER or if APP_OUTER is malformed.
 
   The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}. The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the format defined in {{sec-app-profile-edhoc-message_1_2}}.
 
+  The CDDL grammar describing the value of the SvcParamKey "edhocpath" is shown in {{fig-cddl-edhoc-app-prof-value}}.
+
   Each CBOR sequence APP_PROF_SEQ specifies a set of EDHOC application profiles that the server supports.
 
-If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR, then the SvcParamKey "edhocpath", if present, specifies the URI paths of the EDHOC resources at the server.
+If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR, then the SvcParamKey "edhocpath", if present, specifies the URI paths of EDHOC resources at the server.
 
 If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then the following applies.
 
@@ -420,6 +424,32 @@ If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then the followin
     The information specified by the i-th element of the CBOR array within the SvcParamKey "edhoc-app-prof" pertains to the EDHOC resource at the server with URI path specified by the i-th element of the CBOR array within the SvcParamKey "edhocpath".
 
 A consumer MUST treat as malformed an RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.
+
+~~~~~~~~~~~~~~~~~~~~ CDDL
+edhocpath-value = PATH_OUTER
+
+PATH_OUTER = PATH_BSTR / [2* PATH_BSTR]
+
+PATH_BSTR = << PATH_SEQ >>
+
+; This defines an array, the elements of which
+; are to be used in the CBOR Sequence PATH_SEQ:
+PATH_SEQ = [* path_segment]
+
+path_segment = tstr
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-cddl-edhocpath-value title="CDDL Definition of the value of the SvcParamKey \"edhocpath\"" artwork-align="left"}
+
+~~~~~~~~~~~~~~~~~~~~ CDDL
+edhoc-app-prof-value = APP_OUTER
+
+APP_OUTER = APP_BSTR / [2* APP_BSTR]
+
+; The full definition of APP_PROF_SEQ
+; is provided in Section 4.1
+APP_BSTR = << APP_PROF_SEQ >>
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-cddl-edhoc-app-prof-value title="CDDL Definition of the value of the SvcParamKey \"edhoc-app-prof\"" artwork-align="left"}
 
 # Well-known EDHOC Application Profiles # {#sec-well-known-app-profiles}
 
