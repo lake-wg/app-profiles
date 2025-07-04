@@ -45,6 +45,8 @@ normative:
   RFC8949:
   RFC9200:
   RFC9360:
+  RFC9460:
+  RFC9461:
   RFC9528:
   RFC9562:
   RFC9668:
@@ -380,6 +382,44 @@ EDHOC_Application_Profile = {
 }
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-edhoc_application-profile-object title="CDDL Definition of the EDHOC_Application_Profile object" artwork-align="left"}
+
+# Advertising Supported EDHOC Application Profiles using SVCB Resource Records # {#sec-svcb}
+
+Given a server, its support for EDHOC and for EDHOC application profiles can be advertised using SVCB Resource Records (RR) {{RFC9460}}{{RFC9461}}.
+
+To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app-prof", which are defined below and are registered in {{iana-svcb}}.
+
+* "edhocpath" - The SvcParamKey "edhocpath" is single-valued and its value MUST be a CBOR data item PATH_OUTER, which MUST be a CBOR byte string PATH_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string PATH_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within PATH_OUTER or if PATH_OUTER is malformed.
+
+  The value of each CBOR byte string PATH_BSTR is the binary representation of a CBOR sequence PATH_SEQ composed of 0 or more CBOR text strings. In particular, each PATH_SEQ specifies the URI path of an EDHOC resource at the server, with each CBOR text string within that PATH_SEQ specifying a URI path segment.
+
+  Editor's note: consider to add the same explanation about the chosen encoding for the URI path as a CBOR sequence that is given in Section 3.2 of draft-ietf-core-dns-over-coap-15.
+
+* "edhoc-app-prof" - The SvcParamKey "edhoc-app-prof" is single-valued and its value MUST be a CBOR data item APP_OUTER, which MUST be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string APP_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within APP_OUTER or if APP_OUTER is malformed.
+
+  The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}. The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the format defined in {{sec-app-profile-edhoc-message_1_2}}.
+
+  Each CBOR sequence APP_PROF_SEQ specifies a set of EDHOC application profiles that the server supports.
+
+If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR, then the SvcParamKey "edhocpath", if present, specifies the URI paths of the EDHOC resources at the server.
+
+If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then the following applies.
+
+* If the SvcParamKey "edhocpath" is not present in the SVCB RR, then the value of the SvcParamKey "edhoc-app-prof" MUST be a CBOR byte string.
+
+  The information specified by the SvcParamKey "edhoc-app-prof" pertains to the EDHOC resource at the server with URI path "/.well-known/edhoc".
+
+* If the SvcParamKey "edhocpath" is present in the SVCB RR, then the following applies.
+
+  * If the value of the SvcParamKey "edhocpath" is a CBOR byte string, then the value of the SvcParamKey "edhoc-app-prof" MUST also be a CBOR byte string.
+
+    The information specified by the SvcParamKey "edhoc-app-prof" pertains to the EDHOC resource at the server with URI path specified by the SvcParamKey "edhocpath".
+
+  * If the value of the SvcParamKey "edhocpath" is a CBOR array including N elements, then the value of the SvcParamKey "edhoc-app-prof" MUST also be a CBOR array including N elements.
+
+    The information specified by the i-th element of the CBOR array within the SvcParamKey "edhoc-app-prof" pertains to the EDHOC resource at the server with URI path specified by the i-th element of the CBOR array within the SvcParamKey "edhocpath".
+
+A consumer MUST treat as malformed an RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.
 
 # Well-known EDHOC Application Profiles # {#sec-well-known-app-profiles}
 
@@ -741,6 +781,24 @@ The columns of this registry are:
 
 This registry has been initially populated with the values in {{table-edhoc-well-known-app-profiles}}.
 
+## DNS SVCB Service Parameter Keys (SvcParamKeys) ## {#iana-svcb}
+
+IANA is asked to add the following entries to the "Service Parameter Keys (SvcParamKeys)" registry within the "DNS Service Bindings (SVCB)" registry group. The definition of this parameter can be found in {{sec-svcb}}.
+
+* Number: 11 (suggested)
+* Name: edhocpath
+* Meaning: EDHOC resource path
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Number: 12 (suggested)
+* Name: edhoc-app-prof
+* Meaning: Supported EDHOC application profiles
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
 ## Expert Review Instructions ## {#iana-expert-review}
 
 "Standards Action with Expert Review" and "Specification Required" are two of the registration policies defined for the IANA registry established in this document. This section gives some general guidelines for what the experts should be looking for, but they are being designated as experts for a reason so they should be given substantial latitude.
@@ -828,6 +886,8 @@ c509_cert = 3
   * Clarified meaning of boolean parameters that are non-prescriptive.
 
   * Forbid the presence of the element "trust_anchors".
+
+* Advertisement of Supported EDHOC Application Profiles using SVCB Resource Records.
 
 * Updated integer abbreviations for the EDHOC_Information parameters.
 
