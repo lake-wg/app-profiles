@@ -791,6 +791,24 @@ IANA is asked to register the following entry in the "EDHOC Error Codes" registr
 * Change Controller: IETF
 * Reference: {{&SELF}}
 
+## DNS SVCB Service Parameter Keys (SvcParamKeys) ## {#iana-svcb}
+
+IANA is asked to add the following entries to the "Service Parameter Keys (SvcParamKeys)" registry within the "DNS Service Bindings (SVCB)" registry group. The definition of these parameters can be found in {{sec-svcb}}.
+
+* Number: 11 (suggested)
+* Name: edhocpath
+* Meaning: EDHOC resource path
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
+<br>
+
+* Number: 12 (suggested)
+* Name: edhoc-app-prof
+* Meaning: Supported EDHOC application profiles
+* Change Controller: IETF
+* Reference: {{&SELF}}
+
 ## EDHOC Application Profiles Registry ## {#iana-edhoc-application-profiles}
 
 IANA is requested to create a new "EDHOC Application Profiles" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group defined in {{RFC9528}}.
@@ -810,24 +828,6 @@ The columns of this registry are:
 * Reference: This field contains a pointer to the public specification for the EDHOC application profile.
 
 This registry has been initially populated with the values in {{table-edhoc-well-known-app-profiles}}.
-
-## DNS SVCB Service Parameter Keys (SvcParamKeys) ## {#iana-svcb}
-
-IANA is asked to add the following entries to the "Service Parameter Keys (SvcParamKeys)" registry within the "DNS Service Bindings (SVCB)" registry group. The definition of this parameter can be found in {{sec-svcb}}.
-
-* Number: 11 (suggested)
-* Name: edhocpath
-* Meaning: EDHOC resource path
-* Change Controller: IETF
-* Reference: {{&SELF}}
-
-<br>
-
-* Number: 12 (suggested)
-* Name: edhoc-app-prof
-* Meaning: Supported EDHOC application profiles
-* Change Controller: IETF
-* Reference: {{&SELF}}
 
 ## Expert Review Instructions ## {#iana-expert-review}
 
@@ -907,7 +907,7 @@ c509_cert = 3
 
   * Invalid information in EDHOC error message with new error code.
 
-* Fixed encoding of ERR_INFO for the EDHOC error_message with the new error code.
+* Fixed encoding of ERR_INFO for the EDHOC error message with the new error code.
 
 * EDHOC_Application_Profile object
 
