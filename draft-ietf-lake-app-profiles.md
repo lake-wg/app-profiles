@@ -399,6 +399,8 @@ To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app
 
   The value of each CBOR byte string PATH_BSTR is the binary representation of a CBOR sequence PATH_SEQ composed of zero or more CBOR text strings. In particular, each PATH_SEQ specifies the URI path of an EDHOC resource at the server, with each CBOR text string within that PATH_SEQ specifying a URI path segment.
 
+  If PATH_OUTER is a CBOR array, it MUST NOT include any two elements that specify the same URI path.
+
   The CDDL grammar describing the value of the SvcParamKey "edhocpath" is shown in {{fig-cddl-edhocpath-value}}.
 
   Editor's note: consider to add the same explanation about the chosen encoding for the URI path as a CBOR sequence that is given in Section 3.2 of draft-ietf-core-dns-over-coap-15.
