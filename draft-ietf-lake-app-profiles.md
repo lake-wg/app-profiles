@@ -974,7 +974,7 @@ c509_cert = 3
 # Acknowledgments # {#acknowledgments}
 {:numbered="false"}
 
-The authors sincerely thank {{{Christian Amsüss}}}, {{{Geovane Fedrecheski}}}, {{{Michael Richardson}}}, {{{Göran Selander}}}, and {{{Brian Sipos}}} for their feedback and comments.
+The authors sincerely thank {{{Christian Amsüss}}}, {{{Carsten Bormann}}}, {{{Geovane Fedrecheski}}}, {{{Martine Lenders}}}, {{{Elsa Lopez-Perez}}}, {{{Michael Richardson}}}, {{{Göran Selander}}}, {{{Brian Sipos}}}, and {{{Mališa Vučinić}}} for their feedback and comments.
 
 The target attributes "ed-ta-*" for specifying supported trust anchors build on a proposal originally described in {{I-D.serafin-lake-ta-hint}}.
 
