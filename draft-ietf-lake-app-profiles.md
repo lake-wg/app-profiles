@@ -121,8 +121,6 @@ This section defines the EDHOC_Application_Profile object, which can be used as 
 
 An EDHOC_Application_Profile object is encoded as a CBOR map {{RFC8949}}. All elements that can be included in the EDHOC_Application_Profile object are elements that can be included in the CBOR-encoded EDHOC_Information object specified in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}. In particular, they use the same CBOR abbreviations from the 'CBOR label' column of the IANA registry "EDHOC Information" defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
-By construction, an EDHOC_Application_Profile object conveys information that pertains to the execution of EDHOC. This includes, e.g., information about transporting and processing EDHOC messages during an EDHOC session. An EDHOC_Application_Profile object does not convey information that does not play a role in completing an EDHOC execution. For instance, this includes the size of outputs of the EDHOC_Exporter interface (see {{Section 4.2.1 of RFC9528}}), or properties and features of protocols other than EDHOC itself that build on the results from an EDHOC session (e.g., the version of the application protocol subsequently used).
-
 The CBOR map encoding an EDHOC_Application_Profile object MUST include the element "app_prof" defined in {{sec-edhoc-information-object}} of this document, as well as the elements "methods" and "cred_types" defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
 
 The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the instance of the EDHOC_Application_Profile object in question. The identifier is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document and encoded as a CBOR integer.
@@ -888,6 +886,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -02 to -03 ## {#sec-02-03}
+
+* Removed restrictions on the scope of the EDHOC_Application_Profile object.
 
 * Clarifications and editorial improvements.
 
