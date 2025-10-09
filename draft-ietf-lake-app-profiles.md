@@ -69,7 +69,7 @@ The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Ove
 
 # Introduction # {#intro}
 
-Ephemeral Diffie-Hellman Over COSE (EDHOC) {{RFC9528}} is a lightweight authenticated key exchange protocol, especially intended for use in constrained scenarios. A main use case for EDHOC is to establish a Security Context for Object Security for Constrained RESTful Environments (OSCORE) {{RFC8613}}.
+Ephemeral Diffie-Hellman Over COSE (EDHOC) {{RFC9528}} is a lightweight authenticated key exchange protocol, especially intended for use in constrained scenarios. A main use case for EDHOC is the establishment of a Security Context for Object Security for Constrained RESTful Environments (OSCORE) {{RFC8613}}.
 
 In order to successfully run EDHOC, the two peers acting as Initiator and Responder have to agree on certain parameters. Some of those are in-band and communicated through the protocol execution, during which a few of them may even be negotiated. However, other parameters have to be known out-of-band, before running the EDHOC protocol.
 
@@ -85,7 +85,7 @@ Furthermore, in order to facilitate interoperability between EDHOC implementatio
 
 * The new parameter "ed-prof" defined in {{web-linking}}. This parameter is employed to specify an EDHOC application profile identified by its Profile ID and can be used as target attribute in a web link {{RFC8288}} to an EDHOC resource, or as filter criterion in a discovery request to discover EDHOC resources.
 
-  For instance, the target attribute can be used in a link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over the Constrained Application Protocol (CoAP) {{RFC7252}} (see {{Section A.2 of RFC9528}} as well as {{RFC9668}}).
+  For instance, the target attribute can be used in a CoRE link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over the Constrained Application Protocol (CoAP) {{RFC7252}} (see {{Section A.2 of RFC9528}} as well as {{RFC9668}}).
 
 * The new parameter "app_prof" defined in {{sec-edhoc-information-object}} for the EDHOC_Information object specified in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter is employed to specify a set of EDHOC application profiles, each identified by its Profile ID.
 
@@ -105,7 +105,7 @@ Finally, this document defines a set of well-known EDHOC application profiles (s
 
 {::boilerplate bcp14-tagged}
 
-The reader is expected to be familiar with terms and concepts defined in EDHOC {{RFC9528}}, and with the use of EDHOC with CoAP {{RFC7252}} and OSCORE {{RFC8613}} defined in {{RFC9668}}.
+The reader is expected to be familiar with terms and concepts defined in EDHOC {{RFC9528}} and with the use of EDHOC with CoAP {{RFC7252}} and OSCORE {{RFC8613}} defined in {{RFC9668}}.
 
 Concise Binary Object Representation (CBOR) {{RFC8949}} and Concise Data Definition Language (CDDL) {{RFC8610}} are used in this document. CDDL predefined type names, especially bstr for CBOR byte strings and tstr for CBOR text strings, are used extensively in this document.
 
@@ -175,7 +175,7 @@ As defined later in this document, Profile IDs can be used to identify EDHOC app
 
 ## In Web Linking # {#web-linking}
 
-{{Section 6 of RFC9668}} defines a number of target attributes that can be used in a web link {{RFC8288}} with resource type "core.edhoc" (see {{Section 10.10 of RFC9528}}). This is the case, e.g., when using a link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over CoAP {{RFC7252}} as defined in {{Section A.2 of RFC9528}}. This allows a client to obtain relevant information about the EDHOC application profile(s) to be used with a certain EDHOC resource.
+{{Section 6 of RFC9668}} defines a number of target attributes that can be used in a web link {{RFC8288}} with resource type "core.edhoc" (see {{Section 10.10 of RFC9528}}). This is the case, e.g., when using a CoRE link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over CoAP {{RFC7252}} as defined in {{Section A.2 of RFC9528}}. This allows a client to obtain relevant information about the EDHOC application profile(s) to be used with a certain EDHOC resource.
 
 In the same spirit, this section defines the following additional parameter, which can be optionally specified as a target attribute with the same name in the link to the respective EDHOC resource, or among the filter criteria in a discovery request from a client.
 
@@ -191,7 +191,7 @@ If a link to an EDHOC resource includes occurrences of the target attribute 'ed-
 
 * If the link includes occurrences of the target attribute 'ed-ead', the link provides the following information: when using the target EDHOC resource as per the EDHOC application profile indicated by any occurrence of the target attribute 'ed-prof', the server supports the External Authorization Data (EAD) items that are specified in the definition of that EDHOC application profile, as well as the EAD items indicated by the occurrences of the target attribute 'ed-ead'.
 
-The example in {{fig-web-link-example}} shows how a CoAP client discovers two EDHOC resources at a CoAP server, and obtains information about the application profile corresponding to each of those resources. The Link Format notation from {{Section 5 of RFC6690}} is used.
+The example in {{fig-web-link-example}} shows how a CoAP client discovers two EDHOC resources at a CoAP server, and obtains information about the application profile corresponding to each of those resources. The CoRE Link Format notation from {{Section 5 of RFC6690}} is used.
 
 The example assumes the existence of an EDHOC application profile identified by the integer Profile ID 500, which is supported by the EDHOC resource at /edhoc-alt and whose definition includes the support for the EAD items with EAD label 111 and 222.
 
@@ -232,15 +232,15 @@ Similarly, the access token includes the corresponding claim "edhoc_info", with 
 
 In turn, the EDHOC_Information object can include the parameter "app_prof" defined in this document. This parameter indicates a set of EDHOC application profiles associated with the EDHOC resource to use at the RS, which is either implied or specified by the parameter "uri_path" within the same EDHOC_Information object.
 
-If the EDHOC_Information object specified as value of "edhoc_info" includes the "app_prof" parameter, then the following applies.
+If the EDHOC_Information object specified as the value of the parameter/claim "edhoc_info" includes the "app_prof" parameter, then the following applies.
 
-* The object MUST NOT include other parameters, with the following exceptions:
+* In addition to the "app_prof" parameter, the object MUST NOT include other parameters, with the following exceptions:
 
   * The parameter "eads".
 
-  * The parameters that are not allowed in the EDHOC\_Application\_Profile object defined in {{sec-app-profile-cbor}}.
+  * Any parameter that is not allowed in the EDHOC\_Application\_Profile object defined in {{sec-app-profile-cbor}}.
 
-    These include the parameter "session_id", which the EDHOC_Information object has to include (see {{Sections 3.3 and 3.3.1 of I-D.ietf-ace-edhoc-oscore-profile}}).
+    For example, the parameter "session_id" is not allowed in the EDHOC\_Application\_Profile object (see {{sec-app-profile-cbor}}) and thus can be included in the EDHOC_Information object, where in fact it has to be present (see {{Sections 3.3 and 3.3.1 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
   C and RS MUST ignore other parameters that are not admitted if they are present in the EDHOC_Information object.
 
@@ -316,7 +316,7 @@ Each item of the CBOR sequence MUST be either of the following:
 
   This item of the CBOR sequence indicates that the message sender supports the EDHOC application profile identified by the Profile ID.
 
-* A CBOR array including at least one element. In particular:
+* A CBOR array including at least two elements. In particular:
 
   * The first element MUST be a CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry.
 
@@ -330,7 +330,7 @@ Each item of the CBOR sequence MUST be either of the following:
 
 * An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
-  The EDHOC_Information object MUST NOT include the element "app_prof" and MUST NOT include elements that are not allowed within the EDHOC_Application_Profile object defined in {{sec-app-profile-cbor}}, with the exception of the element "trust_anchor" that MAY be included. The recipient peer MUST ignore elements that are not allowed if they are present in the EDHOC_Information object.
+  The EDHOC_Information object MUST NOT include the element "app_prof" and MUST NOT include elements that are not allowed within the EDHOC_Application_Profile object defined in {{sec-app-profile-cbor}}, with the exception of the element "trust_anchors" that MAY be included. The recipient peer MUST ignore elements that are not allowed if they are present in the EDHOC_Information object.
 
   This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.
 
@@ -385,7 +385,7 @@ The Responder MUST NOT abort an EDHOC session exclusively due to the wish of sen
 
 When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and MUST NOT specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see {{Section 6.3 of RFC9528}}), the error message MUST NOT specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.
 
-When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ. This CBOR sequence has the same format and semantics of the one used for ead_value of the EAD item "Supported EDHOC application profiles" (see {{sec-app-profile-edhoc-message_1_2}}).
+When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}.
 
 The recipient peer MUST silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format.
 
@@ -662,7 +662,7 @@ Interoperability considerations: N/A
 
 Published specification: {{&SELF}}
 
-Applications that use this media type: Applications that need to describe, distribute, and store a representation of an EDHOC application profile (see {{Section 3.9 of RFC9528}}).
+Applications that use this media type: Applications that need to describe, distribute, and store a representation of an EDHOC application profile (see {{&SELF}} and {{Section 3.9 of RFC9528}}).
 
 Fragment identifier considerations: N/A
 
@@ -886,6 +886,10 @@ c509_cert = 3
 
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
+
+## Version -02 to -03 ## {#sec-02-03}
+
+* Clarifications and editorial improvements.
 
 ## Version -01 to -02 ## {#sec-01-02}
 
