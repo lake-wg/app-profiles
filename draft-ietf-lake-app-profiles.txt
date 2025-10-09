@@ -276,17 +276,6 @@ Table of Contents
    registry "EDHOC Information" defined in
    [I-D.ietf-ace-edhoc-oscore-profile].
 
-   By construction, an EDHOC_Application_Profile object conveys
-   information that pertains to the execution of EDHOC.  This includes,
-   e.g., information about transporting and processing EDHOC messages
-   during an EDHOC session.  An EDHOC_Application_Profile object does
-   not convey information that does not play a role in completing an
-   EDHOC execution.  For instance, this includes the size of outputs of
-   the EDHOC_Exporter interface (see Section 4.2.1 of [RFC9528]), or
-   properties and features of protocols other than EDHOC itself that
-   build on the results from an EDHOC session (e.g., the version of the
-   application protocol subsequently used).
-
    The CBOR map encoding an EDHOC_Application_Profile object MUST
    include the element "app_prof" defined in Section 3.2 of this
    document, as well as the elements "methods" and "cred_types" defined
@@ -1747,6 +1736,9 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -02 to -03
+
+   *  Removed restrictions on the scope of the EDHOC_Application_Profile
+      object.
 
    *  Clarifications and editorial improvements.
 
