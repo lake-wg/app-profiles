@@ -1844,8 +1844,9 @@ B.3.  Version -00 to -01
 
 Acknowledgments
 
-   The authors sincerely thank Christian Amsüss, Geovane Fedrecheski,
-   Michael Richardson, Göran Selander, and Brian Sipos for their
+   The authors sincerely thank Christian Amsüss, Carsten Bormann,
+   Geovane Fedrecheski, Martine Lenders, Elsa Lopez-Perez, Michael
+   Richardson, Göran Selander, Brian Sipos, and Mališa Vučinić for their
    feedback and comments.
 
    The target attributes "ed-ta-*" for specifying supported trust
