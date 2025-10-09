@@ -451,22 +451,23 @@ Table of Contents
 3.2.  In the EDHOC_Information Object
 
    Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile] defines the
-   EDHOC_Information object, as including information that guides two
-   peers towards executing the EDHOC protocol, and defines an initial
-   set of its parameters.
+   EDHOC_Information object and an initial set of its parameters.  The
+   object can be used to convey information that guides two peers about
+   executing the EDHOC protocol.
 
    This document defines the new parameter "app_prof" of the
-   EDHOC_Information object, as summarized in Table 1 and described
-   further below.
+   EDHOC_Information object (see Table 1).  The parameter is of type
+   non-prescriptive (NP) and is specified below.
 
-   +==========+=======+========+===================+===================+
-   | Name     | CBOR  | CBOR   | Registry          | Description       |
-   |          | label | type   |                   |                   |
-   +==========+=======+========+===================+===================+
-   | app_prof | 23    | int    | EDHOC Application | Set of supported  |
-   |          |       | or     | Profiles Registry | EDHOC Application |
-   |          |       | array  |                   | Profiles          |
-   +----------+-------+--------+-------------------+-------------------+
+    +==========+=======+=======+=============+=================+======+
+    | Name     | CBOR  | CBOR  | Registry    | Description     | Type |
+    |          | label | type  |             |                 |      |
+    +==========+=======+=======+=============+=================+======+
+    | app_prof | 23    | int   | EDHOC       | Set of          | NP   |
+    |          |       | or    | Application | supported EDHOC |      |
+    |          |       | array | Profiles    | Application     |      |
+    |          |       |       | Registry    | Profiles        |      |
+    +----------+-------+-------+-------------+-----------------+------+
 
               Table 1: EDHOC_Information Parameter "app_prof"
 
@@ -1409,6 +1410,8 @@ Table of Contents
 
    *  Description: Set of supported EDHOC application profiles
 
+   *  Type: NP
+
    *  Specification: [RFC-XXXX][RFC9528]
 
 10.5.  EDHOC External Authorization Data Registry
@@ -1739,6 +1742,8 @@ B.1.  Version -02 to -03
 
    *  Removed restrictions on the scope of the EDHOC_Application_Profile
       object.
+
+   *  Specified type of "app_prof" in the IANA registration request.
 
    *  Clarifications and editorial improvements.
 
