@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 6 January 2026                                      5 July 2025
+Expires: 12 April 2026                                    9 October 2025
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 January 2026.
+   This Internet-Draft will expire on 12 April 2026.
 
 Copyright Notice
 
@@ -117,8 +117,9 @@ Table of Contents
      11.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
-     B.1.  Version -01 to -02
-     B.2.  Version -00 to -01
+     B.1.  Version -02 to -03
+     B.2.  Version -01 to -02
+     B.3.  Version -00 to -01
    Acknowledgments
    Authors' Addresses
 
@@ -126,9 +127,9 @@ Table of Contents
 
    Ephemeral Diffie-Hellman Over COSE (EDHOC) [RFC9528] is a lightweight
    authenticated key exchange protocol, especially intended for use in
-   constrained scenarios.  A main use case for EDHOC is to establish a
-   Security Context for Object Security for Constrained RESTful
-   Environments (OSCORE) [RFC8613].
+   constrained scenarios.  A main use case for EDHOC is the
+   establishment of a Security Context for Object Security for
+   Constrained RESTful Environments (OSCORE) [RFC8613].
 
    In order to successfully run EDHOC, the two peers acting as Initiator
    and Responder have to agree on certain parameters.  Some of those are
@@ -175,11 +176,11 @@ Table of Contents
       in a web link [RFC8288] to an EDHOC resource, or as filter
       criterion in a discovery request to discover EDHOC resources.
 
-      For instance, the target attribute can be used in a link-format
-      document [RFC6690] describing EDHOC resources at a server, when
-      EDHOC is transferred over the Constrained Application Protocol
-      (CoAP) [RFC7252] (see Appendix A.2 of [RFC9528] as well as
-      [RFC9668]).
+      For instance, the target attribute can be used in a CoRE link-
+      format document [RFC6690] describing EDHOC resources at a server,
+      when EDHOC is transferred over the Constrained Application
+      Protocol (CoAP) [RFC7252] (see Appendix A.2 of [RFC9528] as well
+      as [RFC9668]).
 
    *  The new parameter "app_prof" defined in Section 3.2 for the
       EDHOC_Information object specified in
@@ -234,7 +235,7 @@ Table of Contents
    capitals, as shown here.
 
    The reader is expected to be familiar with terms and concepts defined
-   in EDHOC [RFC9528], and with the use of EDHOC with CoAP [RFC7252] and
+   in EDHOC [RFC9528] and with the use of EDHOC with CoAP [RFC7252] and
    OSCORE [RFC8613] defined in [RFC9668].
 
    Concise Binary Object Representation (CBOR) [RFC8949] and Concise
@@ -389,7 +390,7 @@ Table of Contents
    Section 6 of [RFC9668] defines a number of target attributes that can
    be used in a web link [RFC8288] with resource type "core.edhoc" (see
    Section 10.10 of [RFC9528]).  This is the case, e.g., when using a
-   link-format document [RFC6690] describing EDHOC resources at a
+   CoRE link-format document [RFC6690] describing EDHOC resources at a
    server, when EDHOC is transferred over CoAP [RFC7252] as defined in
    Appendix A.2 of [RFC9528].  This allows a client to obtain relevant
    information about the EDHOC application profile(s) to be used with a
@@ -434,7 +435,7 @@ Table of Contents
    The example in Figure 2 shows how a CoAP client discovers two EDHOC
    resources at a CoAP server, and obtains information about the
    application profile corresponding to each of those resources.  The
-   Link Format notation from Section 5 of [RFC6690] is used.
+   CoRE Link Format notation from Section 5 of [RFC6690] is used.
 
    The example assumes the existence of an EDHOC application profile
    identified by the integer Profile ID 500, which is supported by the
@@ -516,20 +517,23 @@ Table of Contents
    use at the RS, which is either implied or specified by the parameter
    "uri_path" within the same EDHOC_Information object.
 
-   If the EDHOC_Information object specified as value of "edhoc_info"
-   includes the "app_prof" parameter, then the following applies.
+   If the EDHOC_Information object specified as the value of the
+   parameter/claim "edhoc_info" includes the "app_prof" parameter, then
+   the following applies.
 
-   *  The object MUST NOT include other parameters, with the following
-      exceptions:
+   *  In addition to the "app_prof" parameter, the object MUST NOT
+      include other parameters, with the following exceptions:
 
       -  The parameter "eads".
 
-      -  The parameters that are not allowed in the
+      -  Any parameter that is not allowed in the
          EDHOC_Application_Profile object defined in Section 2.
 
-         These include the parameter "session_id", which the
-         EDHOC_Information object has to include (see Sections 3.3 and
-         3.3.1 of [I-D.ietf-ace-edhoc-oscore-profile]).
+         For example, the parameter "session_id" is not allowed in the
+         EDHOC_Application_Profile object (see Section 2) and thus can
+         be included in the EDHOC_Information object, where in fact it
+         has to be present (see Sections 3.3 and 3.3.1 of
+         [I-D.ietf-ace-edhoc-oscore-profile]).
 
       C and RS MUST ignore other parameters that are not admitted if
       they are present in the EDHOC_Information object.
@@ -721,7 +725,7 @@ Table of Contents
       supports the EDHOC application profile identified by the Profile
       ID.
 
-   *  A CBOR array including at least one element.  In particular:
+   *  A CBOR array including at least two elements.  In particular:
 
       -  The first element MUST be a CBOR integer, specifying the
          Profile ID of an EDHOC application profile.  The integer value
@@ -748,7 +752,7 @@ Table of Contents
       The EDHOC_Information object MUST NOT include the element
       "app_prof" and MUST NOT include elements that are not allowed
       within the EDHOC_Application_Profile object defined in Section 2,
-      with the exception of the element "trust_anchor" that MAY be
+      with the exception of the element "trust_anchors" that MAY be
       included.  The recipient peer MUST ignore elements that are not
       allowed if they are present in the EDHOC_Information object.
 
@@ -850,10 +854,8 @@ Table of Contents
 
    When using error code TBD_ERROR_CODE, the error information specified
    in ERR_INFO MUST be a CBOR byte string with value the binary
-   representation of a CBOR sequence APP_PROF_SEQ.  This CBOR sequence
-   has the same format and semantics of the one used for ead_value of
-   the EAD item "Supported EDHOC application profiles" (see
-   Section 5.1).
+   representation of a CBOR sequence APP_PROF_SEQ, which has the same
+   format and semantics specified in Section 5.1.
 
    The recipient peer MUST silently ignore elements of the CBOR sequence
    APP_PROF_SEQ that are malformed or do not conform with the intended
@@ -1241,7 +1243,7 @@ Table of Contents
 
    Applications that use this media type: Applications that need to
    describe, distribute, and store a representation of an EDHOC
-   application profile (see Section 3.9 of [RFC9528]).
+   application profile (see [RFC-XXXX] and Section 3.9 of [RFC9528]).
 
    Fragment identifier considerations: N/A
 
@@ -1575,17 +1577,17 @@ Table of Contents
               Security for Constrained Environments (OSCORE) Profile for
               Authentication and Authorization for Constrained
               Environments (ACE)", Work in Progress, Internet-Draft,
-              draft-ietf-ace-edhoc-oscore-profile-07, 3 March 2025,
+              draft-ietf-ace-edhoc-oscore-profile-08, 7 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
-              edhoc-oscore-profile-07>.
+              edhoc-oscore-profile-08>.
 
    [I-D.ietf-cose-cbor-encoded-cert]
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
               Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-14, 23 June 2025,
+              ietf-cose-cbor-encoded-cert-15, 18 August 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-14>.
+              cbor-encoded-cert-15>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1744,7 +1746,11 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -01 to -02
+B.1.  Version -02 to -03
+
+   *  Clarifications and editorial improvements.
+
+B.2.  Version -01 to -02
 
    *  Revised order of sections.
 
@@ -1799,7 +1805,7 @@ B.1.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.2.  Version -00 to -01
+B.3.  Version -00 to -01
 
    *  Clarified motivation in the abstract and introduction.
 
