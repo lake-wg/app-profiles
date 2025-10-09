@@ -210,12 +210,12 @@ RES: 2.05 Content
 
 ## In the EDHOC_Information Object # {#sec-edhoc-information-object}
 
-{{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}} defines the EDHOC_Information object, as including information that guides two peers towards executing the EDHOC protocol, and defines an initial set of its parameters.
+{{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}} defines the EDHOC_Information object and an initial set of its parameters. The object can be used to convey information that guides two peers about executing the EDHOC protocol.
 
-This document defines the new parameter "app\_prof" of the EDHOC_Information object, as summarized in {{table-cbor-key-edhoc-params}} and described further below.
+This document defines the new parameter "app\_prof" of the EDHOC_Information object (see {{table-cbor-key-edhoc-params}}). The parameter is of type non-prescriptive (NP) and is specified below.
 
-| Name     | CBOR label | CBOR type    | Registry                            | Description                                 |
-| app_prof | 23         | int or array | EDHOC Application Profiles Registry | Set of supported EDHOC Application Profiles |
+| Name     | CBOR label | CBOR type    | Registry                            | Description                                 | Type |
+| app_prof | 23         | int or array | EDHOC Application Profiles Registry | Set of supported EDHOC Application Profiles | NP   |
 {: #table-cbor-key-edhoc-params title="EDHOC_Information Parameter \"app_prof\"" align="center"}
 
 * app\_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app\_prof" value is an integer or an array of integers. In CBOR, "app\_prof" is an integer or an array of integers, and has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
@@ -776,6 +776,7 @@ IANA is asked to register the following entry in the "EDHOC Information" registr
 * CBOR type: int or array
 * Registry: EDHOC Application Profiles registry
 * Description: Set of supported EDHOC application profiles
+* Type: NP
 * Specification: {{&SELF}}{{RFC9528}}
 
 ## EDHOC External Authorization Data Registry ## {#iana-edhoc-ead-registry}
@@ -888,6 +889,8 @@ c509_cert = 3
 ## Version -02 to -03 ## {#sec-02-03}
 
 * Removed restrictions on the scope of the EDHOC_Application_Profile object.
+
+* Specified type of "app_prof" in the IANA registration request.
 
 * Clarifications and editorial improvements.
 
