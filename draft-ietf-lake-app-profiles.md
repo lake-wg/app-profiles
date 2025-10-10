@@ -54,6 +54,7 @@ normative:
   I-D.ietf-cose-cbor-encoded-cert:
 
 informative:
+  RFC3492:
   RFC9423:
   RFC9529:
   I-D.serafin-lake-ta-hint:
@@ -397,23 +398,35 @@ Given a server, its support for EDHOC and for EDHOC application profiles can be 
 
 To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app-prof", which are defined below and are registered in {{iana-svcb}}.
 
-* "edhocpath" - The SvcParamKey "edhocpath" is single-valued and its value MUST be a CBOR data item PATH_OUTER, which MUST be a CBOR byte string PATH_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string PATH_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within PATH_OUTER or if PATH_OUTER is malformed.
+* "edhocpath" - The SvcParamKey "edhocpath" is single-valued and specifies a list of one or more absolute paths to EDHOC resources at the server.
 
-  The value of each CBOR byte string PATH_BSTR is the binary representation of a CBOR sequence PATH_SEQ composed of zero or more CBOR text strings. In particular, each PATH_SEQ specifies the URI path of an EDHOC resource at the server, with each CBOR text string within that PATH_SEQ specifying a URI path segment.
+  - The wire-format value of "edhocpath" is the binary representation of the CBOR data item edhocpath-value, which MUST exactly fill the SvcParamValue.
 
-  If PATH_OUTER is a CBOR array, it MUST NOT include any two elements that specify the same URI path.
+    In particular, edhocpath-value MUST be a CBOR byte string PATH_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string PATH_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within edhocpath-value or if edhocpath-value is malformed.
 
-  The CDDL grammar describing the value of the SvcParamKey "edhocpath" is shown in {{fig-cddl-edhocpath-value}}.
+    The value of each CBOR byte string PATH_BSTR is the binary representation of a CBOR sequence PATH_SEQ composed of zero or more CBOR text strings. In particular, each PATH_SEQ specifies the URI path of an EDHOC resource at the server, with each CBOR text string within that PATH_SEQ specifying a URI path segment.
 
-  Editor's note: consider to add the same explanation about the chosen encoding for the URI path as a CBOR sequence that is given in Section 3.2 of draft-ietf-core-dns-over-coap-15.
+    If edhocpath-value is a CBOR array, it MUST NOT include any two elements that specify the same URI path.
 
-* "edhoc-app-prof" - The SvcParamKey "edhoc-app-prof" is single-valued and its value MUST be a CBOR data item APP_OUTER, which MUST be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string APP_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within APP_OUTER or if APP_OUTER is malformed.
+    The CDDL grammar describing the CBOR data item edhocpath-value is shown in {{fig-cddl-edhocpath-value}}.
 
-  The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}. The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the format defined in {{sec-app-profile-edhoc-message_1_2}}.
+  - The presentation format value of "edhocpath" SHALL be a comma-separated list (see {{Section A.1 of RFC9460}}) of one or more absolute paths to EDHOC resources at the server. The same considerations for the "," and "\\" characters in paths for zone-file implementations as for the alpn-ids in an "alpn" SvcParam apply (see {{Section 7.1.1 of RFC9460}}).
 
-  The CDDL grammar describing the value of the SvcParamKey "edhoc-app-prof" is shown in {{fig-cddl-edhoc-app-prof-value}}.
+    The i-th path in the presentation format value is the textual representation of the path specified by the i-th CBOR sequence PATH_SEQ in the wire-format value (see above).
 
-  Each CBOR sequence APP_PROF_SEQ specifies a set of EDHOC application profiles that the server supports.
+    The textual representation of each path follows the semantics of path-absolute shown in the ABNF definition in {{fig-edhocpath-value-path-abnf}}. In particular, given the path specified by a CBOR sequence PATH_SEQ, segment-nz is the value of the first CBOR text string in PATH_SEQ (if any), while each segment is the value of a CBOR text string following the first one in PATH_SEQ (if any).
+
+* "edhoc-app-prof" - The SvcParamKey "edhoc-app-prof" is single-valued and specifies a set of EDHOC application profiles that the server supports.
+
+  - The wire-format value of "edhoc-app-prof" is the binary representation of the CBOR data item edhoc-app-prof-value, which MUST exactly fill the SvcParamValue.
+
+    In particular, edhoc-app-prof-value MUST be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string APP_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within edhoc-app-prof-value or if edhoc-app-prof-value is malformed.
+
+    The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}. The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the format defined in {{sec-app-profile-edhoc-message_1_2}}.
+
+    The CDDL grammar describing the CBOR data item edhoc-app-prof-value is shown in {{fig-cddl-edhoc-app-prof-value}}.
+
+  - The presentation format value of "edhoc-app-prof" SHALL be the CBOR extended diagnostic notation (see {{Section 8 of RFC8949}} and {{Section G of RFC8610}}) of edhoc-app-prof-value in the wire-format value (see above). When producing the presentation format value, care ought to be taken in representing Unicode with the limited ASCII character subset (e.g., by means of Punycode {{RFC3492}}) and in removing unnecessary common blank spaces within the CBOR extended diagnostic notation.
 
 If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR, then the SvcParamKey "edhocpath", if present, specifies the URI paths of EDHOC resources at the server.
 
@@ -436,9 +449,7 @@ If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then the followin
 A consumer MUST treat as malformed an SVCB RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
-edhocpath-value = PATH_OUTER
-
-PATH_OUTER = PATH_BSTR / [2* PATH_BSTR]
+edhocpath-value = PATH_BSTR / [2* PATH_BSTR]
 
 PATH_BSTR = bytes .cborseq PATH_SEQ
 
@@ -450,10 +461,23 @@ path_segment = tstr
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-edhocpath-value title="CDDL Definition of the value of the SvcParamKey \"edhocpath\"" artwork-align="left"}
 
-~~~~~~~~~~~~~~~~~~~~ CDDL
-edhoc-app-prof-value = APP_OUTER
+~~~~~~~~~~~~~~~~~~~~ ABNF
+path-absolute = "/" [ segment-nz *( "/" segment ) ]
 
-APP_OUTER = APP_BSTR / [2* APP_BSTR]
+segment       = *pchar
+segment-nz    = 1*pchar
+
+pchar = unreserved / pct-encoded / sub-delims / ":" / "@"
+
+unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+pct-encoded   = "%" HEXDIG HEXDIG
+sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
+             / "*" / "+" / "," / ";" / "="
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-edhocpath-value-path-abnf title="ABNF Definition of path-absolute" artwork-align="left"}
+
+~~~~~~~~~~~~~~~~~~~~ CDDL
+edhoc-app-prof-value = APP_BSTR / [2* APP_BSTR]
 
 ; The full definition of APP_PROF_SEQ
 ; is provided in Section 5.1
@@ -895,6 +919,8 @@ c509_cert = 3
 * Removed restrictions on the scope of the EDHOC_Application_Profile object.
 
 * Forbidden violations of prescriptive indications in the EAD item. The EDHOC session fails if such a violation is detected.
+
+* Specified wire-format and presentation format for the SvcParamKeys.
 
 * Fixed errors in CDDL notations.
 
