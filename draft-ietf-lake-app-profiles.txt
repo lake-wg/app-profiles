@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 12 April 2026                                    9 October 2025
+Expires: 13 April 2026                                   10 October 2025
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2026.
+   This Internet-Draft will expire on 13 April 2026.
 
 Copyright Notice
 
@@ -760,7 +760,7 @@ Table of Contents
    The CDDL grammar describing ead_value for the EAD item "Supported
    EDHOC application profiles" is shown in Figure 3.
 
-   ead_value = << APP_PROF_SEQ >>
+   ead_value = bytes .cborseq APP_PROF_SEQ
 
    ; This defines an array, the elements of which
    ; are to be used in the CBOR Sequence APP_PROF_SEQ:
@@ -949,7 +949,7 @@ Table of Contents
 
    PATH_OUTER = PATH_BSTR / [2* PATH_BSTR]
 
-   PATH_BSTR = << PATH_SEQ >>
+   PATH_BSTR = bytes .cborseq PATH_SEQ
 
    ; This defines an array, the elements of which
    ; are to be used in the CBOR Sequence PATH_SEQ:
@@ -965,7 +965,7 @@ Table of Contents
 
    ; The full definition of APP_PROF_SEQ
    ; is provided in Section 5.1
-   APP_BSTR = << APP_PROF_SEQ >>
+   APP_BSTR = bytes .cborseq APP_PROF_SEQ
 
      Figure 5: CDDL Definition of the value of the SvcParamKey "edhoc-
                                  app-prof"
@@ -1744,6 +1744,8 @@ B.1.  Version -02 to -03
       object.
 
    *  Specified type of "app_prof" in the IANA registration request.
+
+   *  Fixed errors in CDDL notations.
 
    *  Clarifications and editorial improvements.
 
