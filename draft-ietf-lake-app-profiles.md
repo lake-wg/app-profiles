@@ -339,7 +339,7 @@ The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC err
 The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in {{fig-cddl-ead-value}}.
 
 ~~~~~~~~~~~~~~~~~~~~ CDDL
-ead_value = << APP_PROF_SEQ >>
+ead_value = bytes .cborseq APP_PROF_SEQ
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence APP_PROF_SEQ:
@@ -436,7 +436,7 @@ edhocpath-value = PATH_OUTER
 
 PATH_OUTER = PATH_BSTR / [2* PATH_BSTR]
 
-PATH_BSTR = << PATH_SEQ >>
+PATH_BSTR = bytes .cborseq PATH_SEQ
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence PATH_SEQ:
@@ -453,7 +453,7 @@ APP_OUTER = APP_BSTR / [2* APP_BSTR]
 
 ; The full definition of APP_PROF_SEQ
 ; is provided in Section 5.1
-APP_BSTR = << APP_PROF_SEQ >>
+APP_BSTR = bytes .cborseq APP_PROF_SEQ
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-edhoc-app-prof-value title="CDDL Definition of the value of the SvcParamKey \"edhoc-app-prof\"" artwork-align="left"}
 
@@ -891,6 +891,8 @@ c509_cert = 3
 * Removed restrictions on the scope of the EDHOC_Application_Profile object.
 
 * Specified type of "app_prof" in the IANA registration request.
+
+* Fixed errors in CDDL notations.
 
 * Clarifications and editorial improvements.
 
