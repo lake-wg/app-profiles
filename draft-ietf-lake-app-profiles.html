@@ -1633,53 +1633,93 @@ When using the target EDHOC resource as per any EDHOC application profile indica
 <p id="section-5.1-4">When the EAD item is present, its ead_label TBD_EAD_LABEL <span class="bcp14">MUST</span> be used only with negative sign, i.e., the use of the EAD item is always critical (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.8" class="relref">Section 3.8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 <p id="section-5.1-5">The EAD item <span class="bcp14">MUST NOT</span> occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 <p id="section-5.1-6">The EAD item <span class="bcp14">MUST NOT</span> be included in the EAD fields of EDHOC message_3 or message_4. In case the recipient peer supports the EAD item, the recipient peer <span class="bcp14">MUST</span> silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
-<p id="section-5.1-7">The EAD item <span class="bcp14">MUST</span> specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence <span>[<a href="#RFC8742" class="cite xref">RFC8742</a>]</span>, namely APP_PROF_SEQ. The CBOR sequence is composed of one or more items, whose order has no meaning.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
-<p id="section-5.1-8">Each item of the CBOR sequence <span class="bcp14">MUST</span> be either of the following:<a href="#section-5.1-8" class="pilcrow">¶</a></p>
+<p id="section-5.1-7">The EAD item <span class="bcp14">MUST</span> specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence <span>[<a href="#RFC8742" class="cite xref">RFC8742</a>]</span>. In particular:<a href="#section-5.1-7" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.1-9.1">
-            <p id="section-5.1-9.1.1">A CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document.<a href="#section-5.1-9.1.1" class="pilcrow">¶</a></p>
-<p id="section-5.1-9.1.2">
-This item of the CBOR sequence indicates that the message sender supports the EDHOC application profile identified by the Profile ID.<a href="#section-5.1-9.1.2" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-5.1-9.2">
-            <p id="section-5.1-9.2.1">A CBOR array including at least two elements. In particular:<a href="#section-5.1-9.2.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-8.1">
+            <p id="section-5.1-8.1.1">When the EAD item is included in the EAD_1 field, the value of the CBOR byte string is the binary representation of the CBOR sequence OUTER_SEQ. In turn, OUTER_SEQ is composed of the following elements:<a href="#section-5.1-8.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.1-9.2.2.1">
-                <p id="section-5.1-9.2.2.1.1">The first element <span class="bcp14">MUST</span> be a CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry.<a href="#section-5.1-9.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-5.1-9.2.2.2">
-                <p id="section-5.1-9.2.2.2.1">Each of the elements following the first one <span class="bcp14">MUST</span> be a CBOR unsigned integer, specifying the ead_label of an EAD item.<a href="#section-5.1-9.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-<p id="section-5.1-9.2.3">
-This item of the CBOR sequence indicates that the message sender supports:<a href="#section-5.1-9.2.3" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-8.1.2.1">
+                <p id="section-5.1-8.1.2.1.1">The CBOR data item reply_flag, which <span class="bcp14">MAY</span> be present. If present, it <span class="bcp14">MUST</span> encode the CBOR simple value true (0xf5) or false (0xf4). The semantics of this item is as follows.<a href="#section-5.1-8.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.1-9.2.4.1">
-                <p id="section-5.1-9.2.4.1.1">The EDHOC application profile PROFILE identified by the Profile ID in the first element of the array; and<a href="#section-5.1-9.2.4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-8.1.2.1.2.1">
+                    <p id="section-5.1-8.1.2.1.2.1.1">If the item reply_flag is present and encodes the CBOR simple value true (0xf5), the Initiator is asking the Responder to advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1.<a href="#section-5.1-8.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-8.1.2.1.2.1.2">
+If such a message is EDHOC message_2, the Responder relies on the EAD item "Supported EDHOC application profiles" included in the EAD_2 field. If such a message is an EDHOC error message with error code TBD_ERROR_CODE (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>), the Responder relies on ERR_INFO.<a href="#section-5.1-8.1.2.1.2.1.2" class="pilcrow">¶</a></p>
+<p id="section-5.1-8.1.2.1.2.1.3">
+If the Responder sends either of those messages in reply to such an EDHOC message_1, the Responder <span class="bcp14">MUST</span> honor the request from the Initiator and accordingly advertise the EDHOC application profiles that it supports.<a href="#section-5.1-8.1.2.1.2.1.3" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-5.1-9.2.4.2">
-                <p id="section-5.1-9.2.4.2.1">The EAD items identified by the ead_label in the elements following the first one, in addition to the EAD items that are specified in the definition of the EDHOC application profile PROFILE.<a href="#section-5.1-9.2.4.2.1" class="pilcrow">¶</a></p>
+                  <li class="normal" id="section-5.1-8.1.2.1.2.2">
+                    <p id="section-5.1-8.1.2.1.2.2.1">If the item reply_flag is present and encodes the CBOR simple value false (0xf4), the Initiator is suggesting the Responder to not advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1. This is relevant when the Initiator already knows what EDHOC application profiles are supported by the Responder, e.g., based on previous interactions with that Responder or on the outcome of a discovery process.<a href="#section-5.1-8.1.2.1.2.2.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-8.1.2.1.2.2.2">
+In spite of the suggestion from the Initiator, the Responder <span class="bcp14">MAY</span> still advertise the EDHOC application profiles that it supports, when replying to EDHOC message_1 with EDHOC message_2 or with an EDHOC error message with error code TBD_ERROR_CODE (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>). For example, when sending EDHOC message_2, the Responder might wish to steer the rest of the EDHOC session in a specific way, by including the EAD item "Supported EDHOC application profiles" that specifies information corresponding to EDHOC_Information prescriptive parameters (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-08#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-5.1-8.1.2.1.2.2.2" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-5.1-8.1.2.2">
+                <p id="section-5.1-8.1.2.2.1">The CBOR sequence APP_PROF_SEQ, which is specified further below.<a href="#section-5.1-8.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="section-5.1-9.3">
-            <p id="section-5.1-9.3.1">An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-08#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-5.1-9.3.1" class="pilcrow">¶</a></p>
-<p id="section-5.1-9.3.2">
-The EDHOC_Information object <span class="bcp14">MUST NOT</span> include the element "app_prof" and <span class="bcp14">MUST NOT</span> include elements that are not allowed within the EDHOC_Application_Profile object defined in <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>, with the exception of the element "trust_anchors" that <span class="bcp14">MAY</span> be included. The recipient peer <span class="bcp14">MUST</span> ignore elements that are not allowed if they are present in the EDHOC_Information object.<a href="#section-5.1-9.3.2" class="pilcrow">¶</a></p>
-<p id="section-5.1-9.3.3">
-This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.<a href="#section-5.1-9.3.3" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.1-8.2">
+            <p id="section-5.1-8.2.1">When the EAD item is included in the EAD_2 field, the value of the CBOR byte string is the binary representation of the CBOR sequence APP_PROF_SEQ.<a href="#section-5.1-8.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-5.1-10">The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message if ead_value is malformed or does not conform with the format defined above.<a href="#section-5.1-10" class="pilcrow">¶</a></p>
-<p id="section-5.1-11">It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-08#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4" or "max_msgsize". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-5.1-11" class="pilcrow">¶</a></p>
-<p id="section-5.1-12">If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session <span class="bcp14">MUST NOT</span> act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Upon receiving an EDHOC message, a peer <span class="bcp14">MUST</span> check whether the other peer has violated such indications. If any violation is found, the peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message.<a href="#section-5.1-12" class="pilcrow">¶</a></p>
-<p id="section-5.1-13">When composing ead_value, the sender peer <span class="bcp14">MUST</span> comply with the content restrictions specified in <a href="#sec-app-profile-edhoc-message_1_2-restrictions" class="auto internal xref">Section 5.1.1</a>.<a href="#section-5.1-13" class="pilcrow">¶</a></p>
-<p id="section-5.1-14">The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 3</a>.<a href="#section-5.1-14" class="pilcrow">¶</a></p>
+<p id="section-5.1-9">The CBOR sequence APP_PROF_SEQ is composed of one or more items, whose order has no meaning. Each item of the CBOR sequence <span class="bcp14">MUST</span> be either of the following:<a href="#section-5.1-9" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-10.1">
+            <p id="section-5.1-10.1.1">A CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document.<a href="#section-5.1-10.1.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-10.1.2">
+This item of the CBOR sequence indicates that the message sender supports the EDHOC application profile identified by the Profile ID.<a href="#section-5.1-10.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-10.2">
+            <p id="section-5.1-10.2.1">A CBOR array including at least two elements. In particular:<a href="#section-5.1-10.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-10.2.2.1">
+                <p id="section-5.1-10.2.2.1.1">The first element <span class="bcp14">MUST</span> be a CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry.<a href="#section-5.1-10.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-5.1-10.2.2.2">
+                <p id="section-5.1-10.2.2.2.1">Each of the elements following the first one <span class="bcp14">MUST</span> be a CBOR unsigned integer, specifying the ead_label of an EAD item.<a href="#section-5.1-10.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-5.1-10.2.3">
+This item of the CBOR sequence indicates that the message sender supports:<a href="#section-5.1-10.2.3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-10.2.4.1">
+                <p id="section-5.1-10.2.4.1.1">The EDHOC application profile PROFILE identified by the Profile ID in the first element of the array; and<a href="#section-5.1-10.2.4.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-5.1-10.2.4.2">
+                <p id="section-5.1-10.2.4.2.1">The EAD items identified by the ead_label in the elements following the first one, in addition to the EAD items that are specified in the definition of the EDHOC application profile PROFILE.<a href="#section-5.1-10.2.4.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-5.1-10.3">
+            <p id="section-5.1-10.3.1">An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-08#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-5.1-10.3.1" class="pilcrow">¶</a></p>
+<p id="section-5.1-10.3.2">
+The EDHOC_Information object <span class="bcp14">MUST NOT</span> include the element "app_prof" and <span class="bcp14">MUST NOT</span> include elements that are not allowed within the EDHOC_Application_Profile object defined in <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>, with the exception of the element "trust_anchors" that <span class="bcp14">MAY</span> be included. The recipient peer <span class="bcp14">MUST</span> ignore elements that are not allowed if they are present in the EDHOC_Information object.<a href="#section-5.1-10.3.2" class="pilcrow">¶</a></p>
+<p id="section-5.1-10.3.3">
+This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.<a href="#section-5.1-10.3.3" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.1-11">The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message if ead_value is malformed or does not conform with the format defined above.<a href="#section-5.1-11" class="pilcrow">¶</a></p>
+<p id="section-5.1-12">It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-08#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4" or "max_msgsize". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-5.1-12" class="pilcrow">¶</a></p>
+<p id="section-5.1-13">If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session <span class="bcp14">MUST NOT</span> act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Upon receiving an EDHOC message, a peer <span class="bcp14">MUST</span> check whether the other peer has violated such indications. If any violation is found, the peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message.<a href="#section-5.1-13" class="pilcrow">¶</a></p>
+<p id="section-5.1-14">When composing ead_value, the sender peer <span class="bcp14">MUST</span> comply with the content restrictions specified in <a href="#sec-app-profile-edhoc-message_1_2-restrictions" class="auto internal xref">Section 5.1.1</a>.<a href="#section-5.1-14" class="pilcrow">¶</a></p>
+<p id="section-5.1-15">The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 3</a>.<a href="#section-5.1-15" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-ead_valu"></span><div id="fig-cddl-ead-value">
 <figure id="figure-3">
-          <div class="alignLeft art-CDDL art-text artwork" id="section-5.1-15.1">
+          <div class="alignLeft art-CDDL art-text artwork" id="section-5.1-16.1">
 <pre>
-ead_value = bytes .cborseq APP_PROF_SEQ
+ead_value = ead_1_value / ead_2_value
+
+ead_1_value = bytes .cborseq OUTER_SEQ
+
+ead_2_value = bytes .cborseq APP_PROF_SEQ
+
+; This defines an array, the elements of which
+; are to be used in the CBOR Sequence OUTER_SEQ:
+OUTER_SEQ = [?reply_flag, APP_PROF_SEQ]
+
+reply_flag = bool
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence APP_PROF_SEQ:
@@ -2740,16 +2780,19 @@ c509_cert = 3
             <p id="appendix-B.1-1.2.1">Forbidden violations of prescriptive indications in the EAD item. The EDHOC session fails if such a violation is detected.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">Specified wire-format and presentation format for the SvcParamKeys.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.3.1">Extended semantics of ead_value: optional boolean flag when the EAD item is used in EDHOC message_1.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.4">
-            <p id="appendix-B.1-1.4.1">Fixed errors in CDDL notations.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.4.1">Specified wire-format and presentation format for the SvcParamKeys.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Specified type of "app_prof" in the IANA registration request.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.5.1">Fixed errors in CDDL notations.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.6">
-            <p id="appendix-B.1-1.6.1">Clarifications and editorial improvements.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.6.1">Specified type of "app_prof" in the IANA registration request.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.7">
+            <p id="appendix-B.1-1.7.1">Clarifications and editorial improvements.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
