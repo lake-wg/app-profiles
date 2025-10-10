@@ -332,9 +332,13 @@ Each item of the CBOR sequence MUST be either of the following:
 
   This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.
 
-When composing ead_value, the sender peer MUST comply with the content restrictions specified in {{sec-app-profile-edhoc-message_1_2-restrictions}}.
-
 The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message if ead_value is malformed or does not conform with the format defined above.
+
+It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4" or "max_msgsize". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
+
+If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session MUST NOT act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Upon receiving an EDHOC message, a peer MUST check whether the other peer has violated such indications. If any violation is found, the peer MUST abort the EDHOC session and MUST reply with an EDHOC error message.
+
+When composing ead_value, the sender peer MUST comply with the content restrictions specified in {{sec-app-profile-edhoc-message_1_2-restrictions}}.
 
 The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in {{fig-cddl-ead-value}}.
 
@@ -361,7 +365,7 @@ EDHOC_Information : map
 
 When the sender peer composes ead_value of the EDHOC EAD item "Supported EDHOC application profiles", the following applies.
 
-It is possible that ead_value provides an information that corresponds to an EDHOC_Information prescriptive parameter (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4" or "max_msgsize". The type of such a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
+It is possible that ead_value provides an information corresponding to an EDHOC_Information prescriptive parameter (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
 If ead_value specifies such an information multiple times, then each occurrence of that information MUST convey exactly the same content. With reference to the CBOR sequence APP_PROF_SEQ defined in {{sec-app-profile-edhoc-message_1_2}}, the enforcement of these content restrictions MUST take into account prescriptive parameters that are included:
 
@@ -890,9 +894,11 @@ c509_cert = 3
 
 * Removed restrictions on the scope of the EDHOC_Application_Profile object.
 
-* Specified type of "app_prof" in the IANA registration request.
+* Forbidden violations of prescriptive indications in the EAD item. The EDHOC session fails if such a violation is detected.
 
 * Fixed errors in CDDL notations.
+
+* Specified type of "app_prof" in the IANA registration request.
 
 * Clarifications and editorial improvements.
 
