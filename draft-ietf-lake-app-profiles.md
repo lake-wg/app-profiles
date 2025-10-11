@@ -52,6 +52,12 @@ normative:
   RFC9668:
   I-D.ietf-ace-edhoc-oscore-profile:
   I-D.ietf-cose-cbor-encoded-cert:
+  EDHOC.Exporter.Labels:
+    author:
+      org: IANA
+    date: false
+    title: EDHOC Exporter Labels
+    target: https://www.iana.org/assignments/edhoc/edhoc.xhtml#edhoc-exporter-labels
 
 informative:
   RFC3492:
@@ -126,7 +132,7 @@ The CBOR map encoding an EDHOC_Application_Profile object MUST include the eleme
 
 The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the instance of the EDHOC_Application_Profile object in question. The identifier is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document and encoded as a CBOR integer.
 
-The CBOR map MUST NOT include the following elements: "session_id", "uri_path", "initiator", "responder", and "trust_anchors". A consumer MUST ignore those elements if they are included in the EDHOC_Application_Profile object.
+The CBOR map MUST NOT include the following elements: "session_id", "uri_path", "initiator", "responder", and "trust_anchors". Also, the CBOR map MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}} of this document. A consumer MUST ignore those elements if they are included in the EDHOC_Application_Profile object.
 
 The CBOR map MAY include other elements.
 
@@ -213,7 +219,7 @@ RES: 2.05 Content
 
 {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}} defines the EDHOC_Information object and an initial set of its parameters. The object can be used to convey information that guides two peers about executing the EDHOC protocol.
 
-This document defines the new parameter "app\_prof" of the EDHOC_Information object (see {{table-cbor-key-edhoc-params}}). The parameter is of type non-prescriptive (NP) and is specified below.
+This document defines the new parameter "app\_prof" of the EDHOC_Information object. The parameter is of type non-prescriptive (NP) and is summarized in {{table-cbor-key-edhoc-params}}. The parameter is specified further below.
 
 | Name     | CBOR label | CBOR type    | Registry                            | Description                                 | Type |
 | app_prof | 23         | int or array | EDHOC Application Profiles Registry | Set of supported EDHOC Application Profiles | NP   |
@@ -233,11 +239,11 @@ In turn, the EDHOC_Information object can include the parameter "app_prof" defin
 
 If the EDHOC_Information object specified as the value of the parameter/claim "edhoc_info" includes the "app_prof" parameter, then the following applies.
 
-* In addition to the "app_prof" parameter, the object MUST NOT include other parameters, with the following exceptions:
+* In addition to the "app_prof" parameter, the object MUST NOT include other parameters, with the exception of the following parameters that MAY be included:
 
   * The parameter "eads".
 
-  * Any parameter that is not allowed in the EDHOC\_Application\_Profile object defined in {{sec-app-profile-cbor}}.
+  * Any parameter that is not allowed in the EDHOC\_Application\_Profile object defined in {{sec-app-profile-cbor}}, unless its inclusion in the EDHOC_Information object is explicitly forbidden by the parameter's definition.
 
     For example, the parameter "session_id" is not allowed in the EDHOC\_Application\_Profile object (see {{sec-app-profile-cbor}}) and thus can be included in the EDHOC_Information object, where in fact it has to be present (see {{Sections 3.3 and 3.3.1 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
@@ -303,7 +309,7 @@ The EAD item MAY be included:
 
 When the EAD item is present, its ead_label TBD_EAD_LABEL MUST be used only with negative sign, i.e., the use of the EAD item is always critical (see {{Section 3.8 of RFC9528}}).
 
-The EAD item MUST NOT occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.
+The EAD item MUST NOT occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.
 
 The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. In case the recipient peer supports the EAD item, the recipient peer MUST silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.
 
@@ -311,15 +317,15 @@ The EAD item MUST specify an ead_value, as a CBOR byte string with value the bin
 
 * When the EAD item is included in the EAD_1 field, the value of the CBOR byte string is the binary representation of the CBOR sequence OUTER_SEQ. In turn, OUTER_SEQ is composed of the following elements:
 
-  - The CBOR data item reply_flag, which MAY be present. If present, it MUST encode the CBOR simple value true (0xf5) or false (0xf4). The semantics of this item is as follows.
+  - The CBOR data item reply_flag, which MAY be present. If present, it MUST encode the CBOR simple value true (0xf5) or false (0xf4). The semantics of this element is as follows.
 
-    - If the item reply_flag is present and encodes the CBOR simple value true (0xf5), the Initiator is asking the Responder to advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1.
+    - If reply_flag is present and encodes the CBOR simple value true (0xf5), the Initiator is asking the Responder to advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1.
 
       If such a message is EDHOC message_2, the Responder relies on the EAD item "Supported EDHOC application profiles" included in the EAD_2 field. If such a message is an EDHOC error message with error code TBD_ERROR_CODE (see {{sec-app-profile-edhoc-error-message}}), the Responder relies on ERR_INFO.
 
       If the Responder sends either of those messages in reply to such an EDHOC message_1, the Responder MUST honor the request from the Initiator and accordingly advertise the EDHOC application profiles that it supports.
 
-    - If the item reply_flag is present and encodes the CBOR simple value false (0xf4), the Initiator is suggesting the Responder to not advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1. This is relevant when the Initiator already knows what EDHOC application profiles are supported by the Responder, e.g., based on previous interactions with that Responder or on the outcome of a discovery process.
+    - If reply_flag is present and encodes the CBOR simple value false (0xf4), the Initiator is suggesting the Responder to not advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1. This is relevant when the Initiator already knows what EDHOC application profiles are supported by the Responder, e.g., based on previous interactions with that Responder or on the outcome of a discovery process.
 
       In spite of the suggestion from the Initiator, the Responder MAY still advertise the EDHOC application profiles that it supports, when replying to EDHOC message_1 with EDHOC message_2 or with an EDHOC error message with error code TBD_ERROR_CODE (see {{sec-app-profile-edhoc-error-message}}). For example, when sending EDHOC message_2, the Responder might wish to steer the rest of the EDHOC session in a specific way, by including the EAD item "Supported EDHOC application profiles" that specifies information corresponding to EDHOC_Information prescriptive parameters (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
@@ -327,11 +333,11 @@ The EAD item MUST specify an ead_value, as a CBOR byte string with value the bin
 
 * When the EAD item is included in the EAD_2 field, the value of the CBOR byte string is the binary representation of the CBOR sequence APP_PROF_SEQ.
 
-The CBOR sequence APP_PROF_SEQ is composed of one or more items, whose order has no meaning. Each item of the CBOR sequence MUST be either of the following:
+The CBOR sequence APP_PROF_SEQ is composed of one or more elements, whose order has no meaning. Each element of the CBOR sequence MUST be either of the following:
 
 * A CBOR integer, specifying the Profile ID of an EDHOC application profile. The integer value is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
-  This item of the CBOR sequence indicates that the message sender supports the EDHOC application profile identified by the Profile ID.
+  This element of the CBOR sequence indicates that the message sender supports the EDHOC application profile identified by the Profile ID.
 
 * A CBOR array including at least two elements. In particular:
 
@@ -339,7 +345,7 @@ The CBOR sequence APP_PROF_SEQ is composed of one or more items, whose order has
 
   * Each of the elements following the first one MUST be a CBOR unsigned integer, specifying the ead_label of an EAD item.
 
-  This item of the CBOR sequence indicates that the message sender supports:
+  This element of the CBOR sequence indicates that the message sender supports:
 
   * The EDHOC application profile PROFILE identified by the Profile ID in the first element of the array; and
 
@@ -347,15 +353,19 @@ The CBOR sequence APP_PROF_SEQ is composed of one or more items, whose order has
 
 * An EDHOC_Information object encoded in CBOR, i.e., as a CBOR map (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
-  The EDHOC_Information object MUST NOT include the element "app_prof" and MUST NOT include elements that are not allowed within the EDHOC_Application_Profile object defined in {{sec-app-profile-cbor}}, with the exception of the element "trust_anchors" that MAY be included. The recipient peer MUST ignore elements that are not allowed if they are present in the EDHOC_Information object.
+  The EDHOC_Information object MUST NOT include the element "app_prof". Also, it MUST NOT include elements that are not allowed within the EDHOC_Application_Profile object defined in {{sec-app-profile-cbor}}, with the exception of the following elements that MAY be included:
 
-  This item of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.
+  - "trust_anchors".
 
-The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message if ead_value is malformed or does not conform with the format defined above.
+  * "exporter_out_len" (see {{exporter-out-length}}).
+
+  This element of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.
+
+The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if ead_value is malformed or does not conform with the format defined above.
 
 It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4" or "max_msgsize". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
 
-If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session MUST NOT act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Upon receiving an EDHOC message, a peer MUST check whether the other peer has violated such indications. If any violation is found, the peer MUST abort the EDHOC session and MUST reply with an EDHOC error message.
+If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session MUST NOT act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Upon receiving an EDHOC message, a peer MUST check whether the other peer has violated such indications. If any violation is found, the peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1.
 
 When composing ead_value, the sender peer MUST comply with the content restrictions specified in {{sec-app-profile-edhoc-message_1_2-restrictions}}.
 
@@ -388,7 +398,7 @@ profile_id_with_eads = [profile_id, 1* uint]
 ; draft-ietf-ace-edhoc-oscore-profile
 EDHOC_Information : map
 ~~~~~~~~~~~~~~~~~~~~
-{: #fig-cddl-ead-value title="CDDL Definition of ead_value for the EAD item \"Supported EDHOC application profiles\"" artwork-align="left"}
+{: #fig-cddl-ead-value title="CDDL Definition of ead_value for the EAD Item \"Supported EDHOC application profiles\"" artwork-align="left"}
 
 ### Content Restrictions # {#sec-app-profile-edhoc-message_1_2-restrictions}
 
@@ -406,6 +416,68 @@ If the Responder receives the EAD item in the EAD_1 field of EDHOC message_1 and
 
 A consumer MUST treat as malformed an EDHOC_Information object that does not comply with the restrictions above.
 
+### Agreeing on EDHOC_Exporter Output Lengths ## {#exporter-out-length}
+
+The main output of a successfully completed EDHOC session is the shared secret session key PRK_out (see {{Section 4.1.3 of RFC9528}}).
+
+After having established PRK_out, the two peers can use the EDHOC_Exporter interface defined in {{Section 4.2.1 of RFC9528}}, e.g., to derive keying material for an application protocol. Among its inputs, the EDHOC_Exporter interface includes "exporter_label" as a registered numeric identifier of the intended output and "length" as the length in bytes of the intended output.
+
+When using the EDHOC_Exporter interface, it is crucial that the two peers agree about the length in bytes of each intended output, in order to ensure the correctness of their operations. To this end, the two peers can rely on pre-defined default lengths, or agree out-of-band on alternative lengths.
+
+However, the two peers might need or prefer to explicitly agree about specific output lengths to use on a per-session basis. As described below, this can be achieved in-band, by using the EDHOC EAD item "Supported EDHOC application profiles" defined in {{sec-app-profile-edhoc-message_1_2}}.
+
+This document defines the new parameter "exporter\_out\_len" of the EDHOC_Information object (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}). The parameter is of type prescriptive (P) and is summarized in {{table-cbor-key-edhoc-params-2}}. The parameter is specified further below.
+
+| Name             | CBOR label | CBOR type | Registry              | Description                                                    | Type |
+| exporter_out_len | 22         | array     | EDHOC Exporter Labels | Set of output lengths to use with the EDHOC_Exporter interface | P    |
+{: #table-cbor-key-edhoc-params-2 title="EDHOC_Information Parameter \"exporter_out_len\"" align="center"}
+
+* exporter\_out\_len: This parameter specifies a set of pairs (X, Y), where:
+
+  - The first element X specifies a value to use as first argument "exporter_label" when invoking the EDHOC_Exporter interface (see {{Section 4.2.1 of RFC9528}}).
+
+    The value of X is taken from the 'Label' column of the "EDHOC Exporter Labels" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group {{EDHOC.Exporter.Labels}}.
+
+  - The second element Y specifies the value to use as third argument "length" when invoking the EDHOC_Exporter interface using the value specified by X as first argument "exporter_label" (see {{Section 4.2.1 of RFC9528}}).
+
+    The value specified by Y MUST be a valid value to use as "length" when using the value specified by X as "exporter_label". For example, when X specifies 0 as the "exporter_label" to derive an OSCORE Master Secret {{RFC8613}}, Y is required to be not less than the "length" default value defined in {{Appendix A.1 of RFC9528}}, i.e., the key length (in bytes) of the application AEAD Algorithm of the selected cipher suite for the EDHOC session.
+
+  The set is encoded as an array, each element of which MUST be an array of exactly two elements, hence encoding one pair (X, Y). That is, each inner array includes X encoded as an unsigned integer and Y encoded as an unsigned integer, in this order.
+
+  Within the set of pairs (X, Y), the order of the inner arrays encoding the pairs is not relevant. The set MUST NOT specify multiple pairs that have the same unsigned integer value as their first element X.
+
+  In JSON, the "exporter\_out\_len" value is an array, each element of which is an array including two unsigned integers. In CBOR, "exporter\_out\_len" is an array, each element of which is an array including two unsigned integers, and has label 22.
+
+Within ead_value of the EAD item "Supported EDHOC application profiles", the parameter "exporter\_out\_len" can be included within instances of the EDHOC_Information object that are specified within the CBOR sequence APP_PROF_SEQ (see {{sec-app-profile-edhoc-message_1_2}}).
+
+The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if any of the following occurs:
+
+* The recipient peer does not recognize the value encoded by the first element X of a pair (X, Y) as a valid "exporter_label" to be used when invoking the EDHOC_Exporter interface.
+
+* In a pair (X, Y), the value encoded by the second element Y is not valid to be used as "length" when invoking the EDHOC_Exporter interface using the value encoded by the first element X as "exporter_label".
+
+* For a pair (X, Y), the recipient peer is not going to be able to invoke the EDHOC_Exporter interface using the values encoded by X and Y as the first argument "exporter_label" and the third argument "length", respectively.
+
+If the Responder has received an EDHOC message_1 including the EAD item "Supported EDHOC application profiles" and specifying the parameter "exporter\_out\_len", then the following applies if the Responder includes the EAD item "Supported EDHOC application profiles" in EDHOC message_2, with ead_value specifying the parameter "exporter\_out\_len". Within ead_value of the EAD item included in EDHOC message_2, the Responder MUST NOT specify any pair (X, Y) such that the unsigned integer value encoded by X was encoded by the first element of a pair within the EAD item included in the received EDHOC message_1.
+
+If the Initiator receives an EDHOC message_2 including the EAD item "Supported EDHOC application profiles" and specifying the parameter "exporter\_out\_len", then the following applies if the Initiator included the EAD item "Supported EDHOC application profiles" in EDHOC message_1, with ead_value specifying the parameter "exporter\_out\_len". The Initiator MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if ead_value of the EAD item included in EDHOC message_2 specifies any pair (X, Y) such that the unsigned integer value encoded by X was encoded by the first element of a pair of the EAD item included in the sent EDHOC message_1.
+
+Since the parameter "exporter\_out\_len" is of type prescriptive, the restrictions compiled in {{sec-app-profile-edhoc-message_1_2-restrictions}} apply. In particular, the "information" corresponding to the prescriptive parameter "exporter\_out\_len" is the "length" Y to use when invoking the EDHOC_Exporter interface using the paired "exporter_label" X.
+
+That is, if ead_value provides the length of the EDHOC_Exporter output for a given "exporter_label" multiple times, then each of such occurrences MUST specify the same "length" value. Within this constraint, it remains possible for ead_value to specify multiple instances of the EDHOC_Information object within APP_PROF_SEQ and for each of such instances to include the parameter "exporter\_out\_len", which can overall encode a value different from that of the same parameter in another instance of the EDHOC_Information object.
+
+The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if the parameter "exporter\_out\_len" is malformed or does not conform with the format and constraints defined above.
+
+In an EDHOC session during which the EAD item "Supported EDHOC application profiles" has been included in EDHOC message_1 and/or message_2 as specifying the parameter "exporter\_out\_len", the following applies.
+
+* The Initiator (Responder) considers the successful verification of EDHOC message_2 (message_3) as a confirmed agreement with the other peer about how to invoke the EDHOC_Exporter interface, once the session key PRK_out for the present EDHOC session is available.
+
+  That is, for each pair (X, Y) specified by the exchanged EAD items, the two peers MUST use the unsigned integer values encoded by X and Y as the first argument "exporter_label" and the third argument "length", respectively.
+
+* If a particular "exporter_label" value is not specified by the exchanged EAD items, then a possible invocation of the EDHOC_Exporter interface using that value as its first argument takes as value for its third argument "length" a pre-defined default value, or an alternative value agreed out-of-band.
+
+When using the EDHOC and OSCORE transport profile of the ACE framework {{I-D.ietf-ace-edhoc-oscore-profile}}, the parameter "exporter\_out\_len" MUST NOT be included within the EDHOC_Information object specified as the value of the parameter/claim "edhoc_info".
+
 ## In the EDHOC Error Message # {#sec-app-profile-edhoc-error-message}
 
 This section defines the error code TBD_ERROR_CODE, which is registered in {{iana-edhoc-error-codes-registry}} of this document.
@@ -416,9 +488,11 @@ The Responder MUST NOT abort an EDHOC session exclusively due to the wish of sen
 
 When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and MUST NOT specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see {{Section 6.3 of RFC9528}}), the error message MUST NOT specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.
 
-When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}.
+When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ.
 
-The recipient peer MUST silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format.
+In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
+
+The recipient peer MUST silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format of APP_PROF_SEQ.
 
 # Advertising Supported EDHOC Application Profiles using SVCB Resource Records # {#sec-svcb}
 
@@ -450,7 +524,9 @@ To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app
 
     In particular, edhoc-app-prof-value MUST be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string APP_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within edhoc-app-prof-value or if edhoc-app-prof-value is malformed.
 
-    The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}. The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the format defined in {{sec-app-profile-edhoc-message_1_2}}.
+    The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ. In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}.
+
+    The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the intended format.
 
     The CDDL grammar describing the CBOR data item edhoc-app-prof-value is shown in {{fig-cddl-edhoc-app-prof-value}}.
 
@@ -827,6 +903,16 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 IANA is asked to register the following entry in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
+* Name: exporter_out_len
+* CBOR label: 22 (suggested)
+* CBOR type: array
+* Registry: EDHOC Exporter Labels
+* Description: Set of output lengths to use with the EDHOC_Exporter interface
+* Type: P
+* Specification: {{&SELF}}{{RFC9528}}
+
+<br>
+
 * Name: app_prof
 * CBOR label: 23 (suggested)
 * CBOR type: int or array
@@ -949,6 +1035,8 @@ c509_cert = 3
 * Forbidden violations of prescriptive indications in the EAD item. The EDHOC session fails if such a violation is detected.
 
 * Extended semantics of ead_value: optional boolean flag when the EAD item is used in EDHOC message_1.
+
+* Defined parameter "exporter_out_len", for in-band negotiation of EDHOC_Exporter output lengths through the EAD item "Supported EDHOC application profiles".
 
 * Specified wire-format and presentation format for the SvcParamKeys.
 
