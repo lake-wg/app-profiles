@@ -516,7 +516,7 @@ To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app
 
     The i-th path in the presentation format value is the textual representation of the path specified by the i-th CBOR sequence PATH_SEQ in the wire-format value (see above).
 
-    The textual representation of each path follows the semantics of path-absolute shown in the ABNF definition in {{fig-edhocpath-value-path-abnf}}. In particular, given the path specified by a CBOR sequence PATH_SEQ, segment-nz is the value of the first CBOR text string in PATH_SEQ (if any), while each segment is the value of a CBOR text string following the first one in PATH_SEQ (if any).
+    The textual representation of each path follows the semantics of path-absolute shown in the ABNF definition in {{fig-edhocpath-value-path-abnf}}, which is provided by the ABNF for path-absolute in {{Section 3.3 of RFC3986}}. In particular, given the path specified by a CBOR sequence PATH_SEQ, segment-nz is the value of the first CBOR text string in PATH_SEQ (if any), while each segment is the value of a CBOR text string following the first one in PATH_SEQ (if any).
 
 * "edhoc-app-prof" - The SvcParamKey "edhoc-app-prof" is single-valued and specifies a set of EDHOC application profiles that the server supports.
 
@@ -524,7 +524,7 @@ To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app
 
     In particular, edhoc-app-prof-value MUST be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string APP_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within edhoc-app-prof-value or if edhoc-app-prof-value is malformed.
 
-    The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ. In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}.
+    The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ. In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
 
     The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the intended format.
 
