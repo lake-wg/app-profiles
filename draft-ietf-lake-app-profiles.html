@@ -1909,7 +1909,7 @@ The CDDL grammar describing the CBOR data item edhocpath-value is shown in <a hr
 <p id="section-6-3.1.2.2.2">
 The i-th path in the presentation format value is the textual representation of the path specified by the i-th CBOR sequence PATH_SEQ in the wire-format value (see above).<a href="#section-6-3.1.2.2.2" class="pilcrow">¶</a></p>
 <p id="section-6-3.1.2.2.3">
-The textual representation of each path follows the semantics of path-absolute shown in the ABNF definition in <a href="#fig-edhocpath-value-path-abnf" class="auto internal xref">Figure 5</a>. In particular, given the path specified by a CBOR sequence PATH_SEQ, segment-nz is the value of the first CBOR text string in PATH_SEQ (if any), while each segment is the value of a CBOR text string following the first one in PATH_SEQ (if any).<a href="#section-6-3.1.2.2.3" class="pilcrow">¶</a></p>
+The textual representation of each path follows the semantics of path-absolute shown in the ABNF definition in <a href="#fig-edhocpath-value-path-abnf" class="auto internal xref">Figure 5</a>, which is provided by the ABNF for path-absolute in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>. In particular, given the path specified by a CBOR sequence PATH_SEQ, segment-nz is the value of the first CBOR text string in PATH_SEQ (if any), while each segment is the value of a CBOR text string following the first one in PATH_SEQ (if any).<a href="#section-6-3.1.2.2.3" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
