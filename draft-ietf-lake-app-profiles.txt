@@ -1714,7 +1714,7 @@ Table of Contents
 
 10.4.  EDHOC Information Registry
 
-   IANA is asked to register the following entry in the "EDHOC
+   IANA is asked to register the following entries in the "EDHOC
    Information" registry defined in [I-D.ietf-ace-edhoc-oscore-profile].
 
    *  Name: exporter_out_len
