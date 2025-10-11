@@ -901,7 +901,7 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 ## EDHOC Information Registry ## {#iana-edhoc-information-registry}
 
-IANA is asked to register the following entry in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
+IANA is asked to register the following entries in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
 * Name: exporter_out_len
 * CBOR label: 22 (suggested)
