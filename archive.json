@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-06T01:14:50.640028+00:00",
+  "timestamp": "2025-11-09T01:17:41.621182+00:00",
   "repo": "lake-wg/app-profiles",
   "labels": [
     {
@@ -49,6 +49,47 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDONbs4xM7WZWXI",
+      "title": "Usage examples for individual tunables",
+      "url": "https://github.com/lake-wg/app-profiles/issues/1",
+      "state": "OPEN",
+      "author": "chrysn",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This document allows tuning a lot of parameters; while many indeed need coordination, I'm not convinced that customizing them is actually needed.\n\nFor example, why would the content format 64/65 be needed (by the server) sent along in the first place?\n\nI know that those were listed as examples of things that a profile might describe. But that was when EDHOC was written, and between then and now we're gathering experience as to what is relevant and what is not.\n\nBy comparison, OSCORE specified that the receive window (of default size 32) can be agreed on to have a different size, but so far, apparently nobody has needed that, and consequently, nobody defined a parameter (eg. in the ACE-OSCORE profile) to tune it, and I appreciate that. If that were specified just because it *can* be specified, that'd just be dead code (in the sense of RFCs being code as in \"code is law\"), or even dead literal code, when people read an RFC and think that they need to implement every bit that is in there (which I don't think makes sense generally, in particular not here).\n\nAs long as there is a concrete (not just hypothetical) reason to negotiate or advertise a parameter: All fine, no concern. But please check the use cases, and maybe document them in some form or other.",
+      "createdAt": "2025-11-06T18:12:23Z",
+      "updatedAt": "2025-11-06T18:12:23Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDONbs4xM7WZcIZ",
+      "title": "Using reply_flag in other places",
+      "url": "https://github.com/lake-wg/app-profiles/issues/2",
+      "state": "OPEN",
+      "author": "chrysn",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Right now, reply_flag is (even by the CDDL) limited to EAD_1.\n\nNot all items necessarily make sense in all places; does limitation necessarily need to be reflected in the CDDL, esp. because there could be sensible use for it in other places too?\n\nFor example, a highly versatile server might set this in the SVCB announcements as well to ask the clients to talk about their profile expectations already in message 1.\n\n(I do realize that this is kind'a contradictory to #1. From my perspective, that limitation is also a feature that could be stripped into a general \"Please tell me your capabilities ASAP\", but I realize that a different perspective might make this a new piece of code rather than removing a piece of code.)",
+      "createdAt": "2025-11-06T18:17:54Z",
+      "updatedAt": "2025-11-06T18:18:44Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "chrysn",
+          "authorAssociation": "NONE",
+          "body": "Moving a comment from the minutes where I prepared this issue into here:\n\n> @marco-tiloca-sics wrote:\n> reply_flag can be only in the EAD item, and only in message_1.\n\nYes, but does it need to be?",
+          "createdAt": "2025-11-06T18:18:44Z",
+          "updatedAt": "2025-11-06T18:18:44Z"
+        }
+      ]
+    }
+  ],
   "pulls": []
 }
