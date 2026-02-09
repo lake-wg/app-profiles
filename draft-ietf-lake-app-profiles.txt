@@ -253,14 +253,14 @@ Table of Contents
 
    In the CBOR diagnostic notation used in this document, constructs of
    the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME
-   in the CDDL model shown in Figure 7 of Appendix A.  For example,
+   in the CDDL model shown in Figure 8 of Appendix A.  For example,
    {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0,
    1, 2, 3], 2 : 3}.
 
    Note to RFC Editor: Please delete the paragraph immediately preceding
    this note.  Also, in the CBOR diagnostic notation used in this
    document, please replace the constructs of the form e'SOME_NAME' with
-   the value assigned to SOME_NAME in the CDDL model shown in Figure 7
+   the value assigned to SOME_NAME in the CDDL model shown in Figure 8
    of Appendix A.  Finally, please delete this note.
 
 2.  EDHOC_Application_Profile
@@ -487,6 +487,16 @@ Table of Contents
       integers, and it has label 23.  The integer values are taken from
       the 'Profile ID' column of the "EDHOC Application Profiles"
       registry defined in Section 10.8 of this document.
+
+   The CDDL grammar describing the "app_prof" parameter when included in
+   the CBOR EDHOC_Information object is:
+
+   app_prof_parameter = (
+     ? 23 => int / [2* int]                      ; app_prof
+   )
+
+         Figure 3: CDDL Definition of the "app_prof" Parameter when
+               Included in the CBOR EDHOC_Information Object.
 
 3.2.1.  Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -840,7 +850,7 @@ Table of Contents
    content restrictions specified in Section 5.1.1.
 
    The CDDL grammar describing ead_value for the EAD item "Supported
-   EDHOC application profiles" is shown in Figure 3.
+   EDHOC application profiles" is shown in Figure 4.
 
    ead_value = ead_1_value / ead_2_value
 
@@ -868,7 +878,7 @@ Table of Contents
    ; draft-ietf-ace-edhoc-oscore-profile
    EDHOC_Information = map
 
-          Figure 3: CDDL Definition of ead_value for the EAD Item
+          Figure 4: CDDL Definition of ead_value for the EAD Item
                    "Supported EDHOC application profiles"
 
 5.1.1.  Content Restrictions
@@ -1155,7 +1165,7 @@ Table of Contents
          elements that specify the same URI path.
 
          The CDDL grammar describing the CBOR data item edhocpath-value
-         is shown in Figure 4.
+         is shown in Figure 5.
 
       -  The presentation format value of "edhocpath" SHALL be a comma-
          separated list (see Appendix A.1 of [RFC9460]) of one or more
@@ -1169,7 +1179,7 @@ Table of Contents
          PATH_SEQ in the wire-format value (see above).
 
          The textual representation of each path follows the semantics
-         of path-absolute shown in the ABNF definition in Figure 5,
+         of path-absolute shown in the ABNF definition in Figure 6,
          which is provided by the ABNF for path-absolute in Section 3.3
          of [RFC3986].  In particular, given the path specified by a
          CBOR sequence PATH_SEQ, segment-nz is the value of the first
@@ -1204,7 +1214,7 @@ Table of Contents
          malformed or does not conform with the intended format.
 
          The CDDL grammar describing the CBOR data item edhoc-app-prof-
-         value is shown in Figure 6.
+         value is shown in Figure 7.
 
       -  The presentation format value of "edhoc-app-prof" SHALL be the
          CBOR extended diagnostic notation (see Section 8 of [RFC8949]
@@ -1264,7 +1274,7 @@ Table of Contents
 
    path_segment = tstr
 
-   Figure 4: CDDL Definition of the value of the SvcParamKey "edhocpath"
+   Figure 5: CDDL Definition of the value of the SvcParamKey "edhocpath"
 
    path-absolute = "/" [ segment-nz *( "/" segment ) ]
 
@@ -1278,7 +1288,7 @@ Table of Contents
    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
                 / "*" / "+" / "," / ";" / "="
 
-                 Figure 5: ABNF Definition of path-absolute
+                 Figure 6: ABNF Definition of path-absolute
 
    edhoc-app-prof-value = APP_BSTR / [2* APP_BSTR]
 
@@ -1286,7 +1296,7 @@ Table of Contents
    ; is provided in Section 5.1
    APP_BSTR = bytes .cborseq APP_PROF_SEQ
 
-     Figure 6: CDDL Definition of the value of the SvcParamKey "edhoc-
+     Figure 7: CDDL Definition of the value of the SvcParamKey "edhoc-
                                  app-prof"
 
 7.  Well-known EDHOC Application Profiles
@@ -2078,13 +2088,16 @@ Appendix A.  CDDL Model
    ; EDHOC Authentication Credential Types
    c509_cert = 3
 
-                            Figure 7: CDDL model
+                            Figure 8: CDDL model
 
 Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -03 to -04
+
+   *  Added the CDDL definition of the "app_prof" parameter for the CBOR
+      EDHOC_Information object.
 
    *  Fixed CDDL definition of the value of the EAD item "Supported
       EDHOC application profiles".
