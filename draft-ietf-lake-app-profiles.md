@@ -421,7 +421,7 @@ If ead_value specifies such an information multiple times, then each occurrence 
 
 * As elements of an EDHOC_Application_Profile object encoding an EDHOC application profile, which is identified by its Profile ID specified within APP_PROF_SEQ.
 
-If the Responder receives the EAD item in the EAD_1 field of EDHOC message_1 and intends to include the EAD item in the EAD_2 field of EDHOC message_2, then the Responder MUST further take into account the presence of such information in the received EAD item when composing ead_value.
+If the Responder has received the EAD item in the EAD_1 field of EDHOC message_1 and intends to include the EAD item in the EAD_2 field of EDHOC message_2, then the Responder MUST further take into account the presence of such information in the received EAD item when composing ead_value.
 
 A consumer MUST treat as malformed an EDHOC_Information object that does not comply with the restrictions above.
 
@@ -441,7 +441,7 @@ This document defines the new parameter "exporter\_out\_len" of the EDHOC_Inform
 | exporter_out_len | 22         | array     | EDHOC Exporter Labels | Set of output lengths to use with the EDHOC_Exporter interface | P    |
 {: #table-cbor-key-edhoc-params-2 title="EDHOC_Information Parameter \"exporter_out_len\"" align="center"}
 
-* exporter\_out\_len: This parameter specifies a set of pairs (X, Y), where:
+* exporter\_out\_len: This parameter specifies a set of one or more pairs (X, Y), where:
 
   - The first element X specifies a value to use as first argument "exporter_label" when invoking the EDHOC_Exporter interface (see {{Section 4.2.1 of RFC9528}}).
 
@@ -451,11 +451,20 @@ This document defines the new parameter "exporter\_out\_len" of the EDHOC_Inform
 
     The value specified by Y MUST be a valid value to use as "length" when using the value specified by X as "exporter_label". For example, when X specifies 0 as the "exporter_label" to derive an OSCORE Master Secret {{RFC8613}}, Y is required to be not less than the "length" default value defined in {{Appendix A.1 of RFC9528}}, i.e., the key length (in bytes) of the application AEAD Algorithm of the selected cipher suite for the EDHOC session.
 
-  The set is encoded as an array, each element of which MUST be an array of exactly two elements, hence encoding one pair (X, Y). That is, each inner array includes X encoded as an unsigned integer and Y encoded as an unsigned integer, in this order.
+  The set is encoded as a non-empty array, each element of which MUST be an array of exactly two elements, hence encoding one pair (X, Y). That is, each inner array includes X encoded as an unsigned integer and Y encoded as an unsigned integer, in this order.
 
   Within the set of pairs (X, Y), the order of the inner arrays encoding the pairs is not relevant. The set MUST NOT specify multiple pairs that have the same unsigned integer value as their first element X.
 
-  In JSON, the "exporter\_out\_len" value is an array, each element of which is an array including two unsigned integers. In CBOR, "exporter\_out\_len" is an array, each element of which is an array including two unsigned integers, and has label 22.
+  In JSON, the "exporter\_out\_len" value is a non-empty array, each element of which is an array including two unsigned integers. In CBOR, "exporter\_out\_len" is a non-empty array that has label 22, each element of which is an array including two unsigned integers.
+
+The CDDL grammar describing the "exporter\_out\_len" parameter when included in the CBOR EDHOC_Information object is:
+
+~~~~~~~~~~~~~~~~~~~~ cddl
+exporter_out_len = (
+  ? 22 => [1* [uint, uint]]                   ; app_prof
+)
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-cddl-exporter_out_len title="CDDL Definition of the \"exporter_out_len\" Parameter when Included in the CBOR EDHOC_Information Object."}
 
 Within ead_value of the EAD item "Supported EDHOC application profiles", the parameter "exporter\_out\_len" can be included within instances of the EDHOC_Information object that are specified within the CBOR sequence APP_PROF_SEQ (see {{sec-app-profile-edhoc-message_1_2}}).
 
@@ -1039,9 +1048,11 @@ c509_cert = 3
 
 ## Version -03 to -04 ## {#sec-03-04}
 
-* Added the CDDL definition of the "app_prof" parameter for the CBOR EDHOC_Information object.
+* CDDL definitions:
 
-* Fixed CDDL definition of the value of the EAD item "Supported EDHOC application profiles".
+  * Added CDDL definitions of the parameters "app_prof" and "exporter_out_len" for the CBOR EDHOC_Information object.
+
+  * Fixed CDDL definition of ead_value of the EAD item "Supported EDHOC application profiles".
 
 * Editorial fixes and improvements.
 
