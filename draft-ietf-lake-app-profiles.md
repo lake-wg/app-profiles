@@ -227,14 +227,14 @@ This document defines the new parameter "app\_prof" of the EDHOC_Information obj
 
 * app\_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app\_prof" value is an integer or an array of integers. In CBOR, "app\_prof" is an integer or an array of integers, and it has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
-The CDDL grammar describing the "app_prof" parameter when included in the CBOR EDHOC_Information object is:
+The CDDL grammar describing the parameter "app_prof" when included in the CBOR EDHOC_Information object is:
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
 app_prof_parameter = (
   ? 23 => int / [2* int]                      ; app_prof
 )
 ~~~~~~~~~~~~~~~~~~~~
-{: #fig-cddl-app_prof title="CDDL Definition of the \"app_prof\" Parameter when Included in the CBOR EDHOC_Information Object."}
+{: #fig-cddl-app_prof title="CDDL Definition of the Parameter \"app_prof\" when Included in the CBOR EDHOC_Information Object."}
 
 ### Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -246,9 +246,9 @@ Similarly, the access token includes the corresponding claim "edhoc_info", with 
 
 In turn, the EDHOC_Information object can include the parameter "app_prof" defined in this document. This parameter indicates a set of EDHOC application profiles associated with the EDHOC resource to use at the RS, which is either implied or specified by the parameter "uri_path" within the same EDHOC_Information object.
 
-If the EDHOC_Information object specified as the value of the parameter/claim "edhoc_info" includes the "app_prof" parameter, then the following applies.
+If the EDHOC_Information object specified as the value of the parameter/claim "edhoc_info" includes the parameter "app_prof", then the following applies.
 
-* In addition to the "app_prof" parameter, the object MUST NOT include other parameters, with the exception of the following parameters that MAY be included:
+* In addition to the parameter "app_prof", the object MUST NOT include other parameters, with the exception of the following parameters that MAY be included:
 
   * The parameter "eads".
 
@@ -260,7 +260,7 @@ If the EDHOC_Information object specified as the value of the parameter/claim "e
 
 * The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4" or "max_msgsize". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
 
-  If the object specifies such an information multiple times, then each occurrence of that information MUST convey exactly the same content. This MUST take into account prescriptive parameters that are included: i) as elements of the EDHOC_Information object; or ii) as elements of an EDHOC_Application_Profile object (see {{sec-app-profile-cbor}}) encoding an EDHOC application profile, which is identified by its Profile ID specified in the "app_prof" parameter of the EDHOC_Information object.
+  If the object specifies such an information multiple times, then each occurrence of that information MUST convey exactly the same content. This MUST take into account prescriptive parameters that are included: i) as elements of the EDHOC_Information object; or ii) as elements of an EDHOC_Application_Profile object (see {{sec-app-profile-cbor}}) encoding an EDHOC application profile, which is identified by its Profile ID specified in the parameter "app_prof" of the EDHOC_Information object.
 
   A consumer MUST treat as malformed an EDHOC_Information object that does not comply with the restriction above.
 
@@ -457,14 +457,14 @@ This document defines the new parameter "exporter\_out\_len" of the EDHOC_Inform
 
   In JSON, the "exporter\_out\_len" value is a non-empty array, each element of which is an array including two unsigned integers. In CBOR, "exporter\_out\_len" is a non-empty array that has label 22, each element of which is an array including two unsigned integers.
 
-The CDDL grammar describing the "exporter\_out\_len" parameter when included in the CBOR EDHOC_Information object is:
+The CDDL grammar describing the parameter "exporter\_out\_len" when included in the CBOR EDHOC_Information object is:
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
 exporter_out_len = (
   ? 22 => [1* [uint, uint]]                   ; app_prof
 )
 ~~~~~~~~~~~~~~~~~~~~
-{: #fig-cddl-exporter_out_len title="CDDL Definition of the \"exporter_out_len\" Parameter when Included in the CBOR EDHOC_Information Object."}
+{: #fig-cddl-exporter_out_len title="CDDL Definition of the Parameter \"exporter_out_len\" when Included in the CBOR EDHOC_Information Object."}
 
 Within ead_value of the EAD item "Supported EDHOC application profiles", the parameter "exporter\_out\_len" can be included within instances of the EDHOC_Information object that are specified within the CBOR sequence APP_PROF_SEQ (see {{sec-app-profile-edhoc-message_1_2}}).
 
