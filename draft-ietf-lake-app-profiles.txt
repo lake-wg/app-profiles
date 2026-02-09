@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 14 April 2026                                   11 October 2025
+Expires: 13 August 2026                                  9 February 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,11 +56,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 April 2026.
+   This Internet-Draft will expire on 13 August 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -118,9 +118,10 @@ Table of Contents
      11.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
-     B.1.  Version -02 to -03
-     B.2.  Version -01 to -02
-     B.3.  Version -00 to -01
+     B.1.  Version -03 to -04
+     B.2.  Version -02 to -03
+     B.3.  Version -01 to -02
+     B.4.  Version -00 to -01
    Acknowledgments
    Authors' Addresses
 
@@ -150,7 +151,7 @@ Table of Contents
    canonical, CBOR-based representation that can be used to describe,
    distribute, and store EDHOC application profiles as CBOR data items
    (see Section 2).  The defined representation is transport- and setup-
-   independent, and avoids the need to reinvent an encoding for the
+   independent, and it avoids the need to reinvent an encoding for the
    available options to run the EDHOC protocol or the selection logic to
    apply on those.
 
@@ -355,11 +356,12 @@ Table of Contents
 
    This section defines two parameters to convey such Profile IDs, i.e.:
 
-   *  The parameter "ed-prof" for web linking [RFC8288] (see
-      Section 3.1).
+   *  The parameter "ed-prof" for web linking [RFC8288] (see Section 3.1
+      of this document).
 
    *  The parameter "app_prof" of the EDHOC_Information object specified
-      in [I-D.ietf-ace-edhoc-oscore-profile] (see Section 3.2).
+      in [I-D.ietf-ace-edhoc-oscore-profile] (see Section 3.2 of this
+      document).
 
       As defined in Section 2, Profile IDs are also conveyed by the
       parameter "app_prof" in the EDHOC_Application_Profile object, in
@@ -425,7 +427,7 @@ Table of Contents
       attribute 'ed-ead'.
 
    The example in Figure 2 shows how a CoAP client discovers two EDHOC
-   resources at a CoAP server, and obtains information about the
+   resources at a CoAP server and obtains information about the
    application profile corresponding to each of those resources.  The
    CoRE Link Format notation from Section 5 of [RFC6690] is used.
 
@@ -469,8 +471,8 @@ Table of Contents
     +==========+=======+=======+=============+=================+======+
     | app_prof | 23    | int   | EDHOC       | Set of          | NP   |
     |          |       | or    | Application | supported EDHOC |      |
-    |          |       | array | Profiles    | Application     |      |
-    |          |       |       | Registry    | Profiles        |      |
+    |          |       | array | Profiles    | application     |      |
+    |          |       |       | registry    | profiles        |      |
     +----------+-------+-------+-------------+-----------------+------+
 
               Table 1: EDHOC_Information Parameter "app_prof"
@@ -482,9 +484,9 @@ Table of Contents
       array of integers, where each array element encodes one Profile
       ID.  In JSON, the "app_prof" value is an integer or an array of
       integers.  In CBOR, "app_prof" is an integer or an array of
-      integers, and has label 23.  The integer values are taken from the
-      'Profile ID' column of the "EDHOC Application Profiles" registry
-      defined in Section 10.8 of this document.
+      integers, and it has label 23.  The integer values are taken from
+      the 'Profile ID' column of the "EDHOC Application Profiles"
+      registry defined in Section 10.8 of this document.
 
 3.2.1.  Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -864,7 +866,7 @@ Table of Contents
 
    ; The full definition is provided in
    ; draft-ietf-ace-edhoc-oscore-profile
-   EDHOC_Information : map
+   EDHOC_Information = map
 
           Figure 3: CDDL Definition of ead_value for the EAD Item
                    "Supported EDHOC application profiles"
@@ -1588,6 +1590,16 @@ Table of Contents
    Attributes" registry within the "Constrained RESTful Environments
    (CoRE) Parameters", as per [RFC9423].
 
+   *  Attribute Name: ed-prof
+
+   *  Brief Description: A supported EDHOC application profile
+
+   *  Change Controller: IETF
+
+   *  Reference: [RFC-XXXX, Section 3.1]
+
+
+
    *  Attribute Name: ed-max-msgsize
 
    *  Brief Description: The admitted maximum size of EDHOC messages in
@@ -1595,7 +1607,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 
 
@@ -1607,7 +1619,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 
 
@@ -1617,7 +1629,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 
 
@@ -1628,17 +1640,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
-
-
-
-   *  Attribute Name: ed-prof
-
-   *  Brief Description: A supported EDHOC application profile
-
-   *  Change Controller: IETF
-
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 
 
@@ -1650,7 +1652,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 
 
@@ -1662,7 +1664,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 
 
@@ -1674,7 +1676,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 
 
@@ -1686,7 +1688,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 
 
@@ -1698,7 +1700,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 
 
@@ -1710,7 +1712,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 4]
 
 10.4.  EDHOC Information Registry
 
@@ -1908,17 +1910,17 @@ Table of Contents
               Security for Constrained Environments (OSCORE) Profile for
               Authentication and Authorization for Constrained
               Environments (ACE)", Work in Progress, Internet-Draft,
-              draft-ietf-ace-edhoc-oscore-profile-08, 7 July 2025,
+              draft-ietf-ace-edhoc-oscore-profile-09, 20 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
-              edhoc-oscore-profile-08>.
+              edhoc-oscore-profile-09>.
 
    [I-D.ietf-cose-cbor-encoded-cert]
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
               Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-15, 18 August 2025,
+              ietf-cose-cbor-encoded-cert-16, 25 January 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-15>.
+              cbor-encoded-cert-16>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -2082,7 +2084,14 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -02 to -03
+B.1.  Version -03 to -04
+
+   *  Fixed CDDL definition of the value of the EAD item "Supported
+      EDHOC application profiles".
+
+   *  Editorial fixes and improvements.
+
+B.2.  Version -02 to -03
 
    *  Removed restrictions on the scope of the EDHOC_Application_Profile
       object.
@@ -2106,7 +2115,7 @@ B.1.  Version -02 to -03
 
    *  Clarifications and editorial improvements.
 
-B.2.  Version -01 to -02
+B.3.  Version -01 to -02
 
    *  Revised order of sections.
 
@@ -2161,7 +2170,7 @@ B.2.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.3.  Version -00 to -01
+B.4.  Version -00 to -01
 
    *  Clarified motivation in the abstract and introduction.
 
