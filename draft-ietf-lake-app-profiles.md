@@ -227,6 +227,15 @@ This document defines the new parameter "app\_prof" of the EDHOC_Information obj
 
 * app\_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app\_prof" value is an integer or an array of integers. In CBOR, "app\_prof" is an integer or an array of integers, and it has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
+The CDDL grammar describing the "app_prof" parameter when included in the CBOR EDHOC_Information object is:
+
+~~~~~~~~~~~~~~~~~~~~ cddl
+app_prof_parameter = (
+  ? 23 => int / [2* int]                      ; app_prof
+)
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-cddl-app_prof title="CDDL Definition of the \"app_prof\" Parameter when Included in the CBOR EDHOC_Information Object."}
+
 ### Use in the EDHOC and OSCORE Profile of the ACE Framework
 
 {{Section 3 of I-D.ietf-ace-edhoc-oscore-profile}} defines how the EDHOC_Information object can be used within the workflow of the EDHOC and OSCORE transport profile of the ACE framework for authentication and authorization in constrained environments (ACE) {{RFC9200}}.
@@ -1029,6 +1038,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -03 to -04 ## {#sec-03-04}
+
+* Added the CDDL definition of the "app_prof" parameter for the CBOR EDHOC_Information object.
 
 * Fixed CDDL definition of the value of the EAD item "Supported EDHOC application profiles".
 
