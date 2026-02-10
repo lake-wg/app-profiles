@@ -326,15 +326,15 @@ The EAD item MUST specify an ead_value, as a CBOR byte string with value the bin
 
 * When the EAD item is included in the EAD_1 field, the value of the CBOR byte string is the binary representation of the CBOR sequence OUTER_SEQ. In turn, OUTER_SEQ is composed of the following elements:
 
-  - The CBOR data item reply_flag, which MAY be present. If present, it MUST encode the CBOR simple value `true` (0xf5) or `false` (0xf4). The semantics of this element is as follows.
+  - The CBOR data item advertise_flag, which MAY be present. If present, it MUST encode the CBOR simple value `true` (0xf5) or `false` (0xf4). The semantics of this element is as follows.
 
-    - If reply_flag is present and encodes the CBOR simple value `true` (0xf5), the Initiator is asking the Responder to advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1.
+    - If advertise_flag is present and encodes the CBOR simple value `true` (0xf5), the Initiator is asking the Responder to advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1.
 
       If such a message is EDHOC message_2, the Responder relies on the EAD item "Supported EDHOC application profiles" included in the EAD_2 field. If such a message is an EDHOC error message with error code TBD_ERROR_CODE (see {{sec-app-profile-edhoc-error-message}}), the Responder relies on ERR_INFO.
 
-      If the Responder sends either of those messages in reply to such an EDHOC message_1, the Responder MUST honor the request from the Initiator and accordingly advertise the EDHOC application profiles that it supports.
+      If the Responder sends either of those messages in reply to such an EDHOC message_1, the Responder MUST honor the wish of the Initiator and accordingly advertise the EDHOC application profiles that it supports.
 
-    - If reply_flag is present and encodes the CBOR simple value `false` (0xf4), the Initiator is suggesting the Responder to not advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1. This is relevant when the Initiator already knows what EDHOC application profiles are supported by the Responder, e.g., based on previous interactions with that Responder or on the outcome of a discovery process.
+    - If advertise_flag is present and encodes the CBOR simple value `false` (0xf4), the Initiator is suggesting the Responder to not advertise the EDHOC application profiles that it supports, within the EDHOC message sent in reply to EDHOC message_1. This is relevant when the Initiator already knows what EDHOC application profiles are supported by the Responder, e.g., based on previous interactions with that Responder or on the outcome of a discovery process.
 
       In spite of the suggestion from the Initiator, the Responder MAY still advertise the EDHOC application profiles that it supports, when replying to EDHOC message_1 with EDHOC message_2 or with an EDHOC error message with error code TBD_ERROR_CODE (see {{sec-app-profile-edhoc-error-message}}). For example, when sending EDHOC message_2, the Responder might wish to steer the rest of the EDHOC session in a specific way, by including the EAD item "Supported EDHOC application profiles" that specifies information corresponding to EDHOC_Information prescriptive parameters (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
@@ -389,9 +389,9 @@ ead_2_value = bytes .cborseq APP_PROF_SEQ
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence OUTER_SEQ:
-OUTER_SEQ = [?reply_flag, APP_PROF_SEQ]
+OUTER_SEQ = [?advertise_flag, APP_PROF_SEQ]
 
-reply_flag = bool
+advertise_flag = bool
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence APP_PROF_SEQ:
@@ -540,33 +540,41 @@ To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app
 
   - The wire-format value of "edhoc-app-prof" is the binary representation of the CBOR data item edhoc-app-prof-value, which MUST exactly fill the SvcParamValue.
 
-    In particular, edhoc-app-prof-value MUST be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string APP_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within edhoc-app-prof-value or if edhoc-app-prof-value is malformed.
+    In particular, edhoc-app-prof-value MUST be a CBOR byte string. The value of the CBOR byte string is the binary representation of the CBOR sequence SVCB_EDHOC_APP_PROF, which is composed of one or two elements as specified below. The SVCB RR MUST be considered malformed if the SvcParamValue ends within edhoc-app-prof-value or if edhoc-app-prof-value is malformed.
 
-    The value of each CBOR byte string APP_BSTR is the binary representation of the CBOR sequence APP_PROF_SEQ. In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
+    * The first element advertise_flag is OPTIONAL. If present, it MUST encode the CBOR simple value `true` (0xf5). If advertise_flag is present, a peer that runs EDHOC with the server is encouraged to advertise the EDHOC application profiles that it supports, when sending to the server the first EDHOC message in an EDHOC session.
 
-    The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the intended format.
+      In order to do that, the peer can rely as appropriate on the EDHOC EAD item "Supported EDHOC application profiles" (see {{sec-app-profile-edhoc-message_1_2}}) when sending an EDHOC message_1 or message_2, or on an EDHOC error message with error code TBD_ERROR_CODE (see {{sec-app-profile-edhoc-error-message}}).
+
+      If the peer supports the EDHOC EAD item "Supported EDHOC application profiles" or the error code TBD_ERROR_CODE, the peer MUST use those as appropriate to honor the wish of the server and accordingly advertise the EDHOC application profiles that it supports.
+
+    * The second element server_info is REQUIRED, and it MUST be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string APP_BSTR.
+
+      The value of each CBOR byte string APP_BSTR is the binary representation of the CBOR sequence APP_PROF_SEQ. In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
+
+      The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the intended format.
 
     The CDDL grammar describing the CBOR data item edhoc-app-prof-value is shown in {{fig-cddl-edhoc-app-prof-value}}.
 
   - The presentation format value of "edhoc-app-prof" SHALL be the CBOR extended diagnostic notation (see {{Section 8 of RFC8949}} and {{Section G of RFC8610}}) of edhoc-app-prof-value in the wire-format value (see above). When producing the presentation format value, care ought to be taken in representing Unicode with the limited ASCII character subset (e.g., by means of Punycode {{RFC3492}}) and in removing unnecessary common blank spaces within the CBOR extended diagnostic notation.
 
-If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR, then the SvcParamKey "edhocpath", if present, specifies the URI paths of EDHOC resources at the server.
+If the SvcParamKey "edhoc-app-prof" is not present in the SVCB RR, then the SvcParamKey "edhocpath", if present, still specifies the URI paths of EDHOC resources at the server. However, no information is provided about what EDHOC application profiles the server supports.
 
-If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then the following applies.
+If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then the following applies to server_info therein.
 
-* If the SvcParamKey "edhocpath" is not present in the SVCB RR, then the value of the SvcParamKey "edhoc-app-prof" MUST be a CBOR byte string.
+* If the SvcParamKey "edhocpath" is not present in the SVCB RR, then server_info MUST be a CBOR byte string.
 
   The information specified by the SvcParamKey "edhoc-app-prof" pertains to the EDHOC resource at the server with URI path "/.well-known/edhoc".
 
 * If the SvcParamKey "edhocpath" is present in the SVCB RR, then the following applies.
 
-  * If the value of the SvcParamKey "edhocpath" is a CBOR byte string, then the value of the SvcParamKey "edhoc-app-prof" MUST also be a CBOR byte string.
+  * If the value of the SvcParamKey "edhocpath" is a CBOR byte string, then server_info MUST be a CBOR byte string.
 
     The information specified by the SvcParamKey "edhoc-app-prof" pertains to the EDHOC resource at the server with URI path specified by the SvcParamKey "edhocpath".
 
-  * If the value of the SvcParamKey "edhocpath" is a CBOR array including N elements, then the value of the SvcParamKey "edhoc-app-prof" MUST also be a CBOR array including N elements.
+  * If the value of the SvcParamKey "edhocpath" is a CBOR array including N elements, then server_info MUST be a CBOR array including N elements.
 
-    The information specified by the i-th element of the CBOR array within the SvcParamKey "edhoc-app-prof" pertains to the EDHOC resource at the server with URI path specified by the i-th element of the CBOR array within the SvcParamKey "edhocpath".
+    The information specified by the i-th element of server_info pertains to the EDHOC resource at the server with URI path specified by the i-th element of the CBOR array within the SvcParamKey "edhocpath".
 
 A consumer MUST treat as malformed an SVCB RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.
 
@@ -599,7 +607,15 @@ sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
 {: #fig-edhocpath-value-path-abnf title="ABNF Definition of path-absolute"}
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
-edhoc-app-prof-value = APP_BSTR / [2* APP_BSTR]
+edhoc-app-prof-value = bytes .cborseq SVCB_EDHOC_APP_PROF
+
+; This defines an array, the elements of which
+; are to be used in the CBOR Sequence SVCB_EDHOC_APP_PROF:
+SVCB_EDHOC_APP_PROF = [?advertise_flag, server_info]
+
+advertise_flag = bool
+
+server_info = APP_BSTR / [2* APP_BSTR]
 
 ; The full definition of APP_PROF_SEQ
 ; is provided in Section 5.1
@@ -1047,6 +1063,10 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -03 to -04 ## {#sec-03-04}
+
+* Renamed "reply_flag" to "advertise_flag".
+
+* Defined use of "advertise_flag" also in SVCB Resource Records.
 
 * CDDL definitions:
 
