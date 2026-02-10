@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 13 August 2026</td>
+<td class="center">Expires 14 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lake-app-profiles-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-09" class="published">9 February 2026</time>
+<time datetime="2026-02-10" class="published">10 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-13">13 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-14">14 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1116,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1522,7 +1522,7 @@ RES: 2.05 Content
             <p id="section-3.2-4.1.1">app_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app_prof" value is an integer or an array of integers. In CBOR, "app_prof" is an integer or an array of integers, and it has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document.<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.2-5">The CDDL grammar describing the parameter "app_prof" when included in the CBOR EDHOC_Information object is:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<p id="section-3.2-5">The CDDL grammar describing the parameter "app_prof" when included in the CBOR-encoded EDHOC_Information object is:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-para"></span><div id="fig-cddl-app_prof">
 <figure id="figure-3">
           <div class="lang-cddl sourcecode" id="section-3.2-6.1">
@@ -1533,7 +1533,7 @@ app_prof_parameter = (
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-cddl-definition-of-the-para" class="selfRef">CDDL Definition of the Parameter "app_prof" when Included in the CBOR EDHOC_Information Object.</a>
+<a href="#name-cddl-definition-of-the-para" class="selfRef">CDDL Definition of the Parameter "app_prof" when Included in the CBOR-encoded EDHOC_Information Object.</a>
           </figcaption></figure>
 </div>
 <div id="use-in-the-edhoc-and-oscore-profile-of-the-ace-framework">
@@ -1849,7 +1849,7 @@ Within the set of pairs (X, Y), the order of the inner arrays encoding the pairs
 In JSON, the "exporter_out_len" value is a non-empty array, each element of which is an array including two unsigned integers. In CBOR, "exporter_out_len" is a non-empty array that has label 22, each element of which is an array including two unsigned integers.<a href="#section-5.1.2-7.1.5" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-5.1.2-8">The CDDL grammar describing the parameter "exporter_out_len" when included in the CBOR EDHOC_Information object is:<a href="#section-5.1.2-8" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-8">The CDDL grammar describing the parameter "exporter_out_len" when included in the CBOR-encoded EDHOC_Information object is:<a href="#section-5.1.2-8" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-param"></span><div id="fig-cddl-exporter_out_len">
 <figure id="figure-5">
             <div class="lang-cddl sourcecode" id="section-5.1.2-9.1">
@@ -1860,7 +1860,7 @@ exporter_out_len = (
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-cddl-definition-of-the-param" class="selfRef">CDDL Definition of the Parameter "exporter_out_len" when Included in the CBOR EDHOC_Information Object.</a>
+<a href="#name-cddl-definition-of-the-param" class="selfRef">CDDL Definition of the Parameter "exporter_out_len" when Included in the CBOR-encoded EDHOC_Information Object.</a>
             </figcaption></figure>
 </div>
 <p id="section-5.1.2-10">Within ead_value of the EAD item "Supported EDHOC application profiles", the parameter "exporter_out_len" can be included within instances of the EDHOC_Information object that are specified within the CBOR sequence APP_PROF_SEQ (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>).<a href="#section-5.1.2-10" class="pilcrow">¶</a></p>
@@ -1906,7 +1906,7 @@ That is, for each pair (X, Y) specified by the exchanged EAD items, the two peer
 <p id="section-5.2-2">Error code TBD_ERROR_CODE <span class="bcp14">MUST</span> only be used when replying to EDHOC message_1. If an EDHOC error message with error code TBD_ERROR_CODE is received as reply to an EDHOC message different from EDHOC message_1, then the recipient of the error message <span class="bcp14">MUST</span> ignore what is specified in ERR_INFO.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-3">The Responder <span class="bcp14">MUST NOT</span> abort an EDHOC session exclusively due to the wish of sending an error message with error code TBD_ERROR_CODE. Instead, the Responder can advertise the EDHOC application profiles that it supports to the Initiator by means of the EAD item "Supported EDHOC application profiles" defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>, specifying it in the EAD_2 field of the EDHOC message_2 to send in the EDHOC session.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.2-4">When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-6.3" class="relref">Section 6.3</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), the error message <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
-<p id="section-5.2-5">When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO <span class="bcp14">MUST</span> be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
+<p id="section-5.2-5">When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO <span class="bcp14">MUST</span> be a CBOR byte string with value the binary representation of the CBOR sequence APP_PROF_SEQ.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 <p id="section-5.2-6">In particular, APP_PROF_SEQ has the same format and semantics specified in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object <span class="bcp14">MUST NOT</span> include the element "exporter_out_len" defined in <a href="#exporter-out-length" class="auto internal xref">Section 5.1.2</a>.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
 <p id="section-5.2-7">The recipient peer <span class="bcp14">MUST</span> silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format of APP_PROF_SEQ.<a href="#section-5.2-7" class="pilcrow">¶</a></p>
 </section>
@@ -1952,7 +1952,7 @@ The textual representation of each path follows the semantics of path-absolute s
 <p id="section-6-3.2.2.1.2">
 In particular, edhoc-app-prof-value <span class="bcp14">MUST</span> be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array <span class="bcp14">MUST</span> include at least two elements, each of which <span class="bcp14">MUST</span> be a CBOR byte string APP_BSTR. The SVCB RR <span class="bcp14">MUST</span> be considered malformed if the SvcParamValue ends within edhoc-app-prof-value or if edhoc-app-prof-value is malformed.<a href="#section-6-3.2.2.1.2" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2.1.3">
-The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ. In particular, APP_PROF_SEQ has the same format and semantics specified in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object <span class="bcp14">MUST NOT</span> include the element "exporter_out_len" defined in <a href="#exporter-out-length" class="auto internal xref">Section 5.1.2</a>.<a href="#section-6-3.2.2.1.3" class="pilcrow">¶</a></p>
+The value of each CBOR byte string APP_BSTR is the binary representation of the CBOR sequence APP_PROF_SEQ. In particular, APP_PROF_SEQ has the same format and semantics specified in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object <span class="bcp14">MUST NOT</span> include the element "exporter_out_len" defined in <a href="#exporter-out-length" class="auto internal xref">Section 5.1.2</a>.<a href="#section-6-3.2.2.1.3" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2.1.4">
 The SVCB RR <span class="bcp14">MUST</span> be considered malformed if APP_PROF_SEQ is malformed or does not conform with the intended format.<a href="#section-6-3.2.2.1.4" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2.1.5">
@@ -2005,7 +2005,7 @@ path_segment = tstr
 </pre>
 </div>
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
-<a href="#name-cddl-definition-of-the-valu" class="selfRef">CDDL Definition of the value of the SvcParamKey "edhocpath"</a>
+<a href="#name-cddl-definition-of-the-valu" class="selfRef">CDDL Definition of the Value of the SvcParamKey "edhocpath"</a>
         </figcaption></figure>
 </div>
 <span id="name-abnf-definition-of-path-abs"></span><div id="fig-edhocpath-value-path-abnf">
@@ -2022,7 +2022,7 @@ pchar = unreserved / pct-encoded / sub-delims / ":" / "@"
 unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
 pct-encoded   = "%" HEXDIG HEXDIG
 sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")"
-             / "*" / "+" / "," / ";" / "="
+              / "*" / "+" / "," / ";" / "="
 </pre>
 </div>
 <figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
@@ -2041,7 +2041,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 </pre>
 </div>
 <figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
-<a href="#name-cddl-definition-of-the-value" class="selfRef">CDDL Definition of the value of the SvcParamKey "edhoc-app-prof"</a>
+<a href="#name-cddl-definition-of-the-value" class="selfRef">CDDL Definition of the Value of the SvcParamKey "edhoc-app-prof"</a>
         </figcaption></figure>
 </div>
 </section>
@@ -2057,7 +2057,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <p id="section-7-4">Building on the above, the well-known application profiles are <em>not</em> intended to deviate from what is mandatory to support for EDHOC peers, which is defined by the compliance requirements in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-7-4" class="pilcrow">¶</a></p>
 <p id="section-7-5">The rest of this section defines the well-known application profiles, each of which is represented by means of an EDHOC_Application_Profile object (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>) using the CBOR extended diagnostic notation.<a href="#section-7-5" class="pilcrow">¶</a></p>
 <p id="section-7-6">An entry for each well-known application profile is also registered at the "EDHOC Application Profiles" registry defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 10.8</a> of this document.<a href="#section-7-6" class="pilcrow">¶</a></p>
-<div id="well-known-application-profile-minimalcs2">
+<div id="sec-well-known-app-prof-id-0">
 <section id="section-7.1">
         <h3 id="name-well-known-application-prof">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-well-known-application-prof" class="section-name selfRef">Well-Known Application Profile MINIMAL_CS_2</a>
@@ -2076,7 +2076,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <p id="section-7.1-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">Section 3</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="well-known-application-profile-minimalcs0">
+<div id="sec-well-known-app-prof-id-1">
 <section id="section-7.2">
         <h3 id="name-well-known-application-profi">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-well-known-application-profi" class="section-name selfRef">Well-Known Application Profile MINIMAL_CS_0</a>
@@ -2094,7 +2094,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 </div>
 </section>
 </div>
-<div id="well-known-application-profile-basiccs2x509">
+<div id="sec-well-known-app-prof-id-2">
 <section id="section-7.3">
         <h3 id="name-well-known-application-profil">
 <a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-well-known-application-profil" class="section-name selfRef">Well-Known Application Profile BASIC_CS_2_X509</a>
@@ -2114,7 +2114,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <p id="section-7.3-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">Section 3</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="well-known-application-profile-basiccs0x509">
+<div id="sec-well-known-app-prof-id-3">
 <section id="section-7.4">
         <h3 id="name-well-known-application-profile">
 <a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-well-known-application-profile" class="section-name selfRef">Well-Known Application Profile BASIC_CS_0_X509</a>
@@ -2134,7 +2134,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <p id="section-7.4-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-2" class="relref">Section 2</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="well-known-application-profile-basiccs2c509">
+<div id="sec-well-known-app-prof-id-4">
 <section id="section-7.5">
         <h3 id="name-well-known-application-profile-">
 <a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-well-known-application-profile-" class="section-name selfRef">Well-Known Application Profile BASIC_CS_2_C509</a>
@@ -2153,7 +2153,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 </div>
 </section>
 </div>
-<div id="well-known-application-profile-basiccs0c509">
+<div id="sec-well-known-app-prof-id-5">
 <section id="section-7.6">
         <h3 id="name-well-known-application-profile-b">
 <a href="#section-7.6" class="section-number selfRef">7.6. </a><a href="#name-well-known-application-profile-b" class="section-name selfRef">Well-Known Application Profile BASIC_CS_0_C509</a>
@@ -2172,7 +2172,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 </div>
 </section>
 </div>
-<div id="well-known-application-profile-intermediatecs2">
+<div id="sec-well-known-app-prof-id-6">
 <section id="section-7.7">
         <h3 id="name-well-known-application-profile-i">
 <a href="#section-7.7" class="section-number selfRef">7.7. </a><a href="#name-well-known-application-profile-i" class="section-name selfRef">Well-Known Application Profile INTERMEDIATE_CS_2</a>
@@ -2195,7 +2195,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <p id="section-7.7-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">Section 3</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="well-known-application-profile-intermediatecs0">
+<div id="sec-well-known-app-prof-id-7">
 <section id="section-7.8">
         <h3 id="name-well-known-application-profile-in">
 <a href="#section-7.8" class="section-number selfRef">7.8. </a><a href="#name-well-known-application-profile-in" class="section-name selfRef">Well-Known Application Profile INTERMEDIATE_CS_0</a>
@@ -2218,7 +2218,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <p id="section-7.8-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-2" class="relref">Section 2</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="well-known-application-profile-extensive">
+<div id="sec-well-known-app-prof-id-8">
 <section id="section-7.9">
         <h3 id="name-well-known-application-profile-e">
 <a href="#section-7.9" class="section-number selfRef">7.9. </a><a href="#name-well-known-application-profile-e" class="section-name selfRef">Well-Known Application Profile EXTENSIVE</a>
@@ -2274,55 +2274,55 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
             <td class="text-left" rowspan="1" colspan="1">0</td>
             <td class="text-left" rowspan="1" colspan="1">MINIMAL-CS-2</td>
             <td class="text-left" rowspan="1" colspan="1">Method 3; Cipher Suite 2; CCS; kid</td>
-            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX]</td>
+            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX, <a href="#sec-well-known-app-prof-id-0" class="auto internal xref">Section 7.1</a>]</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">1</td>
             <td class="text-left" rowspan="1" colspan="1">MINIMAL-CS-0</td>
             <td class="text-left" rowspan="1" colspan="1">Method 3; Cipher Suite 0; CCS; kid</td>
-            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX]</td>
+            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX, <a href="#sec-well-known-app-prof-id-1" class="auto internal xref">Section 7.2</a>]</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">2</td>
             <td class="text-left" rowspan="1" colspan="1">BASIC-CS-2-X509</td>
             <td class="text-left" rowspan="1" colspan="1">Methods (0, 3); Cipher Suite 2; (CCS, X.509 certificates); (kid, x5t)</td>
-            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX]</td>
+            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX, <a href="#sec-well-known-app-prof-id-2" class="auto internal xref">Section 7.3</a>]</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">3</td>
             <td class="text-left" rowspan="1" colspan="1">BASIC-CS-0-X509</td>
             <td class="text-left" rowspan="1" colspan="1">Methods (0, 3); Cipher Suite 0; (CCS, X.509 certificates); (kid, x5t)</td>
-            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX]</td>
+            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX, <a href="#sec-well-known-app-prof-id-3" class="auto internal xref">Section 7.4</a>]</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">4</td>
             <td class="text-left" rowspan="1" colspan="1">BASIC-CS-2-C509</td>
             <td class="text-left" rowspan="1" colspan="1">Methods (0, 3); Cipher Suite 2; (CCS, C509 certificates); (kid, c5t)</td>
-            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX]</td>
+            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX, <a href="#sec-well-known-app-prof-id-4" class="auto internal xref">Section 7.5</a>]</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">5</td>
             <td class="text-left" rowspan="1" colspan="1">BASIC-CS_0-C509</td>
             <td class="text-left" rowspan="1" colspan="1">Methods (0, 3); Cipher Suite 0; (CCS, C509 certificates); (kid, c5t)</td>
-            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX]</td>
+            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX, <a href="#sec-well-known-app-prof-id-5" class="auto internal xref">Section 7.6</a>]</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">6</td>
             <td class="text-left" rowspan="1" colspan="1">INTERMEDIATE-CS-2</td>
             <td class="text-left" rowspan="1" colspan="1">Methods (0, 3); Cipher Suite 2; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)</td>
-            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX]</td>
+            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX, <a href="#sec-well-known-app-prof-id-6" class="auto internal xref">Section 7.7</a>]</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">7</td>
             <td class="text-left" rowspan="1" colspan="1">INTERMEDIATE-CS-0</td>
             <td class="text-left" rowspan="1" colspan="1">Methods (0, 3); Cipher Suite 0; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)</td>
-            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX]</td>
+            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX, <a href="#sec-well-known-app-prof-id-7" class="auto internal xref">Section 7.8</a>]</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">8</td>
             <td class="text-left" rowspan="1" colspan="1">EXTENSIVE</td>
             <td class="text-left" rowspan="1" colspan="1">Methods (0, 1, 2, 3); Cipher Suites (0, 1, 2, 3); (CCS, CWT, X.509/C509 certificates); (kid, kccs, kcwt, x5t, x5chain, c5t, c5c)</td>
-            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX]</td>
+            <td class="text-left" rowspan="1" colspan="1">[RFC-XXXX, <a href="#sec-well-known-app-prof-id-8" class="auto internal xref">Section 7.9</a>]</td>
           </tr>
         </tbody>
       </table>
@@ -2624,7 +2624,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
             <p id="section-10.5-2.3.1">Description: Set of supported EDHOC application profiles<a href="#section-10.5-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-10.5-2.4">
-            <p id="section-10.5-2.4.1">Reference: [RFC-XXXX]<a href="#section-10.5-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-10.5-2.4.1">Reference: [RFC-XXXX, <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>]<a href="#section-10.5-2.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2649,7 +2649,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
             <p id="section-10.6-2.4.1">Change Controller: IETF<a href="#section-10.6-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-10.6-2.5">
-            <p id="section-10.6-2.5.1">Reference: [RFC-XXXX]<a href="#section-10.6-2.5.1" class="pilcrow">¶</a></p>
+            <p id="section-10.6-2.5.1">Reference: [RFC-XXXX, <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>]<a href="#section-10.6-2.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2659,7 +2659,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
         <h3 id="name-dns-svcb-service-parameter-">
 <a href="#section-10.7" class="section-number selfRef">10.7. </a><a href="#name-dns-svcb-service-parameter-" class="section-name selfRef">DNS SVCB Service Parameter Keys (SvcParamKeys)</a>
         </h3>
-<p id="section-10.7-1">IANA is asked to add the following entries to the "Service Parameter Keys (SvcParamKeys)" registry within the "DNS Service Bindings (SVCB)" registry group. The definition of these parameters can be found in <a href="#sec-svcb" class="auto internal xref">Section 6</a>.<a href="#section-10.7-1" class="pilcrow">¶</a></p>
+<p id="section-10.7-1">IANA is asked to add the following entries to the "DNS SVCB Service Parameter Keys (SvcParamKeys)" registry within the "DNS Service Bindings (SVCB)" registry group. The definition of these parameters can be found in <a href="#sec-svcb" class="auto internal xref">Section 6</a>.<a href="#section-10.7-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-10.7-2.1">
             <p id="section-10.7-2.1.1">Number: 11 (suggested)<a href="#section-10.7-2.1.1" class="pilcrow">¶</a></p>
@@ -2674,7 +2674,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
             <p id="section-10.7-2.4.1">Change Controller: IETF<a href="#section-10.7-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-10.7-2.5">
-            <p id="section-10.7-2.5.1">Reference: [RFC-XXXX]<a href="#section-10.7-2.5.1" class="pilcrow">¶</a></p>
+            <p id="section-10.7-2.5.1">Reference: [RFC-XXXX, <a href="#sec-svcb" class="auto internal xref">Section 6</a>]<a href="#section-10.7-2.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-10.7-3"><br></p>
@@ -2692,7 +2692,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
             <p id="section-10.7-4.4.1">Change Controller: IETF<a href="#section-10.7-4.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-10.7-4.5">
-            <p id="section-10.7-4.5.1">Reference: [RFC-XXXX]<a href="#section-10.7-4.5.1" class="pilcrow">¶</a></p>
+            <p id="section-10.7-4.5.1">Reference: [RFC-XXXX, <a href="#sec-svcb" class="auto internal xref">Section 6</a>]<a href="#section-10.7-4.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2943,7 +2943,7 @@ c509_cert = 3
             <p id="appendix-B.1-1.1.1">CDDL definitions:<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1.2.1">
-                <p id="appendix-B.1-1.1.2.1.1">Added CDDL definitions of the parameters "app_prof" and "exporter_out_len" for the CBOR EDHOC_Information object.<a href="#appendix-B.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.1.2.1.1">Added CDDL definitions of the parameters "app_prof" and "exporter_out_len" for the CBOR-encoded EDHOC_Information object.<a href="#appendix-B.1-1.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.1.2.2">
                 <p id="appendix-B.1-1.1.2.2.1">Fixed CDDL definition of ead_value of the EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.1.2.2.1" class="pilcrow">¶</a></p>

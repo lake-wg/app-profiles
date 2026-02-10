@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 13 August 2026                                  9 February 2026
+Expires: 14 August 2026                                 10 February 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 August 2026.
+   This Internet-Draft will expire on 14 August 2026.
 
 Copyright Notice
 
@@ -489,14 +489,14 @@ Table of Contents
       registry defined in Section 10.8 of this document.
 
    The CDDL grammar describing the parameter "app_prof" when included in
-   the CBOR EDHOC_Information object is:
+   the CBOR-encoded EDHOC_Information object is:
 
    app_prof_parameter = (
      ? 23 => int / [2* int]                      ; app_prof
    )
 
          Figure 3: CDDL Definition of the Parameter "app_prof" when
-               Included in the CBOR EDHOC_Information Object.
+           Included in the CBOR-encoded EDHOC_Information Object.
 
 3.2.1.  Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -996,14 +996,14 @@ Table of Contents
       each element of which is an array including two unsigned integers.
 
    The CDDL grammar describing the parameter "exporter_out_len" when
-   included in the CBOR EDHOC_Information object is:
+   included in the CBOR-encoded EDHOC_Information object is:
 
    exporter_out_len = (
      ? 22 => [1* [uint, uint]]                   ; app_prof
    )
 
        Figure 5: CDDL Definition of the Parameter "exporter_out_len"
-            when Included in the CBOR EDHOC_Information Object.
+        when Included in the CBOR-encoded EDHOC_Information Object.
 
    Within ead_value of the EAD item "Supported EDHOC application
    profiles", the parameter "exporter_out_len" can be included within
@@ -1128,7 +1128,7 @@ Table of Contents
 
    When using error code TBD_ERROR_CODE, the error information specified
    in ERR_INFO MUST be a CBOR byte string with value the binary
-   representation of a CBOR sequence APP_PROF_SEQ.
+   representation of the CBOR sequence APP_PROF_SEQ.
 
    In particular, APP_PROF_SEQ has the same format and semantics
    specified in Section 5.1, except for the following difference: for
@@ -1214,12 +1214,12 @@ Table of Contents
          edhoc-app-prof-value is malformed.
 
          The value of each CBOR byte string APP_BSTR is the binary
-         representation of a CBOR sequence APP_PROF_SEQ.  In particular,
-         APP_PROF_SEQ has the same format and semantics specified in
-         Section 5.1, except for the following difference: for each
-         element of the CBOR sequence that is an EDHOC_Information
-         object, such an object MUST NOT include the element
-         "exporter_out_len" defined in Section 5.1.2.
+         representation of the CBOR sequence APP_PROF_SEQ.  In
+         particular, APP_PROF_SEQ has the same format and semantics
+         specified in Section 5.1, except for the following difference:
+         for each element of the CBOR sequence that is an
+         EDHOC_Information object, such an object MUST NOT include the
+         element "exporter_out_len" defined in Section 5.1.2.
 
          The SVCB RR MUST be considered malformed if APP_PROF_SEQ is
          malformed or does not conform with the intended format.
@@ -1285,7 +1285,7 @@ Table of Contents
 
    path_segment = tstr
 
-   Figure 6: CDDL Definition of the value of the SvcParamKey "edhocpath"
+   Figure 6: CDDL Definition of the Value of the SvcParamKey "edhocpath"
 
    path-absolute = "/" [ segment-nz *( "/" segment ) ]
 
@@ -1297,7 +1297,7 @@ Table of Contents
    unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
    pct-encoded   = "%" HEXDIG HEXDIG
    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
-                / "*" / "+" / "," / ";" / "="
+                 / "*" / "+" / "," / ";" / "="
 
                  Figure 7: ABNF Definition of path-absolute
 
@@ -1307,7 +1307,7 @@ Table of Contents
    ; is provided in Section 5.1
    APP_BSTR = bytes .cborseq APP_PROF_SEQ
 
-     Figure 8: CDDL Definition of the value of the SvcParamKey "edhoc-
+     Figure 8: CDDL Definition of the Value of the SvcParamKey "edhoc-
                                  app-prof"
 
 7.  Well-known EDHOC Application Profiles
@@ -1480,53 +1480,55 @@ Table of Contents
     | Profile | Name              | Description          | Reference  |
     | ID      |                   |                      |            |
     +=========+===================+======================+============+
-    | 0       | MINIMAL-CS-2      | Method 3; Cipher     | [RFC-XXXX] |
-    |         |                   | Suite 2; CCS; kid    |            |
+    | 0       | MINIMAL-CS-2      | Method 3; Cipher     | [RFC-XXXX, |
+    |         |                   | Suite 2; CCS; kid    | Section    |
+    |         |                   |                      | 7.1]       |
     +---------+-------------------+----------------------+------------+
-    | 1       | MINIMAL-CS-0      | Method 3; Cipher     | [RFC-XXXX] |
-    |         |                   | Suite 0; CCS; kid    |            |
+    | 1       | MINIMAL-CS-0      | Method 3; Cipher     | [RFC-XXXX, |
+    |         |                   | Suite 0; CCS; kid    | Section    |
+    |         |                   |                      | 7.2]       |
     +---------+-------------------+----------------------+------------+
-    | 2       | BASIC-CS-2-X509   | Methods (0, 3);      | [RFC-XXXX] |
-    |         |                   | Cipher Suite 2;      |            |
-    |         |                   | (CCS, X.509          |            |
+    | 2       | BASIC-CS-2-X509   | Methods (0, 3);      | [RFC-XXXX, |
+    |         |                   | Cipher Suite 2;      | Section    |
+    |         |                   | (CCS, X.509          | 7.3]       |
     |         |                   | certificates); (kid, |            |
     |         |                   | x5t)                 |            |
     +---------+-------------------+----------------------+------------+
-    | 3       | BASIC-CS-0-X509   | Methods (0, 3);      | [RFC-XXXX] |
-    |         |                   | Cipher Suite 0;      |            |
-    |         |                   | (CCS, X.509          |            |
+    | 3       | BASIC-CS-0-X509   | Methods (0, 3);      | [RFC-XXXX, |
+    |         |                   | Cipher Suite 0;      | Section    |
+    |         |                   | (CCS, X.509          | 7.4]       |
     |         |                   | certificates); (kid, |            |
     |         |                   | x5t)                 |            |
     +---------+-------------------+----------------------+------------+
-    | 4       | BASIC-CS-2-C509   | Methods (0, 3);      | [RFC-XXXX] |
-    |         |                   | Cipher Suite 2;      |            |
-    |         |                   | (CCS, C509           |            |
+    | 4       | BASIC-CS-2-C509   | Methods (0, 3);      | [RFC-XXXX, |
+    |         |                   | Cipher Suite 2;      | Section    |
+    |         |                   | (CCS, C509           | 7.5]       |
     |         |                   | certificates); (kid, |            |
     |         |                   | c5t)                 |            |
     +---------+-------------------+----------------------+------------+
-    | 5       | BASIC-CS_0-C509   | Methods (0, 3);      | [RFC-XXXX] |
-    |         |                   | Cipher Suite 0;      |            |
-    |         |                   | (CCS, C509           |            |
+    | 5       | BASIC-CS_0-C509   | Methods (0, 3);      | [RFC-XXXX, |
+    |         |                   | Cipher Suite 0;      | Section    |
+    |         |                   | (CCS, C509           | 7.6]       |
     |         |                   | certificates); (kid, |            |
     |         |                   | c5t)                 |            |
     +---------+-------------------+----------------------+------------+
-    | 6       | INTERMEDIATE-CS-2 | Methods (0, 3);      | [RFC-XXXX] |
-    |         |                   | Cipher Suite 2;      |            |
-    |         |                   | (CCS, X.509/C509     |            |
+    | 6       | INTERMEDIATE-CS-2 | Methods (0, 3);      | [RFC-XXXX, |
+    |         |                   | Cipher Suite 2;      | Section    |
+    |         |                   | (CCS, X.509/C509     | 7.7]       |
     |         |                   | certificates); (kid, |            |
     |         |                   | kccs, x5t, x5chain,  |            |
     |         |                   | c5t, c5c)            |            |
     +---------+-------------------+----------------------+------------+
-    | 7       | INTERMEDIATE-CS-0 | Methods (0, 3);      | [RFC-XXXX] |
-    |         |                   | Cipher Suite 0;      |            |
-    |         |                   | (CCS, X.509/C509     |            |
+    | 7       | INTERMEDIATE-CS-0 | Methods (0, 3);      | [RFC-XXXX, |
+    |         |                   | Cipher Suite 0;      | Section    |
+    |         |                   | (CCS, X.509/C509     | 7.8]       |
     |         |                   | certificates); (kid, |            |
     |         |                   | kccs, x5t, x5chain,  |            |
     |         |                   | c5t, c5c)            |            |
     +---------+-------------------+----------------------+------------+
-    | 8       | EXTENSIVE         | Methods (0, 1, 2,    | [RFC-XXXX] |
-    |         |                   | 3); Cipher Suites    |            |
-    |         |                   | (0, 1, 2, 3); (CCS,  |            |
+    | 8       | EXTENSIVE         | Methods (0, 1, 2,    | [RFC-XXXX, |
+    |         |                   | 3); Cipher Suites    | Section    |
+    |         |                   | (0, 1, 2, 3); (CCS,  | 7.9]       |
     |         |                   | CWT, X.509/C509      |            |
     |         |                   | certificates); (kid, |            |
     |         |                   | kccs, kcwt, x5t,     |            |
@@ -1783,7 +1785,7 @@ Table of Contents
 
    *  Description: Set of supported EDHOC application profiles
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 5.1]
 
 10.6.  EDHOC Error Codes Registry
 
@@ -1799,14 +1801,14 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 5.2]
 
 10.7.  DNS SVCB Service Parameter Keys (SvcParamKeys)
 
-   IANA is asked to add the following entries to the "Service Parameter
-   Keys (SvcParamKeys)" registry within the "DNS Service Bindings
-   (SVCB)" registry group.  The definition of these parameters can be
-   found in Section 6.
+   IANA is asked to add the following entries to the "DNS SVCB Service
+   Parameter Keys (SvcParamKeys)" registry within the "DNS Service
+   Bindings (SVCB)" registry group.  The definition of these parameters
+   can be found in Section 6.
 
    *  Number: 11 (suggested)
 
@@ -1816,7 +1818,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 6]
 
 
 
@@ -1828,7 +1830,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Reference: [RFC-XXXX]
+   *  Reference: [RFC-XXXX, Section 6]
 
 10.8.  EDHOC Application Profiles Registry
 
@@ -2110,7 +2112,8 @@ B.1.  Version -03 to -04
    *  CDDL definitions:
 
       -  Added CDDL definitions of the parameters "app_prof" and
-         "exporter_out_len" for the CBOR EDHOC_Information object.
+         "exporter_out_len" for the CBOR-encoded EDHOC_Information
+         object.
 
       -  Fixed CDDL definition of ead_value of the EAD item "Supported
          EDHOC application profiles".
