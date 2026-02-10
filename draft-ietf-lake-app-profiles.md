@@ -227,14 +227,14 @@ This document defines the new parameter "app\_prof" of the EDHOC_Information obj
 
 * app\_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app\_prof" value is an integer or an array of integers. In CBOR, "app\_prof" is an integer or an array of integers, and it has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
-The CDDL grammar describing the parameter "app_prof" when included in the CBOR EDHOC_Information object is:
+The CDDL grammar describing the parameter "app_prof" when included in the CBOR-encoded EDHOC_Information object is:
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
 app_prof_parameter = (
   ? 23 => int / [2* int]                      ; app_prof
 )
 ~~~~~~~~~~~~~~~~~~~~
-{: #fig-cddl-app_prof title="CDDL Definition of the Parameter \"app_prof\" when Included in the CBOR EDHOC_Information Object."}
+{: #fig-cddl-app_prof title="CDDL Definition of the Parameter \"app_prof\" when Included in the CBOR-encoded EDHOC_Information Object."}
 
 ### Use in the EDHOC and OSCORE Profile of the ACE Framework
 
@@ -457,14 +457,14 @@ This document defines the new parameter "exporter\_out\_len" of the EDHOC_Inform
 
   In JSON, the "exporter\_out\_len" value is a non-empty array, each element of which is an array including two unsigned integers. In CBOR, "exporter\_out\_len" is a non-empty array that has label 22, each element of which is an array including two unsigned integers.
 
-The CDDL grammar describing the parameter "exporter\_out\_len" when included in the CBOR EDHOC_Information object is:
+The CDDL grammar describing the parameter "exporter\_out\_len" when included in the CBOR-encoded EDHOC_Information object is:
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
 exporter_out_len = (
   ? 22 => [1* [uint, uint]]                   ; app_prof
 )
 ~~~~~~~~~~~~~~~~~~~~
-{: #fig-cddl-exporter_out_len title="CDDL Definition of the Parameter \"exporter_out_len\" when Included in the CBOR EDHOC_Information Object."}
+{: #fig-cddl-exporter_out_len title="CDDL Definition of the Parameter \"exporter_out_len\" when Included in the CBOR-encoded EDHOC_Information Object."}
 
 Within ead_value of the EAD item "Supported EDHOC application profiles", the parameter "exporter\_out\_len" can be included within instances of the EDHOC_Information object that are specified within the CBOR sequence APP_PROF_SEQ (see {{sec-app-profile-edhoc-message_1_2}}).
 
@@ -506,7 +506,7 @@ The Responder MUST NOT abort an EDHOC session exclusively due to the wish of sen
 
 When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and MUST NOT specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see {{Section 6.3 of RFC9528}}), the error message MUST NOT specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.
 
-When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of a CBOR sequence APP_PROF_SEQ.
+When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of the CBOR sequence APP_PROF_SEQ.
 
 In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
 
@@ -542,7 +542,7 @@ To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app
 
     In particular, edhoc-app-prof-value MUST be a CBOR byte string APP_BSTR or a CBOR array. In the latter case, the array MUST include at least two elements, each of which MUST be a CBOR byte string APP_BSTR. The SVCB RR MUST be considered malformed if the SvcParamValue ends within edhoc-app-prof-value or if edhoc-app-prof-value is malformed.
 
-    The value of each CBOR byte string APP_BSTR is the binary representation of a CBOR sequence APP_PROF_SEQ. In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
+    The value of each CBOR byte string APP_BSTR is the binary representation of the CBOR sequence APP_PROF_SEQ. In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
 
     The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the intended format.
 
@@ -581,7 +581,7 @@ PATH_SEQ = [* path_segment]
 
 path_segment = tstr
 ~~~~~~~~~~~~~~~~~~~~
-{: #fig-cddl-edhocpath-value title="CDDL Definition of the value of the SvcParamKey \"edhocpath\""}
+{: #fig-cddl-edhocpath-value title="CDDL Definition of the Value of the SvcParamKey \"edhocpath\""}
 
 ~~~~~~~~~~~~~~~~~~~~ abnf
 path-absolute = "/" [ segment-nz *( "/" segment ) ]
@@ -594,7 +594,7 @@ pchar = unreserved / pct-encoded / sub-delims / ":" / "@"
 unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
 pct-encoded   = "%" HEXDIG HEXDIG
 sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
-             / "*" / "+" / "," / ";" / "="
+              / "*" / "+" / "," / ";" / "="
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-edhocpath-value-path-abnf title="ABNF Definition of path-absolute"}
 
@@ -605,7 +605,7 @@ edhoc-app-prof-value = APP_BSTR / [2* APP_BSTR]
 ; is provided in Section 5.1
 APP_BSTR = bytes .cborseq APP_PROF_SEQ
 ~~~~~~~~~~~~~~~~~~~~
-{: #fig-cddl-edhoc-app-prof-value title="CDDL Definition of the value of the SvcParamKey \"edhoc-app-prof\""}
+{: #fig-cddl-edhoc-app-prof-value title="CDDL Definition of the Value of the SvcParamKey \"edhoc-app-prof\""}
 
 # Well-known EDHOC Application Profiles # {#sec-well-known-app-profiles}
 
@@ -621,7 +621,7 @@ The rest of this section defines the well-known application profiles, each of wh
 
 An entry for each well-known application profile is also registered at the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
-## Well-Known Application Profile MINIMAL_CS_2
+## Well-Known Application Profile MINIMAL_CS_2 # {#sec-well-known-app-prof-id-0}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -635,7 +635,7 @@ An entry for each well-known application profile is also registered at the "EDHO
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 3 of RFC9529}}.
 
-## Well-Known Application Profile MINIMAL_CS_0
+## Well-Known Application Profile MINIMAL_CS_0 # {#sec-well-known-app-prof-id-1}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -647,7 +647,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-## Well-Known Application Profile BASIC_CS_2_X509
+## Well-Known Application Profile BASIC_CS_2_X509 # {#sec-well-known-app-prof-id-2}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -662,7 +662,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 3 of RFC9529}}.
 
-## Well-Known Application Profile BASIC_CS_0_X509
+## Well-Known Application Profile BASIC_CS_0_X509 # {#sec-well-known-app-prof-id-3}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -677,7 +677,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 2 of RFC9529}}.
 
-## Well-Known Application Profile BASIC_CS_2_C509
+## Well-Known Application Profile BASIC_CS_2_C509 # {#sec-well-known-app-prof-id-4}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -690,7 +690,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-## Well-Known Application Profile BASIC_CS_0_C509
+## Well-Known Application Profile BASIC_CS_0_C509 # {#sec-well-known-app-prof-id-5}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -703,7 +703,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-## Well-Known Application Profile INTERMEDIATE_CS_2
+## Well-Known Application Profile INTERMEDIATE_CS_2 # {#sec-well-known-app-prof-id-6}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -721,7 +721,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 3 of RFC9529}}.
 
-## Well-Known Application Profile INTERMEDIATE_CS_0
+## Well-Known Application Profile INTERMEDIATE_CS_0 # {#sec-well-known-app-prof-id-7}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -739,7 +739,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 2 of RFC9529}}.
 
-## Well-Known Application Profile EXTENSIVE
+## Well-Known Application Profile EXTENSIVE # {#sec-well-known-app-prof-id-8}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -769,15 +769,15 @@ This document defines the following identifiers of well-known EDHOC application 
 Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RFC number of this specification and delete this paragraph.
 
 | Profile ID | Name              | Description                                                                                                                      | Reference |
-| 0          | MINIMAL-CS-2      | Method 3; Cipher Suite 2; CCS; kid                                                                                               | {{&SELF}} |
-| 1          | MINIMAL-CS-0      | Method 3; Cipher Suite 0; CCS; kid                                                                                               | {{&SELF}} |
-| 2          | BASIC-CS-2-X509   | Methods (0, 3); Cipher Suite 2; (CCS, X.509 certificates); (kid, x5t)                                                            | {{&SELF}} |
-| 3          | BASIC-CS-0-X509   | Methods (0, 3); Cipher Suite 0; (CCS, X.509 certificates); (kid, x5t)                                                            | {{&SELF}} |
-| 4          | BASIC-CS-2-C509   | Methods (0, 3); Cipher Suite 2; (CCS, C509 certificates); (kid, c5t)                                                             | {{&SELF}} |
-| 5          | BASIC-CS_0-C509   | Methods (0, 3); Cipher Suite 0; (CCS, C509 certificates); (kid, c5t)                                                             | {{&SELF}} |
-| 6          | INTERMEDIATE-CS-2 | Methods (0, 3); Cipher Suite 2; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | {{&SELF}} |
-| 7          | INTERMEDIATE-CS-0 | Methods (0, 3); Cipher Suite 0; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | {{&SELF}} |
-| 8          | EXTENSIVE         | Methods (0, 1, 2, 3); Cipher Suites (0, 1, 2, 3); (CCS, CWT, X.509/C509 certificates); (kid, kccs, kcwt, x5t, x5chain, c5t, c5c) | {{&SELF}} |
+| 0          | MINIMAL-CS-2      | Method 3; Cipher Suite 2; CCS; kid                                                                                               | \[RFC-XXXX, {{sec-well-known-app-prof-id-0}}\] |
+| 1          | MINIMAL-CS-0      | Method 3; Cipher Suite 0; CCS; kid                                                                                               | \[RFC-XXXX, {{sec-well-known-app-prof-id-1}}\] |
+| 2          | BASIC-CS-2-X509   | Methods (0, 3); Cipher Suite 2; (CCS, X.509 certificates); (kid, x5t)                                                            | \[RFC-XXXX, {{sec-well-known-app-prof-id-2}}\] |
+| 3          | BASIC-CS-0-X509   | Methods (0, 3); Cipher Suite 0; (CCS, X.509 certificates); (kid, x5t)                                                            | \[RFC-XXXX, {{sec-well-known-app-prof-id-3}}\] |
+| 4          | BASIC-CS-2-C509   | Methods (0, 3); Cipher Suite 2; (CCS, C509 certificates); (kid, c5t)                                                             | \[RFC-XXXX, {{sec-well-known-app-prof-id-4}}\] |
+| 5          | BASIC-CS_0-C509   | Methods (0, 3); Cipher Suite 0; (CCS, C509 certificates); (kid, c5t)                                                             | \[RFC-XXXX, {{sec-well-known-app-prof-id-5}}\] |
+| 6          | INTERMEDIATE-CS-2 | Methods (0, 3); Cipher Suite 2; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | \[RFC-XXXX, {{sec-well-known-app-prof-id-6}}\] |
+| 7          | INTERMEDIATE-CS-0 | Methods (0, 3); Cipher Suite 0; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | \[RFC-XXXX, {{sec-well-known-app-prof-id-7}}\] |
+| 8          | EXTENSIVE         | Methods (0, 1, 2, 3); Cipher Suites (0, 1, 2, 3); (CCS, CWT, X.509/C509 certificates); (kid, kccs, kcwt, x5t, x5chain, c5t, c5c) | \[RFC-XXXX, {{sec-well-known-app-prof-id-8}}\] |
 {: #table-edhoc-well-known-app-profiles title="EDHOC Well-known Application Profiles" align="center"}
 
 # Security Considerations # {#sec-security-considerations}
@@ -946,7 +946,7 @@ IANA is asked to register the following entry in the "EDHOC External Authorizati
 * Name: Supported EDHOC application profiles
 * Label: TBD_EAD_LABEL (range 0-23)
 * Description: Set of supported EDHOC application profiles
-* Reference: {{&SELF}}
+* Reference: \[RFC-XXXX, {{sec-app-profile-edhoc-message_1_2}}\]
 
 ## EDHOC Error Codes Registry ## {#iana-edhoc-error-codes-registry}
 
@@ -956,17 +956,17 @@ IANA is asked to register the following entry in the "EDHOC Error Codes" registr
 * ERR_INFO Type: app_profiles
 * Description: Supported EDHOC application profiles
 * Change Controller: IETF
-* Reference: {{&SELF}}
+* Reference: \[RFC-XXXX, {{sec-app-profile-edhoc-error-message}}\]
 
 ## DNS SVCB Service Parameter Keys (SvcParamKeys) ## {#iana-svcb}
 
-IANA is asked to add the following entries to the "Service Parameter Keys (SvcParamKeys)" registry within the "DNS Service Bindings (SVCB)" registry group. The definition of these parameters can be found in {{sec-svcb}}.
+IANA is asked to add the following entries to the "DNS SVCB Service Parameter Keys (SvcParamKeys)" registry within the "DNS Service Bindings (SVCB)" registry group. The definition of these parameters can be found in {{sec-svcb}}.
 
 * Number: 11 (suggested)
 * Name: edhocpath
 * Meaning: EDHOC resource path
 * Change Controller: IETF
-* Reference: {{&SELF}}
+* Reference: \[RFC-XXXX, {{sec-svcb}}\]
 
 <br>
 
@@ -974,7 +974,7 @@ IANA is asked to add the following entries to the "Service Parameter Keys (SvcPa
 * Name: edhoc-app-prof
 * Meaning: Supported EDHOC application profiles
 * Change Controller: IETF
-* Reference: {{&SELF}}
+* Reference: \[RFC-XXXX, {{sec-svcb}}\]
 
 ## EDHOC Application Profiles Registry ## {#iana-edhoc-application-profiles}
 
@@ -1050,7 +1050,7 @@ c509_cert = 3
 
 * CDDL definitions:
 
-  * Added CDDL definitions of the parameters "app_prof" and "exporter_out_len" for the CBOR EDHOC_Information object.
+  * Added CDDL definitions of the parameters "app_prof" and "exporter_out_len" for the CBOR-encoded EDHOC_Information object.
 
   * Fixed CDDL definition of ead_value of the EAD item "Supported EDHOC application profiles".
 
