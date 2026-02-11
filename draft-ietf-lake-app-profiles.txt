@@ -1257,6 +1257,13 @@ Table of Contents
             The SVCB RR MUST be considered malformed if APP_PROF_SEQ is
             malformed or does not conform with the intended format.
 
+         An SVCB RR might not be intended to advertise what EDHOC
+         application profiles a server supports for a given EDHOC
+         resource that it hosts.  In such a case, server_info can be
+         composed such that the CBOR sequence APP_PROF_SEQ pertaining to
+         that resource only consists of a single EDHOC_Information
+         object as an empty CBOR map.
+
          The CDDL grammar describing the CBOR data item edhoc-app-prof-
          value is shown in Figure 8.
 
@@ -2155,6 +2162,9 @@ B.1.  Version -03 to -04
 
    *  Added guidelines on using the EAD item "Supported EDHOC
       application profiles" only to take advantage of advertise_flag.
+
+   *  Added guidelines on having per-resource empty advertisements in an
+      SVCB RR.
 
    *  Clarifications:
 
