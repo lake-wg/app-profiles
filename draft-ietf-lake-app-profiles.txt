@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 14 August 2026                                 10 February 2026
+Expires: 15 August 2026                                 11 February 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 August 2026.
+   This Internet-Draft will expire on 15 August 2026.
 
 Copyright Notice
 
@@ -841,10 +841,10 @@ Table of Contents
    EDHOC message_1 and/or message_2 during an EDHOC session, the peers
    participating in that session MUST NOT act in violation of what is
    indicated by prescriptive parameters that are specified in those EAD
-   items.  Upon receiving an EDHOC message, a peer MUST check whether
-   the other peer has violated such indications.  If any violation is
-   found, the peer MUST abort the EDHOC session and MUST reply with an
-   EDHOC error message with error code (ERR_CODE) 1.
+   items.  Upon receiving an EDHOC message and throughout the session, a
+   peer MUST check whether the other peer has violated such indications.
+   If any violation is found, the peer MUST abort the EDHOC session and
+   MUST reply with an EDHOC error message with error code (ERR_CODE) 1.
 
    When composing ead_value, the sender peer MUST comply with the
    content restrictions specified in Section 5.1.1.
@@ -2143,6 +2143,11 @@ B.1.  Version -03 to -04
    *  Renamed "reply_flag" to "advertise_flag".
 
    *  Defined use of "advertise_flag" also in SVCB Resource Records.
+
+   *  Clarifications:
+
+      -  Deviations from prescriptive parameters are assessed throughout
+         the whole EDHOC session.
 
    *  CDDL definitions:
 
