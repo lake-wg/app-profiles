@@ -556,6 +556,8 @@ To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app
 
       The SVCB RR MUST be considered malformed if APP_PROF_SEQ is malformed or does not conform with the intended format.
 
+    An SVCB RR might not be intended to advertise what EDHOC application profiles a server supports for a given EDHOC resource that it hosts. In such a case, server_info can be composed such that the CBOR sequence APP_PROF_SEQ pertaining to that resource only consists of a single EDHOC_Information object as an empty CBOR map.
+
     The CDDL grammar describing the CBOR data item edhoc-app-prof-value is shown in {{fig-cddl-edhoc-app-prof-value}}.
 
   - The presentation format value of "edhoc-app-prof" SHALL be the CBOR extended diagnostic notation (see {{Section 8 of RFC8949}} and {{Section G of RFC8610}}) of edhoc-app-prof-value in the wire-format value (see above). When producing the presentation format value, care ought to be taken in representing Unicode with the limited ASCII character subset (e.g., by means of Punycode {{RFC3492}}) and in removing unnecessary common blank spaces within the CBOR extended diagnostic notation.
@@ -1071,6 +1073,8 @@ c509_cert = 3
 * Defined use of "advertise_flag" also in SVCB Resource Records.
 
 * Added guidelines on using the EAD item "Supported EDHOC application profiles" only to take advantage of advertise_flag.
+
+* Added guidelines on having per-resource empty advertisements in an SVCB RR.
 
 * Clarifications:
 
