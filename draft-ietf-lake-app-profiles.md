@@ -338,7 +338,7 @@ The EAD item MUST specify an ead_value, as a CBOR byte string with value the bin
 
       In spite of the suggestion from the Initiator, the Responder MAY still advertise the EDHOC application profiles that it supports, when replying to EDHOC message_1 with EDHOC message_2 or with an EDHOC error message with error code TBD_ERROR_CODE (see {{sec-app-profile-edhoc-error-message}}). For example, when sending EDHOC message_2, the Responder might wish to steer the rest of the EDHOC session in a specific way, by including the EAD item "Supported EDHOC application profiles" that specifies information corresponding to EDHOC_Information prescriptive parameters (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
-  - The CBOR sequence APP_PROF_SEQ, which is specified further below.
+  - The CBOR sequence APP_PROF_SEQ, which MUST be present and is specified further below.
 
 * When the EAD item is included in the EAD_2 field, the value of the CBOR byte string is the binary representation of the CBOR sequence APP_PROF_SEQ.
 
@@ -369,6 +369,8 @@ The CBOR sequence APP_PROF_SEQ is composed of one or more elements, whose order 
   * "exporter_out_len" (see {{exporter-out-length}}).
 
   This element of the CBOR sequence indicates that the message sender supports an EDHOC application profile consistent with the pieces of information specified by the EDHOC_Information object.
+
+When sending EDHOC message_1, the Initiator might want to include the EAD item "Supported EDHOC application profiles" and not advertise the EDHOC application profiles that it supports, but instead just take advantage of advertise_flag and ask the Responder to advertise what is supported on its side. In order to do that, the Initiator can compose ead_value such that, following advertise_flag, the CBOR sequence APP_PROF_SEQ only consists of a single EDHOC_Information object as an empty CBOR map.
 
 The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if ead_value is malformed or does not conform with the format defined above.
 
@@ -1067,6 +1069,8 @@ c509_cert = 3
 * Renamed "reply_flag" to "advertise_flag".
 
 * Defined use of "advertise_flag" also in SVCB Resource Records.
+
+* Added guidelines on using the EAD item "Supported EDHOC application profiles" only to take advantage of advertise_flag.
 
 * Clarifications:
 
