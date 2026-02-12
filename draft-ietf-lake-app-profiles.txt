@@ -93,6 +93,7 @@ Table of Contents
        5.2.1.  Example of ERR_INFO
    6.  Advertising Supported EDHOC Application Profiles using SVCB
            Resource Records
+     6.1.  Examples of Wire-Format Values of the SvcParamKeys
    7.  Well-known EDHOC Application Profiles
      7.1.  Well-Known Application Profile MINIMAL-CS-2
      7.2.  Well-Known Application Profile MINIMAL-CS-0
@@ -255,14 +256,14 @@ Table of Contents
 
    In the CBOR diagnostic notation used in this document, constructs of
    the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME
-   in the CDDL model shown in Figure 13 of Appendix A.  For example,
+   in the CDDL model shown in Figure 15 of Appendix A.  For example,
    {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0,
    1, 2, 3], 2 : 3}.
 
    Note to RFC Editor: Please delete the paragraph immediately preceding
    this note.  Also, in the CBOR diagnostic notation used in this
    document, please replace the constructs of the form e'SOME_NAME' with
-   the value assigned to SOME_NAME in the CDDL model shown in Figure 13
+   the value assigned to SOME_NAME in the CDDL model shown in Figure 15
    of Appendix A.  Finally, please delete this note.
 
 2.  EDHOC_Application_Profile
@@ -691,13 +692,13 @@ Table of Contents
       target attribute 'ed-ta-edcred-kid'.  The target attribute has
       value "AKw", i.e., the base64url-encoded text string of 0x00ac.
       The latter is the binary key identifier of a trust anchor
-      supported by the server when running EDHOC at that resource.
+      supported by the server when running EDHOC through that resource.
 
    *  The link to the EDHOC resource at /edhoc-alt includes the target
       attribute 'ed-ta-edcred-kid'.  The target attribute has value
       "_wH_", i.e., the base64url-encoded text string of 0xff01ff.  The
       latter is the binary key identifier of a trust anchor supported by
-      the server when running EDHOC at that resource.
+      the server when running EDHOC through that resource.
 
    *  The link to the EDHOC resource at /edhoc-alt includes the target
       attribute 'ed-ta-edcred-x5t'.  The target attribute has value
@@ -705,8 +706,8 @@ Table of Contents
       0x822e4879f2a41b510c1f9b.  The latter is the binary representation
       of the COSE_CertHash [RFC9360] corresponding to an X.509
       certificate [RFC5280] that the server suppports as a trust anchor
-      when running EDHOC at that resource.  In CBOR diagnostic notation,
-      the considered COSE_CertHash is as follows: [-15,
+      when running EDHOC through that resource.  In CBOR diagnostic
+      notation, the considered COSE_CertHash is as follows: [-15,
       h'79f2a41b510c1f9b'].
 
     REQ: GET /.well-known/core
@@ -1153,13 +1154,15 @@ Table of Contents
 
 5.1.3.  Examples of ead_value
 
-   Figure 7 shows an example of ead_value for the EDHOC EAD item
-   "Supported EDHOC application profiles", when used in EDHOC message_1.
-   With reference to the CDDL grammar in Figure 5, the following
-   applies.
+   Figure 7 shows an example in CBOR diagnostic notation of ead_value
+   for the EDHOC EAD item "Supported EDHOC application profiles", when
+   used in EDHOC message_1.  With reference to the CDDL grammar in
+   Figure 5, the following applies.
 
    The CBOR data item advertise_flag is present and encodes the CBOR
-   simple value true (0xf5).
+   simple value true (0xf5), hence asking the Responder to advertise the
+   EDHOC application profiles that it supports, when replying to the
+   present EDHOC message_1.
 
    The CBOR sequence APP_PROF_SEQ includes the following three elements:
 
@@ -1216,10 +1219,10 @@ Table of Contents
       Figure 7: Example of ead_value for the EAD Item "Supported EDHOC
                   application profiles" in EDHOC message_1
 
-   Figure 8 shows an example of ead_value for the EDHOC EAD item
-   "Supported EDHOC application profiles", when used in EDHOC message_2.
-   With reference to the CDDL grammar in Figure 5, the following
-   applies.
+   Figure 8 shows an example in CBOR diagnostic notation of ead_value
+   for the EDHOC EAD item "Supported EDHOC application profiles", when
+   used in EDHOC message_2.  With reference to the CDDL grammar in
+   Figure 5, the following applies.
 
    The CBOR sequence APP_PROF_SEQ includes the following two elements:
 
@@ -1308,9 +1311,9 @@ Table of Contents
 
 5.2.1.  Example of ERR_INFO
 
-   Figure 9 shows an example of ERR_INFO for the EDHOC error message
-   with Error Code TBD_ERROR_CODE.  With reference to the CDDL grammar
-   in Figure 5, the following applies.
+   Figure 9 shows an example in CBOR diagnostic notation of ERR_INFO for
+   the EDHOC error message with Error Code TBD_ERROR_CODE.  With
+   reference to the CDDL grammar in Figure 5, the following applies.
 
    The CBOR sequence APP_PROF_SEQ includes the following two elements:
 
@@ -1434,7 +1437,7 @@ Table of Contents
             it MUST encode the CBOR simple value true (0xf5).  If
             advertise_flag is present, a peer that runs EDHOC with the
             server is encouraged to advertise the EDHOC application
-            profiles that it supports, when sending to the server the
+            profiles that it supports, when sending to the server its
             first EDHOC message in an EDHOC session.
 
             In order to do that, the peer can rely as appropriate on the
@@ -1565,6 +1568,89 @@ Table of Contents
 
          Figure 12: CDDL Definition of the Value of the SvcParamKey
                               "edhoc-app-prof"
+
+6.1.  Examples of Wire-Format Values of the SvcParamKeys
+
+   Using CBOR diagnostic notation, this section provides examples of
+   wire-format values of the SvcParamKeys "edhocpath" and "edhoc-app-
+   prof", within an SVCB RR corresponding to a given server.
+
+   Figure 13 shows an example of the SvcParamKey "edhocpath", with
+   reference to the CDDL grammar in Figure 10.
+
+   In the example, two URI paths are specified, i.e., one for the EDHOC
+   resource at "/.well-known/edhoc" and one for the EDHOC resource at
+   "/edhoc-alt".
+
+   [                   / edhocpath-value /
+     <<                / PATH_BSTR /
+       ".well-known",  / path_segment /
+       "edhoc"         / path_segment /
+     >>,
+     <<                / PATH_BSTR /
+       "edhoc-alt"     / path_segment /
+     >>
+   ]
+
+         Figure 13: Example of Wire-Format Value of the SvcParamKey
+                       "edhocpath" within an SVCB RR
+
+   Figure 14 shows an example of the SvcParamKey "edhoc-app-prof", with
+   reference to the CDDL grammar in Figure 12.  In particular, the
+   following applies.
+
+   The CBOR data item advertise_flag is present and encodes the CBOR
+   simple value true (0xf5), hence indicating that a peer that runs
+   EDHOC with the server is encouraged to advertise the EDHOC
+   application profiles that it supports, when sending to the server its
+   first EDHOC message in an EDHOC session.
+
+   The CBOR data item server_info is a CBOR array, which includes two
+   CBOR byte strings APP_BSTR.  In particular:
+
+   *  The value of the first CBOR byte string is the binary
+      representation of a CBOR sequence APP_PROF_SEQ, which advertises
+      the EDHOC application profiles that the server supports when
+      running EDHOC through the resource with URI path "/.well-known/
+      edhoc".
+
+   *  The value of the second CBOR byte string is the binary
+      representation of a CBOR sequence APP_PROF_SEQ, which advertises
+      the EDHOC application profiles that the server supports when
+      running EDHOC through the resource with URI path "/edhoc-alt".
+
+   <<                                / edhoc-app-prof-value /
+      true,                          / advertise_flag /
+      [                              / server_info /
+        <<                           / APP_BSTR /
+          e'APP-PROF-MINIMAL-CS-2',  / profile_id /
+          e'APP-PROF-MINIMAL-CS-0',  / profile_id /
+          {                          / EDHOC_Information /
+            e'message_4' : true,
+            e'eads' : [500, 333],
+            e'trust_anchors' : {
+              e'edhoc_cred' : [
+                { e'kid_ta_type' : h'00ac' },
+                { e'kid_ta_type' : h'ff01ff' }
+              ]
+            }
+          }
+        >>,
+        <<                           / APP_BSTR /
+          e'APP-PROF-MINIMAL-CS-2',  / profile_id /
+          {                          / EDHOC_Information /
+            e'comb_req' : true,
+            e'eads' : [500, 999],
+            e'trust_anchors' : {
+              e'edhoc_cred' : { e'kid_ta_type' : h'91ab' }
+            }
+          }
+        >>
+      ]
+   >>
+
+         Figure 14: Example of Wire-Format Value of the SvcParamKey
+                     "edhoc-app-prof" within an SVCB RR
 
 7.  Well-known EDHOC Application Profiles
 
@@ -2368,7 +2454,7 @@ Appendix A.  CDDL Model
    ; EDHOC Authentication Credential Types
    c509_cert = 3
 
-                           Figure 13: CDDL model
+                           Figure 15: CDDL model
 
 Appendix B.  Document Updates
 
@@ -2407,6 +2493,9 @@ B.1.  Version -03 to -04
 
       -  ead_value for the EDHOC EAD item "Supported EDHOC application
          profiles".
+
+      -  Added examples of wire-format values of the SvcParamKeys
+         "edhocpath" and "edhoc-app-prof".
 
       -  ERR_INFO for the EDHOC error message with Error Code
          TBD_ERROR_CODE.

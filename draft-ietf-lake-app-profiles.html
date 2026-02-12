@@ -1205,6 +1205,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-advertising-supported-edhoc-" class="internal xref">Advertising Supported EDHOC Application Profiles using SVCB Resource Records</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-examples-of-wire-format-val" class="internal xref">Examples of Wire-Format Values of the SvcParamKeys</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-well-known-edhoc-applicatio" class="internal xref">Well-known EDHOC Application Profiles</a></p>
@@ -1367,8 +1372,8 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 <p id="section-1.1-2">The reader is expected to be familiar with terms and concepts defined in EDHOC <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> and with the use of EDHOC with CoAP <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> and OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span> defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">Concise Binary Object Representation (CBOR) <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and Concise Data Definition Language (CDDL) <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> are used in this document. CDDL predefined type names, especially bstr for CBOR byte strings and tstr for CBOR text strings, are used extensively in this document.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <p id="section-1.1-4">CBOR data items are represented using the CBOR extended diagnostic notation as defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">Section 8</a> of [<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> ("diagnostic notation"). Diagnostic notation comments are used to provide a textual representation of the parameters' keys and values.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
-<p id="section-1.1-5">In the CBOR diagnostic notation used in this document, constructs of the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 13</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. For example, {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0, 1, 2, 3], 2 : 3}.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
-<p id="section-1.1-6">Note to RFC Editor: Please delete the paragraph immediately preceding this note. Also, in the CBOR diagnostic notation used in this document, please replace the constructs of the form e'SOME_NAME' with the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 13</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. Finally, please delete this note.<a href="#section-1.1-6" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">In the CBOR diagnostic notation used in this document, constructs of the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 15</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. For example, {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0, 1, 2, 3], 2 : 3}.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<p id="section-1.1-6">Note to RFC Editor: Please delete the paragraph immediately preceding this note. Also, in the CBOR diagnostic notation used in this document, please replace the constructs of the form e'SOME_NAME' with the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 15</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. Finally, please delete this note.<a href="#section-1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1638,13 +1643,13 @@ When using the target EDHOC resource as per any EDHOC application profile indica
 <p id="section-4-5">The example in <a href="#fig-web-link-example-2" class="auto internal xref">Figure 4</a> extends the earlier example in <a href="#fig-web-link-example" class="auto internal xref">Figure 2</a>, by additionally showing the use of the target attributes 'ed-ta-edcred-kid' and 'ed-ta-edcred-x5t'. Compared to the example in <a href="#fig-web-link-example" class="auto internal xref">Figure 2</a>, the following also applies.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4-6.1">
-          <p id="section-4-6.1.1">The link to the EDHOC resource at /.well-known/edhoc includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "AKw", i.e., the base64url-encoded text string of 0x00ac. The latter is the binary key identifier of a trust anchor supported by the server when running EDHOC at that resource.<a href="#section-4-6.1.1" class="pilcrow">¶</a></p>
+          <p id="section-4-6.1.1">The link to the EDHOC resource at /.well-known/edhoc includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "AKw", i.e., the base64url-encoded text string of 0x00ac. The latter is the binary key identifier of a trust anchor supported by the server when running EDHOC through that resource.<a href="#section-4-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-6.2">
-          <p id="section-4-6.2.1">The link to the EDHOC resource at /edhoc-alt includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "_wH_", i.e., the base64url-encoded text string of 0xff01ff. The latter is the binary key identifier of a trust anchor supported by the server when running EDHOC at that resource.<a href="#section-4-6.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-6.2.1">The link to the EDHOC resource at /edhoc-alt includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "_wH_", i.e., the base64url-encoded text string of 0xff01ff. The latter is the binary key identifier of a trust anchor supported by the server when running EDHOC through that resource.<a href="#section-4-6.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-6.3">
-          <p id="section-4-6.3.1">The link to the EDHOC resource at /edhoc-alt includes the target attribute 'ed-ta-edcred-x5t'. The target attribute has value "gi5IefKkG1EMH5s", i.e., the base64url-encoded text string of 0x822e4879f2a41b510c1f9b. The latter is the binary representation of the COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span> corresponding to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> that the server suppports as a trust anchor when running EDHOC at that resource. In CBOR diagnostic notation, the considered COSE_CertHash is as follows: [-15, h'79f2a41b510c1f9b'].<a href="#section-4-6.3.1" class="pilcrow">¶</a></p>
+          <p id="section-4-6.3.1">The link to the EDHOC resource at /edhoc-alt includes the target attribute 'ed-ta-edcred-x5t'. The target attribute has value "gi5IefKkG1EMH5s", i.e., the base64url-encoded text string of 0x822e4879f2a41b510c1f9b. The latter is the binary representation of the COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span> corresponding to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> that the server suppports as a trust anchor when running EDHOC through that resource. In CBOR diagnostic notation, the considered COSE_CertHash is as follows: [-15, h'79f2a41b510c1f9b'].<a href="#section-4-6.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <span id="name-the-web-link-2"></span><div id="fig-web-link-example-2">
@@ -1943,8 +1948,8 @@ That is, for each pair (X, Y) specified by the exchanged EAD items, the two peer
           <h4 id="name-examples-of-ead_value">
 <a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-examples-of-ead_value" class="section-name selfRef">Examples of ead_value</a>
           </h4>
-<p id="section-5.1.3-1"><a href="#fig-example-ead-value-1" class="auto internal xref">Figure 7</a> shows an example of ead_value for the EDHOC EAD item "Supported EDHOC application profiles", when used in EDHOC message_1. With reference to the CDDL grammar in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 5</a>, the following applies.<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.3-2">The CBOR data item advertise_flag is present and encodes the CBOR simple value <code>true</code> (0xf5).<a href="#section-5.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-1"><a href="#fig-example-ead-value-1" class="auto internal xref">Figure 7</a> shows an example in CBOR diagnostic notation of ead_value for the EDHOC EAD item "Supported EDHOC application profiles", when used in EDHOC message_1. With reference to the CDDL grammar in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 5</a>, the following applies.<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-2">The CBOR data item advertise_flag is present and encodes the CBOR simple value <code>true</code> (0xf5), hence asking the Responder to advertise the EDHOC application profiles that it supports, when replying to the present EDHOC message_1.<a href="#section-5.1.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.1.3-3">The CBOR sequence APP_PROF_SEQ includes the following three elements:<a href="#section-5.1.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.1.3-4.1">
@@ -1995,7 +2000,7 @@ In turn, the array includes two CBOR maps. Within the first CBOR map, its entry'
 <a href="#name-example-of-ead_value-for-th" class="selfRef">Example of ead_value for the EAD Item "Supported EDHOC application profiles" in EDHOC message_1</a>
             </figcaption></figure>
 </div>
-<p id="section-5.1.3-6"><a href="#fig-example-ead-value-2" class="auto internal xref">Figure 8</a> shows an example of ead_value for the EDHOC EAD item "Supported EDHOC application profiles", when used in EDHOC message_2. With reference to the CDDL grammar in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 5</a>, the following applies.<a href="#section-5.1.3-6" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-6"><a href="#fig-example-ead-value-2" class="auto internal xref">Figure 8</a> shows an example in CBOR diagnostic notation of ead_value for the EDHOC EAD item "Supported EDHOC application profiles", when used in EDHOC message_2. With reference to the CDDL grammar in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 5</a>, the following applies.<a href="#section-5.1.3-6" class="pilcrow">¶</a></p>
 <p id="section-5.1.3-7">The CBOR sequence APP_PROF_SEQ includes the following two elements:<a href="#section-5.1.3-7" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.1.3-8.1">
@@ -2059,7 +2064,7 @@ Within the inner map, its entry's value is a CBOR byte string that encodes 0x91a
           <h4 id="name-example-of-err_info">
 <a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-example-of-err_info" class="section-name selfRef">Example of ERR_INFO</a>
           </h4>
-<p id="section-5.2.1-1"><a href="#fig-example-err-info" class="auto internal xref">Figure 9</a> shows an example of ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE. With reference to the CDDL grammar in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 5</a>, the following applies.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-1"><a href="#fig-example-err-info" class="auto internal xref">Figure 9</a> shows an example in CBOR diagnostic notation of ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE. With reference to the CDDL grammar in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 5</a>, the following applies.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-2">The CBOR sequence APP_PROF_SEQ includes the following two elements:<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2.1-3.1">
@@ -2150,7 +2155,7 @@ The textual representation of each path follows the semantics of path-absolute s
 In particular, edhoc-app-prof-value <span class="bcp14">MUST</span> be a CBOR byte string. The value of the CBOR byte string is the binary representation of the CBOR sequence SVCB_EDHOC_APP_PROF, which is composed of one or two elements as specified below. The SVCB RR <span class="bcp14">MUST</span> be considered malformed if the SvcParamValue ends within edhoc-app-prof-value or if edhoc-app-prof-value is malformed.<a href="#section-6-3.2.2.1.2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6-3.2.2.1.3.1">
-                  <p id="section-6-3.2.2.1.3.1.1">The first element advertise_flag is <span class="bcp14">OPTIONAL</span>. If present, it <span class="bcp14">MUST</span> encode the CBOR simple value <code>true</code> (0xf5). If advertise_flag is present, a peer that runs EDHOC with the server is encouraged to advertise the EDHOC application profiles that it supports, when sending to the server the first EDHOC message in an EDHOC session.<a href="#section-6-3.2.2.1.3.1.1" class="pilcrow">¶</a></p>
+                  <p id="section-6-3.2.2.1.3.1.1">The first element advertise_flag is <span class="bcp14">OPTIONAL</span>. If present, it <span class="bcp14">MUST</span> encode the CBOR simple value <code>true</code> (0xf5). If advertise_flag is present, a peer that runs EDHOC with the server is encouraged to advertise the EDHOC application profiles that it supports, when sending to the server its first EDHOC message in an EDHOC session.<a href="#section-6-3.2.2.1.3.1.1" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2.1.3.1.2">
 In order to do that, the peer can rely as appropriate on the EDHOC EAD item "Supported EDHOC application profiles" (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>) when sending an EDHOC message_1 or message_2, or on an EDHOC error message with error code TBD_ERROR_CODE (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>).<a href="#section-6-3.2.2.1.3.1.2" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2.1.3.1.3">
@@ -2262,6 +2267,85 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-cddl-definition-of-the-value" class="selfRef">CDDL Definition of the Value of the SvcParamKey "edhoc-app-prof"</a>
         </figcaption></figure>
+</div>
+<div id="examples-of-wire-format-values-of-the-svcparamkeys">
+<section id="section-6.1">
+        <h3 id="name-examples-of-wire-format-val">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-examples-of-wire-format-val" class="section-name selfRef">Examples of Wire-Format Values of the SvcParamKeys</a>
+        </h3>
+<p id="section-6.1-1">Using CBOR diagnostic notation, this section provides examples of wire-format values of the SvcParamKeys "edhocpath" and "edhoc-app-prof", within an SVCB RR corresponding to a given server.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2"><a href="#fig-example-svcb-edhocpath" class="auto internal xref">Figure 13</a> shows an example of the SvcParamKey "edhocpath", with reference to the CDDL grammar in <a href="#fig-cddl-edhocpath-value" class="auto internal xref">Figure 10</a>.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">In the example, two URI paths are specified, i.e., one for the EDHOC resource at "/.well-known/edhoc" and one for the EDHOC resource at "/edhoc-alt".<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<span id="name-example-of-wire-format-valu"></span><div id="fig-example-svcb-edhocpath">
+<figure id="figure-13">
+          <div class="lang-cbor-diag sourcecode" id="section-6.1-4.1">
+<pre>
+[                   / edhocpath-value /
+  &lt;&lt;                / PATH_BSTR /
+    ".well-known",  / path_segment /
+    "edhoc"         / path_segment /
+  &gt;&gt;,
+  &lt;&lt;                / PATH_BSTR /
+    "edhoc-alt"     / path_segment /
+  &gt;&gt;
+]
+</pre>
+</div>
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<a href="#name-example-of-wire-format-valu" class="selfRef">Example of Wire-Format Value of the SvcParamKey "edhocpath" within an SVCB RR</a>
+          </figcaption></figure>
+</div>
+<p id="section-6.1-5"><a href="#fig-example-svcb-edhoc-app-prof" class="auto internal xref">Figure 14</a> shows an example of the SvcParamKey "edhoc-app-prof", with reference to the CDDL grammar in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 12</a>. In particular, the following applies.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
+<p id="section-6.1-6">The CBOR data item advertise_flag is present and encodes the CBOR simple value <code>true</code> (0xf5), hence indicating that a peer that runs EDHOC with the server is encouraged to advertise the EDHOC application profiles that it supports, when sending to the server its first EDHOC message in an EDHOC session.<a href="#section-6.1-6" class="pilcrow">¶</a></p>
+<p id="section-6.1-7">The CBOR data item server_info is a CBOR array, which includes two CBOR byte strings APP_BSTR. In particular:<a href="#section-6.1-7" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-8.1">
+            <p id="section-6.1-8.1.1">The value of the first CBOR byte string is the binary representation of a CBOR sequence APP_PROF_SEQ, which advertises the EDHOC application profiles that the server supports when running EDHOC through the resource with URI path "/.well-known/edhoc".<a href="#section-6.1-8.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.1-8.2">
+            <p id="section-6.1-8.2.1">The value of the second CBOR byte string is the binary representation of a CBOR sequence APP_PROF_SEQ, which advertises the EDHOC application profiles that the server supports when running EDHOC through the resource with URI path "/edhoc-alt".<a href="#section-6.1-8.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<span id="name-example-of-wire-format-value"></span><div id="fig-example-svcb-edhoc-app-prof">
+<figure id="figure-14">
+          <div class="lang-cbor-diag sourcecode" id="section-6.1-9.1">
+<pre>
+&lt;&lt;                                / edhoc-app-prof-value /
+   true,                          / advertise_flag /
+   [                              / server_info /
+     &lt;&lt;                           / APP_BSTR /
+       e'APP-PROF-MINIMAL-CS-2',  / profile_id /
+       e'APP-PROF-MINIMAL-CS-0',  / profile_id /
+       {                          / EDHOC_Information /
+         e'message_4' : true,
+         e'eads' : [500, 333],
+         e'trust_anchors' : {
+           e'edhoc_cred' : [
+             { e'kid_ta_type' : h'00ac' },
+             { e'kid_ta_type' : h'ff01ff' }
+           ]
+         }
+       }
+     &gt;&gt;,
+     &lt;&lt;                           / APP_BSTR /
+       e'APP-PROF-MINIMAL-CS-2',  / profile_id /
+       {                          / EDHOC_Information /
+         e'comb_req' : true,
+         e'eads' : [500, 999],
+         e'trust_anchors' : {
+           e'edhoc_cred' : { e'kid_ta_type' : h'91ab' }
+         }
+       }
+     &gt;&gt;
+   ]
+&gt;&gt;
+</pre>
+</div>
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<a href="#name-example-of-wire-format-value" class="selfRef">Example of Wire-Format Value of the SvcParamKey "edhoc-app-prof" within an SVCB RR</a>
+          </figcaption></figure>
+</div>
+</section>
 </div>
 </section>
 </div>
@@ -3111,7 +3195,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
       </h2>
 <p id="appendix-A-1">This section is to be removed before publishing as an RFC.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-model-2"></span><div id="fig-cddl-model">
-<figure id="figure-13">
+<figure id="figure-15">
         <div class="alignLeft art-cddl art-text artwork" id="appendix-A-2.1">
 <pre>
 ; EDHOC Information
@@ -3151,7 +3235,7 @@ x5t_ta_type = 34
 c509_cert = 3
 </pre>
 </div>
-<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
 <a href="#name-cddl-model-2" class="selfRef">CDDL model</a>
         </figcaption></figure>
 </div>
@@ -3210,7 +3294,10 @@ c509_cert = 3
                 <p id="appendix-B.1-1.7.2.2.1">ead_value for the EDHOC EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.7.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.7.2.3">
-                <p id="appendix-B.1-1.7.2.3.1">ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE.<a href="#appendix-B.1-1.7.2.3.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.7.2.3.1">Added examples of wire-format values of the SvcParamKeys "edhocpath" and "edhoc-app-prof".<a href="#appendix-B.1-1.7.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.7.2.4">
+                <p id="appendix-B.1-1.7.2.4.1">ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE.<a href="#appendix-B.1-1.7.2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
