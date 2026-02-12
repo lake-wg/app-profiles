@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-10T02:04:11.733834+00:00",
+  "timestamp": "2026-02-12T01:53:05.034959+00:00",
   "repo": "lake-wg/app-profiles",
   "labels": [
     {
@@ -71,15 +71,15 @@
       "id": "I_kwDONbs4xM7WZcIZ",
       "title": "Using reply_flag in other places",
       "url": "https://github.com/lake-wg/app-profiles/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chrysn",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Right now, reply_flag is (even by the CDDL) limited to EAD_1.\n\nNot all items necessarily make sense in all places; does limitation necessarily need to be reflected in the CDDL, esp. because there could be sensible use for it in other places too?\n\nFor example, a highly versatile server might set this in the SVCB announcements as well to ask the clients to talk about their profile expectations already in message 1.\n\n(I do realize that this is kind'a contradictory to #1. From my perspective, that limitation is also a feature that could be stripped into a general \"Please tell me your capabilities ASAP\", but I realize that a different perspective might make this a new piece of code rather than removing a piece of code.)",
       "createdAt": "2025-11-06T18:17:54Z",
-      "updatedAt": "2025-11-06T18:18:44Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-10T19:14:02Z",
+      "closedAt": "2026-02-10T19:14:02Z",
       "comments": [
         {
           "author": "chrysn",
