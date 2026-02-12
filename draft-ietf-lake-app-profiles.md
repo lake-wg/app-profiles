@@ -522,7 +522,7 @@ In an EDHOC session during which the EAD item "Supported EDHOC application profi
 
 When using the EDHOC and OSCORE transport profile of the ACE framework {{I-D.ietf-ace-edhoc-oscore-profile}}, the parameter "exporter\_out\_len" MUST NOT be included within the EDHOC_Information object specified as the value of the parameter/claim "edhoc_info".
 
-## Examples of ead_value # {#sec-examples-ead-value}
+### Examples of ead_value # {#sec-examples-ead-value}
 
 {{fig-example-ead-value-1}} shows an example of ead_value for the EDHOC EAD item "Supported EDHOC application profiles", when used in EDHOC message_1. With reference to the CDDL grammar in {{fig-cddl-ead-value}}, the following applies.
 
