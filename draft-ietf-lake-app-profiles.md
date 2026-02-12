@@ -433,6 +433,8 @@ EDHOC_Information = map
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-ead-value title="CDDL Definition of ead_value for the EAD Item \"Supported EDHOC application profiles\""}
 
+Examples of ead_value are shown in {{sec-examples-ead-value}}.
+
 ### Content Restrictions # {#sec-app-profile-edhoc-message_1_2-restrictions}
 
 When the sender peer composes ead_value of the EDHOC EAD item "Supported EDHOC application profiles", the following applies.
@@ -519,6 +521,77 @@ In an EDHOC session during which the EAD item "Supported EDHOC application profi
 * If a particular "exporter_label" value is not specified by the exchanged EAD items, then a possible invocation of the EDHOC_Exporter interface using that value as its first argument takes as value for its third argument "length" a pre-defined default value, or an alternative value agreed out-of-band.
 
 When using the EDHOC and OSCORE transport profile of the ACE framework {{I-D.ietf-ace-edhoc-oscore-profile}}, the parameter "exporter\_out\_len" MUST NOT be included within the EDHOC_Information object specified as the value of the parameter/claim "edhoc_info".
+
+## Examples of ead_value # {#sec-examples-ead-value}
+
+{{fig-example-ead-value-1}} shows an example of ead_value for the EDHOC EAD item "Supported EDHOC application profiles", when used in EDHOC message_1. With reference to the CDDL grammar in {{fig-cddl-ead-value}}, the following applies.
+
+The CBOR data item advertise_flag is present and encodes the CBOR simple value `true` (0xf5).
+
+The CBOR sequence APP_PROF_SEQ includes the following three elements:
+
+* An element profile_id, specifying the Profile ID of an EDHOC application profile supported by the Initiator. Specifically, that EDHOC application profile is the well-known application profile MINIMAL-CS-2 defined in {{sec-well-known-app-prof-id-0}}.
+
+* An element profile_id, specifying the Profile ID of an EDHOC application profile supported by the Initiator. Specifically, that EDHOC application profile is the well-known application profile MINIMAL-CS-0 defined in {{sec-well-known-app-prof-id-1}}.
+
+* An element EDHOC_Information, which in turn includes the following parameters:
+
+  * "message_4", encoded as the CBOR simple value `true` (0xf5), hence indicating that EDHOC meessage_4 is expected in the current EDHOC session.
+
+  * "eads", encoded as a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 333 of the corresponding EAD items supported by the Initiator.
+
+  * "trust_anchors", encoded as a CBOR map. The map includes a single element with value a CBOR array, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
+
+    In turn, the array includes two CBOR maps. Within the first CBOR map, its entry's value is a CBOR byte string that encodes 0x00ac. Within the second CBOR map, its entry's value is a CBOR byte string that encodes 0xff01ff. Both 0x00ac and 0xff01ff are binary key identifiers of trust anchors supported by the Initiator in the current EDHOC session.
+
+~~~~~~~~~~~~~~~~~~~~ cbor-diag
+<<
+   true,                      / advertise_flag /
+   e'APP-PROF-MINIMAL-CS-2',  / profile_id /
+   e'APP-PROF-MINIMAL-CS-0',  / profile_id /
+   {                          / EDHOC_Information /
+      e'message_4' : true,
+      e'eads' : [500, 333],
+      e'trust_anchors' : {
+         e'edhoc_cred' : [
+           { e'kid_ta_type' : h'00ac' },
+           { e'kid_ta_type' : h'ff01ff' }
+         ]
+      }
+   }
+>>
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-example-ead-value-1 title="Example of ead_value for the EAD Item \"Supported EDHOC application profiles\" in EDHOC message_1"}
+
+{{fig-example-ead-value-2}} shows an example of ead_value for the EDHOC EAD item "Supported EDHOC application profiles", when used in EDHOC message_2. With reference to the CDDL grammar in {{fig-cddl-ead-value}}, the following applies.
+
+The CBOR sequence APP_PROF_SEQ includes the following three elements:
+
+* An element profile_id, specifying the Profile ID of an EDHOC application profile supported by the Responder. Specifically, that EDHOC application profile is the well-known application profile MINIMAL-CS-2 defined in {{sec-well-known-app-prof-id-0}}.
+
+* An element EDHOC_Information, which in turn includes the following parameters:
+
+  * "comb_req", encoded as the CBOR simple value `true` (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in {{RFC9668}}.
+
+  * "eads", encoded as a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 999 of the corresponding EAD items supported by the Responder.
+
+  * "trust_anchors", encoded as a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
+
+    Within the inner map, its entry's value is a CBOR byte string that encodes 0x91ab, i.e., the binary key identifier of a trust anchor supported by the Responder in the current EDHOC session.
+
+~~~~~~~~~~~~~~~~~~~~ cbor-diag
+<<
+   e'APP-PROF-MINIMAL-CS-2',  / profile_id /
+   {                          / EDHOC_Information /
+      e'comb_req' : true,
+      e'eads' : [500, 999],
+      e'trust_anchors' : {
+         e'edhoc_cred' : { e'kid_ta_type' : h'91ab' }
+      }
+   }
+>>
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-example-ead-value-2 title="Example of ead_value for the EAD Item \"Supported EDHOC application profiles\" in EDHOC message_2"}
 
 ## In the EDHOC Error Message # {#sec-app-profile-edhoc-error-message}
 
@@ -663,7 +736,7 @@ The rest of this section defines the well-known application profiles, each of wh
 
 An entry for each well-known application profile is also registered at the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
-## Well-Known Application Profile MINIMAL_CS_2 # {#sec-well-known-app-prof-id-0}
+## Well-Known Application Profile MINIMAL-CS-2 # {#sec-well-known-app-prof-id-0}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -677,7 +750,7 @@ An entry for each well-known application profile is also registered at the "EDHO
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 3 of RFC9529}}.
 
-## Well-Known Application Profile MINIMAL_CS_0 # {#sec-well-known-app-prof-id-1}
+## Well-Known Application Profile MINIMAL-CS-0 # {#sec-well-known-app-prof-id-1}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -689,7 +762,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-## Well-Known Application Profile BASIC_CS_2_X509 # {#sec-well-known-app-prof-id-2}
+## Well-Known Application Profile BASIC-CS-2-X509 # {#sec-well-known-app-prof-id-2}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -704,7 +777,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 3 of RFC9529}}.
 
-## Well-Known Application Profile BASIC_CS_0_X509 # {#sec-well-known-app-prof-id-3}
+## Well-Known Application Profile BASIC-CS-0-X509 # {#sec-well-known-app-prof-id-3}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -719,7 +792,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 2 of RFC9529}}.
 
-## Well-Known Application Profile BASIC_CS_2_C509 # {#sec-well-known-app-prof-id-4}
+## Well-Known Application Profile BASIC-CS-2-C509 # {#sec-well-known-app-prof-id-4}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -732,7 +805,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-## Well-Known Application Profile BASIC_CS_0_C509 # {#sec-well-known-app-prof-id-5}
+## Well-Known Application Profile BASIC-CS-0-C509 # {#sec-well-known-app-prof-id-5}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -745,7 +818,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-## Well-Known Application Profile INTERMEDIATE_CS_2 # {#sec-well-known-app-prof-id-6}
+## Well-Known Application Profile INTERMEDIATE-CS-2 # {#sec-well-known-app-prof-id-6}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -763,7 +836,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 3 of RFC9529}}.
 
-## Well-Known Application Profile INTERMEDIATE_CS_0 # {#sec-well-known-app-prof-id-7}
+## Well-Known Application Profile INTERMEDIATE-CS-0 # {#sec-well-known-app-prof-id-7}
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
@@ -816,7 +889,7 @@ Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RF
 | 2          | BASIC-CS-2-X509   | Methods (0, 3); Cipher Suite 2; (CCS, X.509 certificates); (kid, x5t)                                                            | \[RFC-XXXX, {{sec-well-known-app-prof-id-2}}\] |
 | 3          | BASIC-CS-0-X509   | Methods (0, 3); Cipher Suite 0; (CCS, X.509 certificates); (kid, x5t)                                                            | \[RFC-XXXX, {{sec-well-known-app-prof-id-3}}\] |
 | 4          | BASIC-CS-2-C509   | Methods (0, 3); Cipher Suite 2; (CCS, C509 certificates); (kid, c5t)                                                             | \[RFC-XXXX, {{sec-well-known-app-prof-id-4}}\] |
-| 5          | BASIC-CS_0-C509   | Methods (0, 3); Cipher Suite 0; (CCS, C509 certificates); (kid, c5t)                                                             | \[RFC-XXXX, {{sec-well-known-app-prof-id-5}}\] |
+| 5          | BASIC-CS-0-C509   | Methods (0, 3); Cipher Suite 0; (CCS, C509 certificates); (kid, c5t)                                                             | \[RFC-XXXX, {{sec-well-known-app-prof-id-5}}\] |
 | 6          | INTERMEDIATE-CS-2 | Methods (0, 3); Cipher Suite 2; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | \[RFC-XXXX, {{sec-well-known-app-prof-id-6}}\] |
 | 7          | INTERMEDIATE-CS-0 | Methods (0, 3); Cipher Suite 0; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | \[RFC-XXXX, {{sec-well-known-app-prof-id-7}}\] |
 | 8          | EXTENSIVE         | Methods (0, 1, 2, 3); Cipher Suites (0, 1, 2, 3); (CCS, CWT, X.509/C509 certificates); (kid, kccs, kcwt, x5t, x5chain, c5t, c5c) | \[RFC-XXXX, {{sec-well-known-app-prof-id-8}}\] |
@@ -1061,8 +1134,12 @@ Expert reviewers should take into consideration the following points:
 ; EDHOC Information
 methods = 1
 cipher_suites = 2
+message_4 = 3
+comb_req = 4
 cred_types = 6
 id_cred_types = 7
+eads = 8
+trust_anchors = 15
 app_prof = 23
 
 ; EDHOC Application Profiles
@@ -1079,6 +1156,12 @@ APP-PROF-EXTENSIVE = 8
 ; COSE Header Parameters
 c5t = 22
 c5c = 25
+
+; EDHOC Trust Anchor Purposes
+edhoc_cred = 0
+
+; EDHOC Trust Anchor Types
+kid_ta_type = 4
 
 ; EDHOC Authentication Credential Types
 c509_cert = 3
@@ -1111,6 +1194,8 @@ c509_cert = 3
 * Added new examples:
 
   * Response in CoRE link-format using the target attributes 'ed-ta-edcred-*'.
+
+  * ead_value for the EDHOC EAD item "Supported EDHOC application profiles".
 
 * Editorial fixes and improvements.
 
