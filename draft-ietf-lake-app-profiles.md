@@ -565,7 +565,7 @@ The CBOR sequence APP_PROF_SEQ includes the following three elements:
 
 {{fig-example-ead-value-2}} shows an example of ead_value for the EDHOC EAD item "Supported EDHOC application profiles", when used in EDHOC message_2. With reference to the CDDL grammar in {{fig-cddl-ead-value}}, the following applies.
 
-The CBOR sequence APP_PROF_SEQ includes the following three elements:
+The CBOR sequence APP_PROF_SEQ includes the following two elements:
 
 * An element profile_id, specifying the Profile ID of an EDHOC application profile supported by the Responder. Specifically, that EDHOC application profile is the well-known application profile MINIMAL-CS-2 defined in {{sec-well-known-app-prof-id-0}}.
 
@@ -608,6 +608,40 @@ When using error code TBD_ERROR_CODE, the error information specified in ERR_INF
 In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
 
 The recipient peer MUST silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format of APP_PROF_SEQ.
+
+### Example of ERR_INFO
+
+{{fig-example-err-info}} shows an example of ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE. With reference to the CDDL grammar in {{fig-cddl-ead-value}}, the following applies.
+
+The CBOR sequence APP_PROF_SEQ includes the following two elements:
+
+* An element profile_id, specifying the Profile ID of an EDHOC application profile supported by the Responder. Specifically, that EDHOC application profile is the well-known application profile MINIMAL-CS-0 defined in {{sec-well-known-app-prof-id-1}}.
+
+* An element EDHOC_Information, which in turn includes the following parameters:
+
+  * "comb_req", encoded as the CBOR simple value `true` (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in {{RFC9668}}.
+
+  * "eads", encoded as a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 777 of the corresponding EAD items supported by the Responder.
+
+  * "trust_anchors", encoded as a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
+
+    Within the inner map, its entry's value is a COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the Responder suppports as a trust anchor when running EDHOC.
+
+~~~~~~~~~~~~~~~~~~~~ cbor-diag
+<<
+   e'APP-PROF-MINIMAL-CS-0',  / profile_id /
+   {                          / EDHOC_Information /
+      e'comb_req' : true,
+      e'eads' : [500, 777],
+      e'trust_anchors' : {
+         e'edhoc_cred' : {
+           e'x5t_ta_type' : [-15, h'79f2a41b510c1f9b']
+         }
+      }
+   }
+>>
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-example-err-info title="Example of ERR_INFO for the EDHOC Error Message with Error Code TBD_ERROR_CODE"}
 
 # Advertising Supported EDHOC Application Profiles using SVCB Resource Records # {#sec-svcb}
 
@@ -1162,6 +1196,7 @@ edhoc_cred = 0
 
 ; EDHOC Trust Anchor Types
 kid_ta_type = 4
+x5t_ta_type = 34
 
 ; EDHOC Authentication Credential Types
 c509_cert = 3
@@ -1196,6 +1231,8 @@ c509_cert = 3
   * Response in CoRE link-format using the target attributes 'ed-ta-edcred-*'.
 
   * ead_value for the EDHOC EAD item "Supported EDHOC application profiles".
+
+  * ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE.
 
 * Editorial fixes and improvements.
 
