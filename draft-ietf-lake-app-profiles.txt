@@ -90,6 +90,7 @@ Table of Contents
        5.1.2.  Agreeing on EDHOC_Exporter Output Lengths
        5.1.3.  Examples of ead_value
      5.2.  In the EDHOC Error Message
+       5.2.1.  Example of ERR_INFO
    6.  Advertising Supported EDHOC Application Profiles using SVCB
            Resource Records
    7.  Well-known EDHOC Application Profiles
@@ -254,14 +255,14 @@ Table of Contents
 
    In the CBOR diagnostic notation used in this document, constructs of
    the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME
-   in the CDDL model shown in Figure 12 of Appendix A.  For example,
+   in the CDDL model shown in Figure 13 of Appendix A.  For example,
    {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0,
    1, 2, 3], 2 : 3}.
 
    Note to RFC Editor: Please delete the paragraph immediately preceding
    this note.  Also, in the CBOR diagnostic notation used in this
    document, please replace the constructs of the form e'SOME_NAME' with
-   the value assigned to SOME_NAME in the CDDL model shown in Figure 12
+   the value assigned to SOME_NAME in the CDDL model shown in Figure 13
    of Appendix A.  Finally, please delete this note.
 
 2.  EDHOC_Application_Profile
@@ -1220,7 +1221,7 @@ Table of Contents
    With reference to the CDDL grammar in Figure 5, the following
    applies.
 
-   The CBOR sequence APP_PROF_SEQ includes the following three elements:
+   The CBOR sequence APP_PROF_SEQ includes the following two elements:
 
    *  An element profile_id, specifying the Profile ID of an EDHOC
       application profile supported by the Responder.  Specifically,
@@ -1305,6 +1306,57 @@ Table of Contents
    APP_PROF_SEQ that are malformed or do not conform with the intended
    format of APP_PROF_SEQ.
 
+5.2.1.  Example of ERR_INFO
+
+   Figure 9 shows an example of ERR_INFO for the EDHOC error message
+   with Error Code TBD_ERROR_CODE.  With reference to the CDDL grammar
+   in Figure 5, the following applies.
+
+   The CBOR sequence APP_PROF_SEQ includes the following two elements:
+
+   *  An element profile_id, specifying the Profile ID of an EDHOC
+      application profile supported by the Responder.  Specifically,
+      that EDHOC application profile is the well-known application
+      profile MINIMAL-CS-0 defined in Section 7.2.
+
+   *  An element EDHOC_Information, which in turn includes the following
+      parameters:
+
+      -  "comb_req", encoded as the CBOR simple value true (0xf5), hence
+         indicating that the Responder supports the EDHOC + OSCORE
+         combined request defined in [RFC9668].
+
+      -  "eads", encoded as a CBOR array.  The array includes two
+         elements encoded as unsigned integers, i.e., the EAD labels 500
+         and 777 of the corresponding EAD items supported by the
+         Responder.
+
+      -  "trust_anchors", encoded as a CBOR map.  The map includes a
+         single element with value an inner CBOR map, which pertains to
+         trust anchors whose purpose is the verification of
+         authentication credentials of other EDHOC peers in an EDHOC
+         session.
+
+         Within the inner map, its entry's value is a COSE_CertHash
+         [RFC9360] corresponding to an X.509 certificate [RFC5280] that
+         the Responder suppports as a trust anchor when running EDHOC.
+
+   <<
+      e'APP-PROF-MINIMAL-CS-0',  / profile_id /
+      {                          / EDHOC_Information /
+         e'comb_req' : true,
+         e'eads' : [500, 777],
+         e'trust_anchors' : {
+            e'edhoc_cred' : {
+              e'x5t_ta_type' : [-15, h'79f2a41b510c1f9b']
+            }
+         }
+      }
+   >>
+
+       Figure 9: Example of ERR_INFO for the EDHOC Error Message with
+                         Error Code TBD_ERROR_CODE
+
 6.  Advertising Supported EDHOC Application Profiles using SVCB Resource
     Records
 
@@ -1341,7 +1393,7 @@ Table of Contents
          elements that specify the same URI path.
 
          The CDDL grammar describing the CBOR data item edhocpath-value
-         is shown in Figure 9.
+         is shown in Figure 10.
 
       -  The presentation format value of "edhocpath" SHALL be a comma-
          separated list (see Appendix A.1 of [RFC9460]) of one or more
@@ -1355,7 +1407,7 @@ Table of Contents
          PATH_SEQ in the wire-format value (see above).
 
          The textual representation of each path follows the semantics
-         of path-absolute shown in the ABNF definition in Figure 10,
+         of path-absolute shown in the ABNF definition in Figure 11,
          which is provided by the ABNF for path-absolute in Section 3.3
          of [RFC3986].  In particular, given the path specified by a
          CBOR sequence PATH_SEQ, segment-nz is the value of the first
@@ -1421,7 +1473,7 @@ Table of Contents
          object as an empty CBOR map.
 
          The CDDL grammar describing the CBOR data item edhoc-app-prof-
-         value is shown in Figure 11.
+         value is shown in Figure 12.
 
       -  The presentation format value of "edhoc-app-prof" SHALL be the
          CBOR extended diagnostic notation (see Section 8 of [RFC8949]
@@ -1480,7 +1532,8 @@ Table of Contents
 
    path_segment = tstr
 
-   Figure 9: CDDL Definition of the Value of the SvcParamKey "edhocpath"
+         Figure 10: CDDL Definition of the Value of the SvcParamKey
+                                "edhocpath"
 
    path-absolute = "/" [ segment-nz *( "/" segment ) ]
 
@@ -1494,7 +1547,7 @@ Table of Contents
    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
                  / "*" / "+" / "," / ";" / "="
 
-                Figure 10: ABNF Definition of path-absolute
+                Figure 11: ABNF Definition of path-absolute
 
    edhoc-app-prof-value = bytes .cborseq SVCB_EDHOC_APP_PROF
 
@@ -1510,7 +1563,7 @@ Table of Contents
    ; is provided in Section 5.1
    APP_BSTR = bytes .cborseq APP_PROF_SEQ
 
-         Figure 11: CDDL Definition of the Value of the SvcParamKey
+         Figure 12: CDDL Definition of the Value of the SvcParamKey
                               "edhoc-app-prof"
 
 7.  Well-known EDHOC Application Profiles
@@ -2310,11 +2363,12 @@ Appendix A.  CDDL Model
 
    ; EDHOC Trust Anchor Types
    kid_ta_type = 4
+   x5t_ta_type = 34
 
    ; EDHOC Authentication Credential Types
    c509_cert = 3
 
-                           Figure 12: CDDL model
+                           Figure 13: CDDL model
 
 Appendix B.  Document Updates
 
@@ -2353,6 +2407,9 @@ B.1.  Version -03 to -04
 
       -  ead_value for the EDHOC EAD item "Supported EDHOC application
          profiles".
+
+      -  ERR_INFO for the EDHOC error message with Error Code
+         TBD_ERROR_CODE.
 
    *  Editorial fixes and improvements.
 
