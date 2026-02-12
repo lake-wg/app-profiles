@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 15 August 2026                                 11 February 2026
+Expires: 16 August 2026                                 12 February 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 August 2026.
+   This Internet-Draft will expire on 16 August 2026.
 
 Copyright Notice
 
@@ -253,14 +253,14 @@ Table of Contents
 
    In the CBOR diagnostic notation used in this document, constructs of
    the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME
-   in the CDDL model shown in Figure 9 of Appendix A.  For example,
+   in the CDDL model shown in Figure 10 of Appendix A.  For example,
    {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0,
    1, 2, 3], 2 : 3}.
 
    Note to RFC Editor: Please delete the paragraph immediately preceding
    this note.  Also, in the CBOR diagnostic notation used in this
    document, please replace the constructs of the form e'SOME_NAME' with
-   the value assigned to SOME_NAME in the CDDL model shown in Figure 9
+   the value assigned to SOME_NAME in the CDDL model shown in Figure 10
    of Appendix A.  Finally, please delete this note.
 
 2.  EDHOC_Application_Profile
@@ -447,7 +447,7 @@ Table of Contents
           </sensors/temp>;osc,
           </sensors/light>;if=sensor,
           </.well-known/edhoc>;rt=core.edhoc;ed-csuite=0;ed-csuite=2;
-              ed-method=0;ed-cred-t=1;ed-cred-t=3;ed-idcred-t=4;
+              ed-method=0;ed-cred-t=0;ed-cred-t=1;ed-idcred-t=4;
               ed-i;ed-r;ed-comb-req,
           </edhoc-alt>;rt=core.edhoc;ed-prof=500;ed-ead=333
 
@@ -680,6 +680,46 @@ Table of Contents
       parameter MAY occur multiple times, with each occurrence
       specifying one trust anchor identifier.
 
+   The example in Figure 4 extends the earlier example in Figure 2, by
+   additionally showing the use of the target attributes 'ed-ta-edcred-
+   kid' and 'ed-ta-edcred-x5t'.  Compared to the example in Figure 2,
+   the following also applies.
+
+   *  The link to the EDHOC resource at /.well-known/edhoc includes the
+      target attribute 'ed-ta-edcred-kid'.  The target attribute has
+      value "AKw", i.e., the base64url-encoded text string of 0x00ac.
+      The latter is the binary key identifier of a trust anchor
+      supported by the server when running EDHOC at that resource.
+
+   *  The link to the EDHOC resource at /edhoc-alt includes the target
+      attribute 'ed-ta-edcred-kid'.  The target attribute has value
+      "_wH_", i.e., the base64url-encoded text string of 0xff01ff.  The
+      latter is the binary key identifier of a trust anchor supported by
+      the server when running EDHOC at that resource.
+
+   *  The link to the EDHOC resource at /edhoc-alt includes the target
+      attribute 'ed-ta-edcred-x5t'.  The target attribute has value
+      "gi5IefKkG1EMH5s", i.e., the base64url-encoded text string of
+      0x822e4879f2a41b510c1f9b.  The latter is the binary representation
+      of the COSE_CertHash [RFC9360] corresponding to an X.509
+      certificate [RFC5280] that the server suppports as a trust anchor
+      when running EDHOC at that resource.  In CBOR diagnostic notation,
+      the considered COSE_CertHash is as follows: [-15,
+      h'79f2a41b510c1f9b'].
+
+    REQ: GET /.well-known/core
+
+    RES: 2.05 Content
+        </sensors/temp>;osc,
+        </sensors/light>;if=sensor,
+        </.well-known/edhoc>;rt=core.edhoc;ed-csuite=0;ed-csuite=2;
+            ed-method=0;ed-cred-t=0;ed-cred-t=1;ed-idcred-t=4;
+            ed-i;ed-r;ed-comb-req;ed-ta-edcred-kid="AKw",
+        </edhoc-alt>;rt=core.edhoc;ed-prof=500;ed-ead=333;
+            ed-ta-edcred-kid="_wH_";ed-ta-edcred-x5t="gi5IefKkG1EMH5s"
+
+                          Figure 4: The Web Link.
+
 5.  Advertising Supported EDHOC Application Profiles during an EDHOC
     Session
 
@@ -859,7 +899,7 @@ Table of Contents
    content restrictions specified in Section 5.1.1.
 
    The CDDL grammar describing ead_value for the EAD item "Supported
-   EDHOC application profiles" is shown in Figure 4.
+   EDHOC application profiles" is shown in Figure 5.
 
    ead_value = ead_1_value / ead_2_value
 
@@ -887,7 +927,7 @@ Table of Contents
    ; draft-ietf-ace-edhoc-oscore-profile
    EDHOC_Information = map
 
-          Figure 4: CDDL Definition of ead_value for the EAD Item
+          Figure 5: CDDL Definition of ead_value for the EAD Item
                    "Supported EDHOC application profiles"
 
 5.1.1.  Content Restrictions
@@ -1011,7 +1051,7 @@ Table of Contents
      ? 22 => [1* [uint, uint]]                   ; app_prof
    )
 
-       Figure 5: CDDL Definition of the Parameter "exporter_out_len"
+       Figure 6: CDDL Definition of the Parameter "exporter_out_len"
         when Included in the CBOR-encoded EDHOC_Information Object.
 
    Within ead_value of the EAD item "Supported EDHOC application
@@ -1185,7 +1225,7 @@ Table of Contents
          elements that specify the same URI path.
 
          The CDDL grammar describing the CBOR data item edhocpath-value
-         is shown in Figure 6.
+         is shown in Figure 7.
 
       -  The presentation format value of "edhocpath" SHALL be a comma-
          separated list (see Appendix A.1 of [RFC9460]) of one or more
@@ -1199,7 +1239,7 @@ Table of Contents
          PATH_SEQ in the wire-format value (see above).
 
          The textual representation of each path follows the semantics
-         of path-absolute shown in the ABNF definition in Figure 7,
+         of path-absolute shown in the ABNF definition in Figure 8,
          which is provided by the ABNF for path-absolute in Section 3.3
          of [RFC3986].  In particular, given the path specified by a
          CBOR sequence PATH_SEQ, segment-nz is the value of the first
@@ -1265,7 +1305,7 @@ Table of Contents
          object as an empty CBOR map.
 
          The CDDL grammar describing the CBOR data item edhoc-app-prof-
-         value is shown in Figure 8.
+         value is shown in Figure 9.
 
       -  The presentation format value of "edhoc-app-prof" SHALL be the
          CBOR extended diagnostic notation (see Section 8 of [RFC8949]
@@ -1324,7 +1364,7 @@ Table of Contents
 
    path_segment = tstr
 
-   Figure 6: CDDL Definition of the Value of the SvcParamKey "edhocpath"
+   Figure 7: CDDL Definition of the Value of the SvcParamKey "edhocpath"
 
    path-absolute = "/" [ segment-nz *( "/" segment ) ]
 
@@ -1338,7 +1378,7 @@ Table of Contents
    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
                  / "*" / "+" / "," / ";" / "="
 
-                 Figure 7: ABNF Definition of path-absolute
+                 Figure 8: ABNF Definition of path-absolute
 
    edhoc-app-prof-value = bytes .cborseq SVCB_EDHOC_APP_PROF
 
@@ -1354,7 +1394,7 @@ Table of Contents
    ; is provided in Section 5.1
    APP_BSTR = bytes .cborseq APP_PROF_SEQ
 
-     Figure 8: CDDL Definition of the Value of the SvcParamKey "edhoc-
+     Figure 9: CDDL Definition of the Value of the SvcParamKey "edhoc-
                                  app-prof"
 
 7.  Well-known EDHOC Application Profiles
@@ -2148,7 +2188,7 @@ Appendix A.  CDDL Model
    ; EDHOC Authentication Credential Types
    c509_cert = 3
 
-                            Figure 9: CDDL model
+                           Figure 10: CDDL model
 
 Appendix B.  Document Updates
 
@@ -2179,6 +2219,11 @@ B.1.  Version -03 to -04
 
       -  Fixed CDDL definition of ead_value of the EAD item "Supported
          EDHOC application profiles".
+
+   *  Added new examples:
+
+      -  Response in CoRE link-format using the target attributes 'ed-
+         ta-edcred-*'.
 
    *  Editorial fixes and improvements.
 
