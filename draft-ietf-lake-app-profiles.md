@@ -209,7 +209,7 @@ RES: 2.05 Content
     </sensors/temp>;osc,
     </sensors/light>;if=sensor,
     </.well-known/edhoc>;rt=core.edhoc;ed-csuite=0;ed-csuite=2;
-        ed-method=0;ed-cred-t=1;ed-cred-t=3;ed-idcred-t=4;
+        ed-method=0;ed-cred-t=0;ed-cred-t=1;ed-idcred-t=4;
         ed-i;ed-r;ed-comb-req,
     </edhoc-alt>;rt=core.edhoc;ed-prof=500;ed-ead=333
 ~~~~~~~~~~~~~~~~~
@@ -299,6 +299,28 @@ When specifying any of the parameters defined below in a link to an EDHOC resour
 * 'ed-ta-edcred-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
 * 'ed-ta-edcred-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI {{RFC3986}} pointing to an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+
+The example in {{fig-web-link-example-2}} extends the earlier example in {{fig-web-link-example}}, by additionally showing the use of the target attributes 'ed-ta-edcred-kid' and 'ed-ta-edcred-x5t'. Compared to the example in {{fig-web-link-example}}, the following also applies.
+
+* The link to the EDHOC resource at /.well-known/edhoc includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "AKw", i.e., the base64url-encoded text string of 0x00ac. The latter is the binary key identifier of a trust anchor supported by the server when running EDHOC at that resource.
+
+* The link to the EDHOC resource at /edhoc-alt includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "\_wH\_", i.e., the base64url-encoded text string of 0xff01ff. The latter is the binary key identifier of a trust anchor supported by the server when running EDHOC at that resource.
+
+* The link to the EDHOC resource at /edhoc-alt includes the target attribute 'ed-ta-edcred-x5t'. The target attribute has value "gi5IefKkG1EMH5s", i.e., the base64url-encoded text string of 0x822e4879f2a41b510c1f9b. The latter is the binary representation of the COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the server suppports as a trust anchor when running EDHOC at that resource. In CBOR diagnostic notation, the considered COSE_CertHash is as follows: \[-15, h'79f2a41b510c1f9b'\].
+
+~~~~~~~~~~~~~~~~~
+REQ: GET /.well-known/core
+
+RES: 2.05 Content
+    </sensors/temp>;osc,
+    </sensors/light>;if=sensor,
+    </.well-known/edhoc>;rt=core.edhoc;ed-csuite=0;ed-csuite=2;
+        ed-method=0;ed-cred-t=0;ed-cred-t=1;ed-idcred-t=4;
+        ed-i;ed-r;ed-comb-req;ed-ta-edcred-kid="AKw",
+    </edhoc-alt>;rt=core.edhoc;ed-prof=500;ed-ead=333;
+        ed-ta-edcred-kid="_wH_";ed-ta-edcred-x5t="gi5IefKkG1EMH5s"
+~~~~~~~~~~~~~~~~~
+{: #fig-web-link-example-2 title="The Web Link." artwork-align="center"}
 
 # Advertising Supported EDHOC Application Profiles during an EDHOC Session # {#sec-app-profile-edhoc-messages}
 
@@ -1085,6 +1107,10 @@ c509_cert = 3
   * Added CDDL definitions of the parameters "app_prof" and "exporter_out_len" for the CBOR-encoded EDHOC_Information object.
 
   * Fixed CDDL definition of ead_value of the EAD item "Supported EDHOC application profiles".
+
+* Added new examples:
+
+  * Response in CoRE link-format using the target attributes 'ed-ta-edcred-*'.
 
 * Editorial fixes and improvements.
 
