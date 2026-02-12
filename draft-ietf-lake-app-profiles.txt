@@ -91,7 +91,7 @@ Table of Contents
        5.1.3.  Examples of ead_value
      5.2.  In the EDHOC Error Message
        5.2.1.  Example of ERR_INFO
-   6.  Advertising Supported EDHOC Application Profiles using SVCB
+   6.  Advertising Supported EDHOC Application Profiles using DNS SVCB
            Resource Records
      6.1.  Examples of Wire-Format Values of the SvcParamKeys
    7.  Well-known EDHOC Application Profiles
@@ -1360,11 +1360,11 @@ Table of Contents
        Figure 9: Example of ERR_INFO for the EDHOC Error Message with
                          Error Code TBD_ERROR_CODE
 
-6.  Advertising Supported EDHOC Application Profiles using SVCB Resource
-    Records
+6.  Advertising Supported EDHOC Application Profiles using DNS SVCB
+    Resource Records
 
    Given a server, its support for EDHOC and for EDHOC application
-   profiles can be advertised using SVCB Resource Records (RR)
+   profiles can be advertised using DNS SVCB Resource Records (RR)
    [RFC9460][RFC9461].
 
    To this end, this document specifies the SvcParamKeys "edhocpath" and
@@ -1881,7 +1881,90 @@ Table of Contents
 
 9.  Security Considerations
 
-   TBD
+   The security considerations compiled in Section 9 of [RFC9528] hold
+   for this document.  The security considerations compiled in Section 7
+   of [RFC9668] also apply, when EDHOC is transported over CoAP
+   [RFC7252] and specifically when using the EDHOC + OSCORE request
+   defined in Section 3 of [RFC9668].
+
+   Instances of the EDHOC_Application_Profile objects (see Section 2)
+   ought to be accepted only if provided by an identifiable, trusted
+   party by using secure communication.  When this is not the case, an
+   EDHOC peer can be induced to: erroneously identify a given EDHOC
+   application profile with a wrong Profile ID; erroneously believe a
+   given EDHOC application profile to exist in the first place; develop
+   a wrong understanding of what a given EDHOC application profile
+   consists of.
+
+   Different security guarantees can be achieved about the acquired
+   information on the EDHOC application profiles supported by a given
+   peer, depending on the specific approach used.  The potential
+   consequences of acquiring such information in a non secured way are
+   discussed later in this section.
+
+   *  With respect to using web linking (see Section 3.1 and Section 4),
+      the security considerations in Section 5 of [RFC8288] apply.  When
+      specifically relying on CoRE Link Format [RFC6690], the security
+      considerations in Section 6 of [RFC6690] also apply.
+
+      Clearly, the discovery of EDHOC resources at a server is intended
+      to happen before running EDHOC with the server.  At that point in
+      time, the peer attempting to discover EDHOC resources at the
+      server is unlikely to already have a secure communication
+      association with the server.  Therefore, the discovery process is
+      likely to use unsecured communication.
+
+      Alternatively, EDHOC resources at a server can be discovered by
+      securely interacting with separate discovery services, e.g., by
+      using the CoRE Resource Directory [RFC9176].
+
+   *  With respect to using the EDHOC EAD item "Supported EDHOC
+      application profiles" (see Section 5.1), the following applies.
+
+      -  When the EAD item is included in EDHOC message_1, the
+         information conveyed therein is not protected.  However,
+         changing EDHOC message_1 in transit (e.g., by adding, removing,
+         or modifying the EAD item) would result in the Initiator
+         aborting the EDHOC session, after receiving and failing to
+         verify EDHOC message_2.
+
+      -  When the EAD item is included in EDHOC message_2, the
+         information conveyed therein is protected by EDHOC.
+
+   *  With respect to using an EDHOC error message with error code
+      TBD_ERROR_CODE, the information conveyed in ERR_INFO is not
+      protected, just like when any other error code is used.
+
+   *  With respect to using the SvcParamKeys "edhocpath" and "edhoc-app-
+      prof" within an SVCB RR (see Section 6), the security
+      considerations from Section 12 of [RFC9460] and Section 8 of
+      [RFC9461] apply.
+
+      It is encouraged that DNS is used with secure communication.
+      Known threats for unprotected DNS are described in [RFC3833] and
+      [RFC9076].
+
+   In case information about EDHOC application profiles supported by a
+   peer is distributed in an unprotected way (e.g., through unsecured
+   communication), a consumer should treat such information as a hint.
+
+   If the acquired information has been tampered with and does not
+   reflect what a given peer supports and intends to advertise, this can
+   set wrong expectations about what is effectively possible to do when
+   running EDHOC with that peer.  Although this can still result in
+   successfully running EDHOC with a configuration that is commonly
+   supported, such configuration would probably not have been selected,
+   had reliable information been acquired.  In the worst case, there
+   might be the erroneous belief that there is not sufficient shared
+   support with that peer.
+
+   What is discussed above does not have an impact on the security of
+   the EDHOC protocol in itself.  That is, even when the available
+   information about supported EDHOC application profiles is not
+   guaranteed to be reliable, the successful completion of an EDHOC
+   session still provides the security guarantees that are expected as
+   per the way the session was run (e.g., based on the selected cipher
+   suite and EDHOC method used).
 
 10.  IANA Considerations
 
@@ -2404,6 +2487,19 @@ Table of Contents
               (IDNA)", RFC 3492, DOI 10.17487/RFC3492, March 2003,
               <https://www.rfc-editor.org/rfc/rfc3492>.
 
+   [RFC3833]  Atkins, D. and R. Austein, "Threat Analysis of the Domain
+              Name System (DNS)", RFC 3833, DOI 10.17487/RFC3833, August
+              2004, <https://www.rfc-editor.org/rfc/rfc3833>.
+
+   [RFC9076]  Wicinski, T., Ed., "DNS Privacy Considerations", RFC 9076,
+              DOI 10.17487/RFC9076, July 2021,
+              <https://www.rfc-editor.org/rfc/rfc9076>.
+
+   [RFC9176]  Amsüss, C., Ed., Shelby, Z., Koster, M., Bormann, C., and
+              P. van der Stok, "Constrained RESTful Environments (CoRE)
+              Resource Directory", RFC 9176, DOI 10.17487/RFC9176, April
+              2022, <https://www.rfc-editor.org/rfc/rfc9176>.
+
    [RFC9423]  Bormann, C., "Constrained RESTful Environments (CoRE)
               Target Attributes Registry", RFC 9423,
               DOI 10.17487/RFC9423, April 2024,
@@ -2499,6 +2595,8 @@ B.1.  Version -03 to -04
 
       -  ERR_INFO for the EDHOC error message with Error Code
          TBD_ERROR_CODE.
+
+   *  Added security considerations.
 
    *  Editorial fixes and improvements.
 

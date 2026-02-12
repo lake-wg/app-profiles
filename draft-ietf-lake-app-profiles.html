@@ -1204,7 +1204,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-advertising-supported-edhoc-" class="internal xref">Advertising Supported EDHOC Application Profiles using SVCB Resource Records</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-advertising-supported-edhoc-" class="internal xref">Advertising Supported EDHOC Application Profiles using DNS SVCB Resource Records</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-examples-of-wire-format-val" class="internal xref">Examples of Wire-Format Values of the SvcParamKeys</a></p>
@@ -2118,9 +2118,9 @@ Within the inner map, its entry's value is a COSE_CertHash <span>[<a href="#RFC9
 <div id="sec-svcb">
 <section id="section-6">
       <h2 id="name-advertising-supported-edhoc-">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-advertising-supported-edhoc-" class="section-name selfRef">Advertising Supported EDHOC Application Profiles using SVCB Resource Records</a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-advertising-supported-edhoc-" class="section-name selfRef">Advertising Supported EDHOC Application Profiles using DNS SVCB Resource Records</a>
       </h2>
-<p id="section-6-1">Given a server, its support for EDHOC and for EDHOC application profiles can be advertised using SVCB Resource Records (RR) <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span><span>[<a href="#RFC9461" class="cite xref">RFC9461</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">Given a server, its support for EDHOC and for EDHOC application profiles can be advertised using DNS SVCB Resource Records (RR) <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span><span>[<a href="#RFC9461" class="cite xref">RFC9461</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app-prof", which are defined below and are registered in <a href="#iana-svcb" class="auto internal xref">Section 10.7</a>.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6-3.1">
@@ -2637,7 +2637,40 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
       <h2 id="name-security-considerations">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-9-1">TBD<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">The security considerations compiled in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-9" class="relref">Section 9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> hold for this document. The security considerations compiled in <span><a href="https://rfc-editor.org/rfc/rfc9668#section-7" class="relref">Section 7</a> of [<a href="#RFC9668" class="cite xref">RFC9668</a>]</span> also apply, when EDHOC is transported over CoAP <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> and specifically when using the EDHOC + OSCORE request defined in <span><a href="https://rfc-editor.org/rfc/rfc9668#section-3" class="relref">Section 3</a> of [<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-2">Instances of the EDHOC_Application_Profile objects (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>) ought to be accepted only if provided by an identifiable, trusted party by using secure communication. When this is not the case, an EDHOC peer can be induced to: erroneously identify a given EDHOC application profile with a wrong Profile ID; erroneously believe a given EDHOC application profile to exist in the first place; develop a wrong understanding of what a given EDHOC application profile consists of.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-3">Different security guarantees can be achieved about the acquired information on the EDHOC application profiles supported by a given peer, depending on the specific approach used. The potential consequences of acquiring such information in a non secured way are discussed later in this section.<a href="#section-9-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-9-4.1">
+          <p id="section-9-4.1.1">With respect to using web linking (see <a href="#web-linking" class="auto internal xref">Section 3.1</a> and <a href="#sec-parameters-web-linking" class="auto internal xref">Section 4</a>), the security considerations in <span><a href="https://rfc-editor.org/rfc/rfc8288#section-5" class="relref">Section 5</a> of [<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> apply. When specifically relying on CoRE Link Format <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span>, the security considerations in <span><a href="https://rfc-editor.org/rfc/rfc6690#section-6" class="relref">Section 6</a> of [<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> also apply.<a href="#section-9-4.1.1" class="pilcrow">¶</a></p>
+<p id="section-9-4.1.2">
+Clearly, the discovery of EDHOC resources at a server is intended to happen before running EDHOC with the server. At that point in time, the peer attempting to discover EDHOC resources at the server is unlikely to already have a secure communication association with the server. Therefore, the discovery process is likely to use unsecured communication.<a href="#section-9-4.1.2" class="pilcrow">¶</a></p>
+<p id="section-9-4.1.3">
+Alternatively, EDHOC resources at a server can be discovered by securely interacting with separate discovery services, e.g., by using the CoRE Resource Directory <span>[<a href="#RFC9176" class="cite xref">RFC9176</a>]</span>.<a href="#section-9-4.1.3" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-9-4.2">
+          <p id="section-9-4.2.1">With respect to using the EDHOC EAD item "Supported EDHOC application profiles" (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>), the following applies.<a href="#section-9-4.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-9-4.2.2.1">
+              <p id="section-9-4.2.2.1.1">When the EAD item is included in EDHOC message_1, the information conveyed therein is not protected. However, changing EDHOC message_1 in transit (e.g., by adding, removing, or modifying the EAD item) would result in the Initiator aborting the EDHOC session, after receiving and failing to verify EDHOC message_2.<a href="#section-9-4.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-9-4.2.2.2">
+              <p id="section-9-4.2.2.2.1">When the EAD item is included in EDHOC message_2, the information conveyed therein is protected by EDHOC.<a href="#section-9-4.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+        <li class="normal" id="section-9-4.3">
+          <p id="section-9-4.3.1">With respect to using an EDHOC error message with error code TBD_ERROR_CODE, the information conveyed in ERR_INFO is not protected, just like when any other error code is used.<a href="#section-9-4.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-9-4.4">
+          <p id="section-9-4.4.1">With respect to using the SvcParamKeys "edhocpath" and "edhoc-app-prof" within an SVCB RR (see <a href="#sec-svcb" class="auto internal xref">Section 6</a>), the security considerations from <span><a href="https://rfc-editor.org/rfc/rfc9460#section-12" class="relref">Section 12</a> of [<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc9461#section-8" class="relref">Section 8</a> of [<a href="#RFC9461" class="cite xref">RFC9461</a>]</span> apply.<a href="#section-9-4.4.1" class="pilcrow">¶</a></p>
+<p id="section-9-4.4.2">
+It is encouraged that DNS is used with secure communication. Known threats for unprotected DNS are described in <span>[<a href="#RFC3833" class="cite xref">RFC3833</a>]</span> and <span>[<a href="#RFC9076" class="cite xref">RFC9076</a>]</span>.<a href="#section-9-4.4.2" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-9-5">In case information about EDHOC application profiles supported by a peer is distributed in an unprotected way (e.g., through unsecured communication), a consumer should treat such information as a hint.<a href="#section-9-5" class="pilcrow">¶</a></p>
+<p id="section-9-6">If the acquired information has been tampered with and does not reflect what a given peer supports and intends to advertise, this can set wrong expectations about what is effectively possible to do when running EDHOC with that peer. Although this can still result in successfully running EDHOC with a configuration that is commonly supported, such configuration would probably not have been selected, had reliable information been acquired. In the worst case, there might be the erroneous belief that there is not sufficient shared support with that peer.<a href="#section-9-6" class="pilcrow">¶</a></p>
+<p id="section-9-7">What is discussed above does not have an impact on the security of the EDHOC protocol in itself. That is, even when the available information about supported EDHOC application profiles is not guaranteed to be reliable, the successful completion of an EDHOC session still provides the security guarantees that are expected as per the way the session was run (e.g., based on the selected cipher suite and EDHOC method used).<a href="#section-9-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -3175,6 +3208,18 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
         <dd>
 <span class="refAuthor">Costello, A.</span>, <span class="refTitle">"Punycode: A Bootstring encoding of Unicode for Internationalized Domain Names in Applications (IDNA)"</span>, <span class="seriesInfo">RFC 3492</span>, <span class="seriesInfo">DOI 10.17487/RFC3492</span>, <time datetime="2003-03" class="refDate">March 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3492">https://www.rfc-editor.org/rfc/rfc3492</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC3833">[RFC3833]</dt>
+        <dd>
+<span class="refAuthor">Atkins, D.</span> and <span class="refAuthor">R. Austein</span>, <span class="refTitle">"Threat Analysis of the Domain Name System (DNS)"</span>, <span class="seriesInfo">RFC 3833</span>, <span class="seriesInfo">DOI 10.17487/RFC3833</span>, <time datetime="2004-08" class="refDate">August 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3833">https://www.rfc-editor.org/rfc/rfc3833</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9076">[RFC9076]</dt>
+        <dd>
+<span class="refAuthor">Wicinski, T., Ed.</span>, <span class="refTitle">"DNS Privacy Considerations"</span>, <span class="seriesInfo">RFC 9076</span>, <span class="seriesInfo">DOI 10.17487/RFC9076</span>, <time datetime="2021-07" class="refDate">July 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9076">https://www.rfc-editor.org/rfc/rfc9076</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9176">[RFC9176]</dt>
+        <dd>
+<span class="refAuthor">Amsüss, C., Ed.</span>, <span class="refAuthor">Shelby, Z.</span>, <span class="refAuthor">Koster, M.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">P. van der Stok</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Resource Directory"</span>, <span class="seriesInfo">RFC 9176</span>, <span class="seriesInfo">DOI 10.17487/RFC9176</span>, <time datetime="2022-04" class="refDate">April 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9176">https://www.rfc-editor.org/rfc/rfc9176</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9423">[RFC9423]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Target Attributes Registry"</span>, <span class="seriesInfo">RFC 9423</span>, <span class="seriesInfo">DOI 10.17487/RFC9423</span>, <time datetime="2024-04" class="refDate">April 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9423">https://www.rfc-editor.org/rfc/rfc9423</a>&gt;</span>. </dd>
@@ -3302,7 +3347,10 @@ c509_cert = 3
             </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.8">
-            <p id="appendix-B.1-1.8.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.8.1">Added security considerations.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.9">
+            <p id="appendix-B.1-1.9.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.9.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
