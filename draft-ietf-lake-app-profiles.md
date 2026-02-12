@@ -61,6 +61,9 @@ normative:
 
 informative:
   RFC3492:
+  RFC3833:
+  RFC9076:
+  RFC9176:
   RFC9423:
   RFC9529:
   I-D.serafin-lake-ta-hint:
@@ -643,9 +646,9 @@ The CBOR sequence APP_PROF_SEQ includes the following two elements:
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-example-err-info title="Example of ERR_INFO for the EDHOC Error Message with Error Code TBD_ERROR_CODE"}
 
-# Advertising Supported EDHOC Application Profiles using SVCB Resource Records # {#sec-svcb}
+# Advertising Supported EDHOC Application Profiles using DNS SVCB Resource Records # {#sec-svcb}
 
-Given a server, its support for EDHOC and for EDHOC application profiles can be advertised using SVCB Resource Records (RR) {{RFC9460}}{{RFC9461}}.
+Given a server, its support for EDHOC and for EDHOC application profiles can be advertised using DNS SVCB Resource Records (RR) {{RFC9460}}{{RFC9461}}.
 
 To this end, this document specifies the SvcParamKeys "edhocpath" and "edhoc-app-prof", which are defined below and are registered in {{iana-svcb}}.
 
@@ -995,7 +998,35 @@ Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RF
 
 # Security Considerations # {#sec-security-considerations}
 
-TBD
+The security considerations compiled in {{Section 9 of RFC9528}} hold for this document. The security considerations compiled in {{Section 7 of RFC9668}} also apply, when EDHOC is transported over CoAP {{RFC7252}} and specifically when using the EDHOC + OSCORE request defined in {{Section 3 of RFC9668}}.
+
+Instances of the EDHOC_Application_Profile objects (see {{sec-app-profile-cbor}}) ought to be accepted only if provided by an identifiable, trusted party by using secure communication. When this is not the case, an EDHOC peer can be induced to: erroneously identify a given EDHOC application profile with a wrong Profile ID; erroneously believe a given EDHOC application profile to exist in the first place; develop a wrong understanding of what a given EDHOC application profile consists of.
+
+Different security guarantees can be achieved about the acquired information on the EDHOC application profiles supported by a given peer, depending on the specific approach used. The potential consequences of acquiring such information in a non secured way are discussed later in this section.
+
+* With respect to using web linking (see {{web-linking}} and {{sec-parameters-web-linking}}), the security considerations in {{Section 5 of RFC8288}} apply. When specifically relying on CoRE Link Format {{RFC6690}}, the security considerations in {{Section 6 of RFC6690}} also apply.
+
+  Clearly, the discovery of EDHOC resources at a server is intended to happen before running EDHOC with the server. At that point in time, the peer attempting to discover EDHOC resources at the server is unlikely to already have a secure communication association with the server. Therefore, the discovery process is likely to use unsecured communication.
+
+  Alternatively, EDHOC resources at a server can be discovered by securely interacting with separate discovery services, e.g., by using the CoRE Resource Directory {{RFC9176}}.
+
+* With respect to using the EDHOC EAD item "Supported EDHOC application profiles" (see {{sec-app-profile-edhoc-message_1_2}}), the following applies.
+
+  - When the EAD item is included in EDHOC message_1, the information conveyed therein is not protected. However, changing EDHOC message_1 in transit (e.g., by adding, removing, or modifying the EAD item) would result in the Initiator aborting the EDHOC session, after receiving and failing to verify EDHOC message_2.
+
+  - When the EAD item is included in EDHOC message_2, the information conveyed therein is protected by EDHOC.
+
+* With respect to using an EDHOC error message with error code TBD_ERROR_CODE, the information conveyed in ERR_INFO is not protected, just like when any other error code is used.
+
+* With respect to using the SvcParamKeys "edhocpath" and "edhoc-app-prof" within an SVCB RR (see {{sec-svcb}}), the security considerations from {{Section 12 of RFC9460}} and {{Section 8 of RFC9461}} apply.
+
+  It is encouraged that DNS is used with secure communication. Known threats for unprotected DNS are described in {{RFC3833}} and {{RFC9076}}.
+
+In case information about EDHOC application profiles supported by a peer is distributed in an unprotected way (e.g., through unsecured communication), a consumer should treat such information as a hint.
+
+If the acquired information has been tampered with and does not reflect what a given peer supports and intends to advertise, this can set wrong expectations about what is effectively possible to do when running EDHOC with that peer. Although this can still result in successfully running EDHOC with a configuration that is commonly supported, such configuration would probably not have been selected, had reliable information been acquired. In the worst case, there might be the erroneous belief that there is not sufficient shared support with that peer.
+
+What is discussed above does not have an impact on the security of the EDHOC protocol in itself. That is, even when the available information about supported EDHOC application profiles is not guaranteed to be reliable, the successful completion of an EDHOC session still provides the security guarantees that are expected as per the way the session was run (e.g., based on the selected cipher suite and EDHOC method used).
 
 # IANA Considerations
 
@@ -1299,6 +1330,8 @@ c509_cert = 3
   * Added examples of wire-format values of the SvcParamKeys "edhocpath" and "edhoc-app-prof".
 
   * ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE.
+
+* Added security considerations.
 
 * Editorial fixes and improvements.
 
