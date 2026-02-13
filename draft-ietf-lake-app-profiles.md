@@ -996,6 +996,34 @@ Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RF
 | 8          | EXTENSIVE         | Methods (0, 1, 2, 3); Cipher Suites (0, 1, 2, 3); (CCS, CWT, X.509/C509 certificates); (kid, kccs, kcwt, x5t, x5chain, c5t, c5c) | \[RFC-XXXX, {{sec-well-known-app-prof-id-8}}\] |
 {: #table-edhoc-well-known-app-profiles title="EDHOC Well-known Application Profiles" align="center"}
 
+# Operational Considerations
+
+This section compiles the operational considerations that hold for this document.
+
+## Relation with Network Operations
+
+The means defined in this document are largely about aiding peers in running the EDHOC protocol by achieving a common understanding of what they support, thereby facilitating interoperability between EDHOC implementations. Such coordination is expected to keep authenticate key exchange through EDHOC a smooth process in itself and with respect to network operation and management.
+
+The use of these coordinating means in itself is not expected to have a notable impact on performance and network operations, and it is embedded within other relevant network protocols and components such as: the discovery of resources through web-linking {{RFC8288}} and CoRE Link Format {{RFC6690}} (see {{web-linking}} and {{sec-parameters-web-linking}}); the execution of the EDHOC protocol itself (see {{sec-app-profile-edhoc-messages}}); and the discovery of server-related information via DNS SVCB RR {{RFC9460}}{{RFC9461}} (see {{sec-svcb}}).
+
+## Source of Data for Network Operators
+
+As further discussed in {{sec-security-considerations}}, information about what EDHOC application profiles a peer supports could be advertised in plain, depending on the approach specifically used. In such a case, a network operator can passively observe the plain exchange of such information, thereby gaining (a partial) knowledge of EDHOC application profiles that are supported and used in the network.
+
+From the perspective of an individual network operator, this knowledge can be useful for (fine-)tuning the allocation of network resources.
+
+Multiple, cooperating network operators could build an aggregated knowledge that indicates broad "trends" about EDHOC application profiles and their use. This raises awareness of what appears to be most supported and preferred by EDHOC peers, which can influence priority decisions about the development and use of EDHOC implementations, as well as the operations of infrastructures for provisioning and validating public authentication credentials.
+
+As noted in {{sec-well-known-app-profiles}}, well-known EDHOC application profiles are not meant to be default profiles to use, and they are not meant to deviate from the EDHOC compliance requirements compiled in {{Section 8 of RFC9528}}. Instead, they are meant to reflect what is most common and expected to be supported by EDHOC peers. Hence, developing aggregated knowledge on typical uses of EDHOC can help identifying EDHOC application profiles that have become de facto well-known, thereby further accelerating their adoption.
+
+## Logging and Reporting
+
+When using the means defined in this document, EDHOC peers are not expected to keep any particular log of such use, or to go beyond expectations already in place as to the logging of EDHOC sessions. However, when gaining knowledge about what EDHOC application profiles are supported by a given EDHOC peer, it is encouraged to locally preserve that knowledge for a non-negligible amount of time determined by the application. Especially under the assumption that what EDHOC peers support does not (often) change, this avoids the need to repeatedly re-gain the same knowledge at least in the short term.
+
+If an EDHOC session fails due to an apparent mismatch with gained knowledge about commonly supported EDHOC application profiles, a peer can report such a failure to a network manager or infrastructure operator. This can help identify peers whose behavior deviates from what is advertised in terms of EDHOC application profiles that they allegedly support. In turn, this can be used to detect misbehaving peers, outdated information about what peers support, or ongoing tampering of such information if that is advertised in plain (see {{sec-security-considerations}}).
+
+It is out of the scope of this document what specific semantics and data model are used for producing and processing such reports. Specific semantics and data models can be defined by applications and future specifications.
+
 # Security Considerations # {#sec-security-considerations}
 
 The security considerations compiled in {{Section 9 of RFC9528}} hold for this document. The security considerations compiled in {{Section 7 of RFC9668}} also apply, when EDHOC is transported over CoAP {{RFC7252}} and specifically when using the EDHOC + OSCORE request defined in {{Section 3 of RFC9668}}.
@@ -1330,6 +1358,8 @@ c509_cert = 3
   * Added examples of wire-format values of the SvcParamKeys "edhocpath" and "edhoc-app-prof".
 
   * ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE.
+
+* Added "Operational Considerations" section.
 
 * Added security considerations.
 
