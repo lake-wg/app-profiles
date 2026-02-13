@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 16 August 2026                                 12 February 2026
+Expires: 17 August 2026                                 13 February 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 August 2026.
+   This Internet-Draft will expire on 17 August 2026.
 
 Copyright Notice
 
@@ -105,20 +105,24 @@ Table of Contents
      7.8.  Well-Known Application Profile INTERMEDIATE-CS-0
      7.9.  Well-Known Application Profile EXTENSIVE
    8.  Identifiers of Well-known EDHOC Application Profiles
-   9.  Security Considerations
-   10. IANA Considerations
-     10.1.  Media Type Registrations
-     10.2.  CoAP Content-Formats Registry
-     10.3.  Target Attributes Registry
-     10.4.  EDHOC Information Registry
-     10.5.  EDHOC External Authorization Data Registry
-     10.6.  EDHOC Error Codes Registry
-     10.7.  DNS SVCB Service Parameter Keys (SvcParamKeys)
-     10.8.  EDHOC Application Profiles Registry
-     10.9.  Expert Review Instructions
-   11. References
-     11.1.  Normative References
-     11.2.  Informative References
+   9.  Operational Considerations
+     9.1.  Relation with Network Operations
+     9.2.  Source of Data for Network Operators
+     9.3.  Logging and Reporting
+   10. Security Considerations
+   11. IANA Considerations
+     11.1.  Media Type Registrations
+     11.2.  CoAP Content-Formats Registry
+     11.3.  Target Attributes Registry
+     11.4.  EDHOC Information Registry
+     11.5.  EDHOC External Authorization Data Registry
+     11.6.  EDHOC Error Codes Registry
+     11.7.  DNS SVCB Service Parameter Keys (SvcParamKeys)
+     11.8.  EDHOC Application Profiles Registry
+     11.9.  Expert Review Instructions
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
      B.1.  Version -03 to -04
@@ -172,7 +176,7 @@ Table of Contents
    profiles, that is:
 
    *  The new IANA registry "EDHOC Application Profiles" defined in
-      Section 10.8, where to register integer identifiers of EDHOC
+      Section 11.8, where to register integer identifiers of EDHOC
       application profiles to use as corresponding Profile IDs.
 
    *  The new parameter "ed-prof" defined in Section 3.1.  This
@@ -355,7 +359,7 @@ Table of Contents
 
    This document introduces the concept of Profile IDs, i.e., integer
    values that uniquely identify EDHOC application profiles, for which
-   an IANA registry is defined in Section 10.8.
+   an IANA registry is defined in Section 11.8.
 
    This section defines two parameters to convey such Profile IDs, i.e.:
 
@@ -401,7 +405,7 @@ Table of Contents
    *  'ed-prof', specifying an EDHOC application profile supported by
       the server.  This parameter MUST specify a single value, which is
       taken from the 'Profile ID' column of the "EDHOC Application
-      Profiles" registry defined in Section 10.8 of this document.  This
+      Profiles" registry defined in Section 11.8 of this document.  This
       parameter MAY occur multiple times, with each occurrence
       specifying an EDHOC application profile.
 
@@ -489,7 +493,7 @@ Table of Contents
       integers.  In CBOR, "app_prof" is an integer or an array of
       integers, and it has label 23.  The integer values are taken from
       the 'Profile ID' column of the "EDHOC Application Profiles"
-      registry defined in Section 10.8 of this document.
+      registry defined in Section 11.8 of this document.
 
    The CDDL grammar describing the parameter "app_prof" when included in
    the CBOR-encoded EDHOC_Information object is:
@@ -736,7 +740,7 @@ Table of Contents
 5.1.  In EDHOC Message 1 and Message 2
 
    This section defines the EDHOC EAD item "Supported EDHOC application
-   profiles", which is registered in Section 10.5 of this document.
+   profiles", which is registered in Section 11.5 of this document.
 
    The EAD item MAY be included:
 
@@ -825,7 +829,7 @@ Table of Contents
    *  A CBOR integer, specifying the Profile ID of an EDHOC application
       profile.  The integer value is taken from the 'Profile ID' column
       of the "EDHOC Application Profiles" registry defined in
-      Section 10.8 of this document.
+      Section 11.8 of this document.
 
       This element of the CBOR sequence indicates that the message
       sender supports the EDHOC application profile identified by the
@@ -1270,7 +1274,7 @@ Table of Contents
 5.2.  In the EDHOC Error Message
 
    This section defines the error code TBD_ERROR_CODE, which is
-   registered in Section 10.6 of this document.
+   registered in Section 11.6 of this document.
 
    Error code TBD_ERROR_CODE MUST only be used when replying to EDHOC
    message_1.  If an EDHOC error message with error code TBD_ERROR_CODE
@@ -1369,7 +1373,7 @@ Table of Contents
 
    To this end, this document specifies the SvcParamKeys "edhocpath" and
    "edhoc-app-prof", which are defined below and are registered in
-   Section 10.7.
+   Section 11.7.
 
    *  "edhocpath" - The SvcParamKey "edhocpath" is single-valued and
       specifies a list of one or more absolute paths to EDHOC resources
@@ -1678,7 +1682,7 @@ Table of Contents
    object (see Section 2) using the CBOR extended diagnostic notation.
 
    An entry for each well-known application profile is also registered
-   at the "EDHOC Application Profiles" registry defined in Section 10.8
+   at the "EDHOC Application Profiles" registry defined in Section 11.8
    of this document.
 
 7.1.  Well-Known Application Profile MINIMAL-CS-2
@@ -1879,7 +1883,88 @@ Table of Contents
 
                Table 3: EDHOC Well-known Application Profiles
 
-9.  Security Considerations
+9.  Operational Considerations
+
+   This section compiles the operational considerations that hold for
+   this document.
+
+9.1.  Relation with Network Operations
+
+   The means defined in this document are largely about aiding peers in
+   running the EDHOC protocol by achieving a common understanding of
+   what they support, thereby facilitating interoperability between
+   EDHOC implementations.  Such coordination is expected to keep
+   authenticate key exchange through EDHOC a smooth process in itself
+   and with respect to network operation and management.
+
+   The use of these coordinating means in itself is not expected to have
+   a notable impact on performance and network operations, and it is
+   embedded within other relevant network protocols and components such
+   as: the discovery of resources through web-linking [RFC8288] and CoRE
+   Link Format [RFC6690] (see Section 3.1 and Section 4); the execution
+   of the EDHOC protocol itself (see Section 5); and the discovery of
+   server-related information via DNS SVCB RR [RFC9460][RFC9461] (see
+   Section 6).
+
+9.2.  Source of Data for Network Operators
+
+   As further discussed in Section 10, information about what EDHOC
+   application profiles a peer supports could be advertised in plain,
+   depending on the approach specifically used.  In such a case, a
+   network operator can passively observe the plain exchange of such
+   information, thereby gaining (a partial) knowledge of EDHOC
+   application profiles that are supported and used in the network.
+
+   From the perspective of an individual network operator, this
+   knowledge can be useful for (fine-)tuning the allocation of network
+   resources.
+
+   Multiple, cooperating network operators could build an aggregated
+   knowledge that indicates broad "trends" about EDHOC application
+   profiles and their use.  This raises awareness of what appears to be
+   most supported and preferred by EDHOC peers, which can influence
+   priority decisions about the development and use of EDHOC
+   implementations, as well as the operations of infrastructures for
+   provisioning and validating public authentication credentials.
+
+   As noted in Section 7, well-known EDHOC application profiles are not
+   meant to be default profiles to use, and they are not meant to
+   deviate from the EDHOC compliance requirements compiled in Section 8
+   of [RFC9528].  Instead, they are meant to reflect what is most common
+   and expected to be supported by EDHOC peers.  Hence, developing
+   aggregated knowledge on typical uses of EDHOC can help identifying
+   EDHOC application profiles that have become de facto well-known,
+   thereby further accelerating their adoption.
+
+9.3.  Logging and Reporting
+
+   When using the means defined in this document, EDHOC peers are not
+   expected to keep any particular log of such use, or to go beyond
+   expectations already in place as to the logging of EDHOC sessions.
+   However, when gaining knowledge about what EDHOC application profiles
+   are supported by a given EDHOC peer, it is encouraged to locally
+   preserve that knowledge for a non-negligible amount of time
+   determined by the application.  Especially under the assumption that
+   what EDHOC peers support does not (often) change, this avoids the
+   need to repeatedly re-gain the same knowledge at least in the short
+   term.
+
+   If an EDHOC session fails due to an apparent mismatch with gained
+   knowledge about commonly supported EDHOC application profiles, a peer
+   can report such a failure to a network manager or infrastructure
+   operator.  This can help identify peers whose behavior deviates from
+   what is advertised in terms of EDHOC application profiles that they
+   allegedly support.  In turn, this can be used to detect misbehaving
+   peers, outdated information about what peers support, or ongoing
+   tampering of such information if that is advertised in plain (see
+   Section 10).
+
+   It is out of the scope of this document what specific semantics and
+   data model are used for producing and processing such reports.
+   Specific semantics and data models can be defined by applications and
+   future specifications.
+
+10.  Security Considerations
 
    The security considerations compiled in Section 9 of [RFC9528] hold
    for this document.  The security considerations compiled in Section 7
@@ -1966,14 +2051,14 @@ Table of Contents
    per the way the session was run (e.g., based on the selected cipher
    suite and EDHOC method used).
 
-10.  IANA Considerations
+11.  IANA Considerations
 
    This document has the following actions for IANA.
 
    Note to RFC Editor: Please replace all occurrences of "[RFC-XXXX]"
    with the RFC number of this specification and delete this paragraph.
 
-10.1.  Media Type Registrations
+11.1.  Media Type Registrations
 
    IANA is asked to register the media type "application/edhoc-app-
    profile+cbor-seq".  This registration follows the procedures
@@ -1992,7 +2077,7 @@ Table of Contents
    defined as an element of the CBOR-encoded EDHOC_Information object
    from Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile].
 
-   Security considerations: See Section 9 of [RFC-XXXX].
+   Security considerations: See Section 10 of [RFC-XXXX].
 
    Interoperability considerations: N/A
 
@@ -2018,7 +2103,7 @@ Table of Contents
 
    Provisional registration: No
 
-10.2.  CoAP Content-Formats Registry
+11.2.  CoAP Content-Formats Registry
 
    IANA is asked to add the following entry to the "CoAP Content-
    Formats" registry within the "Constrained RESTful Environments (CoRE)
@@ -2032,7 +2117,7 @@ Table of Contents
 
    Reference: [RFC-XXXX]
 
-10.3.  Target Attributes Registry
+11.3.  Target Attributes Registry
 
    IANA is asked to register the following entries in the "Target
    Attributes" registry within the "Constrained RESTful Environments
@@ -2162,7 +2247,7 @@ Table of Contents
 
    *  Reference: [RFC-XXXX, Section 4]
 
-10.4.  EDHOC Information Registry
+11.4.  EDHOC Information Registry
 
    IANA is asked to register the following entries in the "EDHOC
    Information" registry defined in [I-D.ietf-ace-edhoc-oscore-profile].
@@ -2198,7 +2283,7 @@ Table of Contents
 
    *  Specification: [RFC-XXXX][RFC9528]
 
-10.5.  EDHOC External Authorization Data Registry
+11.5.  EDHOC External Authorization Data Registry
 
    IANA is asked to register the following entry in the "EDHOC External
    Authorization Data" registry within the "Ephemeral Diffie-Hellman
@@ -2212,7 +2297,7 @@ Table of Contents
 
    *  Reference: [RFC-XXXX, Section 5.1]
 
-10.6.  EDHOC Error Codes Registry
+11.6.  EDHOC Error Codes Registry
 
    IANA is asked to register the following entry in the "EDHOC Error
    Codes" registry within the "Ephemeral Diffie-Hellman Over COSE
@@ -2228,7 +2313,7 @@ Table of Contents
 
    *  Reference: [RFC-XXXX, Section 5.2]
 
-10.7.  DNS SVCB Service Parameter Keys (SvcParamKeys)
+11.7.  DNS SVCB Service Parameter Keys (SvcParamKeys)
 
    IANA is asked to add the following entries to the "DNS SVCB Service
    Parameter Keys (SvcParamKeys)" registry within the "DNS Service
@@ -2257,7 +2342,7 @@ Table of Contents
 
    *  Reference: [RFC-XXXX, Section 6]
 
-10.8.  EDHOC Application Profiles Registry
+11.8.  EDHOC Application Profiles Registry
 
    IANA is requested to create a new "EDHOC Application Profiles"
    registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)"
@@ -2265,7 +2350,7 @@ Table of Contents
 
    The registration policy is either "Private Use", "Standards Action
    with Expert Review", or "Specification Required" per Section 4.6 of
-   [RFC8126].  "Expert Review" guidelines are provided in Section 10.9.
+   [RFC8126].  "Expert Review" guidelines are provided in Section 11.9.
 
    All assignments according to "Standards Action with Expert Review"
    are made on a "Standards Action" basis per Section 4.9 of [RFC8126],
@@ -2301,7 +2386,7 @@ Table of Contents
    This registry has been initially populated with the values in
    Table 3.
 
-10.9.  Expert Review Instructions
+11.9.  Expert Review Instructions
 
    "Standards Action with Expert Review" and "Specification Required"
    are two of the registration policies defined for the IANA registry
@@ -2343,9 +2428,9 @@ Table of Contents
       it will be used on, and the number of code points left that encode
       to that size.
 
-11.  References
+12.  References
 
-11.1.  Normative References
+12.1.  Normative References
 
    [EDHOC.Exporter.Labels]
               IANA, "EDHOC Exporter Labels",
@@ -2473,7 +2558,7 @@ Table of Contents
               (OSCORE)", RFC 9668, DOI 10.17487/RFC9668, November 2024,
               <https://www.rfc-editor.org/rfc/rfc9668>.
 
-11.2.  Informative References
+12.2.  Informative References
 
    [I-D.serafin-lake-ta-hint]
               Serafin, M. and G. Selander, "Trust Anchor Hints in
@@ -2595,6 +2680,8 @@ B.1.  Version -03 to -04
 
       -  ERR_INFO for the EDHOC error message with Error Code
          TBD_ERROR_CODE.
+
+   *  Added "Operational Considerations" section.
 
    *  Added security considerations.
 
