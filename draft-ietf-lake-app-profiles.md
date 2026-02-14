@@ -89,7 +89,7 @@ In order to ensure the applicability of such parameters and information beyond t
 
 The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.
 
-Furthermore, in order to facilitate interoperability between EDHOC implementations and to support EDHOC extensibility for additional integrations (e.g., of external security applications, handling of authentication credentials, and message transports), this document defines a number of means to coordinate the use of EDHOC application profiles, that is:
+Furthermore, in order to facilitate interoperability between EDHOC implementations and to support EDHOC extensibility for additional integrations (e.g., external security applications, or handling of authentication credentials), this document defines a number of means to coordinate the use of EDHOC application profiles, that is:
 
 * The new IANA registry "EDHOC Application Profiles" defined in {{iana-edhoc-application-profiles}}, where to register integer identifiers of EDHOC application profiles to use as corresponding Profile IDs.
 
@@ -261,7 +261,7 @@ If the EDHOC_Information object specified as the value of the parameter/claim "e
 
   C and RS MUST ignore other parameters that are not admitted if they are present in the EDHOC_Information object.
 
-* The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4" or "max_msgsize". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
+* The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
 
   If the object specifies such an information multiple times, then each occurrence of that information MUST convey exactly the same content. This MUST take into account prescriptive parameters that are included: i) as elements of the EDHOC_Information object; or ii) as elements of an EDHOC_Application_Profile object (see {{sec-app-profile-cbor}}) encoding an EDHOC application profile, which is identified by its Profile ID specified in the parameter "app_prof" of the EDHOC_Information object.
 
@@ -282,14 +282,6 @@ Building on what is defined and prescribed in {{Section 6 of RFC9668}}, this sec
 These parameters can be optionally specified as target attributes with the same name in a link with resource type "core.edhoc" (see {{Section 10.10 of RFC9528}}) targeting an EDHOC resource, or as filter criteria in a discovery request from a client.
 
 When specifying any of the parameters defined below in a link to an EDHOC resource, the target attribute rt="core.edhoc" MUST be included.
-
-* 'ed-max-msgsize', specifying the admitted maximum size of EDHOC messages in bytes. This parameter MUST specify a single unsigned integer value.
-
-* 'ed-coap-ct', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see {{Sections 3.4.1 and A.2 of RFC9528}}). A value MUST NOT be given to this parameter and any present value MUST be ignored by the recipient.
-
-* 'ed-epid-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter MUST specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.
-
-* 'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter MUST specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter MAY occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.
 
 * 'ed-ta-edcred-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a UUID {{RFC9562}}. This parameter MUST specify a single value, which is the UUID in its string format (see Section 4 of {{RFC9562}}). This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
@@ -399,7 +391,7 @@ When sending EDHOC message_1, the Initiator might want to include the EAD item "
 
 The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if ead_value is malformed or does not conform with the format defined above.
 
-It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4" or "max_msgsize". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
+It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
 
 If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session MUST NOT act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Upon receiving an EDHOC message and throughout the session, a peer MUST check whether the other peer has violated such indications. If any violation is found, the peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1.
 
@@ -1121,34 +1113,6 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 <br>
 
-* Attribute Name: ed-max-msgsize
-* Brief Description: The admitted maximum size of EDHOC messages in bytes
-* Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
-
-<br>
-
-* Attribute Name: ed-coap-ct
-* Brief Description: Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier
-* Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
-
-<br>
-
-* Attribute Name: ed-epid-t
-* Brief Description: A supported type of endpoint identity for EDHOC
-* Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
-
-<br>
-
-* Attribute Name: ed-tp
-* Brief Description: A supported means for transporting EDHOC messages
-* Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
-
-<br>
-
 * Attribute Name: ed-ta-edcred-uuid
 * Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a UUID
 * Change Controller: IETF
@@ -1296,7 +1260,7 @@ comb_req = 4
 cred_types = 6
 id_cred_types = 7
 eads = 8
-trust_anchors = 15
+trust_anchors = 11
 app_prof = 23
 
 ; EDHOC Application Profiles
@@ -1330,6 +1294,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -03 to -04 ## {#sec-03-04}
+
+* Removed parameters that were removed from draft-ietf-ace-edhoc-oscore-profile.
 
 * Renamed "reply_flag" to "advertise_flag".
 
