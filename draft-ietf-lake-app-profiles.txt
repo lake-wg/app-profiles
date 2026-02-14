@@ -680,7 +680,7 @@ Table of Contents
       "gi5IefKkG1EMH5s", i.e., the base64url-encoded text string of
       0x822e4879f2a41b510c1f9b.  The latter is the binary representation
       of the COSE_CertHash [RFC9360] corresponding to an X.509
-      certificate [RFC5280] that the server suppports as a trust anchor
+      certificate [RFC5280] that the server supports as a trust anchor
       when running EDHOC through that resource.  In CBOR diagnostic
       notation, the considered COSE_CertHash is as follows: [-15,
       h'79f2a41b510c1f9b'].
@@ -1317,7 +1317,7 @@ Table of Contents
 
          Within the inner map, its entry's value is a COSE_CertHash
          [RFC9360] corresponding to an X.509 certificate [RFC5280] that
-         the Responder suppports as a trust anchor when running EDHOC.
+         the Responder supports as a trust anchor when running EDHOC.
 
    <<
       e'APP-PROF-MINIMAL-CS-0',  / profile_id /
