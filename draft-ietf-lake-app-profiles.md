@@ -1109,49 +1109,49 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 * Attribute Name: ed-prof
 * Brief Description: A supported EDHOC application profile
 * Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 3.1\]
+* Reference: \[RFC-XXXX, {{web-linking}}\]
 
 <br>
 
 * Attribute Name: ed-ta-edcred-uuid
 * Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a UUID
 * Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
+* Reference: \[RFC-XXXX, {{sec-parameters-web-linking}}\]
 
 <br>
 
 * Attribute Name: ed-ta-edcred-kid
 * Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a binary key identifier
 * Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
+* Reference: \[RFC-XXXX, {{sec-parameters-web-linking}}\]
 
 <br>
 
 * Attribute Name: ed-ta-edcred-c5t
 * Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate
 * Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
+* Reference: \[RFC-XXXX, {{sec-parameters-web-linking}}\]
 
 <br>
 
 * Attribute Name: ed-ta-edcred-c5u
 * Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to a C509 certificate
 * Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
+* Reference: \[RFC-XXXX, {{sec-parameters-web-linking}}\]
 
 <br>
 
 * Attribute Name: ed-ta-edcred-x5t
 * Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate
 * Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
+* Reference: \[RFC-XXXX, {{sec-parameters-web-linking}}\]
 
 <br>
 
 * Attribute Name: ed-ta-edcred-x5u
 * Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to an X.509 certificate
 * Change Controller: IETF
-* Reference: \[RFC-XXXX, Section 4\]
+* Reference: \[RFC-XXXX, {{sec-parameters-web-linking}}\]
 
 ## EDHOC Information Registry ## {#iana-edhoc-information-registry}
 
