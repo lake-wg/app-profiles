@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 17 August 2026</td>
+<td class="center">Expires 18 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lake-app-profiles-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-13" class="published">13 February 2026</time>
+<time datetime="2026-02-14" class="published">14 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-17">17 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-18">18 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1117,7 +1117,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1346,7 +1346,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1-3">As discussed in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, applications can use EDHOC application profiles, which specify the intended usage of EDHOC to allow for the relevant processing and verifications to be made. In particular, an EDHOC application profile may include both in-band and out-of-band parameters.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>). The defined representation is transport- and setup-independent, and it avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">Furthermore, in order to facilitate interoperability between EDHOC implementations and to support EDHOC extensibility for additional integrations (e.g., of external security applications, handling of authentication credentials, and message transports), this document defines a number of means to coordinate the use of EDHOC application profiles, that is:<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-6">Furthermore, in order to facilitate interoperability between EDHOC implementations and to support EDHOC extensibility for additional integrations (e.g., external security applications, or handling of authentication credentials), this document defines a number of means to coordinate the use of EDHOC application profiles, that is:<a href="#section-1-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-7.1">
           <p id="section-1-7.1.1">The new IANA registry "EDHOC Application Profiles" defined in <a href="#iana-edhoc-application-profiles" class="auto internal xref">Section 11.8</a>, where to register integer identifiers of EDHOC application profiles to use as corresponding Profile IDs.<a href="#section-1-7.1.1" class="pilcrow">¶</a></p>
@@ -1591,7 +1591,7 @@ For example, the parameter "session_id" is not allowed in the EDHOC_Application_
 C and RS <span class="bcp14">MUST</span> ignore other parameters that are not admitted if they are present in the EDHOC_Information object.<a href="#section-3.2.1-6.1.3" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.2.1-6.2">
-              <p id="section-3.2.1-6.2.1">The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-09#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4" or "max_msgsize". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-3.2.1-6.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.2.1-6.2.1">The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-09#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-3.2.1-6.2.1" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-6.2.2">
 If the object specifies such an information multiple times, then each occurrence of that information <span class="bcp14">MUST</span> convey exactly the same content. This <span class="bcp14">MUST</span> take into account prescriptive parameters that are included: i) as elements of the EDHOC_Information object; or ii) as elements of an EDHOC_Application_Profile object (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>) encoding an EDHOC application profile, which is identified by its Profile ID specified in the parameter "app_prof" of the EDHOC_Information object.<a href="#section-3.2.1-6.2.2" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-6.2.3">
@@ -1624,34 +1624,22 @@ When using the target EDHOC resource as per any EDHOC application profile indica
 <p id="section-4-3">When specifying any of the parameters defined below in a link to an EDHOC resource, the target attribute rt="core.edhoc" <span class="bcp14">MUST</span> be included.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4-4.1">
-          <p id="section-4-4.1.1">'ed-max-msgsize', specifying the admitted maximum size of EDHOC messages in bytes. This parameter <span class="bcp14">MUST</span> specify a single unsigned integer value.<a href="#section-4-4.1.1" class="pilcrow">¶</a></p>
+          <p id="section-4-4.1.1">'ed-ta-edcred-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the UUID in its string format (see Section 4 of <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>). This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-4.2">
-          <p id="section-4-4.2.1">'ed-coap-ct', specifying that CoAP messages have to include the CoAP Content-Format Option with value 64 (application/edhoc+cbor-seq) or 65 (application/cid-edhoc+cbor-seq) as appropriate, when the message payload includes exclusively an EDHOC message possibly prepended by an EDHOC connection identifier (see Sections <a href="https://rfc-editor.org/rfc/rfc9528#section-3.4.1" class="relref">3.4.1</a> and <a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">A.2</a> of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). A value <span class="bcp14">MUST NOT</span> be given to this parameter and any present value <span class="bcp14">MUST</span> be ignored by the recipient.<a href="#section-4-4.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-4.2.1">'ed-ta-edcred-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a binary key identifier. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-4.3">
-          <p id="section-4-4.3.1">'ed-epid-t', specifying a type of endpoint identity for EDHOC supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'CBOR Label' column of the "EDHOC Endpoint Identity Types" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a type of endpoint identity for EDHOC.<a href="#section-4-4.3.1" class="pilcrow">¶</a></p>
+          <p id="section-4-4.3.1">'ed-ta-edcred-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-4.4">
-          <p id="section-4-4.4.1">'ed-tp', specifying a means for transporting EDHOC messages supported by the server. This parameter <span class="bcp14">MUST</span> specify a single value, which is taken from the 'Transport ID' column of the "EDHOC Transports" registry defined in <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying a means for transporting EDHOC messages.<a href="#section-4-4.4.1" class="pilcrow">¶</a></p>
+          <p id="section-4-4.4.1">'ed-ta-edcred-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-4.5">
-          <p id="section-4-4.5.1">'ed-ta-edcred-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the UUID in its string format (see Section 4 of <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>). This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.5.1" class="pilcrow">¶</a></p>
+          <p id="section-4-4.5.1">'ed-ta-edcred-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-4.6">
-          <p id="section-4-4.6.1">'ed-ta-edcred-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a binary key identifier. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-4-4.7">
-          <p id="section-4-4.7.1">'ed-ta-edcred-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.7.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-4-4.8">
-          <p id="section-4-4.8.1">'ed-ta-edcred-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to a C509 certificate <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.8.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-4-4.9">
-          <p id="section-4-4.9.1">'ed-ta-edcred-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.9.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-4-4.10">
-          <p id="section-4-4.10.1">'ed-ta-edcred-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.10.1" class="pilcrow">¶</a></p>
+          <p id="section-4-4.6.1">'ed-ta-edcred-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> pointing to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This parameter <span class="bcp14">MUST</span> specify a single value, which is the URI pointing to the certificate. This parameter <span class="bcp14">MAY</span> occur multiple times, with each occurrence specifying one trust anchor identifier.<a href="#section-4-4.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-4-5">The example in <a href="#fig-web-link-example-2" class="auto internal xref">Figure 4</a> extends the earlier example in <a href="#fig-web-link-example" class="auto internal xref">Figure 2</a>, by additionally showing the use of the target attributes 'ed-ta-edcred-kid' and 'ed-ta-edcred-x5t'. Compared to the example in <a href="#fig-web-link-example" class="auto internal xref">Figure 2</a>, the following also applies.<a href="#section-4-5" class="pilcrow">¶</a></p>
@@ -1790,7 +1778,7 @@ This element of the CBOR sequence indicates that the message sender supports an 
         </ul>
 <p id="section-5.1-11">When sending EDHOC message_1, the Initiator might want to include the EAD item "Supported EDHOC application profiles" and not advertise the EDHOC application profiles that it supports, but instead just take advantage of advertise_flag and ask the Responder to advertise what is supported on its side. In order to do that, the Initiator can compose ead_value such that, following advertise_flag, the CBOR sequence APP_PROF_SEQ only consists of a single EDHOC_Information object as an empty CBOR map.<a href="#section-5.1-11" class="pilcrow">¶</a></p>
 <p id="section-5.1-12">The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message with error code (ERR_CODE) 1, if ead_value is malformed or does not conform with the format defined above.<a href="#section-5.1-12" class="pilcrow">¶</a></p>
-<p id="section-5.1-13">It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-09#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4" or "max_msgsize". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-5.1-13" class="pilcrow">¶</a></p>
+<p id="section-5.1-13">It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-09#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-5.1-13" class="pilcrow">¶</a></p>
 <p id="section-5.1-14">If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session <span class="bcp14">MUST NOT</span> act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Upon receiving an EDHOC message and throughout the session, a peer <span class="bcp14">MUST</span> check whether the other peer has violated such indications. If any violation is found, the peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message with error code (ERR_CODE) 1.<a href="#section-5.1-14" class="pilcrow">¶</a></p>
 <p id="section-5.1-15">When composing ead_value, the sender peer <span class="bcp14">MUST</span> comply with the content restrictions specified in <a href="#sec-app-profile-edhoc-message_1_2-restrictions" class="auto internal xref">Section 5.1.1</a>.<a href="#section-5.1-15" class="pilcrow">¶</a></p>
 <p id="section-5.1-16">The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 5</a>.<a href="#section-5.1-16" class="pilcrow">¶</a></p>
@@ -2791,10 +2779,10 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.3-3"><br></p>
 <ul class="normal">
 <li class="normal" id="section-11.3-4.1">
-            <p id="section-11.3-4.1.1">Attribute Name: ed-max-msgsize<a href="#section-11.3-4.1.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-4.1.1">Attribute Name: ed-ta-edcred-uuid<a href="#section-11.3-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-4.2">
-            <p id="section-11.3-4.2.1">Brief Description: The admitted maximum size of EDHOC messages in bytes<a href="#section-11.3-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-4.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a UUID<a href="#section-11.3-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-4.3">
             <p id="section-11.3-4.3.1">Change Controller: IETF<a href="#section-11.3-4.3.1" class="pilcrow">¶</a></p>
@@ -2806,10 +2794,10 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.3-5"><br></p>
 <ul class="normal">
 <li class="normal" id="section-11.3-6.1">
-            <p id="section-11.3-6.1.1">Attribute Name: ed-coap-ct<a href="#section-11.3-6.1.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-6.1.1">Attribute Name: ed-ta-edcred-kid<a href="#section-11.3-6.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-6.2">
-            <p id="section-11.3-6.2.1">Brief Description: Requested use of the CoAP Content-Format Option in CoAP messages whose payload includes exclusively an EDHOC message, possibly prepended by an EDHOC connection identifier<a href="#section-11.3-6.2.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-6.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a binary key identifier<a href="#section-11.3-6.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-6.3">
             <p id="section-11.3-6.3.1">Change Controller: IETF<a href="#section-11.3-6.3.1" class="pilcrow">¶</a></p>
@@ -2821,10 +2809,10 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.3-7"><br></p>
 <ul class="normal">
 <li class="normal" id="section-11.3-8.1">
-            <p id="section-11.3-8.1.1">Attribute Name: ed-epid-t<a href="#section-11.3-8.1.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-8.1.1">Attribute Name: ed-ta-edcred-c5t<a href="#section-11.3-8.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-8.2">
-            <p id="section-11.3-8.2.1">Brief Description: A supported type of endpoint identity for EDHOC<a href="#section-11.3-8.2.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-8.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate<a href="#section-11.3-8.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-8.3">
             <p id="section-11.3-8.3.1">Change Controller: IETF<a href="#section-11.3-8.3.1" class="pilcrow">¶</a></p>
@@ -2836,10 +2824,10 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.3-9"><br></p>
 <ul class="normal">
 <li class="normal" id="section-11.3-10.1">
-            <p id="section-11.3-10.1.1">Attribute Name: ed-tp<a href="#section-11.3-10.1.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-10.1.1">Attribute Name: ed-ta-edcred-c5u<a href="#section-11.3-10.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-10.2">
-            <p id="section-11.3-10.2.1">Brief Description: A supported means for transporting EDHOC messages<a href="#section-11.3-10.2.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-10.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to a C509 certificate<a href="#section-11.3-10.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-10.3">
             <p id="section-11.3-10.3.1">Change Controller: IETF<a href="#section-11.3-10.3.1" class="pilcrow">¶</a></p>
@@ -2851,10 +2839,10 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.3-11"><br></p>
 <ul class="normal">
 <li class="normal" id="section-11.3-12.1">
-            <p id="section-11.3-12.1.1">Attribute Name: ed-ta-edcred-uuid<a href="#section-11.3-12.1.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-12.1.1">Attribute Name: ed-ta-edcred-x5t<a href="#section-11.3-12.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-12.2">
-            <p id="section-11.3-12.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a UUID<a href="#section-11.3-12.2.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-12.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate<a href="#section-11.3-12.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-12.3">
             <p id="section-11.3-12.3.1">Change Controller: IETF<a href="#section-11.3-12.3.1" class="pilcrow">¶</a></p>
@@ -2866,76 +2854,16 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.3-13"><br></p>
 <ul class="normal">
 <li class="normal" id="section-11.3-14.1">
-            <p id="section-11.3-14.1.1">Attribute Name: ed-ta-edcred-kid<a href="#section-11.3-14.1.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-14.1.1">Attribute Name: ed-ta-edcred-x5u<a href="#section-11.3-14.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-14.2">
-            <p id="section-11.3-14.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a binary key identifier<a href="#section-11.3-14.2.1" class="pilcrow">¶</a></p>
+            <p id="section-11.3-14.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to an X.509 certificate<a href="#section-11.3-14.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-14.3">
             <p id="section-11.3-14.3.1">Change Controller: IETF<a href="#section-11.3-14.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.3-14.4">
             <p id="section-11.3-14.4.1">Reference: [RFC-XXXX, Section 4]<a href="#section-11.3-14.4.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-11.3-15"><br></p>
-<ul class="normal">
-<li class="normal" id="section-11.3-16.1">
-            <p id="section-11.3-16.1.1">Attribute Name: ed-ta-edcred-c5t<a href="#section-11.3-16.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-16.2">
-            <p id="section-11.3-16.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate<a href="#section-11.3-16.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-16.3">
-            <p id="section-11.3-16.3.1">Change Controller: IETF<a href="#section-11.3-16.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-16.4">
-            <p id="section-11.3-16.4.1">Reference: [RFC-XXXX, Section 4]<a href="#section-11.3-16.4.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-11.3-17"><br></p>
-<ul class="normal">
-<li class="normal" id="section-11.3-18.1">
-            <p id="section-11.3-18.1.1">Attribute Name: ed-ta-edcred-c5u<a href="#section-11.3-18.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-18.2">
-            <p id="section-11.3-18.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to a C509 certificate<a href="#section-11.3-18.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-18.3">
-            <p id="section-11.3-18.3.1">Change Controller: IETF<a href="#section-11.3-18.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-18.4">
-            <p id="section-11.3-18.4.1">Reference: [RFC-XXXX, Section 4]<a href="#section-11.3-18.4.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-11.3-19"><br></p>
-<ul class="normal">
-<li class="normal" id="section-11.3-20.1">
-            <p id="section-11.3-20.1.1">Attribute Name: ed-ta-edcred-x5t<a href="#section-11.3-20.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-20.2">
-            <p id="section-11.3-20.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate<a href="#section-11.3-20.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-20.3">
-            <p id="section-11.3-20.3.1">Change Controller: IETF<a href="#section-11.3-20.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-20.4">
-            <p id="section-11.3-20.4.1">Reference: [RFC-XXXX, Section 4]<a href="#section-11.3-20.4.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-11.3-21"><br></p>
-<ul class="normal">
-<li class="normal" id="section-11.3-22.1">
-            <p id="section-11.3-22.1.1">Attribute Name: ed-ta-edcred-x5u<a href="#section-11.3-22.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-22.2">
-            <p id="section-11.3-22.2.1">Brief Description: Identifier of a supported trust anchor for verifying authentication credentials of other EDHOC peers, as a URI pointing to an X.509 certificate<a href="#section-11.3-22.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-22.3">
-            <p id="section-11.3-22.3.1">Change Controller: IETF<a href="#section-11.3-22.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-11.3-22.4">
-            <p id="section-11.3-22.4.1">Reference: [RFC-XXXX, Section 4]<a href="#section-11.3-22.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -3303,7 +3231,7 @@ comb_req = 4
 cred_types = 6
 id_cred_types = 7
 eads = 8
-trust_anchors = 15
+trust_anchors = 11
 app_prof = 23
 
 ; EDHOC Application Profiles
@@ -3351,61 +3279,64 @@ c509_cert = 3
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Renamed "reply_flag" to "advertise_flag".<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Removed parameters that were removed from draft-ietf-ace-edhoc-oscore-profile.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">Defined use of "advertise_flag" also in SVCB Resource Records.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.2.1">Renamed "reply_flag" to "advertise_flag".<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">Added guidelines on using the EAD item "Supported EDHOC application profiles" only to take advantage of advertise_flag.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.3.1">Defined use of "advertise_flag" also in SVCB Resource Records.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.4">
-            <p id="appendix-B.1-1.4.1">Added guidelines on having per-resource empty advertisements in an SVCB RR.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.4.1">Added guidelines on using the EAD item "Supported EDHOC application profiles" only to take advantage of advertise_flag.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Clarifications:<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="appendix-B.1-1.5.2.1">
-                <p id="appendix-B.1-1.5.2.1.1">Deviations from prescriptive parameters are assessed throughout the whole EDHOC session.<a href="#appendix-B.1-1.5.2.1.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
+            <p id="appendix-B.1-1.5.1">Added guidelines on having per-resource empty advertisements in an SVCB RR.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.6">
-            <p id="appendix-B.1-1.6.1">CDDL definitions:<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.6.1">Clarifications:<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.6.2.1">
-                <p id="appendix-B.1-1.6.2.1.1">Added CDDL definitions of the parameters "app_prof" and "exporter_out_len" for the CBOR-encoded EDHOC_Information object.<a href="#appendix-B.1-1.6.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.6.2.2">
-                <p id="appendix-B.1-1.6.2.2.1">Fixed CDDL definition of ead_value of the EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.6.2.2.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.6.2.1.1">Deviations from prescriptive parameters are assessed throughout the whole EDHOC session.<a href="#appendix-B.1-1.6.2.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.7">
-            <p id="appendix-B.1-1.7.1">Added new examples:<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.7.1">CDDL definitions:<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.7.2.1">
-                <p id="appendix-B.1-1.7.2.1.1">Response in CoRE link-format using the target attributes 'ed-ta-edcred-*'.<a href="#appendix-B.1-1.7.2.1.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.7.2.1.1">Added CDDL definitions of the parameters "app_prof" and "exporter_out_len" for the CBOR-encoded EDHOC_Information object.<a href="#appendix-B.1-1.7.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.7.2.2">
-                <p id="appendix-B.1-1.7.2.2.1">ead_value for the EDHOC EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.7.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.7.2.3">
-                <p id="appendix-B.1-1.7.2.3.1">Added examples of wire-format values of the SvcParamKeys "edhocpath" and "edhoc-app-prof".<a href="#appendix-B.1-1.7.2.3.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.7.2.4">
-                <p id="appendix-B.1-1.7.2.4.1">ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE.<a href="#appendix-B.1-1.7.2.4.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.7.2.2.1">Fixed CDDL definition of ead_value of the EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.7.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.8">
-            <p id="appendix-B.1-1.8.1">Added "Operational Considerations" section.<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.8.1">Added new examples:<a href="#appendix-B.1-1.8.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.1-1.8.2.1">
+                <p id="appendix-B.1-1.8.2.1.1">Response in CoRE link-format using the target attributes 'ed-ta-edcred-*'.<a href="#appendix-B.1-1.8.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.8.2.2">
+                <p id="appendix-B.1-1.8.2.2.1">ead_value for the EDHOC EAD item "Supported EDHOC application profiles".<a href="#appendix-B.1-1.8.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.8.2.3">
+                <p id="appendix-B.1-1.8.2.3.1">Added examples of wire-format values of the SvcParamKeys "edhocpath" and "edhoc-app-prof".<a href="#appendix-B.1-1.8.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.8.2.4">
+                <p id="appendix-B.1-1.8.2.4.1">ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE.<a href="#appendix-B.1-1.8.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.9">
-            <p id="appendix-B.1-1.9.1">Added security considerations.<a href="#appendix-B.1-1.9.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.9.1">Added "Operational Considerations" section.<a href="#appendix-B.1-1.9.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.10">
-            <p id="appendix-B.1-1.10.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.10.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.10.1">Added security considerations.<a href="#appendix-B.1-1.10.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.11">
+            <p id="appendix-B.1-1.11.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.11.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
