@@ -301,7 +301,7 @@ The example in {{fig-web-link-example-2}} extends the earlier example in {{fig-w
 
 * The link to the EDHOC resource at /edhoc-alt includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "\_wH\_", i.e., the base64url-encoded text string of 0xff01ff. The latter is the binary key identifier of a trust anchor supported by the server when running EDHOC through that resource.
 
-* The link to the EDHOC resource at /edhoc-alt includes the target attribute 'ed-ta-edcred-x5t'. The target attribute has value "gi5IefKkG1EMH5s", i.e., the base64url-encoded text string of 0x822e4879f2a41b510c1f9b. The latter is the binary representation of the COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the server suppports as a trust anchor when running EDHOC through that resource. In CBOR diagnostic notation, the considered COSE_CertHash is as follows: \[-15, h'79f2a41b510c1f9b'\].
+* The link to the EDHOC resource at /edhoc-alt includes the target attribute 'ed-ta-edcred-x5t'. The target attribute has value "gi5IefKkG1EMH5s", i.e., the base64url-encoded text string of 0x822e4879f2a41b510c1f9b. The latter is the binary representation of the COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the server supports as a trust anchor when running EDHOC through that resource. In CBOR diagnostic notation, the considered COSE_CertHash is as follows: \[-15, h'79f2a41b510c1f9b'\].
 
 ~~~~~~~~~~~~~~~~~
 REQ: GET /.well-known/core
@@ -620,7 +620,7 @@ The CBOR sequence APP_PROF_SEQ includes the following two elements:
 
   * "trust_anchors", encoded as a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
 
-    Within the inner map, its entry's value is a COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the Responder suppports as a trust anchor when running EDHOC.
+    Within the inner map, its entry's value is a COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the Responder supports as a trust anchor when running EDHOC.
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 <<
