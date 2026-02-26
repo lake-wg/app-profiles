@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 18 August 2026                                 14 February 2026
+Expires: 30 August 2026                                 26 February 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -22,7 +22,7 @@ Abstract
    to ensure the applicability of such parameters and information beyond
    transport- or setup-specific scenarios, this document defines a
    canonical, CBOR-based representation that can be used to describe,
-   distribute, and store EDHOC application profiles.  Furthermore, In
+   distribute, and store EDHOC application profiles.  Furthermore, in
    order to facilitate interoperability between EDHOC implementations
    and support EDHOC extensibility for additional integrations, this
    document defines a number of means to coordinate the use of EDHOC
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 August 2026.
+   This Internet-Draft will expire on 30 August 2026.
 
 Copyright Notice
 
@@ -227,12 +227,12 @@ Table of Contents
    Finally, this document defines a set of well-known EDHOC application
    profiles (see Section 7).  These application profiles are meant to
    reflect what is most common and expected to be supported by EDHOC
-   peers, while they are not to be intended as "default" application
-   profiles or as a deviation from what is mandatory to support for
-   EDHOC peers (see Section 8 of [RFC9528]).  On the other hand, they
-   provide implementers and users with a quick overview of the several
-   available options to run the EDHOC protocol and of their most
-   expected combinations.
+   peers, while they are not intended as "default" application profiles
+   or as a deviation from what is mandatory to support for EDHOC peers
+   (see Section 8 of [RFC9528]).  On the other hand, they provide
+   implementers and users with a quick overview of the several available
+   options to run the EDHOC protocol and of their most expected
+   combinations.
 
 1.1.  Terminology
 
@@ -324,14 +324,14 @@ Table of Contents
    in the IANA registry "EDHOC Information" specifies "NP" (non-
    prescriptive) in the 'Type' column and "True or False" in the 'CBOR
    type' column, then the following applies.  An EDHOC peer that adheres
-   to the EDHOC application profile in question is required or not to
-   support the property or feature of EDHOC associated with the element
-   in the CBOR map, if that element encodes the CBOR simple value true
-   (0xf5) or false (0xf4), respectively.  For example, the presence of
-   the parameter "comb_req" denotes whether EDHOC peers adhering to the
-   EDHOC application profile have to support the EDHOC + OSCORE combined
-   request defined in [RFC9668], or instead do not have to but might if
-   they are willing to.
+   to the EDHOC application profile in question is either required to
+   support or not required to support the property or feature of EDHOC
+   associated with the element in the CBOR map, if that element encodes
+   the CBOR simple value true (0xf5) or false (0xf4), respectively.  For
+   example, the presence of the parameter "comb_req" denotes whether
+   EDHOC peers adhering to the EDHOC application profile have to support
+   the EDHOC + OSCORE combined request defined in [RFC9668], or instead
+   do not have to but might if they are willing to.
 
    If an element present in the CBOR map specifies an information that
    is intrinsically a set of one or more co-existing alternatives, then
@@ -2328,7 +2328,7 @@ Table of Contents
       check the clarity of purpose and use of the requested entries.
       Experts need to make sure that the object of registration is
       clearly defined in the corresponding specification.  Entries that
-      do not meet these objective of clarity and completeness must not
+      do not meet these objectives of clarity and completeness must not
       be registered.
 
    *  Point squatting should be discouraged.  Reviewers are encouraged

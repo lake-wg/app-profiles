@@ -8,7 +8,7 @@
 <meta content="Marco Tiloca" name="author">
 <meta content="Rikard Höglund" name="author">
 <meta content="
-       The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Furthermore, In order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles. 
+       The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Furthermore, in order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 18 August 2026</td>
+<td class="center">Expires 30 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lake-app-profiles-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-14" class="published">14 February 2026</time>
+<time datetime="2026-02-26" class="published">26 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-18">18 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-30">30 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1085,7 +1085,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Coordinating the Use of Application Profiles for Ephemeral Diffie-Hellman Over COSE (EDHOC)</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Furthermore, In order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Furthermore, in order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1117,7 +1117,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1373,7 +1373,7 @@ This parameter is also used in the EDHOC_Application_Profile object defined in t
           <p id="section-1-7.6.1">The use of SVCB Resource Records (RR) <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span><span>[<a href="#RFC9461" class="cite xref">RFC9461</a>]</span> to advertise the support for EDHOC and for EDHOC application profiles of a given server (see <a href="#sec-svcb" class="auto internal xref">Section 6</a>).<a href="#section-1-7.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-8">Finally, this document defines a set of well-known EDHOC application profiles (see <a href="#sec-well-known-app-profiles" class="auto internal xref">Section 7</a>). These application profiles are meant to reflect what is most common and expected to be supported by EDHOC peers, while they are not to be intended as "default" application profiles or as a deviation from what is mandatory to support for EDHOC peers (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). On the other hand, they provide implementers and users with a quick overview of the several available options to run the EDHOC protocol and of their most expected combinations.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-8">Finally, this document defines a set of well-known EDHOC application profiles (see <a href="#sec-well-known-app-profiles" class="auto internal xref">Section 7</a>). These application profiles are meant to reflect what is most common and expected to be supported by EDHOC peers, while they are not intended as "default" application profiles or as a deviation from what is mandatory to support for EDHOC peers (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>). On the other hand, they provide implementers and users with a quick overview of the several available options to run the EDHOC protocol and of their most expected combinations.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">
@@ -1415,7 +1415,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
           <p id="section-2-8.3.1">The absence of any other elements in the CBOR map <span class="bcp14">MUST NOT</span> result in assuming any value.<a href="#section-2-8.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-9">If an element is present in the CBOR map and the corresponding entry in the IANA registry "EDHOC Information" specifies "NP" (non-prescriptive) in the 'Type' column and "True or False" in the 'CBOR type' column, then the following applies. An EDHOC peer that adheres to the EDHOC application profile in question is required or not to support the property or feature of EDHOC associated with the element in the CBOR map, if that element encodes the CBOR simple value <code>true</code> (0xf5) or <code>false</code> (0xf4), respectively. For example, the presence of the parameter "comb_req" denotes whether EDHOC peers adhering to the EDHOC application profile have to support the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>, or instead do not have to but might if they are willing to.<a href="#section-2-9" class="pilcrow">¶</a></p>
+<p id="section-2-9">If an element is present in the CBOR map and the corresponding entry in the IANA registry "EDHOC Information" specifies "NP" (non-prescriptive) in the 'Type' column and "True or False" in the 'CBOR type' column, then the following applies. An EDHOC peer that adheres to the EDHOC application profile in question is either required to support or not required to support the property or feature of EDHOC associated with the element in the CBOR map, if that element encodes the CBOR simple value <code>true</code> (0xf5) or <code>false</code> (0xf4), respectively. For example, the presence of the parameter "comb_req" denotes whether EDHOC peers adhering to the EDHOC application profile have to support the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>, or instead do not have to but might if they are willing to.<a href="#section-2-9" class="pilcrow">¶</a></p>
 <p id="section-2-10">If an element present in the CBOR map specifies an information that is intrinsically a set of one or more co-existing alternatives, then all the specified alternatives apply for the EDHOC application profile in question. For example, the element "cipher_suites" with value the CBOR array [0, 2] means that, in order to adhere to the EDHOC application profile in question, an EDHOC peer has to implement both the EDHOC cipher suites 0 and 2, because either of them can be used by another EDHOC peer also adhering to the same EDHOC application profile.<a href="#section-2-10" class="pilcrow">¶</a></p>
 <p id="section-2-11">The CDDL grammar describing the EDHOC_Application_Profile object is:<a href="#section-2-11" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-edho"></span><div id="fig-cddl-edhoc_application-profile-object">
@@ -3048,7 +3048,7 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.9-2">Expert reviewers should take into consideration the following points:<a href="#section-11.9-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11.9-3.1">
-            <p id="section-11.9-3.1.1">Clarity and correctness of registrations. Experts are expected to check the clarity of purpose and use of the requested entries. Experts need to make sure that the object of registration is clearly defined in the corresponding specification. Entries that do not meet these objective of clarity and completeness must not be registered.<a href="#section-11.9-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-11.9-3.1.1">Clarity and correctness of registrations. Experts are expected to check the clarity of purpose and use of the requested entries. Experts need to make sure that the object of registration is clearly defined in the corresponding specification. Entries that do not meet these objectives of clarity and completeness must not be registered.<a href="#section-11.9-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.9-3.2">
             <p id="section-11.9-3.2.1">Point squatting should be discouraged. Reviewers are encouraged to get sufficient information for registration requests to ensure that the usage is not going to duplicate one that is already registered and that the point is likely to be used in deployments. The zones tagged as "Private Use" are intended for testing purposes and closed environments. Code points in other ranges should not be assigned for testing.<a href="#section-11.9-3.2.1" class="pilcrow">¶</a></p>
