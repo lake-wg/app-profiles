@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 30 August 2026                                 26 February 2026
+Expires: 8 December 2026                                     6 June 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2026.
+   This Internet-Draft will expire on 8 December 2026.
 
 Copyright Notice
 
@@ -125,10 +125,11 @@ Table of Contents
      12.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
-     B.1.  Version -03 to -04
-     B.2.  Version -02 to -03
-     B.3.  Version -01 to -02
-     B.4.  Version -00 to -01
+     B.1.  Version -04 to -05
+     B.2.  Version -03 to -04
+     B.3.  Version -02 to -03
+     B.4.  Version -01 to -02
+     B.5.  Version -00 to -01
    Acknowledgments
    Authors' Addresses
 
@@ -1028,7 +1029,7 @@ Table of Contents
    included in the CBOR-encoded EDHOC_Information object is:
 
    exporter_out_len = (
-     ? 22 => [1* [uint, uint]]                   ; app_prof
+     ? 22 => [1* [uint, uint]]                   ; exporter_out_len
    )
 
        Figure 6: CDDL Definition of the Parameter "exporter_out_len"
@@ -2370,17 +2371,17 @@ Table of Contents
               Security for Constrained Environments (OSCORE) Profile for
               Authentication and Authorization for Constrained
               Environments (ACE)", Work in Progress, Internet-Draft,
-              draft-ietf-ace-edhoc-oscore-profile-09, 20 October 2025,
+              draft-ietf-ace-edhoc-oscore-profile-10, 1 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
-              edhoc-oscore-profile-09>.
+              edhoc-oscore-profile-10>.
 
    [I-D.ietf-cose-cbor-encoded-cert]
-              Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
-              M. Furuhed, "CBOR Encoded X.509 Certificates (C509
-              Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-16, 25 January 2026,
+              Mattsson, J. P., Selander, G., Raza, S., Höglund, J.,
+              Furuhed, M., and L. Liao, "CBOR Encoded X.509 Certificates
+              (C509 Certificates)", Work in Progress, Internet-Draft,
+              draft-ietf-cose-cbor-encoded-cert-19, 11 May 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-16>.
+              cbor-encoded-cert-19>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -2568,7 +2569,11 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -03 to -04
+B.1.  Version -04 to -05
+
+   *  Editorial fixes and improvements.
+
+B.2.  Version -03 to -04
 
    *  Removed parameters that were removed from draft-ietf-ace-edhoc-
       oscore-profile.
@@ -2617,7 +2622,7 @@ B.1.  Version -03 to -04
 
    *  Editorial fixes and improvements.
 
-B.2.  Version -02 to -03
+B.3.  Version -02 to -03
 
    *  Removed restrictions on the scope of the EDHOC_Application_Profile
       object.
@@ -2641,7 +2646,7 @@ B.2.  Version -02 to -03
 
    *  Clarifications and editorial improvements.
 
-B.3.  Version -01 to -02
+B.4.  Version -01 to -02
 
    *  Revised order of sections.
 
@@ -2696,7 +2701,7 @@ B.3.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.4.  Version -00 to -01
+B.5.  Version -00 to -01
 
    *  Clarified motivation in the abstract and introduction.
 
