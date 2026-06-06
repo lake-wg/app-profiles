@@ -482,7 +482,7 @@ The CDDL grammar describing the parameter "exporter\_out\_len" when included in 
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
 exporter_out_len = (
-  ? 22 => [1* [uint, uint]]                   ; app_prof
+  ? 22 => [1* [uint, uint]]                   ; exporter_out_len
 )
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-exporter_out_len title="CDDL Definition of the Parameter \"exporter_out_len\" when Included in the CBOR-encoded EDHOC_Information Object."}
