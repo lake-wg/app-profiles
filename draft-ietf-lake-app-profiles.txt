@@ -2048,9 +2048,11 @@ Table of Contents
    Optional parameters: N/A
 
    Encoding considerations: Must be encoded as a CBOR sequence [RFC8742]
-   of CBOR maps [RFC8949].  Each element of each CBOR map is also
-   defined as an element of the CBOR-encoded EDHOC_Information object
-   from Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile].
+   of CBOR maps [RFC8949].  Each of the CBOR maps is an
+   EDHOC_Application_Profile object (see Section 2 of [RFC-XXXX]).  Each
+   element of each CBOR map is also defined as an element of the CBOR-
+   encoded EDHOC_Information object from Section 3.4 of
+   [I-D.ietf-ace-edhoc-oscore-profile].
 
    Security considerations: See Section 10 of [RFC-XXXX].
 
@@ -2060,7 +2062,8 @@ Table of Contents
 
    Applications that use this media type: Applications that need to
    describe, distribute, and store a representation of an EDHOC
-   application profile (see [RFC-XXXX] and Section 3.9 of [RFC9528]).
+   application profile (see Section 2 of [RFC-XXXX] and Section 3.9 of
+   [RFC9528]).
 
    Fragment identifier considerations: N/A
 
@@ -2253,7 +2256,7 @@ Table of Contents
    Parameter Keys (SvcParamKeys)" registry [DNS.SVCB.SvcParamKeys]
    within the "DNS Service Bindings (SVCB)" registry group.
 
-   *  Number: 11 (suggested)
+   *  Number: 12 (suggested)
 
    *  Name: edhocpath
 
@@ -2265,7 +2268,7 @@ Table of Contents
 
 
 
-   *  Number: 12 (suggested)
+   *  Number: 13 (suggested)
 
    *  Name: edhoc-app-prof
 
@@ -2596,7 +2599,13 @@ Appendix B.  Document Updates
 
 B.1.  Version -04 to -05
 
-   *  Added references to IANA registries.
+   *  IANA considerations:
+
+      -  Added references to IANA registries.
+
+      -  More details in the media type registration.
+
+      -  Proposed codepoints picked up among unassigned ones.
 
    *  Editorial fixes and improvements.
 

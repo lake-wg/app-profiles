@@ -2731,11 +2731,11 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.1-3">Subtype name: edhoc-app-profile+cbor-seq<a href="#section-11.1-3" class="pilcrow">¶</a></p>
 <p id="section-11.1-4">Required parameters: N/A<a href="#section-11.1-4" class="pilcrow">¶</a></p>
 <p id="section-11.1-5">Optional parameters: N/A<a href="#section-11.1-5" class="pilcrow">¶</a></p>
-<p id="section-11.1-6">Encoding considerations: Must be encoded as a CBOR sequence <span>[<a href="#RFC8742" class="cite xref">RFC8742</a>]</span> of CBOR maps <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>. Each element of each CBOR map is also defined as an element of the CBOR-encoded EDHOC_Information object from <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-10#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>.<a href="#section-11.1-6" class="pilcrow">¶</a></p>
+<p id="section-11.1-6">Encoding considerations: Must be encoded as a CBOR sequence <span>[<a href="#RFC8742" class="cite xref">RFC8742</a>]</span> of CBOR maps <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>. Each of the CBOR maps is an EDHOC_Application_Profile object (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a> of [RFC-XXXX]). Each element of each CBOR map is also defined as an element of the CBOR-encoded EDHOC_Information object from <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-10#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>.<a href="#section-11.1-6" class="pilcrow">¶</a></p>
 <p id="section-11.1-7">Security considerations: See <a href="#sec-security-considerations" class="auto internal xref">Section 10</a> of [RFC-XXXX].<a href="#section-11.1-7" class="pilcrow">¶</a></p>
 <p id="section-11.1-8">Interoperability considerations: N/A<a href="#section-11.1-8" class="pilcrow">¶</a></p>
 <p id="section-11.1-9">Published specification: [RFC-XXXX]<a href="#section-11.1-9" class="pilcrow">¶</a></p>
-<p id="section-11.1-10">Applications that use this media type: Applications that need to describe, distribute, and store a representation of an EDHOC application profile (see [RFC-XXXX] and <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-11.1-10" class="pilcrow">¶</a></p>
+<p id="section-11.1-10">Applications that use this media type: Applications that need to describe, distribute, and store a representation of an EDHOC application profile (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a> of [RFC-XXXX] and <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-11.1-10" class="pilcrow">¶</a></p>
 <p id="section-11.1-11">Fragment identifier considerations: N/A<a href="#section-11.1-11" class="pilcrow">¶</a></p>
 <p id="section-11.1-12">Additional information: N/A<a href="#section-11.1-12" class="pilcrow">¶</a></p>
 <p id="section-11.1-13">Person &amp; email address to contact for further information: LAKE WG mailing list (lake@ietf.org) or IETF Applications and Real-Time Area (art@ietf.org)<a href="#section-11.1-13" class="pilcrow">¶</a></p>
@@ -2979,7 +2979,7 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.7-1">IANA is asked to add the following entries to the "DNS SVCB Service Parameter Keys (SvcParamKeys)" registry <span>[<a href="#DNS.SVCB.SvcParamKeys" class="cite xref">DNS.SVCB.SvcParamKeys</a>]</span> within the "DNS Service Bindings (SVCB)" registry group.<a href="#section-11.7-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11.7-2.1">
-            <p id="section-11.7-2.1.1">Number: 11 (suggested)<a href="#section-11.7-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-11.7-2.1.1">Number: 12 (suggested)<a href="#section-11.7-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.7-2.2">
             <p id="section-11.7-2.2.1">Name: edhocpath<a href="#section-11.7-2.2.1" class="pilcrow">¶</a></p>
@@ -2997,7 +2997,7 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.7-3"><br></p>
 <ul class="normal">
 <li class="normal" id="section-11.7-4.1">
-            <p id="section-11.7-4.1.1">Number: 12 (suggested)<a href="#section-11.7-4.1.1" class="pilcrow">¶</a></p>
+            <p id="section-11.7-4.1.1">Number: 13 (suggested)<a href="#section-11.7-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.7-4.2">
             <p id="section-11.7-4.2.1">Name: edhoc-app-prof<a href="#section-11.7-4.2.1" class="pilcrow">¶</a></p>
@@ -3296,7 +3296,18 @@ c509_cert = 3
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Added references to IANA registries.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">IANA considerations:<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.1-1.1.2.1">
+                <p id="appendix-B.1-1.1.2.1.1">Added references to IANA registries.<a href="#appendix-B.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.1.2.2">
+                <p id="appendix-B.1-1.1.2.2.1">More details in the media type registration.<a href="#appendix-B.1-1.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.1.2.3">
+                <p id="appendix-B.1-1.1.2.3.1">Proposed codepoints picked up among unassigned ones.<a href="#appendix-B.1-1.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
             <p id="appendix-B.1-1.2.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
