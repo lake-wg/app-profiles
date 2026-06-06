@@ -149,13 +149,13 @@ Table of Contents
 
    As discussed in Section 3.9 of [RFC9528], applications can use EDHOC
    application profiles, which specify the intended usage of EDHOC to
-   allow for the relevant processing and verifications to be made.  In
-   particular, an EDHOC application profile may include both in-band and
-   out-of-band parameters.
+   allow for the relevant processing and verifications to be made.  An
+   EDHOC application profile may include both in-band and out-of-band
+   parameters.
 
    In order to ensure the applicability of such parameters and
    information beyond transport- or setup-specific scenarios, this
-   document also defines the EDHOC_Application_Profile object, i.e., a
+   document defines the EDHOC_Application_Profile object, i.e., a
    canonical, CBOR-based representation that can be used to describe,
    distribute, and store EDHOC application profiles as CBOR data items
    (see Section 2).  The defined representation is transport- and setup-
@@ -551,8 +551,8 @@ Table of Contents
          has to be present (see Sections 3.3 and 3.3.1 of
          [I-D.ietf-ace-edhoc-oscore-profile]).
 
-      C and RS MUST ignore other parameters that are not admitted if
-      they are present in the EDHOC_Information object.
+      C and RS MUST ignore other parameters that are not admitted, in
+      the case that they are present in the EDHOC_Information object.
 
    *  The object might provide an information that corresponds to an
       EDHOC_Information prescriptive parameter (see Section 3.4 of
@@ -706,8 +706,8 @@ Table of Contents
    order to advertise the EDHOC application profiles that it supports to
    another EDHOC peer, when running EDHOC with that other peer.
 
-   Such means are an EDHOC EAD item (see Section 5.1) and an error code
-   for the EDHOC error message (see Section 5.2).
+   Such means are an EDHOC EAD item (see Section 5.1) and EDHOC error
+   message with a dedicated error code (see Section 5.2).
 
 5.1.  In EDHOC Message 1 and Message 2
 
@@ -939,8 +939,9 @@ Table of Contents
    account the presence of such information in the received EAD item
    when composing ead_value.
 
-   A consumer MUST treat as malformed an EDHOC_Information object that
-   does not comply with the restrictions above.
+   A consumer MUST treat as malformed an EAD item "Supported EDHOC
+   application profiles" whose ead_value does not comply with the
+   restrictions above.
 
 5.1.2.  Agreeing on EDHOC_Exporter Output Lengths
 
@@ -1155,16 +1156,16 @@ Table of Contents
    *  An element EDHOC_Information, which in turn includes the following
       parameters:
 
-      -  "message_4", encoded as the CBOR simple value true (0xf5),
+      -  "message_4", with value the CBOR simple value true (0xf5),
          hence indicating that EDHOC meessage_4 is expected in the
          current EDHOC session.
 
-      -  "eads", encoded as a CBOR array.  The array includes two
+      -  "eads", with value a CBOR array.  The array includes two
          elements encoded as unsigned integers, i.e., the EAD labels 500
          and 333 of the corresponding EAD items supported by the
          Initiator.
 
-      -  "trust_anchors", encoded as a CBOR map.  The map includes a
+      -  "trust_anchors", with value a CBOR map.  The map includes a
          single element with value a CBOR array, which pertains to trust
          anchors whose purpose is the verification of authentication
          credentials of other EDHOC peers in an EDHOC session.
@@ -1210,16 +1211,16 @@ Table of Contents
    *  An element EDHOC_Information, which in turn includes the following
       parameters:
 
-      -  "comb_req", encoded as the CBOR simple value true (0xf5), hence
+      -  "comb_req", with value the CBOR simple value true (0xf5), hence
          indicating that the Responder supports the EDHOC + OSCORE
          combined request defined in [RFC9668].
 
-      -  "eads", encoded as a CBOR array.  The array includes two
+      -  "eads", with value a CBOR array.  The array includes two
          elements encoded as unsigned integers, i.e., the EAD labels 500
          and 999 of the corresponding EAD items supported by the
          Responder.
 
-      -  "trust_anchors", encoded as a CBOR map.  The map includes a
+      -  "trust_anchors", with value a CBOR map.  The map includes a
          single element with value an inner CBOR map, which pertains to
          trust anchors whose purpose is the verification of
          authentication credentials of other EDHOC peers in an EDHOC
@@ -1301,16 +1302,16 @@ Table of Contents
    *  An element EDHOC_Information, which in turn includes the following
       parameters:
 
-      -  "comb_req", encoded as the CBOR simple value true (0xf5), hence
+      -  "comb_req", with value the CBOR simple value true (0xf5), hence
          indicating that the Responder supports the EDHOC + OSCORE
          combined request defined in [RFC9668].
 
-      -  "eads", encoded as a CBOR array.  The array includes two
+      -  "eads", with value a CBOR array.  The array includes two
          elements encoded as unsigned integers, i.e., the EAD labels 500
          and 777 of the corresponding EAD items supported by the
          Responder.
 
-      -  "trust_anchors", encoded as a CBOR map.  The map includes a
+      -  "trust_anchors", with value a CBOR map.  The map includes a
          single element with value an inner CBOR map, which pertains to
          trust anchors whose purpose is the verification of
          authentication credentials of other EDHOC peers in an EDHOC
@@ -1571,9 +1572,11 @@ Table of Contents
          Figure 13: Example of Wire-Format Value of the SvcParamKey
                        "edhocpath" within an SVCB RR
 
-   Figure 14 shows an example of the SvcParamKey "edhoc-app-prof", with
-   reference to the CDDL grammar in Figure 12.  In particular, the
-   following applies.
+   Assuming an SVCB RR that includes the SvcParamKey "edhocpath" shown
+   in Figure 13, the following Figure 14 shows an example of the
+   SvcParamKey "edhoc-app-prof" within the same SVCB RR, with reference
+   to the CDDL grammar in Figure 12.  In particular, the following
+   applies.
 
    The CBOR data item advertise_flag is present and encodes the CBOR
    simple value true (0xf5), hence indicating that a peer that runs
@@ -1904,9 +1907,9 @@ Table of Contents
    deviate from the EDHOC compliance requirements compiled in Section 8
    of [RFC9528].  Instead, they are meant to reflect what is most common
    and expected to be supported by EDHOC peers.  Hence, developing
-   aggregated knowledge on typical uses of EDHOC can help identifying
-   EDHOC application profiles that have become de facto well-known,
-   thereby further accelerating their adoption.
+   aggregated knowledge on typical uses of EDHOC can help identify EDHOC
+   application profiles that have become de facto well-known, thereby
+   further accelerating their adoption.
 
 9.3.  Logging and Reporting
 
@@ -2011,17 +2014,17 @@ Table of Contents
    running EDHOC with that peer.  Although this can still result in
    successfully running EDHOC with a configuration that is commonly
    supported, such configuration would probably not have been selected,
-   had reliable information been acquired.  In the worst case, there
-   might be the erroneous belief that there is not sufficient shared
-   support with that peer.
+   had reliable and authentic information been acquired.  In the worst
+   case, there might be the erroneous belief that there is not
+   sufficient shared support with that peer.
 
    What is discussed above does not have an impact on the security of
    the EDHOC protocol in itself.  That is, even when the available
    information about supported EDHOC application profiles is not
-   guaranteed to be reliable, the successful completion of an EDHOC
-   session still provides the security guarantees that are expected as
-   per the way the session was run (e.g., based on the selected cipher
-   suite and EDHOC method used).
+   guaranteed to be reliable and authentic, the successful completion of
+   an EDHOC session still provides the security guarantees that are
+   expected as per the way the session was run (e.g., based on the
+   selected cipher suite and EDHOC method used).
 
 11.  IANA Considerations
 

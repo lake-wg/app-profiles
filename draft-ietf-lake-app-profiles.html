@@ -1344,8 +1344,8 @@ svg {
       </h2>
 <p id="section-1-1">Ephemeral Diffie-Hellman Over COSE (EDHOC) <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> is a lightweight authenticated key exchange protocol, especially intended for use in constrained scenarios. A main use case for EDHOC is the establishment of a Security Context for Object Security for Constrained RESTful Environments (OSCORE) <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">In order to successfully run EDHOC, the two peers acting as Initiator and Responder have to agree on certain parameters. Some of those are in-band and communicated through the protocol execution, during which a few of them may even be negotiated. However, other parameters have to be known out-of-band, before running the EDHOC protocol.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">As discussed in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, applications can use EDHOC application profiles, which specify the intended usage of EDHOC to allow for the relevant processing and verifications to be made. In particular, an EDHOC application profile may include both in-band and out-of-band parameters.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>). The defined representation is transport- and setup-independent, and it avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-3">As discussed in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, applications can use EDHOC application profiles, which specify the intended usage of EDHOC to allow for the relevant processing and verifications to be made. An EDHOC application profile may include both in-band and out-of-band parameters.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>). The defined representation is transport- and setup-independent, and it avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">Furthermore, in order to facilitate interoperability between EDHOC implementations and to support EDHOC extensibility for additional integrations (e.g., external security applications, or handling of authentication credentials), this document defines a number of means to coordinate the use of EDHOC application profiles, that is:<a href="#section-1-6" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1589,7 +1589,7 @@ For example, the parameter "session_id" is not allowed in the EDHOC_Application_
 </li>
               </ul>
 <p id="section-3.2.1-6.1.3">
-C and RS <span class="bcp14">MUST</span> ignore other parameters that are not admitted if they are present in the EDHOC_Information object.<a href="#section-3.2.1-6.1.3" class="pilcrow">¶</a></p>
+C and RS <span class="bcp14">MUST</span> ignore other parameters that are not admitted, in the case that they are present in the EDHOC_Information object.<a href="#section-3.2.1-6.1.3" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.2.1-6.2">
               <p id="section-3.2.1-6.2.1">The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-10#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>), e.g., "message_4". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see <span>[<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>).<a href="#section-3.2.1-6.2.1" class="pilcrow">¶</a></p>
@@ -1683,7 +1683,7 @@ RES: 2.05 Content
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-advertising-supported-edhoc" class="section-name selfRef">Advertising Supported EDHOC Application Profiles during an EDHOC Session</a>
       </h2>
 <p id="section-5-1">The rest of this section defines means that an EDHOC peer can use in order to advertise the EDHOC application profiles that it supports to another EDHOC peer, when running EDHOC with that other peer.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">Such means are an EDHOC EAD item (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>) and an error code for the EDHOC error message (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>).<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-2">Such means are an EDHOC EAD item (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>) and EDHOC error message with a dedicated error code (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>).<a href="#section-5-2" class="pilcrow">¶</a></p>
 <div id="sec-app-profile-edhoc-message_1_2">
 <section id="section-5.1">
         <h3 id="name-in-edhoc-message-1-and-mess">
@@ -1836,7 +1836,7 @@ EDHOC_Information = map
 </li>
           </ul>
 <p id="section-5.1.1-5">If the Responder has received the EAD item in the EAD_1 field of EDHOC message_1 and intends to include the EAD item in the EAD_2 field of EDHOC message_2, then the Responder <span class="bcp14">MUST</span> further take into account the presence of such information in the received EAD item when composing ead_value.<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-6">A consumer <span class="bcp14">MUST</span> treat as malformed an EDHOC_Information object that does not comply with the restrictions above.<a href="#section-5.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-6">A consumer <span class="bcp14">MUST</span> treat as malformed an EAD item "Supported EDHOC application profiles" whose ead_value does not comply with the restrictions above.<a href="#section-5.1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="exporter-out-length">
@@ -1965,13 +1965,13 @@ That is, for each pair (X, Y) specified by the exchanged EAD items, the two peer
               <p id="section-5.1.3-4.3.1">An element EDHOC_Information, which in turn includes the following parameters:<a href="#section-5.1.3-4.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.1.3-4.3.2.1">
-                  <p id="section-5.1.3-4.3.2.1.1">"message_4", encoded as the CBOR simple value <code>true</code> (0xf5), hence indicating that EDHOC meessage_4 is expected in the current EDHOC session.<a href="#section-5.1.3-4.3.2.1.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.1.3-4.3.2.1.1">"message_4", with value the CBOR simple value <code>true</code> (0xf5), hence indicating that EDHOC meessage_4 is expected in the current EDHOC session.<a href="#section-5.1.3-4.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-5.1.3-4.3.2.2">
-                  <p id="section-5.1.3-4.3.2.2.1">"eads", encoded as a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 333 of the corresponding EAD items supported by the Initiator.<a href="#section-5.1.3-4.3.2.2.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.1.3-4.3.2.2.1">"eads", with value a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 333 of the corresponding EAD items supported by the Initiator.<a href="#section-5.1.3-4.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-5.1.3-4.3.2.3">
-                  <p id="section-5.1.3-4.3.2.3.1">"trust_anchors", encoded as a CBOR map. The map includes a single element with value a CBOR array, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.<a href="#section-5.1.3-4.3.2.3.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.1.3-4.3.2.3.1">"trust_anchors", with value a CBOR map. The map includes a single element with value a CBOR array, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.<a href="#section-5.1.3-4.3.2.3.1" class="pilcrow">¶</a></p>
 <p id="section-5.1.3-4.3.2.3.2">
 In turn, the array includes two CBOR maps. Within the first CBOR map, its entry's value is a CBOR byte string that encodes 0x00ac. Within the second CBOR map, its entry's value is a CBOR byte string that encodes 0xff01ff. Both 0x00ac and 0xff01ff are binary key identifiers of trust anchors supported by the Initiator in the current EDHOC session.<a href="#section-5.1.3-4.3.2.3.2" class="pilcrow">¶</a></p>
 </li>
@@ -2013,13 +2013,13 @@ In turn, the array includes two CBOR maps. Within the first CBOR map, its entry'
               <p id="section-5.1.3-8.2.1">An element EDHOC_Information, which in turn includes the following parameters:<a href="#section-5.1.3-8.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.1.3-8.2.2.1">
-                  <p id="section-5.1.3-8.2.2.1.1">"comb_req", encoded as the CBOR simple value <code>true</code> (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>.<a href="#section-5.1.3-8.2.2.1.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.1.3-8.2.2.1.1">"comb_req", with value the CBOR simple value <code>true</code> (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>.<a href="#section-5.1.3-8.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-5.1.3-8.2.2.2">
-                  <p id="section-5.1.3-8.2.2.2.1">"eads", encoded as a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 999 of the corresponding EAD items supported by the Responder.<a href="#section-5.1.3-8.2.2.2.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.1.3-8.2.2.2.1">"eads", with value a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 999 of the corresponding EAD items supported by the Responder.<a href="#section-5.1.3-8.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-5.1.3-8.2.2.3">
-                  <p id="section-5.1.3-8.2.2.3.1">"trust_anchors", encoded as a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.<a href="#section-5.1.3-8.2.2.3.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.1.3-8.2.2.3.1">"trust_anchors", with value a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.<a href="#section-5.1.3-8.2.2.3.1" class="pilcrow">¶</a></p>
 <p id="section-5.1.3-8.2.2.3.2">
 Within the inner map, its entry's value is a CBOR byte string that encodes 0x91ab, i.e., the binary key identifier of a trust anchor supported by the Responder in the current EDHOC session.<a href="#section-5.1.3-8.2.2.3.2" class="pilcrow">¶</a></p>
 </li>
@@ -2077,13 +2077,13 @@ Within the inner map, its entry's value is a CBOR byte string that encodes 0x91a
               <p id="section-5.2.1-3.2.1">An element EDHOC_Information, which in turn includes the following parameters:<a href="#section-5.2.1-3.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2.1-3.2.2.1">
-                  <p id="section-5.2.1-3.2.2.1.1">"comb_req", encoded as the CBOR simple value <code>true</code> (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>.<a href="#section-5.2.1-3.2.2.1.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.2.1-3.2.2.1.1">"comb_req", with value the CBOR simple value <code>true</code> (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>.<a href="#section-5.2.1-3.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-5.2.1-3.2.2.2">
-                  <p id="section-5.2.1-3.2.2.2.1">"eads", encoded as a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 777 of the corresponding EAD items supported by the Responder.<a href="#section-5.2.1-3.2.2.2.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.2.1-3.2.2.2.1">"eads", with value a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 777 of the corresponding EAD items supported by the Responder.<a href="#section-5.2.1-3.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-5.2.1-3.2.2.3">
-                  <p id="section-5.2.1-3.2.2.3.1">"trust_anchors", encoded as a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.<a href="#section-5.2.1-3.2.2.3.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.2.1-3.2.2.3.1">"trust_anchors", with value a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.<a href="#section-5.2.1-3.2.2.3.1" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-3.2.2.3.2">
 Within the inner map, its entry's value is a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span> corresponding to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> that the Responder supports as a trust anchor when running EDHOC.<a href="#section-5.2.1-3.2.2.3.2" class="pilcrow">¶</a></p>
 </li>
@@ -2298,7 +2298,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <a href="#name-example-of-wire-format-valu" class="selfRef">Example of Wire-Format Value of the SvcParamKey "edhocpath" within an SVCB RR</a>
           </figcaption></figure>
 </div>
-<p id="section-6.1-5"><a href="#fig-example-svcb-edhoc-app-prof" class="auto internal xref">Figure 14</a> shows an example of the SvcParamKey "edhoc-app-prof", with reference to the CDDL grammar in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 12</a>. In particular, the following applies.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
+<p id="section-6.1-5">Assuming an SVCB RR that includes the SvcParamKey "edhocpath" shown in <a href="#fig-example-svcb-edhocpath" class="auto internal xref">Figure 13</a>, the following <a href="#fig-example-svcb-edhoc-app-prof" class="auto internal xref">Figure 14</a> shows an example of the SvcParamKey "edhoc-app-prof" within the same SVCB RR, with reference to the CDDL grammar in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 12</a>. In particular, the following applies.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
 <p id="section-6.1-6">The CBOR data item advertise_flag is present and encodes the CBOR simple value <code>true</code> (0xf5), hence indicating that a peer that runs EDHOC with the server is encouraged to advertise the EDHOC application profiles that it supports, when sending to the server its first EDHOC message in an EDHOC session.<a href="#section-6.1-6" class="pilcrow">¶</a></p>
 <p id="section-6.1-7">The CBOR data item server_info is a CBOR array, which includes two CBOR byte strings APP_BSTR. In particular:<a href="#section-6.1-7" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2658,7 +2658,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <p id="section-9.2-1">As further discussed in <a href="#sec-security-considerations" class="auto internal xref">Section 10</a>, information about what EDHOC application profiles a peer supports could be advertised in plain, depending on the approach specifically used. In such a case, a network operator can passively observe the plain exchange of such information, thereby gaining (a partial) knowledge of EDHOC application profiles that are supported and used in the network.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 <p id="section-9.2-2">From the perspective of an individual network operator, this knowledge can be useful for (fine-)tuning the allocation of network resources.<a href="#section-9.2-2" class="pilcrow">¶</a></p>
 <p id="section-9.2-3">Multiple, cooperating network operators could build an aggregated knowledge that indicates broad "trends" about EDHOC application profiles and their use. This raises awareness of what appears to be most supported and preferred by EDHOC peers, which can influence priority decisions about the development and use of EDHOC implementations, as well as the operations of infrastructures for provisioning and validating public authentication credentials.<a href="#section-9.2-3" class="pilcrow">¶</a></p>
-<p id="section-9.2-4">As noted in <a href="#sec-well-known-app-profiles" class="auto internal xref">Section 7</a>, well-known EDHOC application profiles are not meant to be default profiles to use, and they are not meant to deviate from the EDHOC compliance requirements compiled in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>. Instead, they are meant to reflect what is most common and expected to be supported by EDHOC peers. Hence, developing aggregated knowledge on typical uses of EDHOC can help identifying EDHOC application profiles that have become de facto well-known, thereby further accelerating their adoption.<a href="#section-9.2-4" class="pilcrow">¶</a></p>
+<p id="section-9.2-4">As noted in <a href="#sec-well-known-app-profiles" class="auto internal xref">Section 7</a>, well-known EDHOC application profiles are not meant to be default profiles to use, and they are not meant to deviate from the EDHOC compliance requirements compiled in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>. Instead, they are meant to reflect what is most common and expected to be supported by EDHOC peers. Hence, developing aggregated knowledge on typical uses of EDHOC can help identify EDHOC application profiles that have become de facto well-known, thereby further accelerating their adoption.<a href="#section-9.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="logging-and-reporting">
@@ -2710,8 +2710,8 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 </li>
       </ul>
 <p id="section-10-5">In case information about EDHOC application profiles supported by a peer is distributed in an unprotected way (e.g., through unsecured communication), a consumer should treat such information as a hint.<a href="#section-10-5" class="pilcrow">¶</a></p>
-<p id="section-10-6">If the acquired information has been tampered with and does not reflect what a given peer supports and intends to advertise, this can set wrong expectations about what is effectively possible to do when running EDHOC with that peer. Although this can still result in successfully running EDHOC with a configuration that is commonly supported, such configuration would probably not have been selected, had reliable information been acquired. In the worst case, there might be the erroneous belief that there is not sufficient shared support with that peer.<a href="#section-10-6" class="pilcrow">¶</a></p>
-<p id="section-10-7">What is discussed above does not have an impact on the security of the EDHOC protocol in itself. That is, even when the available information about supported EDHOC application profiles is not guaranteed to be reliable, the successful completion of an EDHOC session still provides the security guarantees that are expected as per the way the session was run (e.g., based on the selected cipher suite and EDHOC method used).<a href="#section-10-7" class="pilcrow">¶</a></p>
+<p id="section-10-6">If the acquired information has been tampered with and does not reflect what a given peer supports and intends to advertise, this can set wrong expectations about what is effectively possible to do when running EDHOC with that peer. Although this can still result in successfully running EDHOC with a configuration that is commonly supported, such configuration would probably not have been selected, had reliable and authentic information been acquired. In the worst case, there might be the erroneous belief that there is not sufficient shared support with that peer.<a href="#section-10-6" class="pilcrow">¶</a></p>
+<p id="section-10-7">What is discussed above does not have an impact on the security of the EDHOC protocol in itself. That is, even when the available information about supported EDHOC application profiles is not guaranteed to be reliable and authentic, the successful completion of an EDHOC session still provides the security guarantees that are expected as per the way the session was run (e.g., based on the selected cipher suite and EDHOC method used).<a href="#section-10-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
