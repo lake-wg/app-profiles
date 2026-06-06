@@ -350,7 +350,7 @@ RES: 2.05 Content
 
 The rest of this section defines means that an EDHOC peer can use in order to advertise the EDHOC application profiles that it supports to another EDHOC peer, when running EDHOC with that other peer.
 
-Such means are an EDHOC EAD item (see {{sec-app-profile-edhoc-message_1_2}}) and EDHOC error message with a dedicated error code (see {{sec-app-profile-edhoc-error-message}}).
+Such means are an EDHOC EAD item (see {{sec-app-profile-edhoc-message_1_2}}) and an EDHOC error message with a dedicated error code (see {{sec-app-profile-edhoc-error-message}}).
 
 ## In EDHOC Message 1 and Message 2 # {#sec-app-profile-edhoc-message_1_2}
 
