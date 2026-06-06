@@ -706,7 +706,7 @@ Table of Contents
    order to advertise the EDHOC application profiles that it supports to
    another EDHOC peer, when running EDHOC with that other peer.
 
-   Such means are an EDHOC EAD item (see Section 5.1) and EDHOC error
+   Such means are an EDHOC EAD item (see Section 5.1) and an EDHOC error
    message with a dedicated error code (see Section 5.2).
 
 5.1.  In EDHOC Message 1 and Message 2
