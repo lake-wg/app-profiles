@@ -2078,8 +2078,8 @@ Table of Contents
 11.2.  CoAP Content-Formats Registry
 
    IANA is asked to add the following entry to the "CoAP Content-
-   Formats" registry within the "Constrained RESTful Environments (CoRE)
-   Parameters" registry group.
+   Formats" registry [CoAP.Content.Formats] within the "Constrained
+   RESTful Environments (CoRE) Parameters" registry group.
 
    Content Type: application/edhoc-app-profile+cbor-seq
 
@@ -2092,8 +2092,8 @@ Table of Contents
 11.3.  Target Attributes Registry
 
    IANA is asked to register the following entries in the "Target
-   Attributes" registry within the "Constrained RESTful Environments
-   (CoRE) Parameters", as per [RFC9423].
+   Attributes" registry [Target.Attributes] within the "Constrained
+   RESTful Environments (CoRE) Parameters" registry group.
 
    *  Attribute Name: ed-prof
 
@@ -2178,7 +2178,9 @@ Table of Contents
 11.4.  EDHOC Information Registry
 
    IANA is asked to register the following entries in the "EDHOC
-   Information" registry defined in [I-D.ietf-ace-edhoc-oscore-profile].
+   Information" registry defined in [I-D.ietf-ace-edhoc-oscore-profile]
+   within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry
+   group.
 
    *  Name: exporter_out_len
 
@@ -2214,8 +2216,9 @@ Table of Contents
 11.5.  EDHOC External Authorization Data Registry
 
    IANA is asked to register the following entry in the "EDHOC External
-   Authorization Data" registry within the "Ephemeral Diffie-Hellman
-   Over COSE (EDHOC)" registry group defined in [RFC9528].
+   Authorization Data" registry [EDHOC.External.Authorization.Data]
+   within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry
+   group.
 
    *  Name: Supported EDHOC application profiles
 
@@ -2228,8 +2231,8 @@ Table of Contents
 11.6.  EDHOC Error Codes Registry
 
    IANA is asked to register the following entry in the "EDHOC Error
-   Codes" registry within the "Ephemeral Diffie-Hellman Over COSE
-   (EDHOC)" registry group defined in [RFC9528].
+   Codes" registry [EDHOC.Error.Codes] within the "Ephemeral Diffie-
+   Hellman Over COSE (EDHOC)" registry group.
 
    *  ERR_CODE: TBD_ERROR_CODE (range -24 to 23)
 
@@ -2244,9 +2247,8 @@ Table of Contents
 11.7.  DNS SVCB Service Parameter Keys (SvcParamKeys)
 
    IANA is asked to add the following entries to the "DNS SVCB Service
-   Parameter Keys (SvcParamKeys)" registry within the "DNS Service
-   Bindings (SVCB)" registry group.  The definition of these parameters
-   can be found in Section 6.
+   Parameter Keys (SvcParamKeys)" registry [DNS.SVCB.SvcParamKeys]
+   within the "DNS Service Bindings (SVCB)" registry group.
 
    *  Number: 11 (suggested)
 
@@ -2360,10 +2362,30 @@ Table of Contents
 
 12.1.  Normative References
 
+   [CoAP.Content.Formats]
+              IANA, "CoAP Content-Formats",
+              <https://www.iana.org/assignments/core-parameters/core-
+              parameters.xhtml#content-formats>.
+
+   [DNS.SVCB.SvcParamKeys]
+              IANA, "DNS SVCB Service Parameter Keys (SvcParamKeys)",
+              <https://www.iana.org/assignments/dns-svcb/dns-
+              svcb.xhtml#dns-svcparamkeys>.
+
+   [EDHOC.Error.Codes]
+              IANA, "EDHOC Error Codes",
+              <https://www.iana.org/assignments/edhoc/edhoc.xhtml#edhoc-
+              error-codes>.
+
    [EDHOC.Exporter.Labels]
               IANA, "EDHOC Exporter Labels",
               <https://www.iana.org/assignments/edhoc/edhoc.xhtml#edhoc-
               exporter-labels>.
+
+   [EDHOC.External.Authorization.Data]
+              IANA, "EDHOC External Authorization Data",
+              <https://www.iana.org/assignments/edhoc/edhoc.xhtml#edhoc-
+              ead>.
 
    [I-D.ietf-ace-edhoc-oscore-profile]
               Selander, G., Mattsson, J. P., Tiloca, M., and R. Höglund,
@@ -2486,6 +2508,11 @@ Table of Contents
               (OSCORE)", RFC 9668, DOI 10.17487/RFC9668, November 2024,
               <https://www.rfc-editor.org/rfc/rfc9668>.
 
+   [Target.Attributes]
+              IANA, "Target Attributes",
+              <https://www.iana.org/assignments/core-parameters/core-
+              parameters.xhtml#target-attributes>.
+
 12.2.  Informative References
 
    [I-D.serafin-lake-ta-hint]
@@ -2512,11 +2539,6 @@ Table of Contents
               P. van der Stok, "Constrained RESTful Environments (CoRE)
               Resource Directory", RFC 9176, DOI 10.17487/RFC9176, April
               2022, <https://www.rfc-editor.org/rfc/rfc9176>.
-
-   [RFC9423]  Bormann, C., "Constrained RESTful Environments (CoRE)
-              Target Attributes Registry", RFC 9423,
-              DOI 10.17487/RFC9423, April 2024,
-              <https://www.rfc-editor.org/rfc/rfc9423>.
 
    [RFC9529]  Selander, G., Preuß Mattsson, J., Serafin, M., Tiloca, M.,
               and M. Vučinić, "Traces of Ephemeral Diffie-Hellman Over
@@ -2570,6 +2592,8 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -04 to -05
+
+   *  Added references to IANA registries.
 
    *  Editorial fixes and improvements.
 
