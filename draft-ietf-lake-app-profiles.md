@@ -1095,7 +1095,7 @@ Required parameters: N/A
 
 Optional parameters: N/A
 
-Encoding considerations: Must be encoded as a CBOR sequence {{RFC8742}} of CBOR maps {{RFC8949}}. Each element of each CBOR map is also defined as an element of the CBOR-encoded EDHOC_Information object from {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
+Encoding considerations: Must be encoded as a CBOR sequence {{RFC8742}} of CBOR maps {{RFC8949}}. Each of the CBOR maps is an EDHOC_Application_Profile object (see {{sec-app-profile-cbor}} of {{&SELF}}). Each element of each CBOR map is also defined as an element of the CBOR-encoded EDHOC_Information object from {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
 
 Security considerations: See {{sec-security-considerations}} of {{&SELF}}.
 
@@ -1103,7 +1103,7 @@ Interoperability considerations: N/A
 
 Published specification: {{&SELF}}
 
-Applications that use this media type: Applications that need to describe, distribute, and store a representation of an EDHOC application profile (see {{&SELF}} and {{Section 3.9 of RFC9528}}).
+Applications that use this media type: Applications that need to describe, distribute, and store a representation of an EDHOC application profile (see {{sec-app-profile-cbor}} of {{&SELF}} and {{Section 3.9 of RFC9528}}).
 
 Fragment identifier considerations: N/A
 
@@ -1227,7 +1227,7 @@ IANA is asked to register the following entry in the "EDHOC Error Codes" registr
 
 IANA is asked to add the following entries to the "DNS SVCB Service Parameter Keys (SvcParamKeys)" registry {{DNS.SVCB.SvcParamKeys}} within the "DNS Service Bindings (SVCB)" registry group.
 
-* Number: 11 (suggested)
+* Number: 12 (suggested)
 * Name: edhocpath
 * Meaning: EDHOC resource path
 * Change Controller: IETF
@@ -1235,7 +1235,7 @@ IANA is asked to add the following entries to the "DNS SVCB Service Parameter Ke
 
 <br>
 
-* Number: 12 (suggested)
+* Number: 13 (suggested)
 * Name: edhoc-app-prof
 * Meaning: Supported EDHOC application profiles
 * Change Controller: IETF
@@ -1324,7 +1324,13 @@ c509_cert = 3
 
 ## Version -04 to -05 ## {#sec-04-05}
 
-* Added references to IANA registries.
+* IANA considerations:
+
+  * Added references to IANA registries.
+
+  * More details in the media type registration.
+
+  * Proposed codepoints picked up among unassigned ones.
 
 * Editorial fixes and improvements.
 
