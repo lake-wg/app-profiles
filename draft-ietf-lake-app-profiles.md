@@ -112,9 +112,9 @@ Ephemeral Diffie-Hellman Over COSE (EDHOC) {{RFC9528}} is a lightweight authenti
 
 In order to successfully run EDHOC, the two peers acting as Initiator and Responder have to agree on certain parameters. Some of those are in-band and communicated through the protocol execution, during which a few of them may even be negotiated. However, other parameters have to be known out-of-band, before running the EDHOC protocol.
 
-As discussed in {{Section 3.9 of RFC9528}}, applications can use EDHOC application profiles, which specify the intended usage of EDHOC to allow for the relevant processing and verifications to be made. In particular, an EDHOC application profile may include both in-band and out-of-band parameters.
+As discussed in {{Section 3.9 of RFC9528}}, applications can use EDHOC application profiles, which specify the intended usage of EDHOC to allow for the relevant processing and verifications to be made. An EDHOC application profile may include both in-band and out-of-band parameters.
 
-In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document also defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see {{sec-app-profile-cbor}}). The defined representation is transport- and setup-independent, and it avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.
+In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see {{sec-app-profile-cbor}}). The defined representation is transport- and setup-independent, and it avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.
 
 The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.
 
@@ -288,7 +288,7 @@ If the EDHOC_Information object specified as the value of the parameter/claim "e
 
     For example, the parameter "session_id" is not allowed in the EDHOC\_Application\_Profile object (see {{sec-app-profile-cbor}}) and thus can be included in the EDHOC_Information object, where in fact it has to be present (see {{Sections 3.3 and 3.3.1 of I-D.ietf-ace-edhoc-oscore-profile}}).
 
-  C and RS MUST ignore other parameters that are not admitted if they are present in the EDHOC_Information object.
+  C and RS MUST ignore other parameters that are not admitted, in the case that they are present in the EDHOC_Information object.
 
 * The object might provide an information that corresponds to an EDHOC_Information prescriptive parameter (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4". The type of a parameter is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
 
@@ -350,7 +350,7 @@ RES: 2.05 Content
 
 The rest of this section defines means that an EDHOC peer can use in order to advertise the EDHOC application profiles that it supports to another EDHOC peer, when running EDHOC with that other peer.
 
-Such means are an EDHOC EAD item (see {{sec-app-profile-edhoc-message_1_2}}) and an error code for the EDHOC error message (see {{sec-app-profile-edhoc-error-message}}).
+Such means are an EDHOC EAD item (see {{sec-app-profile-edhoc-message_1_2}}) and EDHOC error message with a dedicated error code (see {{sec-app-profile-edhoc-error-message}}).
 
 ## In EDHOC Message 1 and Message 2 # {#sec-app-profile-edhoc-message_1_2}
 
@@ -473,7 +473,7 @@ If ead_value specifies such an information multiple times, then each occurrence 
 
 If the Responder has received the EAD item in the EAD_1 field of EDHOC message_1 and intends to include the EAD item in the EAD_2 field of EDHOC message_2, then the Responder MUST further take into account the presence of such information in the received EAD item when composing ead_value.
 
-A consumer MUST treat as malformed an EDHOC_Information object that does not comply with the restrictions above.
+A consumer MUST treat as malformed an EAD item "Supported EDHOC application profiles" whose ead_value does not comply with the restrictions above.
 
 ### Agreeing on EDHOC_Exporter Output Lengths ## {#exporter-out-length}
 
@@ -560,11 +560,11 @@ The CBOR sequence APP_PROF_SEQ includes the following three elements:
 
 * An element EDHOC_Information, which in turn includes the following parameters:
 
-  * "message_4", encoded as the CBOR simple value `true` (0xf5), hence indicating that EDHOC meessage_4 is expected in the current EDHOC session.
+  * "message_4", with value the CBOR simple value `true` (0xf5), hence indicating that EDHOC meessage_4 is expected in the current EDHOC session.
 
-  * "eads", encoded as a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 333 of the corresponding EAD items supported by the Initiator.
+  * "eads", with value a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 333 of the corresponding EAD items supported by the Initiator.
 
-  * "trust_anchors", encoded as a CBOR map. The map includes a single element with value a CBOR array, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
+  * "trust_anchors", with value a CBOR map. The map includes a single element with value a CBOR array, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
 
     In turn, the array includes two CBOR maps. Within the first CBOR map, its entry's value is a CBOR byte string that encodes 0x00ac. Within the second CBOR map, its entry's value is a CBOR byte string that encodes 0xff01ff. Both 0x00ac and 0xff01ff are binary key identifiers of trust anchors supported by the Initiator in the current EDHOC session.
 
@@ -595,11 +595,11 @@ The CBOR sequence APP_PROF_SEQ includes the following two elements:
 
 * An element EDHOC_Information, which in turn includes the following parameters:
 
-  * "comb_req", encoded as the CBOR simple value `true` (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in {{RFC9668}}.
+  * "comb_req", with value the CBOR simple value `true` (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in {{RFC9668}}.
 
-  * "eads", encoded as a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 999 of the corresponding EAD items supported by the Responder.
+  * "eads", with value a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 999 of the corresponding EAD items supported by the Responder.
 
-  * "trust_anchors", encoded as a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
+  * "trust_anchors", with value a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
 
     Within the inner map, its entry's value is a CBOR byte string that encodes 0x91ab, i.e., the binary key identifier of a trust anchor supported by the Responder in the current EDHOC session.
 
@@ -643,11 +643,11 @@ The CBOR sequence APP_PROF_SEQ includes the following two elements:
 
 * An element EDHOC_Information, which in turn includes the following parameters:
 
-  * "comb_req", encoded as the CBOR simple value `true` (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in {{RFC9668}}.
+  * "comb_req", with value the CBOR simple value `true` (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in {{RFC9668}}.
 
-  * "eads", encoded as a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 777 of the corresponding EAD items supported by the Responder.
+  * "eads", with value a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 777 of the corresponding EAD items supported by the Responder.
 
-  * "trust_anchors", encoded as a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
+  * "trust_anchors", with value a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.
 
     Within the inner map, its entry's value is a COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the Responder supports as a trust anchor when running EDHOC.
 
@@ -801,7 +801,7 @@ In the example, two URI paths are specified, i.e., one for the EDHOC resource at
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-example-svcb-edhocpath title="Example of Wire-Format Value of the SvcParamKey \"edhocpath\" within an SVCB RR"}
 
-{{fig-example-svcb-edhoc-app-prof}} shows an example of the SvcParamKey "edhoc-app-prof", with reference to the CDDL grammar in {{fig-cddl-edhoc-app-prof-value}}. In particular, the following applies.
+Assuming an SVCB RR that includes the SvcParamKey "edhocpath" shown in {{fig-example-svcb-edhocpath}}, the following {{fig-example-svcb-edhoc-app-prof}} shows an example of the SvcParamKey "edhoc-app-prof" within the same SVCB RR, with reference to the CDDL grammar in {{fig-cddl-edhoc-app-prof-value}}. In particular, the following applies.
 
 The CBOR data item advertise_flag is present and encodes the CBOR simple value `true` (0xf5), hence indicating that a peer that runs EDHOC with the server is encouraged to advertise the EDHOC application profiles that it supports, when sending to the server its first EDHOC message in an EDHOC session.
 
@@ -1035,7 +1035,7 @@ From the perspective of an individual network operator, this knowledge can be us
 
 Multiple, cooperating network operators could build an aggregated knowledge that indicates broad "trends" about EDHOC application profiles and their use. This raises awareness of what appears to be most supported and preferred by EDHOC peers, which can influence priority decisions about the development and use of EDHOC implementations, as well as the operations of infrastructures for provisioning and validating public authentication credentials.
 
-As noted in {{sec-well-known-app-profiles}}, well-known EDHOC application profiles are not meant to be default profiles to use, and they are not meant to deviate from the EDHOC compliance requirements compiled in {{Section 8 of RFC9528}}. Instead, they are meant to reflect what is most common and expected to be supported by EDHOC peers. Hence, developing aggregated knowledge on typical uses of EDHOC can help identifying EDHOC application profiles that have become de facto well-known, thereby further accelerating their adoption.
+As noted in {{sec-well-known-app-profiles}}, well-known EDHOC application profiles are not meant to be default profiles to use, and they are not meant to deviate from the EDHOC compliance requirements compiled in {{Section 8 of RFC9528}}. Instead, they are meant to reflect what is most common and expected to be supported by EDHOC peers. Hence, developing aggregated knowledge on typical uses of EDHOC can help identify EDHOC application profiles that have become de facto well-known, thereby further accelerating their adoption.
 
 ## Logging and Reporting
 
@@ -1073,9 +1073,9 @@ Different security guarantees can be achieved about the acquired information on 
 
 In case information about EDHOC application profiles supported by a peer is distributed in an unprotected way (e.g., through unsecured communication), a consumer should treat such information as a hint.
 
-If the acquired information has been tampered with and does not reflect what a given peer supports and intends to advertise, this can set wrong expectations about what is effectively possible to do when running EDHOC with that peer. Although this can still result in successfully running EDHOC with a configuration that is commonly supported, such configuration would probably not have been selected, had reliable information been acquired. In the worst case, there might be the erroneous belief that there is not sufficient shared support with that peer.
+If the acquired information has been tampered with and does not reflect what a given peer supports and intends to advertise, this can set wrong expectations about what is effectively possible to do when running EDHOC with that peer. Although this can still result in successfully running EDHOC with a configuration that is commonly supported, such configuration would probably not have been selected, had reliable and authentic information been acquired. In the worst case, there might be the erroneous belief that there is not sufficient shared support with that peer.
 
-What is discussed above does not have an impact on the security of the EDHOC protocol in itself. That is, even when the available information about supported EDHOC application profiles is not guaranteed to be reliable, the successful completion of an EDHOC session still provides the security guarantees that are expected as per the way the session was run (e.g., based on the selected cipher suite and EDHOC method used).
+What is discussed above does not have an impact on the security of the EDHOC protocol in itself. That is, even when the available information about supported EDHOC application profiles is not guaranteed to be reliable and authentic, the successful completion of an EDHOC session still provides the security guarantees that are expected as per the way the session was run (e.g., based on the selected cipher suite and EDHOC method used).
 
 # IANA Considerations
 
