@@ -58,13 +58,42 @@ normative:
     date: false
     title: EDHOC Exporter Labels
     target: https://www.iana.org/assignments/edhoc/edhoc.xhtml#edhoc-exporter-labels
+  CoAP.Content.Formats:
+    author:
+      org: IANA
+    date: false
+    title: CoAP Content-Formats
+    target: https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#content-formats
+  Target.Attributes:
+    author:
+      org: IANA
+    date: false
+    title: Target Attributes
+    target: https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#target-attributes
+  EDHOC.External.Authorization.Data:
+    author:
+      org: IANA
+    date: false
+    title: EDHOC External Authorization Data
+    target: https://www.iana.org/assignments/edhoc/edhoc.xhtml#edhoc-ead
+  EDHOC.Error.Codes:
+    author:
+      org: IANA
+    date: false
+    title: EDHOC Error Codes
+    target: https://www.iana.org/assignments/edhoc/edhoc.xhtml#edhoc-error-codes
+  DNS.SVCB.SvcParamKeys:
+    author:
+      org: IANA
+    date: false
+    title: DNS SVCB Service Parameter Keys (SvcParamKeys)
+    target: https://www.iana.org/assignments/dns-svcb/dns-svcb.xhtml#dns-svcparamkeys
 
 informative:
   RFC3492:
   RFC3833:
   RFC9076:
   RFC9176:
-  RFC9423:
   RFC9529:
   I-D.serafin-lake-ta-hint:
 
@@ -1092,7 +1121,7 @@ Provisional registration: No
 
 ## CoAP Content-Formats Registry {#iana-content-format}
 
-IANA is asked to add the following entry to the "CoAP Content-Formats" registry within the "Constrained RESTful Environments (CoRE) Parameters" registry group.
+IANA is asked to add the following entry to the "CoAP Content-Formats" registry {{CoAP.Content.Formats}} within the "Constrained RESTful Environments (CoRE) Parameters" registry group.
 
 Content Type: application/edhoc-app-profile+cbor-seq
 
@@ -1104,7 +1133,7 @@ Reference: {{&SELF}}
 
 ## Target Attributes Registry ## {#iana-target-attributes}
 
-IANA is asked to register the following entries in the "Target Attributes" registry within the "Constrained RESTful Environments (CoRE) Parameters", as per {{RFC9423}}.
+IANA is asked to register the following entries in the "Target Attributes" registry {{Target.Attributes}} within the "Constrained RESTful Environments (CoRE) Parameters" registry group.
 
 * Attribute Name: ed-prof
 * Brief Description: A supported EDHOC application profile
@@ -1155,7 +1184,7 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 
 ## EDHOC Information Registry ## {#iana-edhoc-information-registry}
 
-IANA is asked to register the following entries in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
+IANA is asked to register the following entries in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}} within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group.
 
 * Name: exporter_out_len
 * CBOR label: 22 (suggested)
@@ -1177,7 +1206,7 @@ IANA is asked to register the following entries in the "EDHOC Information" regis
 
 ## EDHOC External Authorization Data Registry ## {#iana-edhoc-ead-registry}
 
-IANA is asked to register the following entry in the "EDHOC External Authorization Data" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group defined in {{RFC9528}}.
+IANA is asked to register the following entry in the "EDHOC External Authorization Data" registry {{EDHOC.External.Authorization.Data}} within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group.
 
 * Name: Supported EDHOC application profiles
 * Label: TBD_EAD_LABEL (range 0-23)
@@ -1186,7 +1215,7 @@ IANA is asked to register the following entry in the "EDHOC External Authorizati
 
 ## EDHOC Error Codes Registry ## {#iana-edhoc-error-codes-registry}
 
-IANA is asked to register the following entry in the "EDHOC Error Codes" registry within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group defined in {{RFC9528}}.
+IANA is asked to register the following entry in the "EDHOC Error Codes" registry {{EDHOC.Error.Codes}} within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group.
 
 * ERR_CODE: TBD_ERROR_CODE (range -24 to 23)
 * ERR_INFO Type: app_profiles
@@ -1196,7 +1225,7 @@ IANA is asked to register the following entry in the "EDHOC Error Codes" registr
 
 ## DNS SVCB Service Parameter Keys (SvcParamKeys) ## {#iana-svcb}
 
-IANA is asked to add the following entries to the "DNS SVCB Service Parameter Keys (SvcParamKeys)" registry within the "DNS Service Bindings (SVCB)" registry group. The definition of these parameters can be found in {{sec-svcb}}.
+IANA is asked to add the following entries to the "DNS SVCB Service Parameter Keys (SvcParamKeys)" registry {{DNS.SVCB.SvcParamKeys}} within the "DNS Service Bindings (SVCB)" registry group.
 
 * Number: 11 (suggested)
 * Name: edhocpath
@@ -1294,6 +1323,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -04 to -05 ## {#sec-04-05}
+
+* Added references to IANA registries.
 
 * Editorial fixes and improvements.
 
