@@ -1288,10 +1288,14 @@ x5t_ta_type = 34
 ; EDHOC Authentication Credential Types
 c509_cert = 3
 ~~~~~~~~~~~~~~~~~~~~
-{: #fig-cddl-model title="CDDL model" artwork-align="left"}
+{: #fig-cddl-model title="CDDL model"}
 
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
+
+## Version -04 to -05 ## {#sec-04-05}
+
+* Editorial fixes and improvements.
 
 ## Version -03 to -04 ## {#sec-03-04}
 
