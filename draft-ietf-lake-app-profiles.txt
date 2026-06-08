@@ -725,6 +725,20 @@ Table of Contents
    Such means are an EDHOC EAD item (see Section 5.1) and an EDHOC error
    message with a dedicated error code (see Section 5.2).
 
+   Differently from the discovery mechanisms defined in Section 4 and
+   Section 6, these means display a number of benefits:
+
+   *  Since EAD fields and the EDHOC error message are a core feature of
+      EDHOC, supporting the new EAD item and the new error code is the
+      only prerequisite for their use.
+
+   *  They allow an EDHOC peer to advertise what it supports even if it
+      is a client-only peer.
+
+   *  They allow an EDHOC peer to advertise what it supports and prefers
+      in the context of a specific EDHOC session and in the light of its
+      current status, instead of only in fixed and broad terms.
+
 5.1.  In EDHOC Message 1 and Message 2
 
    This section defines the EDHOC EAD item "Supported EDHOC application
@@ -2619,6 +2633,8 @@ B.1.  Version -04 to -05
 
       -  Purpose of "app_prof" in the EDHOC_Application_Profile object
          and in the EDHOC_Information object.
+
+      -  Motivation and benefits of the new EAD item and error code.
 
    *  IANA considerations:
 

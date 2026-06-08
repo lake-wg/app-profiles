@@ -1685,6 +1685,18 @@ RES: 2.05 Content
       </h2>
 <p id="section-5-1">The rest of this section defines means that an EDHOC peer can use in order to advertise the EDHOC application profiles that it supports to another EDHOC peer, when running EDHOC with that other peer.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Such means are an EDHOC EAD item (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>) and an EDHOC error message with a dedicated error code (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>).<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">Differently from the discovery mechanisms defined in <a href="#sec-parameters-web-linking" class="auto internal xref">Section 4</a> and <a href="#sec-svcb" class="auto internal xref">Section 6</a>, these means display a number of benefits:<a href="#section-5-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5-4.1">
+          <p id="section-5-4.1.1">Since EAD fields and the EDHOC error message are a core feature of EDHOC, supporting the new EAD item and the new error code is the only prerequisite for their use.<a href="#section-5-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-4.2">
+          <p id="section-5-4.2.1">They allow an EDHOC peer to advertise what it supports even if it is a client-only peer.<a href="#section-5-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-4.3">
+          <p id="section-5-4.3.1">They allow an EDHOC peer to advertise what it supports and prefers in the context of a specific EDHOC session and in the light of its current status, instead of only in fixed and broad terms.<a href="#section-5-4.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 <div id="sec-app-profile-edhoc-message_1_2">
 <section id="section-5.1">
         <h3 id="name-in-edhoc-message-1-and-mess">
@@ -3301,6 +3313,9 @@ c509_cert = 3
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1.2.1">
                 <p id="appendix-B.1-1.1.2.1.1">Purpose of "app_prof" in the EDHOC_Application_Profile object and in the EDHOC_Information object.<a href="#appendix-B.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.1.2.2">
+                <p id="appendix-B.1-1.1.2.2.1">Motivation and benefits of the new EAD item and error code.<a href="#appendix-B.1-1.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
