@@ -193,9 +193,13 @@ Table of Contents
 
    *  The new parameter "app_prof" defined in Section 3.2 for the
       EDHOC_Information object specified in
-      [I-D.ietf-ace-edhoc-oscore-profile].  This parameter is employed
-      to specify a set of EDHOC application profiles, each identified by
-      its Profile ID.
+      [I-D.ietf-ace-edhoc-oscore-profile].  When present within an
+      instance of the EDHOC_Information object, this parameter
+      identifies one or more EDHOC application profiles that are
+      supported under the concrete circumstance where the
+      EDHOC_Information object is used.  In particular, this parameter
+      identifies each EDHOC application profile by means of the
+      corresponding Profile ID.
 
       For instance, the parameter can be used in the EDHOC and OSCORE
       profile [I-D.ietf-ace-edhoc-oscore-profile] of the ACE framework
@@ -204,9 +208,11 @@ Table of Contents
       profiles supported by an ACE resource server.
 
       This parameter is also used in the EDHOC_Application_Profile
-      object defined in this document, in order to encode the Profile ID
-      of the EDHOC application profile described by an instance of that
-      object.
+      object defined in Section 2 of this document.  That is, given an
+      instance of the EDHOC_Application_Profile object, the parameter
+      "app_prof" included therein specifies the Profile ID of the EDHOC
+      application profile that is described by the instance of the
+      object in question.
 
    *  Additional parameters that provide information about an EDHOC
       application profile.  These parameters correspond to elements of
@@ -290,12 +296,14 @@ Table of Contents
    document, as well as the elements "methods" and "cred_types" defined
    in Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile].
 
-   The value of the element "app_prof" is the unique identifier of the
-   EDHOC application profile described by the instance of the
-   EDHOC_Application_Profile object in question.  The identifier is
-   taken from the 'Profile ID' column of the "EDHOC Application
-   Profiles" registry defined in this document and encoded as a CBOR
-   integer.
+   Within the CBOR map, the element "app_prof" is encoded as a CBOR
+   integer and identifies the EDHOC application profile being defined by
+   the instance of the EDHOC_Application_Profile object in question.
+   That is, the value of the element "app_prof" encodes the unique
+   integer identifier of the EDHOC application profile described by the
+   instance of the object in question.  The identifier is taken from the
+   'Profile ID' column of the "EDHOC Application Profiles" registry
+   defined in this document.
 
    The CBOR map MUST NOT include the following elements: "session_id",
    "uri_path", "initiator", "responder", and "trust_anchors".  Also, the
@@ -494,6 +502,14 @@ Table of Contents
       integers, and it has label 23.  The integer values are taken from
       the 'Profile ID' column of the "EDHOC Application Profiles"
       registry defined in Section 11.8 of this document.
+
+   When present within an instance of the EDHOC_Information object, the
+   parameter "app_prof" identifies one or more EDHOC application
+   profiles that are supported under the concrete circumstance where the
+   object is used.  Section 3.2.1 describes the use of the parameter
+   "app_prof" within an instance of the EDHOC_Information object, when
+   using the EDHOC and OSCORE profile of the ACE Framework
+   [I-D.ietf-ace-edhoc-oscore-profile].
 
    The CDDL grammar describing the parameter "app_prof" when included in
    the CBOR-encoded EDHOC_Information object is:
@@ -2598,6 +2614,11 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -04 to -05
+
+   *  Clarifications:
+
+      -  Purpose of "app_prof" in the EDHOC_Application_Profile object
+         and in the EDHOC_Information object.
 
    *  IANA considerations:
 
