@@ -560,7 +560,7 @@ The CBOR sequence APP_PROF_SEQ includes the following three elements:
 
 * An element EDHOC_Information, which in turn includes the following parameters:
 
-  * "message_4", with value the CBOR simple value `true` (0xf5), hence indicating that EDHOC meessage_4 is expected in the current EDHOC session.
+  * "message_4", with value the CBOR simple value `true` (0xf5), hence indicating that EDHOC message_4 is expected in the current EDHOC session.
 
   * "eads", with value a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 333 of the corresponding EAD items supported by the Initiator.
 
@@ -1023,7 +1023,7 @@ This section compiles the operational considerations that hold for this document
 
 ## Relation with Network Operations
 
-The means defined in this document are largely about aiding peers in running the EDHOC protocol by achieving a common understanding of what they support, thereby facilitating interoperability between EDHOC implementations. Such coordination is expected to keep authenticate key exchange through EDHOC a smooth process in itself and with respect to network operation and management.
+The means defined in this document are largely about aiding peers in running the EDHOC protocol by achieving a common understanding of what they support, thereby facilitating interoperability between EDHOC implementations. Such coordination is expected to keep authenticated key exchange through EDHOC a smooth process in itself and with respect to network operation and management.
 
 The use of these coordinating means in itself is not expected to have a notable impact on performance and network operations, and it is embedded within other relevant network protocols and components such as: the discovery of resources through web-linking {{RFC8288}} and CoRE Link Format {{RFC6690}} (see {{web-linking}} and {{sec-parameters-web-linking}}); the execution of the EDHOC protocol itself (see {{sec-app-profile-edhoc-messages}}); and the discovery of server-related information via DNS SVCB RR {{RFC9460}}{{RFC9461}} (see {{sec-svcb}}).
 
