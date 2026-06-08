@@ -354,6 +354,14 @@ The rest of this section defines means that an EDHOC peer can use in order to ad
 
 Such means are an EDHOC EAD item (see {{sec-app-profile-edhoc-message_1_2}}) and an EDHOC error message with a dedicated error code (see {{sec-app-profile-edhoc-error-message}}).
 
+Differently from the discovery mechanisms defined in {{sec-parameters-web-linking}} and {{sec-svcb}}, these means display a number of benefits:
+
+* Since EAD fields and the EDHOC error message are a core feature of EDHOC, supporting the new EAD item and the new error code is the only prerequisite for their use.
+
+* They allow an EDHOC peer to advertise what it supports even if it is a client-only peer.
+
+* They allow an EDHOC peer to advertise what it supports and prefers in the context of a specific EDHOC session and in the light of its current status, instead of only in fixed and broad terms.
+
 ## In EDHOC Message 1 and Message 2 # {#sec-app-profile-edhoc-message_1_2}
 
 This section defines the EDHOC EAD item "Supported EDHOC application profiles", which is registered in {{iana-edhoc-ead-registry}} of this document.
@@ -1329,6 +1337,8 @@ c509_cert = 3
 * Clarifications:
 
   * Purpose of "app_prof" in the EDHOC_Application_Profile object and in the EDHOC_Information object.
+
+  * Motivation and benefits of the new EAD item and error code.
 
 * IANA considerations:
 
