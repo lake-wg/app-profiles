@@ -126,11 +126,11 @@ Furthermore, in order to facilitate interoperability between EDHOC implementatio
 
   For instance, the target attribute can be used in a CoRE link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over the Constrained Application Protocol (CoAP) {{RFC7252}} (see {{Section A.2 of RFC9528}} as well as {{RFC9668}}).
 
-* The new parameter "app_prof" defined in {{sec-edhoc-information-object}} for the EDHOC_Information object specified in {{I-D.ietf-ace-edhoc-oscore-profile}}. This parameter is employed to specify a set of EDHOC application profiles, each identified by its Profile ID.
+* The new parameter "app_prof" defined in {{sec-edhoc-information-object}} for the EDHOC_Information object specified in {{I-D.ietf-ace-edhoc-oscore-profile}}. When present within an instance of the EDHOC_Information object, this parameter identifies one or more EDHOC application profiles that are supported under the concrete circumstance where the EDHOC_Information object is used. In particular, this parameter identifies each EDHOC application profile by means of the corresponding Profile ID.
 
   For instance, the parameter can be used in the EDHOC and OSCORE profile {{I-D.ietf-ace-edhoc-oscore-profile}} of the ACE framework for authentication and authorization in constrained environments (ACE) {{RFC9200}}, in order to indicate the EDHOC application profiles supported by an ACE resource server.
 
-  This parameter is also used in the EDHOC_Application_Profile object defined in this document, in order to encode the Profile ID of the EDHOC application profile described by an instance of that object.
+  This parameter is also used in the EDHOC_Application_Profile object defined in {{sec-app-profile-cbor}} of this document. That is, given an instance of the EDHOC_Application_Profile object, the parameter "app_prof" included therein specifies the Profile ID of the EDHOC application profile that is described by the instance of the object in question.
 
 * Additional parameters that provide information about an EDHOC application profile. These parameters correspond to elements of the EDHOC_Information object and are to be used as target attributes in a web link to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources (see {{sec-parameters-web-linking}}).
 
@@ -162,7 +162,7 @@ An EDHOC_Application_Profile object is encoded as a CBOR map {{RFC8949}}. All el
 
 The CBOR map encoding an EDHOC_Application_Profile object MUST include the element "app_prof" defined in {{sec-edhoc-information-object}} of this document, as well as the elements "methods" and "cred_types" defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
 
-The value of the element "app_prof" is the unique identifier of the EDHOC application profile described by the instance of the EDHOC_Application_Profile object in question. The identifier is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document and encoded as a CBOR integer.
+Within the CBOR map, the element "app_prof" is encoded as a CBOR integer and identifies the EDHOC application profile being defined by the instance of the EDHOC_Application_Profile object in question. That is, the value of the element "app_prof" encodes the unique integer identifier of the EDHOC application profile described by the instance of the object in question. The identifier is taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in this document.
 
 The CBOR map MUST NOT include the following elements: "session_id", "uri_path", "initiator", "responder", and "trust_anchors". Also, the CBOR map MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}} of this document. A consumer MUST ignore those elements if they are included in the EDHOC_Application_Profile object.
 
@@ -259,6 +259,8 @@ This document defines the new parameter "app\_prof" of the EDHOC_Information obj
 
 * app\_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app\_prof" value is an integer or an array of integers. In CBOR, "app\_prof" is an integer or an array of integers, and it has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
+When present within an instance of the EDHOC_Information object, the parameter "app_prof" identifies one or more EDHOC application profiles that are supported under the concrete circumstance where the object is used. {{sec-app-prof-in-edhoc-profile}} describes the use of the parameter "app_prof" within an instance of the EDHOC_Information object, when using the EDHOC and OSCORE profile of the ACE Framework {{I-D.ietf-ace-edhoc-oscore-profile}}.
+
 The CDDL grammar describing the parameter "app_prof" when included in the CBOR-encoded EDHOC_Information object is:
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
@@ -268,7 +270,7 @@ app_prof_parameter = (
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-app_prof title="CDDL Definition of the Parameter \"app_prof\" when Included in the CBOR-encoded EDHOC_Information Object."}
 
-### Use in the EDHOC and OSCORE Profile of the ACE Framework
+### Use in the EDHOC and OSCORE Profile of the ACE Framework # {#sec-app-prof-in-edhoc-profile}
 
 {{Section 3 of I-D.ietf-ace-edhoc-oscore-profile}} defines how the EDHOC_Information object can be used within the workflow of the EDHOC and OSCORE transport profile of the ACE framework for authentication and authorization in constrained environments (ACE) {{RFC9200}}.
 
@@ -1323,6 +1325,10 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -04 to -05 ## {#sec-04-05}
+
+* Clarifications:
+
+  * Purpose of "app_prof" in the EDHOC_Application_Profile object and in the EDHOC_Information object.
 
 * IANA considerations:
 
