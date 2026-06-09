@@ -196,10 +196,10 @@ The CDDL grammar describing the EDHOC_Application_Profile object is:
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
 EDHOC_Application_Profile = {
-      1 => int / array,    ; methods
-      6 => int / array,    ; cred_types
-     23 => int,            ; app_prof
-   * int / tstr => any
+      1 => int / [2* int],    ; methods
+      6 => int / [2* int],    ; cred_types
+     23 => int,               ; app_prof
+   * (int / tstr) => any
 }
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-edhoc_application-profile-object title="CDDL Definition of the EDHOC_Application_Profile object"}
@@ -477,7 +477,18 @@ profile_id_with_eads = [profile_id, 1* uint]
 
 ; The full definition is provided in
 ; draft-ietf-ace-edhoc-oscore-profile
-EDHOC_Information = map
+EDHOC_Information = { * $$EDHOC_Information_item } .within
+                    { * (int / tstr) => any }
+
+; exporter_out_len
+$$EDHOC_Information_item //= (
+  22: [1* [uint, uint]]
+)
+
+; app_prof
+$$EDHOC_Information_item //= (
+  23: profile_id / [2* profile_id]
+)
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-ead-value title="CDDL Definition of ead_value for the EAD Item \"Supported EDHOC application profiles\""}
 
@@ -1347,6 +1358,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -04 to -05 ## {#sec-04-05}
+
+* Fixed CDDL definitions of the EDHOC_Application_Profile object and of the ead_value for the new EAD Item.
 
 * Clarifications:
 
