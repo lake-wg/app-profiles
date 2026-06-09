@@ -2420,7 +2420,8 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.1-1" class="pilcrow">¶</a>
 </div>
-<p id="section-7.1-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">Section 3</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-2">This minimal application profile is suitable for EDHOC peers with very limited capabilities, as they benefit from efficiently using: non-signature keys for authentication with EDHOC method 3; EDHOC cipher suite 2, which is already expected to be supported; the compact credential type CBOR Web Token Claims Set (CCS) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> identified by reference with a compact "kid".<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">Section 3</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-well-known-app-prof-id-1">
@@ -2439,6 +2440,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.2-1" class="pilcrow">¶</a>
 </div>
+<p id="section-7.2-2">This minimal application profile is suitable for EDHOC peers with very limited capabilities, and it differs from the one in <a href="#sec-well-known-app-prof-id-0" class="auto internal xref">Section 7.1</a> only by indicating a different EDHOC cipher suite (0) from those intended for constrained environments.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-well-known-app-prof-id-2">
@@ -2458,7 +2460,8 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.3-1" class="pilcrow">¶</a>
 </div>
-<p id="section-7.3-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">Section 3</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">This basic application profile is suitable for EDHOC peers with fairly limited capabilities, which can afford using: signature keys or non-signature keys for authentication with EDHOC method 0 or 3; EDHOC cipher suite 2; the credential type CCS identified by reference with "kid", or X.509 certificates <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> identified by reference with "x5t".<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.3-3">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">Section 3</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-well-known-app-prof-id-3">
@@ -2478,7 +2481,8 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.4-1" class="pilcrow">¶</a>
 </div>
-<p id="section-7.4-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-2" class="relref">Section 2</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
+<p id="section-7.4-2">This basic application profile is suitable for EDHOC peers with fairly limited capabilities, and it differs from the one in <a href="#sec-well-known-app-prof-id-2" class="auto internal xref">Section 7.3</a> only by indicating a different EDHOC cipher suite (0) from those inteded for constrained environments.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
+<p id="section-7.4-3">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-2" class="relref">Section 2</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-well-known-app-prof-id-4">
@@ -2498,6 +2502,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.5-1" class="pilcrow">¶</a>
 </div>
+<p id="section-7.5-2">This basic application profile is suitable for EDHOC peers with fairly limited capabilities, and it differs from the one in <a href="#sec-well-known-app-prof-id-2" class="auto internal xref">Section 7.3</a> only by indicating support for C509 certificates <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span> identified by reference with "c5t", instead of X.509 certificates identified by reference with "x5t".<a href="#section-7.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-well-known-app-prof-id-5">
@@ -2517,6 +2522,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.6-1" class="pilcrow">¶</a>
 </div>
+<p id="section-7.6-2">This basic application profile is suitable for EDHOC peers with fairly limited capabilities, and it differs from the one in <a href="#sec-well-known-app-prof-id-3" class="auto internal xref">Section 7.4</a> only by indicating support for C509 certificates identified by reference with "c5t", instead of X.509 certificates identified by reference with "x5t".<a href="#section-7.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-well-known-app-prof-id-6">
@@ -2539,7 +2545,8 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.7-1" class="pilcrow">¶</a>
 </div>
-<p id="section-7.7-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">Section 3</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.7-2" class="pilcrow">¶</a></p>
+<p id="section-7.7-2">This intermediate application profile is suitable for EDHOC peers that, even if with somewhat limited capabilities, can afford a moderate set of options: signature keys or non-signature keys for authentication with EDHOC method 0 or 3; EDHOC cipher suite 2; the credential type CCS identified by reference with "kid" or by value with "kccs", or X.509 certificates identified by reference with "x5t" or by value with "x5chain", or C509 certificates identified by reference with "c5t" or by value with "c5c".<a href="#section-7.7-2" class="pilcrow">¶</a></p>
+<p id="section-7.7-3">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">Section 3</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-well-known-app-prof-id-7">
@@ -2562,7 +2569,8 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.8-1" class="pilcrow">¶</a>
 </div>
-<p id="section-7.8-2">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-2" class="relref">Section 2</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.8-2" class="pilcrow">¶</a></p>
+<p id="section-7.8-2">This intermediate application profile is suitable for EDHOC peers that, even if with somewhat limited capabilities, can afford a moderate set of options, and it differs from the one in <a href="#sec-well-known-app-prof-id-6" class="auto internal xref">Section 7.7</a> only by indicating a different EDHOC cipher suite (0) from those inteded for constrained environments.<a href="#section-7.8-2" class="pilcrow">¶</a></p>
+<p id="section-7.8-3">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-2" class="relref">Section 2</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.8-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-well-known-app-prof-id-8">
@@ -2590,7 +2598,8 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.9-1" class="pilcrow">¶</a>
 </div>
-<p id="section-7.9-2">This application profile is aligned with the example traces of EDHOC compiled in Sections <a href="https://rfc-editor.org/rfc/rfc9529#section-2" class="relref">2</a> and <a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">3</a> of <span>[<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.9-2" class="pilcrow">¶</a></p>
+<p id="section-7.9-2">This extensive application profile is suitable for EDHOC peers that, even if with somewhat limited capabilities, can afford an extensive set of options: all the four original EDHOC cipher suites intended for constrained environments; all the four original EDHOC authentication methods based on public key authentication; the credential type CCS identified by reference with "kid" or by value with "kccs", or CBOR Web Token (CWT) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> identified by reference with "kid" or by value with "kcwt", or X.509 certificates identified by reference with "x5t" or by value with "x5chain", or C509 certificates identified by reference with "c5t" or by value with "c5c".<a href="#section-7.9-2" class="pilcrow">¶</a></p>
+<p id="section-7.9-3">This application profile is aligned with the example traces of EDHOC compiled in Sections <a href="https://rfc-editor.org/rfc/rfc9529#section-2" class="relref">2</a> and <a href="https://rfc-editor.org/rfc/rfc9529#section-3" class="relref">3</a> of <span>[<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.9-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3185,6 +3194,10 @@ It is encouraged that DNS is used with secure communication. Known threats for u
         <dd>
 <span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Web Linking"</span>, <span class="seriesInfo">RFC 8288</span>, <span class="seriesInfo">DOI 10.17487/RFC8288</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8288">https://www.rfc-editor.org/rfc/rfc8288</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8392">[RFC8392]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8392">https://www.rfc-editor.org/rfc/rfc8392</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8610">[RFC8610]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Vigano, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures"</span>, <span class="seriesInfo">RFC 8610</span>, <span class="seriesInfo">DOI 10.17487/RFC8610</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8610">https://www.rfc-editor.org/rfc/rfc8610</a>&gt;</span>. </dd>
@@ -3353,6 +3366,9 @@ c509_cert = 3
 </li>
               <li class="normal" id="appendix-B.1-1.2.2.4">
                 <p id="appendix-B.1-1.2.2.4.1">Extraction of CDDL definitions from the XML, using an XPath expression.<a href="#appendix-B.1-1.2.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.2.2.5">
+                <p id="appendix-B.1-1.2.2.5.1">Short explanation of well-known profiles.<a href="#appendix-B.1-1.2.2.5.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>

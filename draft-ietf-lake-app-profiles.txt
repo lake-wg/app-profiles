@@ -1742,6 +1742,13 @@ Table of Contents
           e'app_prof' : e'APP-PROF-MINIMAL-CS-2'
    }
 
+   This minimal application profile is suitable for EDHOC peers with
+   very limited capabilities, as they benefit from efficiently using:
+   non-signature keys for authentication with EDHOC method 3; EDHOC
+   cipher suite 2, which is already expected to be supported; the
+   compact credential type CBOR Web Token Claims Set (CCS) [RFC8392]
+   identified by reference with a compact "kid".
+
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
 
@@ -1755,6 +1762,11 @@ Table of Contents
           e'app_prof' : e'APP-PROF-MINIMAL-CS-0'
    }
 
+   This minimal application profile is suitable for EDHOC peers with
+   very limited capabilities, and it differs from the one in Section 7.1
+   only by indicating a different EDHOC cipher suite (0) from those
+   intended for constrained environments.
+
 7.3.  Well-Known Application Profile BASIC-CS-2-X509
 
    {
@@ -1765,6 +1777,13 @@ Table of Contents
      e'id_cred_types' : [4, 34], / kid and x5t /
           e'app_prof' : e'APP-PROF-BASIC-CS-2-X509'
    }
+
+   This basic application profile is suitable for EDHOC peers with
+   fairly limited capabilities, which can afford using: signature keys
+   or non-signature keys for authentication with EDHOC method 0 or 3;
+   EDHOC cipher suite 2; the credential type CCS identified by reference
+   with "kid", or X.509 certificates [RFC5280] identified by reference
+   with "x5t".
 
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
@@ -1780,6 +1799,11 @@ Table of Contents
           e'app_prof' : e'APP-PROF-BASIC-CS-0-X509'
    }
 
+   This basic application profile is suitable for EDHOC peers with
+   fairly limited capabilities, and it differs from the one in
+   Section 7.3 only by indicating a different EDHOC cipher suite (0)
+   from those inteded for constrained environments.
+
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 2 of [RFC9529].
 
@@ -1794,6 +1818,12 @@ Table of Contents
           e'app_prof' : e'APP-PROF-BASIC-CS-2-C509'
    }
 
+   This basic application profile is suitable for EDHOC peers with
+   fairly limited capabilities, and it differs from the one in
+   Section 7.3 only by indicating support for C509 certificates
+   [I-D.ietf-cose-cbor-encoded-cert] identified by reference with "c5t",
+   instead of X.509 certificates identified by reference with "x5t".
+
 7.6.  Well-Known Application Profile BASIC-CS-0-C509
 
    {
@@ -1804,6 +1834,12 @@ Table of Contents
      e'id_cred_types' : [4, e'c5t'], / kid and c5t /
           e'app_prof' : e'APP-PROF-BASIC-CS-0-C509'
    }
+
+   This basic application profile is suitable for EDHOC peers with
+   fairly limited capabilities, and it differs from the one in
+   Section 7.4 only by indicating support for C509 certificates
+   identified by reference with "c5t", instead of X.509 certificates
+   identified by reference with "x5t".
 
 7.7.  Well-Known Application Profile INTERMEDIATE-CS-2
 
@@ -1818,6 +1854,15 @@ Table of Contents
                                                          c5t, and c5c /
           e'app_prof' : e'APP-PROF-INTERMEDIATE-CS-2'
    }
+
+   This intermediate application profile is suitable for EDHOC peers
+   that, even if with somewhat limited capabilities, can afford a
+   moderate set of options: signature keys or non-signature keys for
+   authentication with EDHOC method 0 or 3; EDHOC cipher suite 2; the
+   credential type CCS identified by reference with "kid" or by value
+   with "kccs", or X.509 certificates identified by reference with "x5t"
+   or by value with "x5chain", or C509 certificates identified by
+   reference with "c5t" or by value with "c5c".
 
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 3 of [RFC9529].
@@ -1835,6 +1880,12 @@ Table of Contents
                                                          c5t, and c5c /
           e'app_prof' : e'APP-PROF-INTERMEDIATE-CS-0'
    }
+
+   This intermediate application profile is suitable for EDHOC peers
+   that, even if with somewhat limited capabilities, can afford a
+   moderate set of options, and it differs from the one in Section 7.7
+   only by indicating a different EDHOC cipher suite (0) from those
+   inteded for constrained environments.
 
    This application profile is aligned with the example trace of EDHOC
    compiled in Section 2 of [RFC9529].
@@ -1857,6 +1908,18 @@ Table of Contents
                                                              c5c /
           e'app_prof' : e'APP-PROF-EXTENSIVE'
    }
+
+   This extensive application profile is suitable for EDHOC peers that,
+   even if with somewhat limited capabilities, can afford an extensive
+   set of options: all the four original EDHOC cipher suites intended
+   for constrained environments; all the four original EDHOC
+   authentication methods based on public key authentication; the
+   credential type CCS identified by reference with "kid" or by value
+   with "kccs", or CBOR Web Token (CWT) [RFC8392] identified by
+   reference with "kid" or by value with "kcwt", or X.509 certificates
+   identified by reference with "x5t" or by value with "x5chain", or
+   C509 certificates identified by reference with "c5t" or by value with
+   "c5c".
 
    This application profile is aligned with the example traces of EDHOC
    compiled in Sections 2 and 3 of [RFC9529].
@@ -2530,6 +2593,10 @@ Table of Contents
               DOI 10.17487/RFC8288, October 2017,
               <https://www.rfc-editor.org/rfc/rfc8288>.
 
+   [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
+              "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
+              May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
+
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
               Definition Language (CDDL): A Notational Convention to
               Express Concise Binary Object Representation (CBOR) and
@@ -2686,6 +2753,8 @@ B.1.  Version -04 to -05
 
       -  Extraction of CDDL definitions from the XML, using an XPath
          expression.
+
+      -  Short explanation of well-known profiles.
 
    *  IANA considerations:
 
