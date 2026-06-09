@@ -154,7 +154,11 @@ The reader is also expected to be familiar with the concept of EDHOC_Information
 
 * A non-prescriptive parameter is used to provide convenient information to consider when executing EDHOC, e.g., in terms of features supported by peers. Such information is not necessarily exhaustive. An example is the parameter "methods" indicating a set of supported EDHOC methods.
 
-Concise Binary Object Representation (CBOR) {{RFC8949}} and Concise Data Definition Language (CDDL) {{RFC8610}} are used in this document. CDDL predefined type names, especially bstr for CBOR byte strings and tstr for CBOR text strings, are used extensively in this document.
+Concise Binary Object Representation (CBOR) {{RFC8949}} and Concise Data Definition Language (CDDL) {{RFC8610}} are used in this document. CDDL predefined type names, especially bstr for CBOR byte strings and tstr for CBOR text strings, are used extensively in this document. The provided CDDL definitions can be extracted from the XML version of this document using the following XPath expression:
+
+~~~~~~~~~~~~~~~~~
+'//sourcecode[@type="cddl"]'
+~~~~~~~~~~~~~~~~~
 
 CBOR data items are represented using the CBOR extended diagnostic notation as defined in {{Section 8 of RFC8949}} and {{Section G of RFC8610}} ("diagnostic notation"). Diagnostic notation comments are used to provide a textual representation of the parameters' keys and values.
 
@@ -1351,6 +1355,8 @@ c509_cert = 3
   * Motivation and benefits of the new EAD item and error code.
 
   * Handling of deviations from what is specified by prescriptive EDHOC_Information parameters.
+
+  * Extraction of CDDL definitions from the XML, using an XPath expression.
 
 * IANA considerations:
 
