@@ -1396,10 +1396,15 @@ If a prescriptive parameter applies to an EDHOC session, a peer participating in
             <p id="section-1.1-4.2.1">A non-prescriptive parameter is used to provide convenient information to consider when executing EDHOC, e.g., in terms of features supported by peers. Such information is not necessarily exhaustive. An example is the parameter "methods" indicating a set of supported EDHOC methods.<a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-1.1-5">Concise Binary Object Representation (CBOR) <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and Concise Data Definition Language (CDDL) <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> are used in this document. CDDL predefined type names, especially bstr for CBOR byte strings and tstr for CBOR text strings, are used extensively in this document.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
-<p id="section-1.1-6">CBOR data items are represented using the CBOR extended diagnostic notation as defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">Section 8</a> of [<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> ("diagnostic notation"). Diagnostic notation comments are used to provide a textual representation of the parameters' keys and values.<a href="#section-1.1-6" class="pilcrow">¶</a></p>
-<p id="section-1.1-7">In the CBOR diagnostic notation used in this document, constructs of the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 15</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. For example, {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0, 1, 2, 3], 2 : 3}.<a href="#section-1.1-7" class="pilcrow">¶</a></p>
-<p id="section-1.1-8">Note to RFC Editor: Please delete the paragraph immediately preceding this note. Also, in the CBOR diagnostic notation used in this document, please replace the constructs of the form e'SOME_NAME' with the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 15</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. Finally, please delete this note.<a href="#section-1.1-8" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">Concise Binary Object Representation (CBOR) <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and Concise Data Definition Language (CDDL) <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> are used in this document. CDDL predefined type names, especially bstr for CBOR byte strings and tstr for CBOR text strings, are used extensively in this document. The provided CDDL definitions can be extracted from the XML version of this document using the following XPath expression:<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-1.1-6">
+<pre>
+'//sourcecode[@type="cddl"]'
+</pre><a href="#section-1.1-6" class="pilcrow">¶</a>
+</div>
+<p id="section-1.1-7">CBOR data items are represented using the CBOR extended diagnostic notation as defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">Section 8</a> of [<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> ("diagnostic notation"). Diagnostic notation comments are used to provide a textual representation of the parameters' keys and values.<a href="#section-1.1-7" class="pilcrow">¶</a></p>
+<p id="section-1.1-8">In the CBOR diagnostic notation used in this document, constructs of the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 15</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. For example, {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0, 1, 2, 3], 2 : 3}.<a href="#section-1.1-8" class="pilcrow">¶</a></p>
+<p id="section-1.1-9">Note to RFC Editor: Please delete the paragraph immediately preceding this note. Also, in the CBOR diagnostic notation used in this document, please replace the constructs of the form e'SOME_NAME' with the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 15</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. Finally, please delete this note.<a href="#section-1.1-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3331,6 +3336,9 @@ c509_cert = 3
 </li>
               <li class="normal" id="appendix-B.1-1.1.2.3">
                 <p id="appendix-B.1-1.1.2.3.1">Handling of deviations from what is specified by prescriptive EDHOC_Information parameters.<a href="#appendix-B.1-1.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.1.2.4">
+                <p id="appendix-B.1-1.1.2.4.1">Extraction of CDDL definitions from the XML, using an XPath expression.<a href="#appendix-B.1-1.1.2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
