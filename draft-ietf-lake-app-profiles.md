@@ -146,6 +146,14 @@ Finally, this document defines a set of well-known EDHOC application profiles (s
 
 The reader is expected to be familiar with terms and concepts defined in EDHOC {{RFC9528}} and with the use of EDHOC with CoAP {{RFC7252}} and OSCORE {{RFC8613}} defined in {{RFC9668}}.
 
+The reader is also expected to be familiar with the concept of EDHOC_Information parameters defined in {{I-D.ietf-ace-edhoc-oscore-profile}} and with their categorization as prescriptive or non-prescriptive. In particular:
+
+* A prescriptive parameter is used to provide an authoritative statement about how an execution of EDHOC has to be performed. An example is the parameter "message_4" indicating whether the use of EDHOC message_4 in an EDHOC session is mandatory or not.
+
+  If a prescriptive parameter applies to an EDHOC session, a peer participating in the session complies with what is indicated by the parameter, and it aborts the session if it determines that the other peer has violated such indication.
+
+* A non-prescriptive parameter is used to provide convenient information to consider when executing EDHOC, e.g., in terms of features supported by peers. Such information is not necessarily exhaustive. An example is the parameter "methods" indicating a set of supported EDHOC methods.
+
 Concise Binary Object Representation (CBOR) {{RFC8949}} and Concise Data Definition Language (CDDL) {{RFC8610}} are used in this document. CDDL predefined type names, especially bstr for CBOR byte strings and tstr for CBOR text strings, are used extensively in this document.
 
 CBOR data items are represented using the CBOR extended diagnostic notation as defined in {{Section 8 of RFC8949}} and {{Section G of RFC8610}} ("diagnostic notation"). Diagnostic notation comments are used to provide a textual representation of the parameters' keys and values.
@@ -432,7 +440,9 @@ The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC err
 
 It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
 
-If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session MUST NOT act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Upon receiving an EDHOC message and throughout the session, a peer MUST check whether the other peer has violated such indications. If any violation is found, the peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1.
+If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session MUST NOT act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Note that such indications can be provided: as elements of an EDHOC_Information object specified within APP_PROF_SEQ; or as elements of an EDHOC_Application_Profile object encoding an EDHOC application profile, which is identified by its Profile ID specified within APP_PROF_SEQ.
+
+Upon receiving an EDHOC message and throughout the session, a peer MUST check whether the other peer has violated such indications. If any violation is found, the peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1.
 
 When composing ead_value, the sender peer MUST comply with the content restrictions specified in {{sec-app-profile-edhoc-message_1_2-restrictions}}.
 
@@ -1339,6 +1349,8 @@ c509_cert = 3
   * Purpose of "app_prof" in the EDHOC_Application_Profile object and in the EDHOC_Information object.
 
   * Motivation and benefits of the new EAD item and error code.
+
+  * Handling of deviations from what is specified by prescriptive EDHOC_Information parameters.
 
 * IANA considerations:
 
