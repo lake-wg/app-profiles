@@ -278,7 +278,7 @@ When present within an instance of the EDHOC_Information object, the parameter "
 The CDDL grammar describing the parameter "app_prof" when included in the CBOR-encoded EDHOC_Information object is:
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
-app_prof_parameter = (
+app_prof = (
   ? 23 => int / [2* int]                      ; app_prof
 )
 ~~~~~~~~~~~~~~~~~~~~
