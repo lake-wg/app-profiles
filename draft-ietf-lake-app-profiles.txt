@@ -541,7 +541,7 @@ Table of Contents
    The CDDL grammar describing the parameter "app_prof" when included in
    the CBOR-encoded EDHOC_Information object is:
 
-   app_prof_parameter = (
+   app_prof = (
      ? 23 => int / [2* int]                      ; app_prof
    )
 
