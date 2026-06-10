@@ -2104,13 +2104,14 @@ Table of Contents
    When using the means defined in this document, EDHOC peers are not
    expected to keep any particular log of such use, or to go beyond
    expectations already in place as to the logging of EDHOC sessions.
-   However, when gaining knowledge about what EDHOC application profiles
-   are supported by a given EDHOC peer, it is encouraged to locally
-   preserve that knowledge for a non-negligible amount of time
-   determined by the application.  Especially under the assumption that
-   what EDHOC peers support does not (often) change, this avoids the
-   need to repeatedly re-gain the same knowledge at least in the short
-   term.
+   However, after gaining knowledge about what EDHOC application
+   profiles are supported by a given EDHOC peer and verifying that such
+   knowledge is reliable and authentic (see Section 10), it is
+   encouraged to locally persist that knowledge for a non-negligible
+   amount of time determined by the application.  Especially under the
+   assumption that what EDHOC peers support does not (often) change,
+   this avoids the need to repeatedly re-gain the same knowledge at
+   least in the short term.
 
    If an EDHOC session fails due to an apparent mismatch with gained
    knowledge about commonly supported EDHOC application profiles, a peer
@@ -2193,9 +2194,17 @@ Table of Contents
       Known threats for unprotected DNS are described in [RFC3833] and
       [RFC9076].
 
-   In case information about EDHOC application profiles supported by a
-   peer is distributed in an unprotected way (e.g., through unsecured
-   communication), a consumer should treat such information as a hint.
+   If information about EDHOC application profiles supported by a peer
+   is distributed in an unprotected way (e.g., through unsecured
+   communication), a consumer should treat such information as a hint
+   and does not locally persist that information until verifying that it
+   is reliable and authentic.  For example, if the Responder receives an
+   EDHOC message_1 that includes the EDHOC EAD item "Supported EDHOC
+   application profiles", the Responder will initially treat the
+   information conveyed therein as a hint, and it is able to verify such
+   information as reliable and authentic after receiving and
+   successfully processing the later EDHOC message_3 in the same EDHOC
+   session.
 
    If the acquired information has been tampered with and does not
    reflect what a given peer supports and intends to advertise, this can
@@ -2820,6 +2829,9 @@ B.1.  Version -04 to -05
       -  Short explanation of well-known profiles.
 
       -  Full name of error codes used through the text.
+
+      -  Gained knowledge about other peers is persisted only if
+         verified as reliable and authentic.
 
    *  IANA considerations:
 
