@@ -53,6 +53,7 @@ normative:
   RFC9668:
   I-D.ietf-ace-edhoc-oscore-profile:
   I-D.ietf-cose-cbor-encoded-cert:
+  I-D.ietf-lake-edhoc-psk:
   EDHOC.Exporter.Labels:
     author:
       org: IANA
@@ -327,17 +328,19 @@ These parameters can be optionally specified as target attributes with the same 
 
 When specifying any of the parameters defined below in a link to an EDHOC resource, the target attribute rt="core.edhoc" MUST be included.
 
-* 'ed-ta-edcred-uuid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a UUID {{RFC9562}}. This parameter MUST specify a single value, which is the UUID in its string format (see Section 4 of {{RFC9562}}). This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-uuid': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a UUID {{RFC9562}}. This parameter MUST specify a single value, which is the UUID in its string format (see Section 4 of {{RFC9562}}). This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-edcred-kid', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a binary key identifier. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-kid': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a binary key identifier. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-edcred-c5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-c5t': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-edcred-c5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI {{RFC3986}} pointing to a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-c5u': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI {{RFC3986}} pointing to a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-edcred-x5t', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-x5t': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a hash of an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-edcred-x5u', specifying the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI {{RFC3986}} pointing to an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-x5u': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other EDHOC peers, as a URI {{RFC3986}} pointing to an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+
+* 'ed-psk-resumption': If present, specifies that the server supports EDHOC session resumption with EDHOC-PSK {{I-D.ietf-lake-edhoc-psk}}. A value MUST NOT be given to this parameter and any present value MUST be ignored by the recipient. Future documents may update the definition of this parameter by expanding its semantics and specifying what it can take as value.
 
 The example in {{fig-web-link-example-2}} extends the earlier example in {{fig-web-link-example}}, by additionally showing the use of the target attributes 'ed-ta-edcred-kid' and 'ed-ta-edcred-x5t'. Compared to the example in {{fig-web-link-example}}, the following also applies.
 
@@ -451,7 +454,7 @@ Upon receiving an EDHOC message and throughout the session, a peer MUST check wh
 
 When composing ead_value, the sender peer MUST comply with the content restrictions specified in {{sec-app-profile-edhoc-message_1_2-restrictions}}.
 
-The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in {{fig-cddl-ead-value}}.
+The CDDL grammar describing ead_value for the EAD item "Supported EDHOC application profiles" is shown in {{fig-cddl-ead-value}}. The parameters "psk_resumption", "exporter_out_len", and "app_prof" of the EDHOC_Information object are defined in {{support-psk-resumption}}, {{exporter-out-length}}, and {{sec-edhoc-information-object}}, respectively.
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
 ead_value = ead_1_value / ead_2_value
@@ -480,6 +483,11 @@ profile_id_with_eads = [profile_id, 1* uint]
 ; draft-ietf-ace-edhoc-oscore-profile
 EDHOC_Information = { * $$EDHOC_Information_item } .within
                     { * (int / tstr) => any }
+
+; psk_resumption
+$$EDHOC_Information_item //= (
+  21: true / false
+)
 
 ; exporter_out_len
 $$EDHOC_Information_item //= (
@@ -510,6 +518,29 @@ If ead_value specifies such an information multiple times, then each occurrence 
 If the Responder has received the EAD item in the EAD_1 field of EDHOC message_1 and intends to include the EAD item in the EAD_2 field of EDHOC message_2, then the Responder MUST further take into account the presence of such information in the received EAD item when composing ead_value.
 
 A consumer MUST treat as malformed an EAD item "Supported EDHOC application profiles" whose ead_value does not comply with the restrictions above.
+
+### Indicating Support for Session Resumption with EDHOC-PSK ## {#support-psk-resumption}
+
+The specification {{I-D.ietf-lake-edhoc-psk}} defines EDHOC-PSK, an EDHOC authentication method by which two peers use a symmetric Pre-Shared Key (PSK) to mutually authenticate during an EDHOC session.
+
+In particular, {{Section 6 of I-D.ietf-lake-edhoc-psk}} defines how EDHOC-PSK is used to perform session resumption. That is, after successfully completing an EDHOC session, two peers that support session resumption with EDHOC-PSK can derive a resumption PSK and the corresponding key identifier. Later on, the two peers can run EDHOC using the authentication method EDHOC-PSK, authenticating each other by using the resumption PSK.
+
+This document defines the new parameter "psk_resumption" of the EDHOC_Information object (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}). The parameter is of type non-prescriptive (NP) and is summarized in {{table-cbor-key-edhoc-params-psk-resumption}}. The parameter is specified further below.
+
+| Name           | CBOR label | CBOR type     | Registry | Description                                         | Type |
+| psk_resumption | 21         | True or False |          | Support for EDHOC session resumption with EDHOC-PSK | NP   |
+{: #table-cbor-key-edhoc-params-psk-resumption title="EDHOC_Information Parameter \"psk_resumption\"" align="center"}
+
+* psk_resumption: This parameter indicates whether EDHOC session resumption with the authentication method EDHOC-PSK is supported, as per {{I-D.ietf-lake-edhoc-psk}}. In JSON, the "psk_resumption" value is a boolean. In CBOR, "psk_resumption" is the simple value `true` (0xf5) or `false` (0xf4), and has label 21.
+
+The CDDL grammar describing the parameter "psk_resumption" when included in the CBOR-encoded EDHOC_Information object is:
+
+~~~~~~~~~~~~~~~~~~~~ cddl
+psk_resumption = (
+  ? 21 => true / false                          ; psk_resumption
+)
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-cddl-psk_resumption title="CDDL Definition of the Parameter \"psk_resumption\" when Included in the CBOR-encoded EDHOC_Information Object."}
 
 ### Agreeing on EDHOC_Exporter Output Lengths ## {#exporter-out-length}
 
@@ -1258,9 +1289,26 @@ IANA is asked to register the following entries in the "Target Attributes" regis
 * Change Controller: IETF
 * Reference: \[RFC-XXXX, {{sec-parameters-web-linking}}\]
 
+<br>
+
+* Attribute Name: ed-psk-resumption
+* Brief Description: Hint: support for EDHOC session resumption with EDHOC-PSK
+* Change Controller: IETF
+* Reference: \[RFC-XXXX, {{sec-parameters-web-linking}}\]
+
 ## EDHOC Information Registry ## {#iana-edhoc-information-registry}
 
 IANA is asked to register the following entries in the "EDHOC Information" registry defined in {{I-D.ietf-ace-edhoc-oscore-profile}} within the "Ephemeral Diffie-Hellman Over COSE (EDHOC)" registry group.
+
+* Name: psk_resumption
+* CBOR label: 21 (suggested)
+* CBOR type: True or False
+* Registry:
+* Description: Support for EDHOC session resumption with EDHOC-PSK
+* Type: NP
+* Specification: {{&SELF}}{{I-D.ietf-lake-edhoc-psk}}
+
+<br>
 
 * Name: exporter_out_len
 * CBOR label: 22 (suggested)
@@ -1407,6 +1455,8 @@ c509_cert = 3
   * Extended semantics of ERR_INFO to also provide diagnostic information.
 
   * Updated error code description to "Unspecified error and supported EDHOC application profiles"
+
+* Defined the web link parameter "ed-psk-resumption" and the EDHOC_Information object parameter "psk_resumption", to indicate support for session resumption with EDHOC-PSK.
 
 * Clarifications:
 
