@@ -788,9 +788,9 @@ Table of Contents
    times in the EAD fields of EDHOC message_1 or message_2.
 
    The EAD item MUST NOT be included in the EAD fields of EDHOC
-   message_3 or message_4.  In case the recipient peer supports the EAD
-   item, the recipient peer MUST silently ignore the EAD item if this is
-   included in the EAD fields of EDHOC message_3 or message_4.
+   message_3 or message_4.  In the case that the recipient peer supports
+   the EAD item, the recipient peer MUST silently ignore the EAD item if
+   this is included in the EAD fields of EDHOC message_3 or message_4.
 
    The EAD item MUST specify an ead_value, as a CBOR byte string with
    value the binary representation of a CBOR sequence [RFC8742].  In
@@ -1623,7 +1623,7 @@ Table of Contents
          specified by the i-th element of the CBOR array within the
          SvcParamKey "edhocpath".
 
-   A consumer MUST treat as malformed an SVCB RR, in case the
+   A consumer MUST treat as malformed an SVCB RR, in the case that the
    SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not
    comply with the format and restrictions defined above.
 
@@ -1763,8 +1763,8 @@ Table of Contents
    supported by EDHOC peers.
 
    The well-known application profiles are _not_ to be intended as
-   "default" profiles to use, in case no other indication is provided to
-   EDHOC peers.
+   "default" profiles to use, in the case that no other indication is
+   provided to EDHOC peers.
 
    In particular, an EDHOC peer MUST NOT assume that, unless otherwise
    indicated, any of such profiles is used when running EDHOC through a

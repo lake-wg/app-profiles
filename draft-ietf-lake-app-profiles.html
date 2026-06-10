@@ -1730,7 +1730,7 @@ RES: 2.05 Content
         </ul>
 <p id="section-5.1-4">When the EAD item is present, its ead_label TBD_EAD_LABEL <span class="bcp14">MUST</span> be used only with negative sign, i.e., the use of the EAD item is always critical (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.8" class="relref">Section 3.8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 <p id="section-5.1-5">The EAD item <span class="bcp14">MUST NOT</span> occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer <span class="bcp14">MUST</span> abort the EDHOC session and <span class="bcp14">MUST</span> reply with an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error", if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
-<p id="section-5.1-6">The EAD item <span class="bcp14">MUST NOT</span> be included in the EAD fields of EDHOC message_3 or message_4. In case the recipient peer supports the EAD item, the recipient peer <span class="bcp14">MUST</span> silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
+<p id="section-5.1-6">The EAD item <span class="bcp14">MUST NOT</span> be included in the EAD fields of EDHOC message_3 or message_4. In the case that the recipient peer supports the EAD item, the recipient peer <span class="bcp14">MUST</span> silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
 <p id="section-5.1-7">The EAD item <span class="bcp14">MUST</span> specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence <span>[<a href="#RFC8742" class="cite xref">RFC8742</a>]</span>. In particular:<a href="#section-5.1-7" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.1-8.1">
@@ -2280,7 +2280,7 @@ The information specified by the i-th element of server_info pertains to the EDH
           </ul>
 </li>
       </ul>
-<p id="section-6-7">A consumer <span class="bcp14">MUST</span> treat as malformed an SVCB RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.<a href="#section-6-7" class="pilcrow">¶</a></p>
+<p id="section-6-7">A consumer <span class="bcp14">MUST</span> treat as malformed an SVCB RR, in the case that the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.<a href="#section-6-7" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-valu"></span><div id="fig-cddl-edhocpath-value">
 <figure id="figure-11">
         <div class="lang-cddl sourcecode" id="section-6-8.1">
@@ -2431,7 +2431,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-well-known-edhoc-applicatio" class="section-name selfRef">Well-known EDHOC Application Profiles</a>
       </h2>
 <p id="section-7-1">This section defines a set of well-known EDHOC application profiles that are meant to reflect what is most common and expected to be supported by EDHOC peers.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">The well-known application profiles are <em>not</em> to be intended as "default" profiles to use, in case no other indication is provided to EDHOC peers.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-2">The well-known application profiles are <em>not</em> to be intended as "default" profiles to use, in the case that no other indication is provided to EDHOC peers.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">In particular, an EDHOC peer <span class="bcp14">MUST NOT</span> assume that, unless otherwise indicated, any of such profiles is used when running EDHOC through a well-known EDHOC resource, such as the resource at /.well-known/edhoc when EDHOC messages are transported as payload of CoAP messages (see <span><a href="https://rfc-editor.org/rfc/rfc9528#appendix-A.2" class="relref">Appendix A.2</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">Building on the above, the well-known application profiles are <em>not</em> intended to deviate from what is mandatory to support for EDHOC peers, which is defined by the compliance requirements in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-7-4" class="pilcrow">¶</a></p>
 <p id="section-7-5">The rest of this section defines the well-known application profiles, each of which is represented by means of an EDHOC_Application_Profile object (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a>) using the CBOR extended diagnostic notation.<a href="#section-7-5" class="pilcrow">¶</a></p>
