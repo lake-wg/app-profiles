@@ -1115,7 +1115,7 @@ As noted in {{sec-well-known-app-profiles}}, well-known EDHOC application profil
 
 ## Logging and Reporting
 
-When using the means defined in this document, EDHOC peers are not expected to keep any particular log of such use, or to go beyond expectations already in place as to the logging of EDHOC sessions. However, when gaining knowledge about what EDHOC application profiles are supported by a given EDHOC peer, it is encouraged to locally preserve that knowledge for a non-negligible amount of time determined by the application. Especially under the assumption that what EDHOC peers support does not (often) change, this avoids the need to repeatedly re-gain the same knowledge at least in the short term.
+When using the means defined in this document, EDHOC peers are not expected to keep any particular log of such use, or to go beyond expectations already in place as to the logging of EDHOC sessions. However, after gaining knowledge about what EDHOC application profiles are supported by a given EDHOC peer and verifying that such knowledge is reliable and authentic (see {{sec-security-considerations}}), it is encouraged to locally persist that knowledge for a non-negligible amount of time determined by the application. Especially under the assumption that what EDHOC peers support does not (often) change, this avoids the need to repeatedly re-gain the same knowledge at least in the short term.
 
 If an EDHOC session fails due to an apparent mismatch with gained knowledge about commonly supported EDHOC application profiles, a peer can report such a failure to a network manager or infrastructure operator. This can help identify peers whose behavior deviates from what is advertised in terms of EDHOC application profiles that they allegedly support. In turn, this can be used to detect misbehaving peers, outdated information about what peers support, or ongoing tampering of such information if that is advertised in plain (see {{sec-security-considerations}}).
 
@@ -1147,7 +1147,7 @@ Different security guarantees can be achieved about the acquired information on 
 
   It is encouraged that DNS is used with secure communication. Known threats for unprotected DNS are described in {{RFC3833}} and {{RFC9076}}.
 
-In case information about EDHOC application profiles supported by a peer is distributed in an unprotected way (e.g., through unsecured communication), a consumer should treat such information as a hint.
+If information about EDHOC application profiles supported by a peer is distributed in an unprotected way (e.g., through unsecured communication), a consumer should treat such information as a hint and does not locally persist that information until verifying that it is reliable and authentic. For example, if the Responder receives an EDHOC message_1 that includes the EDHOC EAD item "Supported EDHOC application profiles", the Responder will initially treat the information conveyed therein as a hint, and it is able to verify such information as reliable and authentic after receiving and successfully processing the later EDHOC message_3 in the same EDHOC session.
 
 If the acquired information has been tampered with and does not reflect what a given peer supports and intends to advertise, this can set wrong expectations about what is effectively possible to do when running EDHOC with that peer. Although this can still result in successfully running EDHOC with a configuration that is commonly supported, such configuration would probably not have been selected, had reliable and authentic information been acquired. In the worst case, there might be the erroneous belief that there is not sufficient shared support with that peer.
 
@@ -1421,6 +1421,8 @@ c509_cert = 3
   * Short explanation of well-known profiles.
 
   * Full name of error codes used through the text.
+
+  * Gained knowledge about other peers is persisted only if verified as reliable and authentic.
 
 * IANA considerations:
 
