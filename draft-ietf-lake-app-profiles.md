@@ -387,7 +387,7 @@ The EAD item MAY be included:
 
 When the EAD item is present, its ead_label TBD_EAD_LABEL MUST be used only with negative sign, i.e., the use of the EAD item is always critical (see {{Section 3.8 of RFC9528}}).
 
-The EAD item MUST NOT occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.
+The EAD item MUST NOT occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error", if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.
 
 The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. In case the recipient peer supports the EAD item, the recipient peer MUST silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.
 
@@ -441,13 +441,13 @@ The CBOR sequence APP_PROF_SEQ is composed of one or more elements, whose order 
 
 When sending EDHOC message_1, the Initiator might want to include the EAD item "Supported EDHOC application profiles" and not advertise the EDHOC application profiles that it supports, but instead just take advantage of advertise_flag and ask the Responder to advertise what is supported on its side. In order to do that, the Initiator can compose ead_value such that, following advertise_flag, the CBOR sequence APP_PROF_SEQ only consists of a single EDHOC_Information object as an empty CBOR map.
 
-The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if ead_value is malformed or does not conform with the format defined above.
+The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error", if ead_value is malformed or does not conform with the format defined above.
 
 It is possible that ead_value provides information corresponding to EDHOC_Information prescriptive parameters (see {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}), e.g., "message_4". The type of such parameters is indicated in the 'Type' column of the corresponding entry in the IANA registry "EDHOC Information" (see {{I-D.ietf-ace-edhoc-oscore-profile}}).
 
 If the EAD item "Supported EDHOC application profiles" is included in EDHOC message_1 and/or message_2 during an EDHOC session, the peers participating in that session MUST NOT act in violation of what is indicated by prescriptive parameters that are specified in those EAD items. Note that such indications can be provided: as elements of an EDHOC_Information object specified within APP_PROF_SEQ; or as elements of an EDHOC_Application_Profile object encoding an EDHOC application profile, which is identified by its Profile ID specified within APP_PROF_SEQ.
 
-Upon receiving an EDHOC message and throughout the session, a peer MUST check whether the other peer has violated such indications. If any violation is found, the peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1.
+Upon receiving an EDHOC message and throughout the session, a peer MUST check whether the other peer has violated such indications. If any violation is found, the peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error".
 
 When composing ead_value, the sender peer MUST comply with the content restrictions specified in {{sec-app-profile-edhoc-message_1_2-restrictions}}.
 
@@ -554,7 +554,7 @@ exporter_out_len = (
 
 Within ead_value of the EAD item "Supported EDHOC application profiles", the parameter "exporter\_out\_len" can be included within instances of the EDHOC_Information object that are specified within the CBOR sequence APP_PROF_SEQ (see {{sec-app-profile-edhoc-message_1_2}}).
 
-The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if any of the following occurs:
+The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error", if any of the following occurs:
 
 * The recipient peer does not recognize the value encoded by the first element X of a pair (X, Y) as a valid "exporter_label" to be used when invoking the EDHOC_Exporter interface.
 
@@ -564,13 +564,13 @@ The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC err
 
 If the Responder has received an EDHOC message_1 including the EAD item "Supported EDHOC application profiles" and specifying the parameter "exporter\_out\_len", then the following applies if the Responder includes the EAD item "Supported EDHOC application profiles" in EDHOC message_2, with ead_value specifying the parameter "exporter\_out\_len". Within ead_value of the EAD item included in EDHOC message_2, the Responder MUST NOT specify any pair (X, Y) such that the unsigned integer value encoded by X was encoded by the first element of a pair within the EAD item included in the received EDHOC message_1.
 
-If the Initiator receives an EDHOC message_2 including the EAD item "Supported EDHOC application profiles" and specifying the parameter "exporter\_out\_len", then the following applies if the Initiator included the EAD item "Supported EDHOC application profiles" in EDHOC message_1, with ead_value specifying the parameter "exporter\_out\_len". The Initiator MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if ead_value of the EAD item included in EDHOC message_2 specifies any pair (X, Y) such that the unsigned integer value encoded by X was encoded by the first element of a pair of the EAD item included in the sent EDHOC message_1.
+If the Initiator receives an EDHOC message_2 including the EAD item "Supported EDHOC application profiles" and specifying the parameter "exporter\_out\_len", then the following applies if the Initiator included the EAD item "Supported EDHOC application profiles" in EDHOC message_1, with ead_value specifying the parameter "exporter\_out\_len". The Initiator MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error", if ead_value of the EAD item included in EDHOC message_2 specifies any pair (X, Y) such that the unsigned integer value encoded by X was encoded by the first element of a pair of the EAD item included in the sent EDHOC message_1.
 
 Since the parameter "exporter\_out\_len" is of type prescriptive, the restrictions compiled in {{sec-app-profile-edhoc-message_1_2-restrictions}} apply. In particular, the "information" corresponding to the prescriptive parameter "exporter\_out\_len" is the "length" Y to use when invoking the EDHOC_Exporter interface using the paired "exporter_label" X.
 
 That is, if ead_value provides the length of the EDHOC_Exporter output for a given "exporter_label" multiple times, then each of such occurrences MUST specify the same "length" value. Within this constraint, it remains possible for ead_value to specify multiple instances of the EDHOC_Information object within APP_PROF_SEQ and for each of such instances to include the parameter "exporter\_out\_len", which can overall encode a value different from that of the same parameter in another instance of the EDHOC_Information object.
 
-The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1, if the parameter "exporter\_out\_len" is malformed or does not conform with the format and constraints defined above.
+The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error", if the parameter "exporter\_out\_len" is malformed or does not conform with the format and constraints defined above.
 
 In an EDHOC session during which the EAD item "Supported EDHOC application profiles" has been included in EDHOC message_1 and/or message_2 as specifying the parameter "exporter\_out\_len", the following applies.
 
@@ -1391,6 +1391,8 @@ c509_cert = 3
   * Extraction of CDDL definitions from the XML, using an XPath expression.
 
   * Short explanation of well-known profiles.
+
+  * Full name of error codes used through the text.
 
 * IANA considerations:
 
