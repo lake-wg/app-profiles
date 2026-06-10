@@ -291,14 +291,14 @@ Table of Contents
 
    In the CBOR diagnostic notation used in this document, constructs of
    the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME
-   in the CDDL model shown in Figure 15 of Appendix A.  For example,
+   in the CDDL model shown in Figure 16 of Appendix A.  For example,
    {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0,
    1, 2, 3], 2 : 3}.
 
    Note to RFC Editor: Please delete the paragraph immediately preceding
    this note.  Also, in the CBOR diagnostic notation used in this
    document, please replace the constructs of the form e'SOME_NAME' with
-   the value assigned to SOME_NAME in the CDDL model shown in Figure 15
+   the value assigned to SOME_NAME in the CDDL model shown in Figure 16
    of Appendix A.  Finally, please delete this note.
 
 2.  EDHOC_Application_Profile
@@ -1343,28 +1343,63 @@ Table of Contents
    example, if the negotiation of the selected cipher suite fails (see
    Section 6.3 of [RFC9528]), the error message MUST NOT specify error
    code TBD_ERROR_CODE, since the error message intended to be used in
-   that case specifies error code 2 (Wrong selected cipher suite) and
-   conveys SUITES_R as ERR_INFO.
+   that case specifies error code (ERR_CODE) 2 "Wrong selected cipher
+   suite", and it conveys SUITES_R as ERR_INFO.
 
    When using error code TBD_ERROR_CODE, the error information specified
    in ERR_INFO MUST be a CBOR byte string with value the binary
-   representation of the CBOR sequence APP_PROF_SEQ.
+   representation of the CBOR sequence ERROR_OUTER_SEQ.  In turn,
+   ERROR_OUTER_SEQ is composed of the following elements, in the order
+   specified below:
 
-   In particular, APP_PROF_SEQ has the same format and semantics
-   specified in Section 5.1, except for the following difference: for
-   each element of the CBOR sequence that is an EDHOC_Information
-   object, such an object MUST NOT include the element
-   "exporter_out_len" defined in Section 5.1.2.
+   *  The CBOR text string diagnostic_info, which encodes a human-
+      readable diagnostic message that SHOULD be written in English (for
+      example, "Method not supported").  The diagnostic text message
+      provides information about the error occurred, and it is mainly
+      intended for software engineers who during debugging need to
+      interpret it in the context of the EDHOC specification.  The
+      diagnostic message SHOULD be provided to the calling application
+      where it SHOULD be logged.
 
-   The recipient peer MUST silently ignore elements of the CBOR sequence
-   APP_PROF_SEQ that are malformed or do not conform with the intended
-   format of APP_PROF_SEQ.
+      This element conveys the same information that would be conveyed
+      by ERR_INFO within an EDHOC error message with error code
+      (ERR_CODE) 1 "Unspecified error".
+
+   *  The CBOR sequence APP_PROF_SEQ, which has the same format and
+      semantics specified in Section 5.1, except for the following
+      difference: for each element of the CBOR sequence that is an
+      EDHOC_Information object, such an object MUST NOT include the
+      element "exporter_out_len" defined in Section 5.1.2.
+
+      The recipient peer MUST silently ignore elements of the CBOR
+      sequence APP_PROF_SEQ that are malformed or do not conform with
+      the intended format of APP_PROF_SEQ.
+
+   The CDDL grammar describing ERR_INFO is shown in Figure 9.
+
+   err-info-tbd-error-code = bytes .cborseq ERROR_OUTER_SEQ
+
+   ; This defines an array, the elements of which
+   ; are to be used in the CBOR Sequence ERROR_OUTER_SEQ:
+   ERROR_OUTER_SEQ = [diagnostic_info, APP_PROF_SEQ]
+
+   diagnostic_info = tstr
+
+   ; The full definition of APP_PROF_SEQ is provided in Section 5.1
+
+     Figure 9: CDDL Definition of ERR_INFO for the EDHOC Error Message
+         with Error Code (ERR_CODE) TBD_ERROR_CODE "Supported EDHOC
+                           application profiles"
 
 5.2.1.  Example of ERR_INFO
 
-   Figure 9 shows an example in CBOR diagnostic notation of ERR_INFO for
-   the EDHOC error message with Error Code TBD_ERROR_CODE.  With
-   reference to the CDDL grammar in Figure 5, the following applies.
+   Figure 10 shows an example in CBOR diagnostic notation of ERR_INFO
+   for the EDHOC error message with error code TBD_ERROR_CODE.  With
+   reference to the CDDL grammar in Figure 9 and Figure 5, the following
+   applies.
+
+   The CBOR text string diagnostic_info encodes the text string "Method
+   not supported".
 
    The CBOR sequence APP_PROF_SEQ includes the following two elements:
 
@@ -1395,7 +1430,8 @@ Table of Contents
          [RFC9360] corresponding to an X.509 certificate [RFC5280] that
          the Responder supports as a trust anchor when running EDHOC.
 
-   <<
+   <<                            / err-info-tbd-error-code /
+      "Method not supported",    / diagnostic_info /
       e'APP-PROF-MINIMAL-CS-0',  / profile_id /
       {                          / EDHOC_Information /
          e'comb_req' : true,
@@ -1408,8 +1444,8 @@ Table of Contents
       }
    >>
 
-       Figure 9: Example of ERR_INFO for the EDHOC Error Message with
-                         Error Code TBD_ERROR_CODE
+      Figure 10: Example of ERR_INFO for the EDHOC Error Message with
+                    Error Code (ERR_CODE) TBD_ERROR_CODE
 
 6.  Advertising Supported EDHOC Application Profiles using DNS SVCB
     Resource Records
@@ -1447,7 +1483,7 @@ Table of Contents
          elements that specify the same URI path.
 
          The CDDL grammar describing the CBOR data item edhocpath-value
-         is shown in Figure 10.
+         is shown in Figure 11.
 
       -  The presentation format value of "edhocpath" SHALL be a comma-
          separated list (see Appendix A.1 of [RFC9460]) of one or more
@@ -1461,7 +1497,7 @@ Table of Contents
          PATH_SEQ in the wire-format value (see above).
 
          The textual representation of each path follows the semantics
-         of path-absolute shown in the ABNF definition in Figure 11,
+         of path-absolute shown in the ABNF definition in Figure 12,
          which is provided by the ABNF for path-absolute in Section 3.3
          of [RFC3986].  In particular, given the path specified by a
          CBOR sequence PATH_SEQ, segment-nz is the value of the first
@@ -1527,7 +1563,7 @@ Table of Contents
          object as an empty CBOR map.
 
          The CDDL grammar describing the CBOR data item edhoc-app-prof-
-         value is shown in Figure 12.
+         value is shown in Figure 13.
 
       -  The presentation format value of "edhoc-app-prof" SHALL be the
          CBOR extended diagnostic notation (see Section 8 of [RFC8949]
@@ -1586,7 +1622,7 @@ Table of Contents
 
    path_segment = tstr
 
-         Figure 10: CDDL Definition of the Value of the SvcParamKey
+         Figure 11: CDDL Definition of the Value of the SvcParamKey
                                 "edhocpath"
 
    path-absolute = "/" [ segment-nz *( "/" segment ) ]
@@ -1601,7 +1637,7 @@ Table of Contents
    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
                  / "*" / "+" / "," / ";" / "="
 
-                Figure 11: ABNF Definition of path-absolute
+                Figure 12: ABNF Definition of path-absolute
 
    edhoc-app-prof-value = bytes .cborseq SVCB_EDHOC_APP_PROF
 
@@ -1617,7 +1653,7 @@ Table of Contents
    ; is provided in Section 5.1
    APP_BSTR = bytes .cborseq APP_PROF_SEQ
 
-         Figure 12: CDDL Definition of the Value of the SvcParamKey
+         Figure 13: CDDL Definition of the Value of the SvcParamKey
                               "edhoc-app-prof"
 
 6.1.  Examples of Wire-Format Values of the SvcParamKeys
@@ -1626,8 +1662,8 @@ Table of Contents
    wire-format values of the SvcParamKeys "edhocpath" and "edhoc-app-
    prof", within an SVCB RR corresponding to a given server.
 
-   Figure 13 shows an example of the SvcParamKey "edhocpath", with
-   reference to the CDDL grammar in Figure 10.
+   Figure 14 shows an example of the SvcParamKey "edhocpath", with
+   reference to the CDDL grammar in Figure 11.
 
    In the example, two URI paths are specified, i.e., one for the EDHOC
    resource at "/.well-known/edhoc" and one for the EDHOC resource at
@@ -1643,13 +1679,13 @@ Table of Contents
      >>
    ]
 
-         Figure 13: Example of Wire-Format Value of the SvcParamKey
+         Figure 14: Example of Wire-Format Value of the SvcParamKey
                        "edhocpath" within an SVCB RR
 
    Assuming an SVCB RR that includes the SvcParamKey "edhocpath" shown
-   in Figure 13, the following Figure 14 shows an example of the
+   in Figure 14, the following Figure 15 shows an example of the
    SvcParamKey "edhoc-app-prof" within the same SVCB RR, with reference
-   to the CDDL grammar in Figure 12.  In particular, the following
+   to the CDDL grammar in Figure 13.  In particular, the following
    applies.
 
    The CBOR data item advertise_flag is present and encodes the CBOR
@@ -1702,7 +1738,7 @@ Table of Contents
       ]
    >>
 
-         Figure 14: Example of Wire-Format Value of the SvcParamKey
+         Figure 15: Example of Wire-Format Value of the SvcParamKey
                      "edhoc-app-prof" within an SVCB RR
 
 7.  Well-known EDHOC Application Profiles
@@ -2381,7 +2417,8 @@ Table of Contents
 
    *  ERR_INFO Type: app_profiles
 
-   *  Description: Supported EDHOC application profiles
+   *  Description: Unspecified error and supported EDHOC application
+      profiles
 
    *  Change Controller: IETF
 
@@ -2732,7 +2769,7 @@ Appendix A.  CDDL Model
    ; EDHOC Authentication Credential Types
    c509_cert = 3
 
-                           Figure 15: CDDL model
+                           Figure 16: CDDL model
 
 Appendix B.  Document Updates
 
@@ -2742,6 +2779,14 @@ B.1.  Version -04 to -05
 
    *  Fixed CDDL definitions of the EDHOC_Application_Profile object and
       of the ead_value for the new EAD Item.
+
+   *  Improved EDHOC error message with the new error code:
+
+      -  Extended semantics of ERR_INFO to also provide diagnostic
+         information.
+
+      -  Updated error code description to "Unspecified error and
+         supported EDHOC application profiles"
 
    *  Clarifications:
 

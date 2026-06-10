@@ -1403,8 +1403,8 @@ If a prescriptive parameter applies to an EDHOC session, a peer participating in
 </pre><a href="#section-1.1-6" class="pilcrow">¶</a>
 </div>
 <p id="section-1.1-7">CBOR data items are represented using the CBOR extended diagnostic notation as defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">Section 8</a> of [<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> ("diagnostic notation"). Diagnostic notation comments are used to provide a textual representation of the parameters' keys and values.<a href="#section-1.1-7" class="pilcrow">¶</a></p>
-<p id="section-1.1-8">In the CBOR diagnostic notation used in this document, constructs of the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 15</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. For example, {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0, 1, 2, 3], 2 : 3}.<a href="#section-1.1-8" class="pilcrow">¶</a></p>
-<p id="section-1.1-9">Note to RFC Editor: Please delete the paragraph immediately preceding this note. Also, in the CBOR diagnostic notation used in this document, please replace the constructs of the form e'SOME_NAME' with the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 15</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. Finally, please delete this note.<a href="#section-1.1-9" class="pilcrow">¶</a></p>
+<p id="section-1.1-8">In the CBOR diagnostic notation used in this document, constructs of the form e'SOME_NAME' are replaced by the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 16</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. For example, {e'methods' : [0, 1, 2, 3], e'cipher_suites': 3} stands for {1 : [0, 1, 2, 3], 2 : 3}.<a href="#section-1.1-8" class="pilcrow">¶</a></p>
+<p id="section-1.1-9">Note to RFC Editor: Please delete the paragraph immediately preceding this note. Also, in the CBOR diagnostic notation used in this document, please replace the constructs of the form e'SOME_NAME' with the value assigned to SOME_NAME in the CDDL model shown in <a href="#fig-cddl-model" class="auto internal xref">Figure 16</a> of <a href="#sec-cddl-model" class="auto internal xref">Appendix A</a>. Finally, please delete this note.<a href="#section-1.1-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2099,43 +2099,75 @@ Within the inner map, its entry's value is a CBOR byte string that encodes 0x91a
 <p id="section-5.2-1">This section defines the error code TBD_ERROR_CODE, which is registered in <a href="#iana-edhoc-error-codes-registry" class="auto internal xref">Section 11.6</a> of this document.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">Error code TBD_ERROR_CODE <span class="bcp14">MUST</span> only be used when replying to EDHOC message_1. If an EDHOC error message with error code TBD_ERROR_CODE is received as reply to an EDHOC message different from EDHOC message_1, then the recipient of the error message <span class="bcp14">MUST</span> ignore what is specified in ERR_INFO.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-3">The Responder <span class="bcp14">MUST NOT</span> abort an EDHOC session exclusively due to the wish of sending an error message with error code TBD_ERROR_CODE. Instead, the Responder can advertise the EDHOC application profiles that it supports to the Initiator by means of the EAD item "Supported EDHOC application profiles" defined in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>, specifying it in the EAD_2 field of the EDHOC message_2 to send in the EDHOC session.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.2-4">When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-6.3" class="relref">Section 6.3</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), the error message <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
-<p id="section-5.2-5">When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO <span class="bcp14">MUST</span> be a CBOR byte string with value the binary representation of the CBOR sequence APP_PROF_SEQ.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
-<p id="section-5.2-6">In particular, APP_PROF_SEQ has the same format and semantics specified in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object <span class="bcp14">MUST NOT</span> include the element "exporter_out_len" defined in <a href="#exporter-out-length" class="auto internal xref">Section 5.1.2</a>.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
-<p id="section-5.2-7">The recipient peer <span class="bcp14">MUST</span> silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format of APP_PROF_SEQ.<a href="#section-5.2-7" class="pilcrow">¶</a></p>
+<p id="section-5.2-4">When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-6.3" class="relref">Section 6.3</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), the error message <span class="bcp14">MUST NOT</span> specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code (ERR_CODE) 2 "Wrong selected cipher suite", and it conveys SUITES_R as ERR_INFO.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.2-5">When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO <span class="bcp14">MUST</span> be a CBOR byte string with value the binary representation of the CBOR sequence ERROR_OUTER_SEQ. In turn, ERROR_OUTER_SEQ is composed of the following elements, in the order specified below:<a href="#section-5.2-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-6.1">
+            <p id="section-5.2-6.1.1">The CBOR text string diagnostic_info, which encodes a human-readable diagnostic message that <span class="bcp14">SHOULD</span> be written in English (for example, "Method not supported"). The diagnostic text message provides information about the error occurred, and it is mainly intended for software engineers who during debugging need to interpret it in the context of the EDHOC specification. The diagnostic message <span class="bcp14">SHOULD</span> be provided to the calling application where it <span class="bcp14">SHOULD</span> be logged.<a href="#section-5.2-6.1.1" class="pilcrow">¶</a></p>
+<p id="section-5.2-6.1.2">
+This element conveys the same information that would be conveyed by ERR_INFO within an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error".<a href="#section-5.2-6.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-6.2">
+            <p id="section-5.2-6.2.1">The CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object <span class="bcp14">MUST NOT</span> include the element "exporter_out_len" defined in <a href="#exporter-out-length" class="auto internal xref">Section 5.1.2</a>.<a href="#section-5.2-6.2.1" class="pilcrow">¶</a></p>
+<p id="section-5.2-6.2.2">
+The recipient peer <span class="bcp14">MUST</span> silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format of APP_PROF_SEQ.<a href="#section-5.2-6.2.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.2-7">The CDDL grammar describing ERR_INFO is shown in <a href="#fig-cddl-edhoc-err-info" class="auto internal xref">Figure 9</a>.<a href="#section-5.2-7" class="pilcrow">¶</a></p>
+<span id="name-cddl-definition-of-err_info"></span><div id="fig-cddl-edhoc-err-info">
+<figure id="figure-9">
+          <div class="lang-cddl sourcecode" id="section-5.2-8.1">
+<pre>
+err-info-tbd-error-code = bytes .cborseq ERROR_OUTER_SEQ
+
+; This defines an array, the elements of which
+; are to be used in the CBOR Sequence ERROR_OUTER_SEQ:
+ERROR_OUTER_SEQ = [diagnostic_info, APP_PROF_SEQ]
+
+diagnostic_info = tstr
+
+; The full definition of APP_PROF_SEQ is provided in Section 5.1
+</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<a href="#name-cddl-definition-of-err_info" class="selfRef">CDDL Definition of ERR_INFO for the EDHOC Error Message with Error Code (ERR_CODE) TBD_ERROR_CODE "Supported EDHOC application profiles"</a>
+          </figcaption></figure>
+</div>
 <div id="example-of-errinfo">
 <section id="section-5.2.1">
           <h4 id="name-example-of-err_info">
 <a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-example-of-err_info" class="section-name selfRef">Example of ERR_INFO</a>
           </h4>
-<p id="section-5.2.1-1"><a href="#fig-example-err-info" class="auto internal xref">Figure 9</a> shows an example in CBOR diagnostic notation of ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE. With reference to the CDDL grammar in <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 5</a>, the following applies.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-2">The CBOR sequence APP_PROF_SEQ includes the following two elements:<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-1"><a href="#fig-example-err-info" class="auto internal xref">Figure 10</a> shows an example in CBOR diagnostic notation of ERR_INFO for the EDHOC error message with error code TBD_ERROR_CODE. With reference to the CDDL grammar in <a href="#fig-cddl-edhoc-err-info" class="auto internal xref">Figure 9</a> and <a href="#fig-cddl-ead-value" class="auto internal xref">Figure 5</a>, the following applies.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-2">The CBOR text string diagnostic_info encodes the text string "Method not supported".<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-3">The CBOR sequence APP_PROF_SEQ includes the following two elements:<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.2.1-3.1">
-              <p id="section-5.2.1-3.1.1">An element profile_id, specifying the Profile ID of an EDHOC application profile supported by the Responder. Specifically, that EDHOC application profile is the well-known application profile MINIMAL-CS-0 defined in <a href="#sec-well-known-app-prof-id-1" class="auto internal xref">Section 7.2</a>.<a href="#section-5.2.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.2.1-4.1">
+              <p id="section-5.2.1-4.1.1">An element profile_id, specifying the Profile ID of an EDHOC application profile supported by the Responder. Specifically, that EDHOC application profile is the well-known application profile MINIMAL-CS-0 defined in <a href="#sec-well-known-app-prof-id-1" class="auto internal xref">Section 7.2</a>.<a href="#section-5.2.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-5.2.1-3.2">
-              <p id="section-5.2.1-3.2.1">An element EDHOC_Information, which in turn includes the following parameters:<a href="#section-5.2.1-3.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-5.2.1-4.2">
+              <p id="section-5.2.1-4.2.1">An element EDHOC_Information, which in turn includes the following parameters:<a href="#section-5.2.1-4.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.2.1-3.2.2.1">
-                  <p id="section-5.2.1-3.2.2.1.1">"comb_req", with value the CBOR simple value <code>true</code> (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>.<a href="#section-5.2.1-3.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.2.1-4.2.2.1">
+                  <p id="section-5.2.1-4.2.2.1.1">"comb_req", with value the CBOR simple value <code>true</code> (0xf5), hence indicating that the Responder supports the EDHOC + OSCORE combined request defined in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>.<a href="#section-5.2.1-4.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-5.2.1-3.2.2.2">
-                  <p id="section-5.2.1-3.2.2.2.1">"eads", with value a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 777 of the corresponding EAD items supported by the Responder.<a href="#section-5.2.1-3.2.2.2.1" class="pilcrow">¶</a></p>
+                <li class="normal" id="section-5.2.1-4.2.2.2">
+                  <p id="section-5.2.1-4.2.2.2.1">"eads", with value a CBOR array. The array includes two elements encoded as unsigned integers, i.e., the EAD labels 500 and 777 of the corresponding EAD items supported by the Responder.<a href="#section-5.2.1-4.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="section-5.2.1-3.2.2.3">
-                  <p id="section-5.2.1-3.2.2.3.1">"trust_anchors", with value a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.<a href="#section-5.2.1-3.2.2.3.1" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-3.2.2.3.2">
-Within the inner map, its entry's value is a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span> corresponding to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> that the Responder supports as a trust anchor when running EDHOC.<a href="#section-5.2.1-3.2.2.3.2" class="pilcrow">¶</a></p>
+                <li class="normal" id="section-5.2.1-4.2.2.3">
+                  <p id="section-5.2.1-4.2.2.3.1">"trust_anchors", with value a CBOR map. The map includes a single element with value an inner CBOR map, which pertains to trust anchors whose purpose is the verification of authentication credentials of other EDHOC peers in an EDHOC session.<a href="#section-5.2.1-4.2.2.3.1" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-4.2.2.3.2">
+Within the inner map, its entry's value is a COSE_CertHash <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span> corresponding to an X.509 certificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> that the Responder supports as a trust anchor when running EDHOC.<a href="#section-5.2.1-4.2.2.3.2" class="pilcrow">¶</a></p>
 </li>
               </ul>
 </li>
           </ul>
 <span id="name-example-of-err_info-for-the"></span><div id="fig-example-err-info">
-<figure id="figure-9">
-            <div class="lang-cbor-diag sourcecode" id="section-5.2.1-4.1">
+<figure id="figure-10">
+            <div class="lang-cbor-diag sourcecode" id="section-5.2.1-5.1">
 <pre>
-&lt;&lt;
+&lt;&lt;                            / err-info-tbd-error-code /
+   "Method not supported",    / diagnostic_info /
    e'APP-PROF-MINIMAL-CS-0',  / profile_id /
    {                          / EDHOC_Information /
       e'comb_req' : true,
@@ -2149,8 +2181,8 @@ Within the inner map, its entry's value is a COSE_CertHash <span>[<a href="#RFC9
 &gt;&gt;
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
-<a href="#name-example-of-err_info-for-the" class="selfRef">Example of ERR_INFO for the EDHOC Error Message with Error Code TBD_ERROR_CODE</a>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<a href="#name-example-of-err_info-for-the" class="selfRef">Example of ERR_INFO for the EDHOC Error Message with Error Code (ERR_CODE) TBD_ERROR_CODE</a>
             </figcaption></figure>
 </div>
 </section>
@@ -2179,14 +2211,14 @@ The value of each CBOR byte string PATH_BSTR is the binary representation of a C
 <p id="section-6-3.1.2.1.4">
 If edhocpath-value is a CBOR array, it <span class="bcp14">MUST NOT</span> include any two elements that specify the same URI path.<a href="#section-6-3.1.2.1.4" class="pilcrow">¶</a></p>
 <p id="section-6-3.1.2.1.5">
-The CDDL grammar describing the CBOR data item edhocpath-value is shown in <a href="#fig-cddl-edhocpath-value" class="auto internal xref">Figure 10</a>.<a href="#section-6-3.1.2.1.5" class="pilcrow">¶</a></p>
+The CDDL grammar describing the CBOR data item edhocpath-value is shown in <a href="#fig-cddl-edhocpath-value" class="auto internal xref">Figure 11</a>.<a href="#section-6-3.1.2.1.5" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6-3.1.2.2">
               <p id="section-6-3.1.2.2.1">The presentation format value of "edhocpath" <span class="bcp14">SHALL</span> be a comma-separated list (see <span><a href="https://rfc-editor.org/rfc/rfc9460#appendix-A.1" class="relref">Appendix A.1</a> of [<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>) of one or more absolute paths to EDHOC resources at the server. The same considerations for the "," and "\" characters in paths for zone-file implementations as for the alpn-ids in an "alpn" SvcParam apply (see <span><a href="https://rfc-editor.org/rfc/rfc9460#section-7.1.1" class="relref">Section 7.1.1</a> of [<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>).<a href="#section-6-3.1.2.2.1" class="pilcrow">¶</a></p>
 <p id="section-6-3.1.2.2.2">
 The i-th path in the presentation format value is the textual representation of the path specified by the i-th CBOR sequence PATH_SEQ in the wire-format value (see above).<a href="#section-6-3.1.2.2.2" class="pilcrow">¶</a></p>
 <p id="section-6-3.1.2.2.3">
-The textual representation of each path follows the semantics of path-absolute shown in the ABNF definition in <a href="#fig-edhocpath-value-path-abnf" class="auto internal xref">Figure 11</a>, which is provided by the ABNF for path-absolute in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>. In particular, given the path specified by a CBOR sequence PATH_SEQ, segment-nz is the value of the first CBOR text string in PATH_SEQ (if any), while each segment is the value of a CBOR text string following the first one in PATH_SEQ (if any).<a href="#section-6-3.1.2.2.3" class="pilcrow">¶</a></p>
+The textual representation of each path follows the semantics of path-absolute shown in the ABNF definition in <a href="#fig-edhocpath-value-path-abnf" class="auto internal xref">Figure 12</a>, which is provided by the ABNF for path-absolute in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>. In particular, given the path specified by a CBOR sequence PATH_SEQ, segment-nz is the value of the first CBOR text string in PATH_SEQ (if any), while each segment is the value of a CBOR text string following the first one in PATH_SEQ (if any).<a href="#section-6-3.1.2.2.3" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
@@ -2216,7 +2248,7 @@ The SVCB RR <span class="bcp14">MUST</span> be considered malformed if APP_PROF_
 <p id="section-6-3.2.2.1.4">
 An SVCB RR might not be intended to advertise what EDHOC application profiles a server supports for a given EDHOC resource that it hosts. In such a case, server_info can be composed such that the CBOR sequence APP_PROF_SEQ pertaining to that resource only consists of a single EDHOC_Information object as an empty CBOR map.<a href="#section-6-3.2.2.1.4" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2.1.5">
-The CDDL grammar describing the CBOR data item edhoc-app-prof-value is shown in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 12</a>.<a href="#section-6-3.2.2.1.5" class="pilcrow">¶</a></p>
+The CDDL grammar describing the CBOR data item edhoc-app-prof-value is shown in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 13</a>.<a href="#section-6-3.2.2.1.5" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6-3.2.2.2">
               <p id="section-6-3.2.2.2.1">The presentation format value of "edhoc-app-prof" <span class="bcp14">SHALL</span> be the CBOR extended diagnostic notation (see <span><a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">Section 8</a> of [<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>) of edhoc-app-prof-value in the wire-format value (see above). When producing the presentation format value, care ought to be taken in representing Unicode with the limited ASCII character subset (e.g., by means of Punycode <span>[<a href="#RFC3492" class="cite xref">RFC3492</a>]</span>) and in removing unnecessary common blank spaces within the CBOR extended diagnostic notation.<a href="#section-6-3.2.2.2.1" class="pilcrow">¶</a></p>
@@ -2250,7 +2282,7 @@ The information specified by the i-th element of server_info pertains to the EDH
       </ul>
 <p id="section-6-7">A consumer <span class="bcp14">MUST</span> treat as malformed an SVCB RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.<a href="#section-6-7" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-valu"></span><div id="fig-cddl-edhocpath-value">
-<figure id="figure-10">
+<figure id="figure-11">
         <div class="lang-cddl sourcecode" id="section-6-8.1">
 <pre>
 edhocpath-value = PATH_BSTR / [2* PATH_BSTR]
@@ -2264,12 +2296,12 @@ PATH_SEQ = [* path_segment]
 path_segment = tstr
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
 <a href="#name-cddl-definition-of-the-valu" class="selfRef">CDDL Definition of the Value of the SvcParamKey "edhocpath"</a>
         </figcaption></figure>
 </div>
 <span id="name-abnf-definition-of-path-abs"></span><div id="fig-edhocpath-value-path-abnf">
-<figure id="figure-11">
+<figure id="figure-12">
         <div class="lang-abnf sourcecode" id="section-6-9.1">
 <pre>
 path-absolute = "/" [ segment-nz *( "/" segment ) ]
@@ -2285,12 +2317,12 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")"
               / "*" / "+" / "," / ";" / "="
 </pre>
 </div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-abnf-definition-of-path-abs" class="selfRef">ABNF Definition of path-absolute</a>
         </figcaption></figure>
 </div>
 <span id="name-cddl-definition-of-the-value"></span><div id="fig-cddl-edhoc-app-prof-value">
-<figure id="figure-12">
+<figure id="figure-13">
         <div class="lang-cddl sourcecode" id="section-6-10.1">
 <pre>
 edhoc-app-prof-value = bytes .cborseq SVCB_EDHOC_APP_PROF
@@ -2308,7 +2340,7 @@ server_info = APP_BSTR / [2* APP_BSTR]
 APP_BSTR = bytes .cborseq APP_PROF_SEQ
 </pre>
 </div>
-<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
 <a href="#name-cddl-definition-of-the-value" class="selfRef">CDDL Definition of the Value of the SvcParamKey "edhoc-app-prof"</a>
         </figcaption></figure>
 </div>
@@ -2318,10 +2350,10 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-examples-of-wire-format-val" class="section-name selfRef">Examples of Wire-Format Values of the SvcParamKeys</a>
         </h3>
 <p id="section-6.1-1">Using CBOR diagnostic notation, this section provides examples of wire-format values of the SvcParamKeys "edhocpath" and "edhoc-app-prof", within an SVCB RR corresponding to a given server.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2"><a href="#fig-example-svcb-edhocpath" class="auto internal xref">Figure 13</a> shows an example of the SvcParamKey "edhocpath", with reference to the CDDL grammar in <a href="#fig-cddl-edhocpath-value" class="auto internal xref">Figure 10</a>.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-2"><a href="#fig-example-svcb-edhocpath" class="auto internal xref">Figure 14</a> shows an example of the SvcParamKey "edhocpath", with reference to the CDDL grammar in <a href="#fig-cddl-edhocpath-value" class="auto internal xref">Figure 11</a>.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.1-3">In the example, two URI paths are specified, i.e., one for the EDHOC resource at "/.well-known/edhoc" and one for the EDHOC resource at "/edhoc-alt".<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <span id="name-example-of-wire-format-valu"></span><div id="fig-example-svcb-edhocpath">
-<figure id="figure-13">
+<figure id="figure-14">
           <div class="lang-cbor-diag sourcecode" id="section-6.1-4.1">
 <pre>
 [                   / edhocpath-value /
@@ -2335,11 +2367,11 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 ]
 </pre>
 </div>
-<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
 <a href="#name-example-of-wire-format-valu" class="selfRef">Example of Wire-Format Value of the SvcParamKey "edhocpath" within an SVCB RR</a>
           </figcaption></figure>
 </div>
-<p id="section-6.1-5">Assuming an SVCB RR that includes the SvcParamKey "edhocpath" shown in <a href="#fig-example-svcb-edhocpath" class="auto internal xref">Figure 13</a>, the following <a href="#fig-example-svcb-edhoc-app-prof" class="auto internal xref">Figure 14</a> shows an example of the SvcParamKey "edhoc-app-prof" within the same SVCB RR, with reference to the CDDL grammar in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 12</a>. In particular, the following applies.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
+<p id="section-6.1-5">Assuming an SVCB RR that includes the SvcParamKey "edhocpath" shown in <a href="#fig-example-svcb-edhocpath" class="auto internal xref">Figure 14</a>, the following <a href="#fig-example-svcb-edhoc-app-prof" class="auto internal xref">Figure 15</a> shows an example of the SvcParamKey "edhoc-app-prof" within the same SVCB RR, with reference to the CDDL grammar in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 13</a>. In particular, the following applies.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
 <p id="section-6.1-6">The CBOR data item advertise_flag is present and encodes the CBOR simple value <code>true</code> (0xf5), hence indicating that a peer that runs EDHOC with the server is encouraged to advertise the EDHOC application profiles that it supports, when sending to the server its first EDHOC message in an EDHOC session.<a href="#section-6.1-6" class="pilcrow">¶</a></p>
 <p id="section-6.1-7">The CBOR data item server_info is a CBOR array, which includes two CBOR byte strings APP_BSTR. In particular:<a href="#section-6.1-7" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2351,7 +2383,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 </li>
         </ul>
 <span id="name-example-of-wire-format-value"></span><div id="fig-example-svcb-edhoc-app-prof">
-<figure id="figure-14">
+<figure id="figure-15">
           <div class="lang-cbor-diag sourcecode" id="section-6.1-9.1">
 <pre>
 &lt;&lt;                                / edhoc-app-prof-value /
@@ -2385,7 +2417,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 &gt;&gt;
 </pre>
 </div>
-<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
 <a href="#name-example-of-wire-format-value" class="selfRef">Example of Wire-Format Value of the SvcParamKey "edhoc-app-prof" within an SVCB RR</a>
           </figcaption></figure>
 </div>
@@ -3010,7 +3042,7 @@ It is encouraged that DNS is used with secure communication. Known threats for u
             <p id="section-11.6-2.2.1">ERR_INFO Type: app_profiles<a href="#section-11.6-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.6-2.3">
-            <p id="section-11.6-2.3.1">Description: Supported EDHOC application profiles<a href="#section-11.6-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-11.6-2.3.1">Description: Unspecified error and supported EDHOC application profiles<a href="#section-11.6-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-11.6-2.4">
             <p id="section-11.6-2.4.1">Change Controller: IETF<a href="#section-11.6-2.4.1" class="pilcrow">¶</a></p>
@@ -3291,7 +3323,7 @@ It is encouraged that DNS is used with secure communication. Known threats for u
       </h2>
 <p id="appendix-A-1">This section is to be removed before publishing as an RFC.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-model-2"></span><div id="fig-cddl-model">
-<figure id="figure-15">
+<figure id="figure-16">
         <div class="lang-cddl sourcecode" id="appendix-A-2.1">
 <pre>
 ; EDHOC Information
@@ -3331,7 +3363,7 @@ x5t_ta_type = 34
 c509_cert = 3
 </pre>
 </div>
-<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
 <a href="#name-cddl-model-2" class="selfRef">CDDL model</a>
         </figcaption></figure>
 </div>
@@ -3353,44 +3385,55 @@ c509_cert = 3
             <p id="appendix-B.1-1.1.1">Fixed CDDL definitions of the EDHOC_Application_Profile object and of the ead_value for the new EAD Item.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">Clarifications:<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.2.1">Improved EDHOC error message with the new error code:<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.2.2.1">
-                <p id="appendix-B.1-1.2.2.1.1">Purpose of "app_prof" in the EDHOC_Application_Profile object and in the EDHOC_Information object.<a href="#appendix-B.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.2.2.1.1">Extended semantics of ERR_INFO to also provide diagnostic information.<a href="#appendix-B.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.2.2.2">
-                <p id="appendix-B.1-1.2.2.2.1">Motivation and benefits of the new EAD item and error code.<a href="#appendix-B.1-1.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.2.2.3">
-                <p id="appendix-B.1-1.2.2.3.1">Handling of deviations from what is specified by prescriptive EDHOC_Information parameters.<a href="#appendix-B.1-1.2.2.3.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.2.2.4">
-                <p id="appendix-B.1-1.2.2.4.1">Extraction of CDDL definitions from the XML, using an XPath expression.<a href="#appendix-B.1-1.2.2.4.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.2.2.5">
-                <p id="appendix-B.1-1.2.2.5.1">Short explanation of well-known profiles.<a href="#appendix-B.1-1.2.2.5.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="appendix-B.1-1.2.2.6">
-                <p id="appendix-B.1-1.2.2.6.1">Full name of error codes used through the text.<a href="#appendix-B.1-1.2.2.6.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.2.2.2.1">Updated error code description to "Unspecified error and supported EDHOC application profiles"<a href="#appendix-B.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">IANA considerations:<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.3.1">Clarifications:<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.3.2.1">
-                <p id="appendix-B.1-1.3.2.1.1">Added references to IANA registries.<a href="#appendix-B.1-1.3.2.1.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.3.2.1.1">Purpose of "app_prof" in the EDHOC_Application_Profile object and in the EDHOC_Information object.<a href="#appendix-B.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.3.2.2">
-                <p id="appendix-B.1-1.3.2.2.1">More details in the media type registration.<a href="#appendix-B.1-1.3.2.2.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.3.2.2.1">Motivation and benefits of the new EAD item and error code.<a href="#appendix-B.1-1.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.3.2.3">
-                <p id="appendix-B.1-1.3.2.3.1">Proposed codepoints picked up among unassigned ones.<a href="#appendix-B.1-1.3.2.3.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.3.2.3.1">Handling of deviations from what is specified by prescriptive EDHOC_Information parameters.<a href="#appendix-B.1-1.3.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.3.2.4">
+                <p id="appendix-B.1-1.3.2.4.1">Extraction of CDDL definitions from the XML, using an XPath expression.<a href="#appendix-B.1-1.3.2.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.3.2.5">
+                <p id="appendix-B.1-1.3.2.5.1">Short explanation of well-known profiles.<a href="#appendix-B.1-1.3.2.5.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.3.2.6">
+                <p id="appendix-B.1-1.3.2.6.1">Full name of error codes used through the text.<a href="#appendix-B.1-1.3.2.6.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.4">
-            <p id="appendix-B.1-1.4.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.4.1">IANA considerations:<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.1-1.4.2.1">
+                <p id="appendix-B.1-1.4.2.1.1">Added references to IANA registries.<a href="#appendix-B.1-1.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.4.2.2">
+                <p id="appendix-B.1-1.4.2.2.1">More details in the media type registration.<a href="#appendix-B.1-1.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.4.2.3">
+                <p id="appendix-B.1-1.4.2.3.1">Proposed codepoints picked up among unassigned ones.<a href="#appendix-B.1-1.4.2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="appendix-B.1-1.5">
+            <p id="appendix-B.1-1.5.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
