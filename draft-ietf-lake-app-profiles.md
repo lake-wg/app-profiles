@@ -661,17 +661,38 @@ Error code TBD_ERROR_CODE MUST only be used when replying to EDHOC message_1. If
 
 The Responder MUST NOT abort an EDHOC session exclusively due to the wish of sending an error message with error code TBD_ERROR_CODE. Instead, the Responder can advertise the EDHOC application profiles that it supports to the Initiator by means of the EAD item "Supported EDHOC application profiles" defined in {{sec-app-profile-edhoc-message_1_2}}, specifying it in the EAD_2 field of the EDHOC message_2 to send in the EDHOC session.
 
-When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and MUST NOT specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see {{Section 6.3 of RFC9528}}), the error message MUST NOT specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code 2 (Wrong selected cipher suite) and conveys SUITES_R as ERR_INFO.
+When replying to an EDHOC message_1 with an error message, the Responder has to consider the reason for which it is aborting the EDHOC session and MUST NOT specify error code TBD_ERROR_CODE if a different, more appropriate error code can be specified instead. For example, if the negotiation of the selected cipher suite fails (see {{Section 6.3 of RFC9528}}), the error message MUST NOT specify error code TBD_ERROR_CODE, since the error message intended to be used in that case specifies error code (ERR_CODE) 2 "Wrong selected cipher suite", and it conveys SUITES_R as ERR_INFO.
 
-When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of the CBOR sequence APP_PROF_SEQ.
+When using error code TBD_ERROR_CODE, the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of the CBOR sequence ERROR_OUTER_SEQ. In turn, ERROR_OUTER_SEQ is composed of the following elements, in the order specified below:
 
-In particular, APP_PROF_SEQ has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
+* The CBOR text string diagnostic_info, which encodes a human-readable diagnostic message that SHOULD be written in English (for example, "Method not supported"). The diagnostic text message provides information about the error occurred, and it is mainly intended for software engineers who during debugging need to interpret it in the context of the EDHOC specification. The diagnostic message SHOULD be provided to the calling application where it SHOULD be logged.
 
-The recipient peer MUST silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format of APP_PROF_SEQ.
+  This element conveys the same information that would be conveyed by ERR_INFO within an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error".
+
+* The CBOR sequence APP_PROF_SEQ, which has the same format and semantics specified in {{sec-app-profile-edhoc-message_1_2}}, except for the following difference: for each element of the CBOR sequence that is an EDHOC_Information object, such an object MUST NOT include the element "exporter_out_len" defined in {{exporter-out-length}}.
+
+  The recipient peer MUST silently ignore elements of the CBOR sequence APP_PROF_SEQ that are malformed or do not conform with the intended format of APP_PROF_SEQ.
+
+The CDDL grammar describing ERR_INFO is shown in {{fig-cddl-edhoc-err-info}}.
+
+~~~~~~~~~~~~~~~~~~~~ cddl
+err-info-tbd-error-code = bytes .cborseq ERROR_OUTER_SEQ
+
+; This defines an array, the elements of which
+; are to be used in the CBOR Sequence ERROR_OUTER_SEQ:
+ERROR_OUTER_SEQ = [diagnostic_info, APP_PROF_SEQ]
+
+diagnostic_info = tstr
+
+; The full definition of APP_PROF_SEQ is provided in Section 5.1
+~~~~~~~~~~~~~~~~~~~~
+{: #fig-cddl-edhoc-err-info title="CDDL Definition of ERR_INFO for the EDHOC Error Message with Error Code (ERR_CODE) TBD_ERROR_CODE \"Supported EDHOC application profiles\""}
 
 ### Example of ERR_INFO
 
-{{fig-example-err-info}} shows an example in CBOR diagnostic notation of ERR_INFO for the EDHOC error message with Error Code TBD_ERROR_CODE. With reference to the CDDL grammar in {{fig-cddl-ead-value}}, the following applies.
+{{fig-example-err-info}} shows an example in CBOR diagnostic notation of ERR_INFO for the EDHOC error message with error code TBD_ERROR_CODE. With reference to the CDDL grammar in {{fig-cddl-edhoc-err-info}} and {{fig-cddl-ead-value}}, the following applies.
+
+The CBOR text string diagnostic_info encodes the text string "Method not supported".
 
 The CBOR sequence APP_PROF_SEQ includes the following two elements:
 
@@ -688,7 +709,8 @@ The CBOR sequence APP_PROF_SEQ includes the following two elements:
     Within the inner map, its entry's value is a COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the Responder supports as a trust anchor when running EDHOC.
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
-<<
+<<                            / err-info-tbd-error-code /
+   "Method not supported",    / diagnostic_info /
    e'APP-PROF-MINIMAL-CS-0',  / profile_id /
    {                          / EDHOC_Information /
       e'comb_req' : true,
@@ -701,7 +723,7 @@ The CBOR sequence APP_PROF_SEQ includes the following two elements:
    }
 >>
 ~~~~~~~~~~~~~~~~~~~~
-{: #fig-example-err-info title="Example of ERR_INFO for the EDHOC Error Message with Error Code TBD_ERROR_CODE"}
+{: #fig-example-err-info title="Example of ERR_INFO for the EDHOC Error Message with Error Code (ERR_CODE) TBD_ERROR_CODE"}
 
 # Advertising Supported EDHOC Application Profiles using DNS SVCB Resource Records # {#sec-svcb}
 
@@ -1273,7 +1295,7 @@ IANA is asked to register the following entry in the "EDHOC Error Codes" registr
 
 * ERR_CODE: TBD_ERROR_CODE (range -24 to 23)
 * ERR_INFO Type: app_profiles
-* Description: Supported EDHOC application profiles
+* Description: Unspecified error and supported EDHOC application profiles
 * Change Controller: IETF
 * Reference: \[RFC-XXXX, {{sec-app-profile-edhoc-error-message}}\]
 
@@ -1379,6 +1401,12 @@ c509_cert = 3
 ## Version -04 to -05 ## {#sec-04-05}
 
 * Fixed CDDL definitions of the EDHOC_Application_Profile object and of the ead_value for the new EAD Item.
+
+* Improved EDHOC error message with the new error code:
+
+  * Extended semantics of ERR_INFO to also provide diagnostic information.
+
+  * Updated error code description to "Unspecified error and supported EDHOC application profiles"
 
 * Clarifications:
 
