@@ -389,7 +389,7 @@ When the EAD item is present, its ead_label TBD_EAD_LABEL MUST be used only with
 
 The EAD item MUST NOT occur more than once in the EAD fields of EDHOC message_1 or message_2. The recipient peer MUST abort the EDHOC session and MUST reply with an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error", if the EAD item occurs multiple times in the EAD fields of EDHOC message_1 or message_2.
 
-The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. In case the recipient peer supports the EAD item, the recipient peer MUST silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.
+The EAD item MUST NOT be included in the EAD fields of EDHOC message_3 or message_4. In the case that the recipient peer supports the EAD item, the recipient peer MUST silently ignore the EAD item if this is included in the EAD fields of EDHOC message_3 or message_4.
 
 The EAD item MUST specify an ead_value, as a CBOR byte string with value the binary representation of a CBOR sequence {{RFC8742}}. In particular:
 
@@ -791,7 +791,7 @@ If the SvcParamKey "edhoc-app-prof" is present in the SVCB RR, then the followin
 
     The information specified by the i-th element of server_info pertains to the EDHOC resource at the server with URI path specified by the i-th element of the CBOR array within the SvcParamKey "edhocpath".
 
-A consumer MUST treat as malformed an SVCB RR, in case the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.
+A consumer MUST treat as malformed an SVCB RR, in the case that the SvcParamKeys "edhocpath" and "edhoc-app-prof", if present, do not comply with the format and restrictions defined above.
 
 ~~~~~~~~~~~~~~~~~~~~ cddl
 edhocpath-value = PATH_BSTR / [2* PATH_BSTR]
@@ -906,7 +906,7 @@ The CBOR data item server_info is a CBOR array, which includes two CBOR byte str
 
 This section defines a set of well-known EDHOC application profiles that are meant to reflect what is most common and expected to be supported by EDHOC peers.
 
-The well-known application profiles are *not* to be intended as "default" profiles to use, in case no other indication is provided to EDHOC peers.
+The well-known application profiles are *not* to be intended as "default" profiles to use, in the case that no other indication is provided to EDHOC peers.
 
 In particular, an EDHOC peer MUST NOT assume that, unless otherwise indicated, any of such profiles is used when running EDHOC through a well-known EDHOC resource, such as the resource at /.well-known/edhoc when EDHOC messages are transported as payload of CoAP messages (see {{Section A.2 of RFC9528}}).
 
