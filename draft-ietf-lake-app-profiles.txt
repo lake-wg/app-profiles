@@ -228,9 +228,9 @@ Table of Contents
       application profile that is described by the instance of the
       object in question.
 
-   *  Parameters for web linking [RFC8288], which can be used to obtain
-      relevant pieces of information from the EDHOC application profile
-      associated with an EDHOC resource (see Section 4).  These
+   *  New parameters for web linking [RFC8288], which can be used to
+      obtain relevant pieces of information from the EDHOC application
+      profile associated with an EDHOC resource (see Section 4).  These
       parameters correspond to analogous elements of the
       EDHOC_Information object and extend the set of parameters for web
       linking originally defined in Section 6 of [RFC9668].  In
