@@ -165,11 +165,23 @@ Table of Contents
    available options to run the EDHOC protocol or the selection logic to
    apply on those.
 
-   The CBOR-based representation of an EDHOC application profile can be,
-   for example: retrieved as a result of a discovery process; or
-   retrieved/provided during the retrieval/provisioning of an EDHOC
-   peer's public authentication credential; or obtained during the
-   execution of a device on-boarding/registration workflow.
+   The EDHOC_Application_Profile object is a specialized alternative to
+   the EDHOC_Information object defined in Section 3.4 of
+   [I-D.ietf-ace-edhoc-oscore-profile], building on a shared parameter
+   namespace.  In particular, an EDHOC_Information object provides a
+   context-based description of an EDHOC application profile that is
+   supported under a concrete circumstance to which the object applies.
+   Conversely, an EDHOC_Application_Profile object provides a
+   description of an EDHOC application profile as an established and
+   immutable set of information about how EDHOC can be run, irrespective
+   of the concrete circumstance where EDHOC is executed.
+
+   An EDHOC_Application_Profile object providing the CBOR-based
+   representation of an EDHOC application profile can be, for example:
+   retrieved as a result of a discovery process; or retrieved/provided
+   during the retrieval/provisioning of an EDHOC peer's public
+   authentication credential; or obtained during the execution of a
+   device on-boarding/registration workflow.
 
    Furthermore, in order to facilitate interoperability between EDHOC
    implementations and to support EDHOC extensibility for additional
@@ -198,8 +210,8 @@ Table of Contents
       [I-D.ietf-ace-edhoc-oscore-profile].  When present within an
       instance of the EDHOC_Information object, this parameter
       identifies one or more EDHOC application profiles that are
-      supported under the concrete circumstance where the
-      EDHOC_Information object is used.  In particular, this parameter
+      supported under the concrete circumstance to which the
+      EDHOC_Information object applies.  In particular, this parameter
       identifies each EDHOC application profile by means of the
       corresponding Profile ID.
 
@@ -317,6 +329,16 @@ Table of Contents
    same CBOR abbreviations from the 'CBOR label' column of the IANA
    registry "EDHOC Information" defined in
    [I-D.ietf-ace-edhoc-oscore-profile].
+
+   More specifically, the EDHOC_Application_Profile object is a
+   specialized alternative to the EDHOC_Information object.  In
+   particular, an EDHOC_Information object provides a context-based
+   description of an EDHOC application profile that is supported under a
+   concrete circumstance to which the object applies.  Conversely, an
+   EDHOC_Application_Profile object provides a description of an EDHOC
+   application profile as an established and immutable set of
+   information about how EDHOC can be run, irrespective of the concrete
+   circumstance where EDHOC is executed.
 
    The CBOR map encoding an EDHOC_Application_Profile object MUST
    include the element "app_prof" defined in Section 3.2 of this
@@ -532,8 +554,8 @@ Table of Contents
 
    When present within an instance of the EDHOC_Information object, the
    parameter "app_prof" identifies one or more EDHOC application
-   profiles that are supported under the concrete circumstance where the
-   object is used.  Section 3.2.1 describes the use of the parameter
+   profiles that are supported under the concrete circumstance to which
+   the object applies.  Section 3.2.1 describes the use of the parameter
    "app_prof" within an instance of the EDHOC_Information object, when
    using the EDHOC and OSCORE profile of the ACE Framework
    [I-D.ietf-ace-edhoc-oscore-profile].
@@ -2922,6 +2944,9 @@ B.1.  Version -04 to -05
 
       -  Purpose of "app_prof" in the EDHOC_Application_Profile object
          and in the EDHOC_Information object.
+
+      -  Difference between the EDHOC_Application_Profile object and the
+         EDHOC_Information object.
 
       -  Motivation and benefits of the new EAD item and error code.
 
