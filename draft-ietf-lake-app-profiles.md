@@ -118,7 +118,9 @@ As discussed in {{Section 3.9 of RFC9528}}, applications can use EDHOC applicati
 
 In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines the EDHOC_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles as CBOR data items (see {{sec-app-profile-cbor}}). The defined representation is transport- and setup-independent, and it avoids the need to reinvent an encoding for the available options to run the EDHOC protocol or the selection logic to apply on those.
 
-The CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.
+The EDHOC_Application_Profile object is a specialized alternative to the EDHOC_Information object defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}, building on a shared parameter namespace. In particular, an EDHOC_Information object provides a context-based description of an EDHOC application profile that is supported under a concrete circumstance to which the object applies. Conversely, an EDHOC_Application_Profile object provides a description of an EDHOC application profile as an established and immutable set of information about how EDHOC can be run, irrespective of the concrete circumstance where EDHOC is executed.
+
+An EDHOC_Application_Profile object providing the CBOR-based representation of an EDHOC application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of an EDHOC peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.
 
 Furthermore, in order to facilitate interoperability between EDHOC implementations and to support EDHOC extensibility for additional integrations (e.g., external security applications, or handling of authentication credentials), this document defines a number of means to coordinate the use of EDHOC application profiles, that is:
 
@@ -128,7 +130,7 @@ Furthermore, in order to facilitate interoperability between EDHOC implementatio
 
   For instance, the target attribute can be used in a CoRE link-format document {{RFC6690}} describing EDHOC resources at a server, when EDHOC is transferred over the Constrained Application Protocol (CoAP) {{RFC7252}} (see {{Section A.2 of RFC9528}} as well as {{RFC9668}}).
 
-* The new parameter "app_prof" defined in {{sec-edhoc-information-object}} for the EDHOC_Information object specified in {{I-D.ietf-ace-edhoc-oscore-profile}}. When present within an instance of the EDHOC_Information object, this parameter identifies one or more EDHOC application profiles that are supported under the concrete circumstance where the EDHOC_Information object is used. In particular, this parameter identifies each EDHOC application profile by means of the corresponding Profile ID.
+* The new parameter "app_prof" defined in {{sec-edhoc-information-object}} for the EDHOC_Information object specified in {{I-D.ietf-ace-edhoc-oscore-profile}}. When present within an instance of the EDHOC_Information object, this parameter identifies one or more EDHOC application profiles that are supported under the concrete circumstance to which the EDHOC_Information object applies. In particular, this parameter identifies each EDHOC application profile by means of the corresponding Profile ID.
 
   For instance, the parameter can be used in the EDHOC and OSCORE profile {{I-D.ietf-ace-edhoc-oscore-profile}} of the ACE framework for authentication and authorization in constrained environments (ACE) {{RFC9200}}, in order to indicate the EDHOC application profiles supported by an ACE resource server.
 
@@ -173,6 +175,8 @@ Note to RFC Editor: Please delete the paragraph immediately preceding this note.
 This section defines the EDHOC_Application_Profile object, which can be used as a canonical representation of EDHOC application profiles for their description, distribution, and storage.
 
 An EDHOC_Application_Profile object is encoded as a CBOR map {{RFC8949}}. All elements that can be included in the EDHOC_Application_Profile object are elements that can be included in the CBOR-encoded EDHOC_Information object specified in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}. In particular, they use the same CBOR abbreviations from the 'CBOR label' column of the IANA registry "EDHOC Information" defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
+
+More specifically, the EDHOC_Application_Profile object is a specialized alternative to the EDHOC_Information object. In particular, an EDHOC_Information object provides a context-based description of an EDHOC application profile that is supported under a concrete circumstance to which the object applies. Conversely, an EDHOC_Application_Profile object provides a description of an EDHOC application profile as an established and immutable set of information about how EDHOC can be run, irrespective of the concrete circumstance where EDHOC is executed.
 
 The CBOR map encoding an EDHOC_Application_Profile object MUST include the element "app_prof" defined in {{sec-edhoc-information-object}} of this document, as well as the elements "methods" and "cred_types" defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
 
@@ -273,7 +277,7 @@ This document defines the new parameter "app\_prof" of the EDHOC_Information obj
 
 * app\_prof: This parameter specifies a set of supported EDHOC application profiles, identified by their Profile ID. If the set is composed of a single EDHOC application profile, its Profile ID is encoded as an integer. Otherwise, the set is encoded as an array of integers, where each array element encodes one Profile ID. In JSON, the "app\_prof" value is an integer or an array of integers. In CBOR, "app\_prof" is an integer or an array of integers, and it has label 23. The integer values are taken from the 'Profile ID' column of the "EDHOC Application Profiles" registry defined in {{iana-edhoc-application-profiles}} of this document.
 
-When present within an instance of the EDHOC_Information object, the parameter "app_prof" identifies one or more EDHOC application profiles that are supported under the concrete circumstance where the object is used. {{sec-app-prof-in-edhoc-profile}} describes the use of the parameter "app_prof" within an instance of the EDHOC_Information object, when using the EDHOC and OSCORE profile of the ACE Framework {{I-D.ietf-ace-edhoc-oscore-profile}}.
+When present within an instance of the EDHOC_Information object, the parameter "app_prof" identifies one or more EDHOC application profiles that are supported under the concrete circumstance to which the object applies. {{sec-app-prof-in-edhoc-profile}} describes the use of the parameter "app_prof" within an instance of the EDHOC_Information object, when using the EDHOC and OSCORE profile of the ACE Framework {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
 The CDDL grammar describing the parameter "app_prof" when included in the CBOR-encoded EDHOC_Information object is:
 
@@ -1461,6 +1465,8 @@ c509_cert = 3
 * Clarifications:
 
   * Purpose of "app_prof" in the EDHOC_Application_Profile object and in the EDHOC_Information object.
+
+  * Difference between the EDHOC_Application_Profile object and the EDHOC_Information object.
 
   * Motivation and benefits of the new EAD item and error code.
 
