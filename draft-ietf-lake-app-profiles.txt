@@ -228,12 +228,15 @@ Table of Contents
       application profile that is described by the instance of the
       object in question.
 
-   *  Additional parameters that provide information about an EDHOC
-      application profile.  These parameters correspond to elements of
-      the EDHOC_Information object and are to be used as target
-      attributes in a web link to an EDHOC resource, or as filter
-      criteria in a discovery request to discover EDHOC resources (see
-      Section 4).
+   *  Parameters for web linking [RFC8288], which can be used to obtain
+      relevant pieces of information from the EDHOC application profile
+      associated with an EDHOC resource (see Section 4).  These
+      parameters correspond to analogous elements of the
+      EDHOC_Information object and extend the set of parameters for web
+      linking originally defined in Section 6 of [RFC9668].  In
+      particular, they can be used as target attributes in a web link to
+      an EDHOC resource, or as filter criteria in a discovery request to
+      discover EDHOC resources.
 
    *  A new EDHOC External Authorization Data (EAD) item (see
       Section 5.1) and a new error code for the EDHOC error message (see
@@ -2947,6 +2950,9 @@ B.1.  Version -04 to -05
 
       -  Difference between the EDHOC_Application_Profile object and the
          EDHOC_Information object.
+
+      -  Purpose and applicability of parameters for web linking in the
+         introduction.
 
       -  Motivation and benefits of the new EAD item and error code.
 

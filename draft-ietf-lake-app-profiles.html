@@ -1369,7 +1369,7 @@ For instance, the parameter can be used in the EDHOC and OSCORE profile <span>[<
 This parameter is also used in the EDHOC_Application_Profile object defined in <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a> of this document. That is, given an instance of the EDHOC_Application_Profile object, the parameter "app_prof" included therein specifies the Profile ID of the EDHOC application profile that is described by the instance of the object in question.<a href="#section-1-8.3.3" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-8.4">
-          <p id="section-1-8.4.1">Additional parameters that provide information about an EDHOC application profile. These parameters correspond to elements of the EDHOC_Information object and are to be used as target attributes in a web link to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources (see <a href="#sec-parameters-web-linking" class="auto internal xref">Section 4</a>).<a href="#section-1-8.4.1" class="pilcrow">¶</a></p>
+          <p id="section-1-8.4.1">Parameters for web linking <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>, which can be used to obtain relevant pieces of information from the EDHOC application profile associated with an EDHOC resource (see <a href="#sec-parameters-web-linking" class="auto internal xref">Section 4</a>). These parameters correspond to analogous elements of the EDHOC_Information object and extend the set of parameters for web linking originally defined in <span><a href="https://rfc-editor.org/rfc/rfc9668#section-6" class="relref">Section 6</a> of [<a href="#RFC9668" class="cite xref">RFC9668</a>]</span>. In particular, they can be used as target attributes in a web link to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources.<a href="#section-1-8.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-8.5">
           <p id="section-1-8.5.1">A new EDHOC External Authorization Data (EAD) item (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>) and a new error code for the EDHOC error message (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>). When running EDHOC, a peer can use those in order to advertise the EDHOC application profiles that it supports to the other peer.<a href="#section-1-8.5.1" class="pilcrow">¶</a></p>
@@ -3521,22 +3521,25 @@ c509_cert = 3
                 <p id="appendix-B.1-1.4.2.2.1">Difference between the EDHOC_Application_Profile object and the EDHOC_Information object.<a href="#appendix-B.1-1.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.4.2.3">
-                <p id="appendix-B.1-1.4.2.3.1">Motivation and benefits of the new EAD item and error code.<a href="#appendix-B.1-1.4.2.3.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.4.2.3.1">Purpose and applicability of parameters for web linking in the introduction.<a href="#appendix-B.1-1.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.4.2.4">
-                <p id="appendix-B.1-1.4.2.4.1">Handling of deviations from what is specified by prescriptive EDHOC_Information parameters.<a href="#appendix-B.1-1.4.2.4.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.4.2.4.1">Motivation and benefits of the new EAD item and error code.<a href="#appendix-B.1-1.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.4.2.5">
-                <p id="appendix-B.1-1.4.2.5.1">Extraction of CDDL definitions from the XML, using an XPath expression.<a href="#appendix-B.1-1.4.2.5.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.4.2.5.1">Handling of deviations from what is specified by prescriptive EDHOC_Information parameters.<a href="#appendix-B.1-1.4.2.5.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.4.2.6">
-                <p id="appendix-B.1-1.4.2.6.1">Short explanation of well-known profiles.<a href="#appendix-B.1-1.4.2.6.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.4.2.6.1">Extraction of CDDL definitions from the XML, using an XPath expression.<a href="#appendix-B.1-1.4.2.6.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.4.2.7">
-                <p id="appendix-B.1-1.4.2.7.1">Full name of error codes used through the text.<a href="#appendix-B.1-1.4.2.7.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.4.2.7.1">Short explanation of well-known profiles.<a href="#appendix-B.1-1.4.2.7.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.4.2.8">
-                <p id="appendix-B.1-1.4.2.8.1">Gained knowledge about other peers is persisted only if verified as reliable and authentic.<a href="#appendix-B.1-1.4.2.8.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.4.2.8.1">Full name of error codes used through the text.<a href="#appendix-B.1-1.4.2.8.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.4.2.9">
+                <p id="appendix-B.1-1.4.2.9.1">Gained knowledge about other peers is persisted only if verified as reliable and authentic.<a href="#appendix-B.1-1.4.2.9.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
