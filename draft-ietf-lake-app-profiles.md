@@ -136,7 +136,7 @@ Furthermore, in order to facilitate interoperability between EDHOC implementatio
 
   This parameter is also used in the EDHOC_Application_Profile object defined in {{sec-app-profile-cbor}} of this document. That is, given an instance of the EDHOC_Application_Profile object, the parameter "app_prof" included therein specifies the Profile ID of the EDHOC application profile that is described by the instance of the object in question.
 
-* Additional parameters that provide information about an EDHOC application profile. These parameters correspond to elements of the EDHOC_Information object and are to be used as target attributes in a web link to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources (see {{sec-parameters-web-linking}}).
+* Parameters for web linking {{RFC8288}}, which can be used to obtain relevant pieces of information from the EDHOC application profile associated with an EDHOC resource (see {{sec-parameters-web-linking}}). These parameters correspond to analogous elements of the EDHOC_Information object and extend the set of parameters for web linking originally defined in {{Section 6 of RFC9668}}. In particular, they can be used as target attributes in a web link to an EDHOC resource, or as filter criteria in a discovery request to discover EDHOC resources.
 
 * A new EDHOC External Authorization Data (EAD) item (see {{sec-app-profile-edhoc-message_1_2}}) and a new error code for the EDHOC error message (see {{sec-app-profile-edhoc-error-message}}). When running EDHOC, a peer can use those in order to advertise the EDHOC application profiles that it supports to the other peer.
 
@@ -1467,6 +1467,8 @@ c509_cert = 3
   * Purpose of "app_prof" in the EDHOC_Application_Profile object and in the EDHOC_Information object.
 
   * Difference between the EDHOC_Application_Profile object and the EDHOC_Information object.
+
+  * Purpose and applicability of parameters for web linking in the introduction.
 
   * Motivation and benefits of the new EAD item and error code.
 
