@@ -10,22 +10,23 @@
 <meta content="
        The lightweight authenticated key exchange protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) requires certain parameters to be agreed out-of-band, in order to ensure its successful completion. To this end, application profiles specify the intended use of EDHOC to allow for the relevant processing and verifications to be made. In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines a canonical, CBOR-based representation that can be used to describe, distribute, and store EDHOC application profiles. Furthermore, in order to facilitate interoperability between EDHOC implementations and support EDHOC extensibility for additional integrations, this document defines a number of means to coordinate the use of EDHOC application profiles. Finally, this document defines a set of well-known EDHOC application profiles. 
     " name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-lake-app-profiles-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.2
 -->
 <link href="draft-ietf-lake-app-profiles.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1044,11 +1045,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">EDHOC Application Profiles</td>
-<td class="right">June 2026</td>
+<td class="right">July 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 14 December 2026</td>
+<td class="center">Expires 7 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1062,12 @@ svg {
 <dd class="internet-draft">draft-ietf-lake-app-profiles-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-12" class="published">12 June 2026</time>
+<time datetime="2026-07-06" class="published">6 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-14">14 December 2026</time></dd>
+<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1115,7 +1116,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1899,7 +1900,7 @@ $$EDHOC_Information_item //= (
 <a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-indicating-support-for-sess" class="section-name selfRef">Indicating Support for Session Resumption with EDHOC-PSK</a>
           </h4>
 <p id="section-5.1.2-1">The specification <span>[<a href="#I-D.ietf-lake-edhoc-psk" class="cite xref">I-D.ietf-lake-edhoc-psk</a>]</span> defines EDHOC-PSK, an EDHOC authentication method by which two peers use a symmetric Pre-Shared Key (PSK) to mutually authenticate during an EDHOC session.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-2">In particular, <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-07#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-lake-edhoc-psk" class="cite xref">I-D.ietf-lake-edhoc-psk</a>]</span> defines how EDHOC-PSK is used to perform session resumption. That is, after successfully completing an EDHOC session, two peers that support session resumption with EDHOC-PSK can derive a resumption PSK and the corresponding key identifier. Later on, the two peers can run EDHOC using the authentication method EDHOC-PSK, authenticating each other by using the resumption PSK.<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-2">In particular, <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-08#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-lake-edhoc-psk" class="cite xref">I-D.ietf-lake-edhoc-psk</a>]</span> defines how EDHOC-PSK is used to perform session resumption. That is, after successfully completing an EDHOC session, two peers that support session resumption with EDHOC-PSK can derive a resumption PSK and the corresponding key identifier. Later on, the two peers can run EDHOC using the authentication method EDHOC-PSK, authenticating each other by using the resumption PSK.<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-3">This document defines the new parameter "psk_resumption" of the EDHOC_Information object (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-edhoc-oscore-profile-10#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-ace-edhoc-oscore-profile" class="cite xref">I-D.ietf-ace-edhoc-oscore-profile</a>]</span>). The parameter is of type non-prescriptive (NP) and is summarized in <a href="#_table-cbor-key-edhoc-params-psk-resumption" class="auto internal xref">Table 2</a>. The parameter is specified further below.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
 <span id="name-edhoc_information-parameter-"></span><div id="_table-cbor-key-edhoc-params-psk-resumption">
 <table class="center" id="table-2">
@@ -2173,7 +2174,7 @@ Within the inner map, its entry's value is a CBOR byte string that encodes 0x91a
 <p id="section-5.2-5">When using error code (ERR_CODE) TBD_ERROR_CODE "Unspecified error and supported EDHOC application profiles", the error information specified in ERR_INFO <span class="bcp14">MUST</span> be a CBOR byte string with value the binary representation of the CBOR sequence ERROR_OUTER_SEQ. In turn, ERROR_OUTER_SEQ is composed of the following elements, in the order specified below:<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-6.1">
-            <p id="section-5.2-6.1.1">The CBOR text string diagnostic_info, which encodes a human-readable diagnostic message that <span class="bcp14">SHOULD</span> be written in English (for example, "Method not supported"). The diagnostic text message provides information about the error occurred, and it is mainly intended for software engineers who during debugging need to interpret it in the context of the EDHOC specification. The diagnostic message <span class="bcp14">SHOULD</span> be provided to the calling application where it <span class="bcp14">SHOULD</span> be logged.<a href="#section-5.2-6.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-6.1.1">The CBOR text string diagnostic_info, which encodes a human-readable diagnostic message that <span class="bcp14">SHOULD</span> be written in English (for example, "Method not supported"). The diagnostic text message provides information about the error that occurred, and it is mainly intended for software engineers who during debugging need to interpret it in the context of the EDHOC specification. The diagnostic message <span class="bcp14">SHOULD</span> be provided to the calling application where it <span class="bcp14">SHOULD</span> be logged.<a href="#section-5.2-6.1.1" class="pilcrow">¶</a></p>
 <p id="section-5.2-6.1.2">
 This element conveys the same information that would be conveyed by ERR_INFO within an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error" (see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-5.2-6.1.2" class="pilcrow">¶</a></p>
 </li>
@@ -2583,7 +2584,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
 }
 </pre><a href="#section-7.4-1" class="pilcrow">¶</a>
 </div>
-<p id="section-7.4-2">This basic application profile is suitable for EDHOC peers with fairly limited capabilities, and it differs from the one in <a href="#sec-well-known-app-prof-id-2" class="auto internal xref">Section 7.3</a> only by indicating a different EDHOC cipher suite (0) from those inteded for constrained environments.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
+<p id="section-7.4-2">This basic application profile is suitable for EDHOC peers with fairly limited capabilities, and it differs from the one in <a href="#sec-well-known-app-prof-id-2" class="auto internal xref">Section 7.3</a> only by indicating a different EDHOC cipher suite (0) from those intended for constrained environments.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
 <p id="section-7.4-3">This application profile is aligned with the example trace of EDHOC compiled in <span><a href="https://rfc-editor.org/rfc/rfc9529#section-2" class="relref">Section 2</a> of [<a href="#RFC9529" class="cite xref">RFC9529</a>]</span>.<a href="#section-7.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3293,11 +3294,11 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <dd class="break"></dd>
 <dt id="I-D.ietf-cose-cbor-encoded-cert">[I-D.ietf-cose-cbor-encoded-cert]</dt>
         <dd>
-<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, <span class="refAuthor">Furuhed, M.</span>, and <span class="refAuthor">L. Liao</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-19</span>, <time datetime="2026-05-11" class="refDate">11 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-19">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-19</a>&gt;</span>. </dd>
+<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, <span class="refAuthor">Furuhed, M.</span>, and <span class="refAuthor">L. Liao</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-20</span>, <time datetime="2026-06-30" class="refDate">30 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-20">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-20</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lake-edhoc-psk">[I-D.ietf-lake-edhoc-psk]</dt>
         <dd>
-<span class="refAuthor">Lopez-Perez</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Marin-Lopez, R.</span>, and <span class="refAuthor">F. Lopez-Gomez</span>, <span class="refTitle">"EDHOC Authenticated with Pre-Shared Keys (PSK)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-psk-07</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-07">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Lopez-Perez</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Marin-Lopez, R.</span>, and <span class="refAuthor">F. Lopez-Gomez</span>, <span class="refTitle">"EDHOC Authenticated with Pre-Shared Keys (PSK)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-psk-08</span>, <time datetime="2026-06-16" class="refDate">16 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-08">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
