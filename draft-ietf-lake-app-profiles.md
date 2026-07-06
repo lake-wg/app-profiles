@@ -700,7 +700,7 @@ When replying to an EDHOC message_1 with an error message, the Responder has to 
 
 When using error code (ERR_CODE) TBD_ERROR_CODE "Unspecified error and supported EDHOC application profiles", the error information specified in ERR_INFO MUST be a CBOR byte string with value the binary representation of the CBOR sequence ERROR_OUTER_SEQ. In turn, ERROR_OUTER_SEQ is composed of the following elements, in the order specified below:
 
-* The CBOR text string diagnostic_info, which encodes a human-readable diagnostic message that SHOULD be written in English (for example, "Method not supported"). The diagnostic text message provides information about the error occurred, and it is mainly intended for software engineers who during debugging need to interpret it in the context of the EDHOC specification. The diagnostic message SHOULD be provided to the calling application where it SHOULD be logged.
+* The CBOR text string diagnostic_info, which encodes a human-readable diagnostic message that SHOULD be written in English (for example, "Method not supported"). The diagnostic text message provides information about the error that occurred, and it is mainly intended for software engineers who during debugging need to interpret it in the context of the EDHOC specification. The diagnostic message SHOULD be provided to the calling application where it SHOULD be logged.
 
   This element conveys the same information that would be conveyed by ERR_INFO within an EDHOC error message with error code (ERR_CODE) 1 "Unspecified error" (see {{Section 6.2 of RFC9528}}).
 
@@ -1011,7 +1011,7 @@ This application profile is aligned with the example trace of EDHOC compiled in 
 }
 ~~~~~~~~~~~~~~~~~~~~
 
-This basic application profile is suitable for EDHOC peers with fairly limited capabilities, and it differs from the one in {{sec-well-known-app-prof-id-2}} only by indicating a different EDHOC cipher suite (0) from those inteded for constrained environments.
+This basic application profile is suitable for EDHOC peers with fairly limited capabilities, and it differs from the one in {{sec-well-known-app-prof-id-2}} only by indicating a different EDHOC cipher suite (0) from those intended for constrained environments.
 
 This application profile is aligned with the example trace of EDHOC compiled in {{Section 2 of RFC9529}}.
 
