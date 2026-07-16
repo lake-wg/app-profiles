@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 7 January 2027                                      6 July 2026
+Expires: 17 January 2027                                    16 July 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 January 2027.
+   This Internet-Draft will expire on 17 January 2027.
 
 Copyright Notice
 
@@ -127,11 +127,12 @@ Table of Contents
      12.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
-     B.1.  Version -04 to -05
-     B.2.  Version -03 to -04
-     B.3.  Version -02 to -03
-     B.4.  Version -01 to -02
-     B.5.  Version -00 to -01
+     B.1.  Version -05 to -06
+     B.2.  Version -04 to -05
+     B.3.  Version -03 to -04
+     B.4.  Version -02 to -03
+     B.5.  Version -01 to -02
+     B.6.  Version -00 to -01
    Acknowledgments
    Authors' Addresses
 
@@ -2573,7 +2574,7 @@ Table of Contents
    Parameter Keys (SvcParamKeys)" registry [DNS.SVCB.SvcParamKeys]
    within the "DNS Service Bindings (SVCB)" registry group.
 
-   *  Number: 12 (suggested)
+   *  Number: TBD1
 
    *  Name: edhocpath
 
@@ -2585,7 +2586,7 @@ Table of Contents
 
 
 
-   *  Number: 13 (suggested)
+   *  Number: TBD2
 
    *  Name: edhoc-app-prof
 
@@ -2716,9 +2717,9 @@ Table of Contents
               Security for Constrained Environments (OSCORE) Profile for
               Authentication and Authorization for Constrained
               Environments (ACE)", Work in Progress, Internet-Draft,
-              draft-ietf-ace-edhoc-oscore-profile-10, 1 March 2026,
+              draft-ietf-ace-edhoc-oscore-profile-11, 6 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
-              edhoc-oscore-profile-10>.
+              edhoc-oscore-profile-11>.
 
    [I-D.ietf-cose-cbor-encoded-cert]
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J.,
@@ -2926,7 +2927,11 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -04 to -05
+B.1.  Version -05 to -06
+
+   *  IANA considerations: use TBD placeholders.
+
+B.2.  Version -04 to -05
 
    *  Fixed CDDL definitions of the EDHOC_Application_Profile object and
       of the ead_value for the new EAD Item.
@@ -2979,7 +2984,7 @@ B.1.  Version -04 to -05
 
    *  Editorial fixes and improvements.
 
-B.2.  Version -03 to -04
+B.3.  Version -03 to -04
 
    *  Removed parameters that were removed from draft-ietf-ace-edhoc-
       oscore-profile.
@@ -3028,7 +3033,7 @@ B.2.  Version -03 to -04
 
    *  Editorial fixes and improvements.
 
-B.3.  Version -02 to -03
+B.4.  Version -02 to -03
 
    *  Removed restrictions on the scope of the EDHOC_Application_Profile
       object.
@@ -3052,7 +3057,7 @@ B.3.  Version -02 to -03
 
    *  Clarifications and editorial improvements.
 
-B.4.  Version -01 to -02
+B.5.  Version -01 to -02
 
    *  Revised order of sections.
 
@@ -3107,7 +3112,7 @@ B.4.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.5.  Version -00 to -01
+B.6.  Version -00 to -01
 
    *  Clarified motivation in the abstract and introduction.
 
