@@ -1355,7 +1355,7 @@ IANA is asked to register the following entry in the "EDHOC Error Codes" registr
 
 IANA is asked to add the following entries to the "DNS SVCB Service Parameter Keys (SvcParamKeys)" registry {{DNS.SVCB.SvcParamKeys}} within the "DNS Service Bindings (SVCB)" registry group.
 
-* Number: 12 (suggested)
+* Number: TBD1
 * Name: edhocpath
 * Meaning: EDHOC resource path
 * Change Controller: IETF
@@ -1363,7 +1363,7 @@ IANA is asked to add the following entries to the "DNS SVCB Service Parameter Ke
 
 <br>
 
-* Number: 13 (suggested)
+* Number: TBD2
 * Name: edhoc-app-prof
 * Meaning: Supported EDHOC application profiles
 * Change Controller: IETF
@@ -1449,6 +1449,10 @@ c509_cert = 3
 
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
+
+## Version -05 to -06 ## {#sec-05-06}
+
+* IANA considerations: use TBD placeholders.
 
 ## Version -04 to -05 ## {#sec-04-05}
 
