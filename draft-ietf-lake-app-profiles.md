@@ -469,7 +469,7 @@ ead_2_value = bytes .cborseq APP_PROF_SEQ
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence OUTER_SEQ:
-OUTER_SEQ = [?advertise_flag, APP_PROF_SEQ]
+OUTER_SEQ = [?advertise_flag, ~APP_PROF_SEQ]
 
 advertise_flag = bool
 
@@ -715,7 +715,7 @@ err-info = bytes .cborseq ERROR_OUTER_SEQ
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence ERROR_OUTER_SEQ:
-ERROR_OUTER_SEQ = [diagnostic_info, APP_PROF_SEQ]
+ERROR_OUTER_SEQ = [diagnostic_info, ~APP_PROF_SEQ]
 
 diagnostic_info = tstr
 
@@ -1449,6 +1449,10 @@ c509_cert = 3
 
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
+
+## Version -06 to -07 ## {#sec-06-07}
+
+* Fixed CDDL definition of OUTER_SEQ and ERROR_OUTER_SEQ.
 
 ## Version -05 to -06 ## {#sec-05-06}
 
