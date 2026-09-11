@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 17 January 2027                                    16 July 2026
+Expires: 15 March 2027                                 11 September 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 January 2027.
+   This Internet-Draft will expire on 15 March 2027.
 
 Copyright Notice
 
@@ -127,12 +127,13 @@ Table of Contents
      12.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
-     B.1.  Version -05 to -06
-     B.2.  Version -04 to -05
-     B.3.  Version -03 to -04
-     B.4.  Version -02 to -03
-     B.5.  Version -01 to -02
-     B.6.  Version -00 to -01
+     B.1.  Version -06 to -07
+     B.2.  Version -05 to -06
+     B.3.  Version -04 to -05
+     B.4.  Version -03 to -04
+     B.5.  Version -02 to -03
+     B.6.  Version -01 to -02
+     B.7.  Version -00 to -01
    Acknowledgments
    Authors' Addresses
 
@@ -991,7 +992,7 @@ Table of Contents
 
    ; This defines an array, the elements of which
    ; are to be used in the CBOR Sequence OUTER_SEQ:
-   OUTER_SEQ = [?advertise_flag, APP_PROF_SEQ]
+   OUTER_SEQ = [?advertise_flag, ~APP_PROF_SEQ]
 
    advertise_flag = bool
 
@@ -1484,7 +1485,7 @@ Table of Contents
 
    ; This defines an array, the elements of which
    ; are to be used in the CBOR Sequence ERROR_OUTER_SEQ:
-   ERROR_OUTER_SEQ = [diagnostic_info, APP_PROF_SEQ]
+   ERROR_OUTER_SEQ = [diagnostic_info, ~APP_PROF_SEQ]
 
    diagnostic_info = tstr
 
@@ -2733,9 +2734,9 @@ Table of Contents
               Lopez-Perez, Selander, G., Mattsson, J. P., Marin-Lopez,
               R., and F. Lopez-Gomez, "EDHOC Authenticated with Pre-
               Shared Keys (PSK)", Work in Progress, Internet-Draft,
-              draft-ietf-lake-edhoc-psk-08, 16 June 2026,
+              draft-ietf-lake-edhoc-psk-09, 8 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
-              edhoc-psk-08>.
+              edhoc-psk-09>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -2927,11 +2928,15 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -05 to -06
+B.1.  Version -06 to -07
+
+   *  Fixed CDDL definition of OUTER_SEQ and ERROR_OUTER_SEQ.
+
+B.2.  Version -05 to -06
 
    *  IANA considerations: use TBD placeholders.
 
-B.2.  Version -04 to -05
+B.3.  Version -04 to -05
 
    *  Fixed CDDL definitions of the EDHOC_Application_Profile object and
       of the ead_value for the new EAD Item.
@@ -2984,7 +2989,7 @@ B.2.  Version -04 to -05
 
    *  Editorial fixes and improvements.
 
-B.3.  Version -03 to -04
+B.4.  Version -03 to -04
 
    *  Removed parameters that were removed from draft-ietf-ace-edhoc-
       oscore-profile.
@@ -3033,7 +3038,7 @@ B.3.  Version -03 to -04
 
    *  Editorial fixes and improvements.
 
-B.4.  Version -02 to -03
+B.5.  Version -02 to -03
 
    *  Removed restrictions on the scope of the EDHOC_Application_Profile
       object.
@@ -3057,7 +3062,7 @@ B.4.  Version -02 to -03
 
    *  Clarifications and editorial improvements.
 
-B.5.  Version -01 to -02
+B.6.  Version -01 to -02
 
    *  Revised order of sections.
 
@@ -3112,7 +3117,7 @@ B.5.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.6.  Version -00 to -01
+B.7.  Version -00 to -01
 
    *  Clarified motivation in the abstract and introduction.
 
