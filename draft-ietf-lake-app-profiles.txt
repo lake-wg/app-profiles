@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 15 March 2027                                 11 September 2026
+Expires: 15 April 2027                                   12 October 2026
 
 
    Coordinating the Use of Application Profiles for Ephemeral Diffie-
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 March 2027.
+   This Internet-Draft will expire on 15 April 2027.
 
 Copyright Notice
 
@@ -127,13 +127,12 @@ Table of Contents
      12.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
-     B.1.  Version -06 to -07
-     B.2.  Version -05 to -06
-     B.3.  Version -04 to -05
-     B.4.  Version -03 to -04
-     B.5.  Version -02 to -03
-     B.6.  Version -01 to -02
-     B.7.  Version -00 to -01
+     B.1.  Version -05 to -06
+     B.2.  Version -04 to -05
+     B.3.  Version -03 to -04
+     B.4.  Version -02 to -03
+     B.5.  Version -01 to -02
+     B.6.  Version -00 to -01
    Acknowledgments
    Authors' Addresses
 
@@ -2726,17 +2725,17 @@ Table of Contents
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J.,
               Furuhed, M., and L. Liao, "CBOR Encoded X.509 Certificates
               (C509 Certificates)", Work in Progress, Internet-Draft,
-              draft-ietf-cose-cbor-encoded-cert-20, 30 June 2026,
+              draft-ietf-cose-cbor-encoded-cert-21, 24 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-20>.
+              cbor-encoded-cert-21>.
 
    [I-D.ietf-lake-edhoc-psk]
               Lopez-Perez, Selander, G., Mattsson, J. P., Marin-Lopez,
-              R., and F. Lopez-Gomez, "EDHOC Authenticated with Pre-
-              Shared Keys (PSK)", Work in Progress, Internet-Draft,
-              draft-ietf-lake-edhoc-psk-09, 8 September 2026,
+              R., and F. Lopez-Gomez, "LAKE Authenticated with Pre-
+              Shared Keys (PSKs)", Work in Progress, Internet-Draft,
+              draft-ietf-lake-edhoc-psk-10, 5 October 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
-              edhoc-psk-09>.
+              edhoc-psk-10>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -2928,15 +2927,13 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -06 to -07
+B.1.  Version -05 to -06
+
+   *  IANA considerations: use TBD placeholders for SvcParamKeys.
 
    *  Fixed CDDL definition of OUTER_SEQ and ERROR_OUTER_SEQ.
 
-B.2.  Version -05 to -06
-
-   *  IANA considerations: use TBD placeholders.
-
-B.3.  Version -04 to -05
+B.2.  Version -04 to -05
 
    *  Fixed CDDL definitions of the EDHOC_Application_Profile object and
       of the ead_value for the new EAD Item.
@@ -2989,7 +2986,7 @@ B.3.  Version -04 to -05
 
    *  Editorial fixes and improvements.
 
-B.4.  Version -03 to -04
+B.3.  Version -03 to -04
 
    *  Removed parameters that were removed from draft-ietf-ace-edhoc-
       oscore-profile.
@@ -3038,7 +3035,7 @@ B.4.  Version -03 to -04
 
    *  Editorial fixes and improvements.
 
-B.5.  Version -02 to -03
+B.4.  Version -02 to -03
 
    *  Removed restrictions on the scope of the EDHOC_Application_Profile
       object.
@@ -3062,7 +3059,7 @@ B.5.  Version -02 to -03
 
    *  Clarifications and editorial improvements.
 
-B.6.  Version -01 to -02
+B.5.  Version -01 to -02
 
    *  Revised order of sections.
 
@@ -3117,7 +3114,7 @@ B.6.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.7.  Version -00 to -01
+B.6.  Version -00 to -01
 
    *  Clarified motivation in the abstract and introduction.
 
