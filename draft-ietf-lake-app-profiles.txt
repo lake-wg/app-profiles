@@ -96,7 +96,7 @@ Table of Contents
    6.  Advertising Supported EDHOC Application Profiles using DNS SVCB
            Resource Records
      6.1.  Examples of Wire-Format Values of the SvcParamKeys
-   7.  Well-known EDHOC Application Profiles
+   7.  Well-Known EDHOC Application Profiles
      7.1.  Well-Known Application Profile MINIMAL-CS-2
      7.2.  Well-Known Application Profile MINIMAL-CS-0
      7.3.  Well-Known Application Profile BASIC-CS-2-X509
@@ -106,7 +106,7 @@ Table of Contents
      7.7.  Well-Known Application Profile INTERMEDIATE-CS-2
      7.8.  Well-Known Application Profile INTERMEDIATE-CS-0
      7.9.  Well-Known Application Profile EXTENSIVE
-   8.  Identifiers of Well-known EDHOC Application Profiles
+   8.  Identifiers of Well-Known EDHOC Application Profiles
    9.  Operational Considerations
      9.1.  Relation with Network Operations
      9.2.  Source of Data for Network Operators
@@ -1848,7 +1848,7 @@ Table of Contents
          Figure 16: Example of Wire-Format Value of the SvcParamKey
                      "edhoc-app-prof" within an SVCB RR
 
-7.  Well-known EDHOC Application Profiles
+7.  Well-Known EDHOC Application Profiles
 
    This section defines a set of well-known EDHOC application profiles
    that are meant to reflect what is most common and expected to be
@@ -2069,7 +2069,7 @@ Table of Contents
    This application profile is aligned with the example traces of EDHOC
    compiled in Sections 2 and 3 of [RFC9529].
 
-8.  Identifiers of Well-known EDHOC Application Profiles
+8.  Identifiers of Well-Known EDHOC Application Profiles
 
    This document defines the following identifiers of well-known EDHOC
    application profiles.
@@ -2136,7 +2136,7 @@ Table of Contents
     |         |                   | x5chain, c5t, c5c)   |            |
     +---------+-------------------+----------------------+------------+
 
-               Table 4: EDHOC Well-known Application Profiles
+               Table 4: EDHOC Well-Known Application Profiles
 
 9.  Operational Considerations
 
@@ -2936,6 +2936,8 @@ B.1.  Version -05 to -06
       -  Of advertise_flag in the SvcParamKey.
 
    *  IANA considerations: use TBD placeholders for SvcParamKeys.
+
+   *  Editorial fixes.
 
 B.2.  Version -04 to -05
 
