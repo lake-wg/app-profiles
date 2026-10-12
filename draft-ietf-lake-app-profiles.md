@@ -863,7 +863,7 @@ edhoc-app-prof-value = bytes .cborseq SVCB_EDHOC_APP_PROF
 ; are to be used in the CBOR Sequence SVCB_EDHOC_APP_PROF:
 SVCB_EDHOC_APP_PROF = [?advertise_flag, server_info]
 
-advertise_flag = bool
+advertise_flag = true
 
 server_info = APP_BSTR / [2* APP_BSTR]
 
@@ -1452,9 +1452,13 @@ c509_cert = 3
 
 ## Version -05 to -06 ## {#sec-05-06}
 
-* IANA considerations: use TBD placeholders for SvcParamKeys.
+* Fixed CDDL definitions:
 
-* Fixed CDDL definition of OUTER_SEQ and ERROR_OUTER_SEQ.
+  * Of OUTER_SEQ and ERROR_OUTER_SEQ.
+
+  * Of advertise_flag in the SvcParamKey.
+
+* IANA considerations: use TBD placeholders for SvcParamKeys.
 
 ## Version -04 to -05 ## {#sec-04-05}
 
