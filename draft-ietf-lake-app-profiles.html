@@ -2402,7 +2402,7 @@ edhoc-app-prof-value = bytes .cborseq SVCB_EDHOC_APP_PROF
 ; are to be used in the CBOR Sequence SVCB_EDHOC_APP_PROF:
 SVCB_EDHOC_APP_PROF = [?advertise_flag, server_info]
 
-advertise_flag = bool
+advertise_flag = true
 
 server_info = APP_BSTR / [2* APP_BSTR]
 
@@ -3496,10 +3496,18 @@ c509_cert = 3
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">IANA considerations: use TBD placeholders for SvcParamKeys.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Fixed CDDL definitions:<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.1-1.1.2.1">
+                <p id="appendix-B.1-1.1.2.1.1">Of OUTER_SEQ and ERROR_OUTER_SEQ.<a href="#appendix-B.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="appendix-B.1-1.1.2.2">
+                <p id="appendix-B.1-1.1.2.2.1">Of advertise_flag in the SvcParamKey.<a href="#appendix-B.1-1.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">Fixed CDDL definition of OUTER_SEQ and ERROR_OUTER_SEQ.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.2.1">IANA considerations: use TBD placeholders for SvcParamKeys.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
