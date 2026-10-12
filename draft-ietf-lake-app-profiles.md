@@ -937,7 +937,7 @@ The CBOR data item server_info is a CBOR array, which includes two CBOR byte str
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-example-svcb-edhoc-app-prof title="Example of Wire-Format Value of the SvcParamKey \"edhoc-app-prof\" within an SVCB RR"}
 
-# Well-known EDHOC Application Profiles # {#sec-well-known-app-profiles}
+# Well-Known EDHOC Application Profiles # {#sec-well-known-app-profiles}
 
 This section defines a set of well-known EDHOC application profiles that are meant to reflect what is most common and expected to be supported by EDHOC peers.
 
@@ -1110,7 +1110,7 @@ This extensive application profile is suitable for EDHOC peers that, even if wit
 
 This application profile is aligned with the example traces of EDHOC compiled in {{Sections 2 and 3 of RFC9529}}.
 
-# Identifiers of Well-known EDHOC Application Profiles # {#sec-edhoc-well-known-app-profiles}
+# Identifiers of Well-Known EDHOC Application Profiles # {#sec-edhoc-well-known-app-profiles}
 
 This document defines the following identifiers of well-known EDHOC application profiles.
 
@@ -1126,7 +1126,7 @@ Note to RFC Editor: Please replace all occurrences of "\[RFC-XXXX\]" with the RF
 | 6          | INTERMEDIATE-CS-2 | Methods (0, 3); Cipher Suite 2; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | \[RFC-XXXX, {{sec-well-known-app-prof-id-6}}\] |
 | 7          | INTERMEDIATE-CS-0 | Methods (0, 3); Cipher Suite 0; (CCS, X.509/C509 certificates); (kid, kccs, x5t, x5chain, c5t, c5c)                              | \[RFC-XXXX, {{sec-well-known-app-prof-id-7}}\] |
 | 8          | EXTENSIVE         | Methods (0, 1, 2, 3); Cipher Suites (0, 1, 2, 3); (CCS, CWT, X.509/C509 certificates); (kid, kccs, kcwt, x5t, x5chain, c5t, c5c) | \[RFC-XXXX, {{sec-well-known-app-prof-id-8}}\] |
-{: #table-edhoc-well-known-app-profiles title="EDHOC Well-known Application Profiles" align="center"}
+{: #table-edhoc-well-known-app-profiles title="EDHOC Well-Known Application Profiles" align="center"}
 
 # Operational Considerations
 
@@ -1459,6 +1459,8 @@ c509_cert = 3
   * Of advertise_flag in the SvcParamKey.
 
 * IANA considerations: use TBD placeholders for SvcParamKeys.
+
+* Editorial fixes.
 
 ## Version -04 to -05 ## {#sec-04-05}
 
