@@ -1450,13 +1450,11 @@ c509_cert = 3
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
 
-## Version -06 to -07 ## {#sec-06-07}
-
-* Fixed CDDL definition of OUTER_SEQ and ERROR_OUTER_SEQ.
-
 ## Version -05 to -06 ## {#sec-05-06}
 
-* IANA considerations: use TBD placeholders.
+* IANA considerations: use TBD placeholders for SvcParamKeys.
+
+* Fixed CDDL definition of OUTER_SEQ and ERROR_OUTER_SEQ.
 
 ## Version -04 to -05 ## {#sec-04-05}
 
