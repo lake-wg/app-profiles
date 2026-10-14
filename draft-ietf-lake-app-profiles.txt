@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 16 April 2027                                   13 October 2026
+Expires: 17 April 2027                                   14 October 2026
 
 
     Coordinating the Use of Application Profiles for the Lightweight
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 April 2027.
+   This Internet-Draft will expire on 17 April 2027.
 
 Copyright Notice
 
@@ -167,13 +167,13 @@ Table of Contents
    The LAKE_Application_Profile object is a specialized alternative to
    the LAKE_Information object defined in Section 3.4 of
    [I-D.ietf-ace-edhoc-oscore-profile], building on a shared parameter
-   namespace.  In particular, a LAKE_Information object provides a
-   context-based description of a LAKE application profile that is
-   supported under a concrete circumstance to which the object applies.
-   Conversely, a LAKE_Application_Profile object provides a description
-   of a LAKE application profile as an established and immutable set of
-   information about how LAKE can be run, irrespective of the concrete
-   circumstance where LAKE is executed.
+   namespace.  In particular, a LAKE_Information object can be used to
+   provide a context-based description of a LAKE application profile
+   that is supported under a concrete circumstance to which the object
+   applies.  Conversely, a LAKE_Application_Profile object provides a
+   description of a LAKE application profile as an established and
+   immutable set of information about how LAKE can be run, irrespective
+   of the concrete circumstance where LAKE is executed.
 
    A LAKE_Application_Profile object providing the CBOR-based
    representation of a LAKE application profile can be, for example:
@@ -339,11 +339,11 @@ Table of Contents
 
    More specifically, the LAKE_Application_Profile object is a
    specialized alternative to the LAKE_Information object.  In
-   particular, a LAKE_Information object provides a context-based
-   description of a LAKE application profile that is supported under a
-   concrete circumstance to which the object applies.  Conversely, a
-   LAKE_Application_Profile object provides a description of a LAKE
-   application profile as an established and immutable set of
+   particular, a LAKE_Information object can be used to provide a
+   context-based description of a LAKE application profile that is
+   supported under a concrete circumstance to which the object applies.
+   Conversely, a LAKE_Application_Profile object provides a description
+   of a LAKE application profile as an established and immutable set of
    information about how LAKE can be run, irrespective of the concrete
    circumstance where LAKE is executed.
 
@@ -527,8 +527,8 @@ Table of Contents
 
    Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile] defines the
    LAKE_Information object and an initial set of its parameters.  The
-   object can be used to convey information that guides two peers about
-   executing the LAKE protocol.
+   object can be used to convey information that guides two peers
+   towards executing the LAKE protocol.
 
    This document defines the new parameter "app_prof" of the
    LAKE_Information object.  The parameter is of type non-prescriptive
