@@ -527,8 +527,8 @@ Table of Contents
 
    Section 3.4 of [I-D.ietf-ace-edhoc-oscore-profile] defines the
    LAKE_Information object and an initial set of its parameters.  The
-   object can be used to convey information that guides two peers
-   towards executing the LAKE protocol.
+   object can be used to convey information that guides peers towards
+   executing the LAKE protocol.
 
    This document defines the new parameter "app_prof" of the
    LAKE_Information object.  The parameter is of type non-prescriptive
