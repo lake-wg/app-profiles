@@ -269,7 +269,7 @@ RES: 2.05 Content
 
 ## In the LAKE\_Information Object # {#sec-edhoc-information-object}
 
-{{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}} defines the LAKE_Information object and an initial set of its parameters. The object can be used to convey information that guides two peers towards executing the LAKE protocol.
+{{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}} defines the LAKE_Information object and an initial set of its parameters. The object can be used to convey information that guides peers towards executing the LAKE protocol.
 
 This document defines the new parameter "app\_prof" of the LAKE_Information object. The parameter is of type non-prescriptive (NP) and is summarized in {{table-cbor-key-edhoc-params}}. The parameter is specified further below.
 
