@@ -118,7 +118,7 @@ As discussed in {{Section 3.9 of RFC9528}}, applications can use LAKE applicatio
 
 In order to ensure the applicability of such parameters and information beyond transport- or setup-specific scenarios, this document defines the LAKE_Application_Profile object, i.e., a canonical, CBOR-based representation that can be used to describe, distribute, and store LAKE application profiles as CBOR data items {{RFC8949}} (see {{sec-app-profile-cbor}}). The defined representation is transport- and setup-independent, and it avoids the need to reinvent an encoding for the available options to run the LAKE protocol or the selection logic to apply on those.
 
-The LAKE_Application_Profile object is a specialized alternative to the LAKE_Information object defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}, building on a shared parameter namespace. In particular, a LAKE_Information object provides a context-based description of a LAKE application profile that is supported under a concrete circumstance to which the object applies. Conversely, a LAKE_Application_Profile object provides a description of a LAKE application profile as an established and immutable set of information about how LAKE can be run, irrespective of the concrete circumstance where LAKE is executed.
+The LAKE_Application_Profile object is a specialized alternative to the LAKE_Information object defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}, building on a shared parameter namespace. In particular, a LAKE_Information object can be used to provide a context-based description of a LAKE application profile that is supported under a concrete circumstance to which the object applies. Conversely, a LAKE_Application_Profile object provides a description of a LAKE application profile as an established and immutable set of information about how LAKE can be run, irrespective of the concrete circumstance where LAKE is executed.
 
 A LAKE_Application_Profile object providing the CBOR-based representation of a LAKE application profile can be, for example: retrieved as a result of a discovery process; or retrieved/provided during the retrieval/provisioning of a LAKE peer's public authentication credential; or obtained during the execution of a device on-boarding/registration workflow.
 
@@ -178,7 +178,7 @@ This section defines the LAKE_Application_Profile object, which can be used as a
 
 A LAKE_Application_Profile object is encoded as a CBOR map {{RFC8949}}. All elements that can be included in the LAKE_Application_Profile object are elements that can be included in the CBOR-encoded LAKE_Information object specified in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}. In particular, they use the same CBOR abbreviations from the 'CBOR label' column of the IANA registry "LAKE Information" defined in {{I-D.ietf-ace-edhoc-oscore-profile}}.
 
-More specifically, the LAKE_Application_Profile object is a specialized alternative to the LAKE_Information object. In particular, a LAKE_Information object provides a context-based description of a LAKE application profile that is supported under a concrete circumstance to which the object applies. Conversely, a LAKE_Application_Profile object provides a description of a LAKE application profile as an established and immutable set of information about how LAKE can be run, irrespective of the concrete circumstance where LAKE is executed.
+More specifically, the LAKE_Application_Profile object is a specialized alternative to the LAKE_Information object. In particular, a LAKE_Information object can be used to provide a context-based description of a LAKE application profile that is supported under a concrete circumstance to which the object applies. Conversely, a LAKE_Application_Profile object provides a description of a LAKE application profile as an established and immutable set of information about how LAKE can be run, irrespective of the concrete circumstance where LAKE is executed.
 
 The CBOR map encoding a LAKE_Application_Profile object MUST include the element "app_prof" defined in {{sec-edhoc-information-object}} of this document, as well as the elements "methods" and "cred_types" defined in {{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}}.
 
@@ -269,7 +269,7 @@ RES: 2.05 Content
 
 ## In the LAKE\_Information Object # {#sec-edhoc-information-object}
 
-{{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}} defines the LAKE_Information object and an initial set of its parameters. The object can be used to convey information that guides two peers about executing the LAKE protocol.
+{{Section 3.4 of I-D.ietf-ace-edhoc-oscore-profile}} defines the LAKE_Information object and an initial set of its parameters. The object can be used to convey information that guides two peers towards executing the LAKE protocol.
 
 This document defines the new parameter "app\_prof" of the LAKE_Information object. The parameter is of type non-prescriptive (NP) and is summarized in {{table-cbor-key-edhoc-params}}. The parameter is specified further below.
 
