@@ -32,6 +32,7 @@ author:
 
 normative:
   RFC3986:
+  RFC4648:
   RFC5280:
   RFC6690:
   RFC6838:
@@ -336,13 +337,13 @@ When specifying any of the parameters defined below in a link to a LAKE resource
 
 * 'ed-ta-edcred-uuid': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other LAKE peers, as a UUID {{RFC9562}}. This parameter MUST specify a single value, which is the UUID in its string format (see Section 4 of {{RFC9562}}). This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-edcred-kid': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other LAKE peers, as a binary key identifier. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the key identifier. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-kid': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other LAKE peers, as a binary key identifier. This parameter MUST specify a single value, which is the base64url-encoding (see {{Section 5 of RFC4648}}) without padding of the binary representation of the key identifier. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-edcred-c5t': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other LAKE peers, as a hash of a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-c5t': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other LAKE peers, as a hash of a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the base64url-encoding (see {{Section 5 of RFC4648}}) without padding of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
 * 'ed-ta-edcred-c5u': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other LAKE peers, as a URI {{RFC3986}} pointing to a C509 certificate {{I-D.ietf-cose-cbor-encoded-cert}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
-* 'ed-ta-edcred-x5t': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other LAKE peers, as a hash of an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the base64url-encoded text string of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
+* 'ed-ta-edcred-x5t': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other LAKE peers, as a hash of an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the base64url-encoding (see {{Section 5 of RFC4648}}) without padding of the binary representation of the certificate hash encoded as a COSE_CertHash {{RFC9360}}. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
 * 'ed-ta-edcred-x5u': Specifies the identifier of a trust anchor supported by the server for verifying authentication credentials of other LAKE peers, as a URI {{RFC3986}} pointing to an X.509 certificate {{RFC5280}}. This parameter MUST specify a single value, which is the URI pointing to the certificate. This parameter MAY occur multiple times, with each occurrence specifying one trust anchor identifier.
 
@@ -350,11 +351,11 @@ When specifying any of the parameters defined below in a link to a LAKE resource
 
 The example in {{fig-web-link-example-2}} extends the earlier example in {{fig-web-link-example}}, by additionally showing the use of the target attributes 'ed-ta-edcred-kid' and 'ed-ta-edcred-x5t'. Compared to the example in {{fig-web-link-example}}, the following also applies.
 
-* The link to the LAKE resource at /.well-known/edhoc includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "AKw", i.e., the base64url-encoded text string of 0x00ac. The latter is the binary key identifier of a trust anchor supported by the server when running LAKE through that resource.
+* The link to the LAKE resource at /.well-known/edhoc includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "AKw", i.e., the base64url-encoding without padding of 0x00ac. The latter is the binary key identifier of a trust anchor supported by the server when running LAKE through that resource.
 
-* The link to the LAKE resource at /lake-alt includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "\_wH\_", i.e., the base64url-encoded text string of 0xff01ff. The latter is the binary key identifier of a trust anchor supported by the server when running LAKE through that resource.
+* The link to the LAKE resource at /lake-alt includes the target attribute 'ed-ta-edcred-kid'. The target attribute has value "\_wH\_", i.e., the base64url-encoding without padding of 0xff01ff. The latter is the binary key identifier of a trust anchor supported by the server when running LAKE through that resource.
 
-* The link to the LAKE resource at /lake-alt includes the target attribute 'ed-ta-edcred-x5t'. The target attribute has value "gi5IefKkG1EMH5s", i.e., the base64url-encoded text string of 0x822e4879f2a41b510c1f9b. The latter is the binary representation of the COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the server supports as a trust anchor when running LAKE through that resource. In CBOR diagnostic notation, the considered COSE_CertHash is as follows: \[-15, h'79f2a41b510c1f9b'\].
+* The link to the LAKE resource at /lake-alt includes the target attribute 'ed-ta-edcred-x5t'. The target attribute has value "gi5IefKkG1EMH5s", i.e., the base64url-encoding without padding of 0x822e4879f2a41b510c1f9b. The latter is the binary representation of the COSE_CertHash {{RFC9360}} corresponding to an X.509 certificate {{RFC5280}} that the server supports as a trust anchor when running LAKE through that resource. In CBOR diagnostic notation, the considered COSE_CertHash is as follows: \[-15, h'79f2a41b510c1f9b'\].
 
 ~~~~~~~~~~~~~~~~~
 REQ: GET /.well-known/core
@@ -1473,6 +1474,8 @@ c509_cert = 3
   * Of OUTER_SEQ and ERROR_OUTER_SEQ.
 
   * Of advertise_flag in the SvcParamKey.
+
+* Added reference to RFC 4648; more precise wording on base64 encoding.
 
 * IANA considerations: use TBD placeholders for SvcParamKeys.
 
