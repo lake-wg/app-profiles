@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 17 April 2027                                   14 October 2026
+Expires: 18 April 2027                                   15 October 2026
 
 
     Coordinating the Use of Application Profiles for the Lightweight
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 April 2027.
+   This Internet-Draft will expire on 18 April 2027.
 
 Copyright Notice
 
@@ -689,19 +689,21 @@ Table of Contents
    *  'ed-ta-edcred-kid': Specifies the identifier of a trust anchor
       supported by the server for verifying authentication credentials
       of other LAKE peers, as a binary key identifier.  This parameter
-      MUST specify a single value, which is the base64url-encoded text
-      string of the binary representation of the key identifier.  This
-      parameter MAY occur multiple times, with each occurrence
-      specifying one trust anchor identifier.
+      MUST specify a single value, which is the base64url-encoding (see
+      Section 5 of [RFC4648]) without padding of the binary
+      representation of the key identifier.  This parameter MAY occur
+      multiple times, with each occurrence specifying one trust anchor
+      identifier.
 
    *  'ed-ta-edcred-c5t': Specifies the identifier of a trust anchor
       supported by the server for verifying authentication credentials
       of other LAKE peers, as a hash of a C509 certificate
       [I-D.ietf-cose-cbor-encoded-cert].  This parameter MUST specify a
-      single value, which is the base64url-encoded text string of the
-      binary representation of the certificate hash encoded as a
-      COSE_CertHash [RFC9360].  This parameter MAY occur multiple times,
-      with each occurrence specifying one trust anchor identifier.
+      single value, which is the base64url-encoding (see Section 5 of
+      [RFC4648]) without padding of the binary representation of the
+      certificate hash encoded as a COSE_CertHash [RFC9360].  This
+      parameter MAY occur multiple times, with each occurrence
+      specifying one trust anchor identifier.
 
    *  'ed-ta-edcred-c5u': Specifies the identifier of a trust anchor
       supported by the server for verifying authentication credentials
@@ -715,10 +717,10 @@ Table of Contents
       supported by the server for verifying authentication credentials
       of other LAKE peers, as a hash of an X.509 certificate [RFC5280].
       This parameter MUST specify a single value, which is the
-      base64url-encoded text string of the binary representation of the
-      certificate hash encoded as a COSE_CertHash [RFC9360].  This
-      parameter MAY occur multiple times, with each occurrence
-      specifying one trust anchor identifier.
+      base64url-encoding (see Section 5 of [RFC4648]) without padding of
+      the binary representation of the certificate hash encoded as a
+      COSE_CertHash [RFC9360].  This parameter MAY occur multiple times,
+      with each occurrence specifying one trust anchor identifier.
 
    *  'ed-ta-edcred-x5u': Specifies the identifier of a trust anchor
       supported by the server for verifying authentication credentials
@@ -742,19 +744,19 @@ Table of Contents
 
    *  The link to the LAKE resource at /.well-known/edhoc includes the
       target attribute 'ed-ta-edcred-kid'.  The target attribute has
-      value "AKw", i.e., the base64url-encoded text string of 0x00ac.
-      The latter is the binary key identifier of a trust anchor
+      value "AKw", i.e., the base64url-encoding without padding of
+      0x00ac.  The latter is the binary key identifier of a trust anchor
       supported by the server when running LAKE through that resource.
 
    *  The link to the LAKE resource at /lake-alt includes the target
       attribute 'ed-ta-edcred-kid'.  The target attribute has value
-      "_wH_", i.e., the base64url-encoded text string of 0xff01ff.  The
-      latter is the binary key identifier of a trust anchor supported by
-      the server when running LAKE through that resource.
+      "_wH_", i.e., the base64url-encoding without padding of 0xff01ff.
+      The latter is the binary key identifier of a trust anchor
+      supported by the server when running LAKE through that resource.
 
    *  The link to the LAKE resource at /lake-alt includes the target
       attribute 'ed-ta-edcred-x5t'.  The target attribute has value
-      "gi5IefKkG1EMH5s", i.e., the base64url-encoded text string of
+      "gi5IefKkG1EMH5s", i.e., the base64url-encoding without padding of
       0x822e4879f2a41b510c1f9b.  The latter is the binary representation
       of the COSE_CertHash [RFC9360] corresponding to an X.509
       certificate [RFC5280] that the server supports as a trust anchor
@@ -2744,6 +2746,10 @@ Table of Contents
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
               <https://www.rfc-editor.org/rfc/rfc3986>.
 
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
+              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
+              <https://www.rfc-editor.org/rfc/rfc4648>.
+
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
@@ -2948,6 +2954,9 @@ B.1.  Version -05 to -06
       -  Of OUTER_SEQ and ERROR_OUTER_SEQ.
 
       -  Of advertise_flag in the SvcParamKey.
+
+   *  Added reference to RFC 4648; more precise wording on base64
+      encoding.
 
    *  IANA considerations: use TBD placeholders for SvcParamKeys.
 
