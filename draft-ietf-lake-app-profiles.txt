@@ -1627,12 +1627,12 @@ Table of Contents
          considered malformed if the SvcParamValue ends within lake-app-
          prof-value or if lake-app-prof-value is malformed.
 
-         o  The first element advertise_flag is OPTIONAL.  If present,
-            it MUST encode the CBOR simple value true (0xf5).  If
-            advertise_flag is present, a peer that runs LAKE with the
-            server is encouraged to advertise the LAKE application
-            profiles that it supports, when sending to the server its
-            first LAKE message in a LAKE session.
+         o  The first element advertise_flag_svcb is OPTIONAL.  If
+            present, it MUST encode the CBOR simple value true (0xf5).
+            If advertise_flag_svcb is present, a peer that runs LAKE
+            with the server is encouraged to advertise the LAKE
+            application profiles that it supports, when sending to the
+            server its first LAKE message in a LAKE session.
 
             In order to do that, the peer can rely as appropriate on the
             LAKE EAD item "Supported LAKE application profiles" (see
@@ -1751,9 +1751,9 @@ Table of Contents
 
    ; This defines an array, the elements of which
    ; are to be used in the CBOR Sequence SVCB_LAKE_APP_PROF:
-   SVCB_LAKE_APP_PROF = [?advertise_flag, server_info]
+   SVCB_LAKE_APP_PROF = [?advertise_flag_svcb, server_info]
 
-   advertise_flag = true
+   advertise_flag_svcb = true
 
    server_info = APP_BSTR / [2* APP_BSTR]
 
@@ -1796,9 +1796,9 @@ Table of Contents
    to the CDDL grammar in Figure 14.  In particular, the following
    applies.
 
-   The CBOR data item advertise_flag is present and encodes the CBOR
-   simple value true (0xf5), hence indicating that a peer that runs LAKE
-   with the server is encouraged to advertise the LAKE application
+   The CBOR data item advertise_flag_svcb is present and encodes the
+   CBOR simple value true (0xf5), hence indicating that a peer that runs
+   LAKE with the server is encouraged to advertise the LAKE application
    profiles that it supports, when sending to the server its first LAKE
    message in a LAKE session.
 
@@ -1817,7 +1817,7 @@ Table of Contents
       running LAKE through the resource with URI path "/lake-alt".
 
    <<                                / lake-app-prof-value /
-      true,                          / advertise_flag /
+      true,                          / advertise_flag_svcb /
       [                              / server_info /
         <<                           / APP_BSTR /
           e'APP-PROF-MINIMAL-CS-2',  / profile_id /
@@ -2953,7 +2953,7 @@ B.1.  Version -05 to -06
 
       -  Of OUTER_SEQ and ERROR_OUTER_SEQ.
 
-      -  Of advertise_flag in the SvcParamKey.
+      -  Of advertise_flag_svcb in the SvcParamKey (was advertise_flag).
 
    *  Added reference to RFC 4648; more precise wording on base64
       encoding.

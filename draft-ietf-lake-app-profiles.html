@@ -2303,7 +2303,7 @@ The textual representation of each path follows the semantics of path-absolute s
 In particular, lake-app-prof-value <span class="bcp14">MUST</span> be a CBOR byte string. The value of the CBOR byte string is the binary representation of the CBOR sequence SVCB_LAKE_APP_PROF, which is composed of one or two elements as specified below. The SVCB RR <span class="bcp14">MUST</span> be considered malformed if the SvcParamValue ends within lake-app-prof-value or if lake-app-prof-value is malformed.<a href="#section-6-3.2.2.1.2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6-3.2.2.1.3.1">
-                  <p id="section-6-3.2.2.1.3.1.1">The first element advertise_flag is <span class="bcp14">OPTIONAL</span>. If present, it <span class="bcp14">MUST</span> encode the CBOR simple value <code>true</code> (0xf5). If advertise_flag is present, a peer that runs LAKE with the server is encouraged to advertise the LAKE application profiles that it supports, when sending to the server its first LAKE message in a LAKE session.<a href="#section-6-3.2.2.1.3.1.1" class="pilcrow">¶</a></p>
+                  <p id="section-6-3.2.2.1.3.1.1">The first element advertise_flag_svcb is <span class="bcp14">OPTIONAL</span>. If present, it <span class="bcp14">MUST</span> encode the CBOR simple value <code>true</code> (0xf5). If advertise_flag_svcb is present, a peer that runs LAKE with the server is encouraged to advertise the LAKE application profiles that it supports, when sending to the server its first LAKE message in a LAKE session.<a href="#section-6-3.2.2.1.3.1.1" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2.1.3.1.2">
 In order to do that, the peer can rely as appropriate on the LAKE EAD item "Supported LAKE application profiles" (see <a href="#sec-app-profile-edhoc-message_1_2" class="auto internal xref">Section 5.1</a>) when sending a LAKE message_1 or message_2, or on a LAKE error message with error code (ERR_CODE) TBD_ERROR_CODE "Unspecified error and supported LAKE application profiles" (see <a href="#sec-app-profile-edhoc-error-message" class="auto internal xref">Section 5.2</a>).<a href="#section-6-3.2.2.1.3.1.2" class="pilcrow">¶</a></p>
 <p id="section-6-3.2.2.1.3.1.3">
@@ -2401,9 +2401,9 @@ lake-app-prof-value = bytes .cborseq SVCB_LAKE_APP_PROF
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence SVCB_LAKE_APP_PROF:
-SVCB_LAKE_APP_PROF = [?advertise_flag, server_info]
+SVCB_LAKE_APP_PROF = [?advertise_flag_svcb, server_info]
 
-advertise_flag = true
+advertise_flag_svcb = true
 
 server_info = APP_BSTR / [2* APP_BSTR]
 
@@ -2444,7 +2444,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
           </figcaption></figure>
 </div>
 <p id="section-6.1-5">Assuming an SVCB RR that includes the SvcParamKey "lakepath" shown in <a href="#fig-example-svcb-edhocpath" class="auto internal xref">Figure 15</a>, the following <a href="#fig-example-svcb-edhoc-app-prof" class="auto internal xref">Figure 16</a> shows an example of the SvcParamKey "lake-app-prof" within the same SVCB RR, with reference to the CDDL grammar in <a href="#fig-cddl-edhoc-app-prof-value" class="auto internal xref">Figure 14</a>. In particular, the following applies.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
-<p id="section-6.1-6">The CBOR data item advertise_flag is present and encodes the CBOR simple value <code>true</code> (0xf5), hence indicating that a peer that runs LAKE with the server is encouraged to advertise the LAKE application profiles that it supports, when sending to the server its first LAKE message in a LAKE session.<a href="#section-6.1-6" class="pilcrow">¶</a></p>
+<p id="section-6.1-6">The CBOR data item advertise_flag_svcb is present and encodes the CBOR simple value <code>true</code> (0xf5), hence indicating that a peer that runs LAKE with the server is encouraged to advertise the LAKE application profiles that it supports, when sending to the server its first LAKE message in a LAKE session.<a href="#section-6.1-6" class="pilcrow">¶</a></p>
 <p id="section-6.1-7">The CBOR data item server_info is a CBOR array, which includes two CBOR byte strings APP_BSTR. In particular:<a href="#section-6.1-7" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-8.1">
@@ -2459,7 +2459,7 @@ APP_BSTR = bytes .cborseq APP_PROF_SEQ
           <div class="lang-cbor-diag sourcecode" id="section-6.1-9.1">
 <pre>
 &lt;&lt;                                / lake-app-prof-value /
-   true,                          / advertise_flag /
+   true,                          / advertise_flag_svcb /
    [                              / server_info /
      &lt;&lt;                           / APP_BSTR /
        e'APP-PROF-MINIMAL-CS-2',  / profile_id /
@@ -3530,7 +3530,7 @@ c509_cert = 3
                 <p id="appendix-B.1-1.2.2.1.1">Of OUTER_SEQ and ERROR_OUTER_SEQ.<a href="#appendix-B.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="appendix-B.1-1.2.2.2">
-                <p id="appendix-B.1-1.2.2.2.1">Of advertise_flag in the SvcParamKey.<a href="#appendix-B.1-1.2.2.2.1" class="pilcrow">¶</a></p>
+                <p id="appendix-B.1-1.2.2.2.1">Of advertise_flag_svcb in the SvcParamKey (was advertise_flag).<a href="#appendix-B.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
