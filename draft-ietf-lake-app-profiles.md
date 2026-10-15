@@ -793,7 +793,7 @@ To this end, this document specifies the SvcParamKeys "lakepath" and "lake-app-p
 
     In particular, lake-app-prof-value MUST be a CBOR byte string. The value of the CBOR byte string is the binary representation of the CBOR sequence SVCB_LAKE_APP_PROF, which is composed of one or two elements as specified below. The SVCB RR MUST be considered malformed if the SvcParamValue ends within lake-app-prof-value or if lake-app-prof-value is malformed.
 
-    * The first element advertise_flag is OPTIONAL. If present, it MUST encode the CBOR simple value `true` (0xf5). If advertise_flag is present, a peer that runs LAKE with the server is encouraged to advertise the LAKE application profiles that it supports, when sending to the server its first LAKE message in a LAKE session.
+    * The first element advertise_flag_svcb is OPTIONAL. If present, it MUST encode the CBOR simple value `true` (0xf5). If advertise_flag_svcb is present, a peer that runs LAKE with the server is encouraged to advertise the LAKE application profiles that it supports, when sending to the server its first LAKE message in a LAKE session.
 
       In order to do that, the peer can rely as appropriate on the LAKE EAD item "Supported LAKE application profiles" (see {{sec-app-profile-edhoc-message_1_2}}) when sending a LAKE message_1 or message_2, or on a LAKE error message with error code (ERR_CODE) TBD_ERROR_CODE "Unspecified error and supported LAKE application profiles" (see {{sec-app-profile-edhoc-error-message}}).
 
@@ -864,9 +864,9 @@ lake-app-prof-value = bytes .cborseq SVCB_LAKE_APP_PROF
 
 ; This defines an array, the elements of which
 ; are to be used in the CBOR Sequence SVCB_LAKE_APP_PROF:
-SVCB_LAKE_APP_PROF = [?advertise_flag, server_info]
+SVCB_LAKE_APP_PROF = [?advertise_flag_svcb, server_info]
 
-advertise_flag = true
+advertise_flag_svcb = true
 
 server_info = APP_BSTR / [2* APP_BSTR]
 
@@ -899,7 +899,7 @@ In the example, two URI paths are specified, i.e., one for the LAKE resource at 
 
 Assuming an SVCB RR that includes the SvcParamKey "lakepath" shown in {{fig-example-svcb-edhocpath}}, the following {{fig-example-svcb-edhoc-app-prof}} shows an example of the SvcParamKey "lake-app-prof" within the same SVCB RR, with reference to the CDDL grammar in {{fig-cddl-edhoc-app-prof-value}}. In particular, the following applies.
 
-The CBOR data item advertise_flag is present and encodes the CBOR simple value `true` (0xf5), hence indicating that a peer that runs LAKE with the server is encouraged to advertise the LAKE application profiles that it supports, when sending to the server its first LAKE message in a LAKE session.
+The CBOR data item advertise_flag_svcb is present and encodes the CBOR simple value `true` (0xf5), hence indicating that a peer that runs LAKE with the server is encouraged to advertise the LAKE application profiles that it supports, when sending to the server its first LAKE message in a LAKE session.
 
 The CBOR data item server_info is a CBOR array, which includes two CBOR byte strings APP_BSTR. In particular:
 
@@ -909,7 +909,7 @@ The CBOR data item server_info is a CBOR array, which includes two CBOR byte str
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 <<                                / lake-app-prof-value /
-   true,                          / advertise_flag /
+   true,                          / advertise_flag_svcb /
    [                              / server_info /
      <<                           / APP_BSTR /
        e'APP-PROF-MINIMAL-CS-2',  / profile_id /
@@ -1473,7 +1473,7 @@ c509_cert = 3
 
   * Of OUTER_SEQ and ERROR_OUTER_SEQ.
 
-  * Of advertise_flag in the SvcParamKey.
+  * Of advertise_flag_svcb in the SvcParamKey (was advertise_flag).
 
 * Added reference to RFC 4648; more precise wording on base64 encoding.
 
