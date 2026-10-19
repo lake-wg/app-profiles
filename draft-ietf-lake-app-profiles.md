@@ -147,7 +147,7 @@ Finally, this document defines a set of well-known LAKE application profiles (se
 
 ## Terminology ## {#terminology}
 
-{::boilerplate bcp14-tagged}
+{::boilerplate bcp14-tagged-bcp14}
 
 The reader is expected to be familiar with terms and concepts defined in LAKE {{RFC9528}} and with the use of LAKE with CoAP {{RFC7252}} and OSCORE {{RFC8613}} defined in {{RFC9668}}.
 
