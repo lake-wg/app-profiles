@@ -213,6 +213,8 @@ LAKE_Application_Profile = {
 ~~~~~~~~~~~~~~~~~~~~
 {: #fig-cddl-edhoc_application-profile-object title="CDDL Definition of the LAKE_Application_Profile object"}
 
+{{iana-media-type}} registers the media type "application/lake-app-profile+cbor-seq" and {{iana-content-format}} registers the corresponding CoAP Content-Format. Applications can use this media type to describe, distribute, and store a representation of a set of one or more LAKE application profiles. In particular, the media type can be used by messages whose payload conveys a set of one or more LAKE application profiles. When using this media type, the set of LAKE application profiles is encoded as a CBOR sequence {{RFC8742}} of CBOR maps {{RFC8949}}. Each of the CBOR maps is a LAKE_Application_Profile object as defined in this section.
+
 # Identifying LAKE Application Profiles by Profile ID
 
 This document introduces the concept of Profile IDs, i.e., integer values that uniquely identify LAKE application profiles, for which an IANA registry is defined in {{iana-edhoc-application-profiles}}.
@@ -1217,7 +1219,7 @@ Interoperability considerations: N/A
 
 Published specification: {{&SELF}}
 
-Applications that use this media type: Applications that need to describe, distribute, and store a representation of a LAKE application profile (see {{sec-app-profile-cbor}} of {{&SELF}} and {{Section 3.9 of RFC9528}}).
+Applications that use this media type: Applications that need to describe, distribute, and store a representation of a set of one or more LAKE application profiles (see {{sec-app-profile-cbor}} of {{&SELF}} and {{Section 3.9 of RFC9528}}).
 
 Fragment identifier considerations: N/A
 
@@ -1454,6 +1456,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -06 to -07 ## {#sec-06-07}
+
+* Relate the LAKE_Application_Profile object to the corresponding media type "application/lake-app-profile+cbor-seq".
 
 * Use normative language on not storing hints until verified.
 
