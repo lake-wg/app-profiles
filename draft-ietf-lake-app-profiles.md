@@ -958,11 +958,11 @@ An entry for each well-known application profile is also registered at the "LAKE
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
-        e'methods' : 3, / LAKE Method Type 3 /
-  e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
-     e'cred_types' : 1, / CWT Claims Set (CCS) /
-  e'id_cred_types' : 4, / kid /
-       e'app_prof' : e'APP-PROF-MINIMAL-CS-2'
+         e'methods' : 3, / LAKE Method Type 3 /
+   e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
+      e'cred_types' : 1, / CWT Claims Set (CCS) /
+   e'id_cred_types' : 4, / kid /
+  e'app_prof_param' : e'APP-PROF-MINIMAL-CS-2'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -974,11 +974,11 @@ This application profile is aligned with the example trace of LAKE compiled in {
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
-        e'methods' : 3, / LAKE Method Type 3 /
-  e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
-     e'cred_types' : 1, / CWT Claims Set (CCS) /
-  e'id_cred_types' : 4, / kid /
-       e'app_prof' : e'APP-PROF-MINIMAL-CS-0'
+         e'methods' : 3, / LAKE Method Type 3 /
+   e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
+      e'cred_types' : 1, / CWT Claims Set (CCS) /
+   e'id_cred_types' : 4, / kid /
+  e'app_prof_param' : e'APP-PROF-MINIMAL-CS-0'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -988,12 +988,12 @@ This minimal application profile is suitable for LAKE peers with very limited ca
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
-        e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-  e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
-     e'cred_types' : [1, 2], / CWT Claims Set (CCS)
-                             and X.509 certificate /
-  e'id_cred_types' : [4, 34], / kid and x5t /
-       e'app_prof' : e'APP-PROF-BASIC-CS-2-X509'
+         e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+   e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
+      e'cred_types' : [1, 2], / CWT Claims Set (CCS)
+                              and X.509 certificate /
+   e'id_cred_types' : [4, 34], / kid and x5t /
+  e'app_prof_param' : e'APP-PROF-BASIC-CS-2-X509'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1005,12 +1005,12 @@ This application profile is aligned with the example trace of LAKE compiled in {
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
-        e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-  e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
-     e'cred_types' : [1, 2], / CWT Claims Set (CCS)
-                             and X.509 certificate /
-  e'id_cred_types' : [4, 34], / kid and x5t /
-       e'app_prof' : e'APP-PROF-BASIC-CS-0-X509'
+         e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+   e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
+      e'cred_types' : [1, 2], / CWT Claims Set (CCS)
+                              and X.509 certificate /
+   e'id_cred_types' : [4, 34], / kid and x5t /
+  e'app_prof_param' : e'APP-PROF-BASIC-CS-0-X509'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1022,12 +1022,12 @@ This application profile is aligned with the example trace of LAKE compiled in {
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
-        e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-  e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
-     e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
-                                        and C509 certificate /
-  e'id_cred_types' : [4, e'c5t'], / kid and c5t /
-       e'app_prof' : e'APP-PROF-BASIC-CS-2-C509'
+         e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+   e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
+      e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
+                                         and C509 certificate /
+   e'id_cred_types' : [4, e'c5t'], / kid and c5t /
+  e'app_prof_param' : e'APP-PROF-BASIC-CS-2-C509'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1037,12 +1037,12 @@ This basic application profile is suitable for LAKE peers with fairly limited ca
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
-        e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-  e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
-     e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
-                                        and C509 certificate /
-  e'id_cred_types' : [4, e'c5t'], / kid and c5t /
-       e'app_prof' : e'APP-PROF-BASIC-CS-0-C509'
+         e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+   e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
+      e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
+                                         and C509 certificate /
+   e'id_cred_types' : [4, e'c5t'], / kid and c5t /
+  e'app_prof_param' : e'APP-PROF-BASIC-CS-0-C509'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1052,15 +1052,15 @@ This basic application profile is suitable for LAKE peers with fairly limited ca
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
-        e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-  e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
-     e'cred_types' : [1, 2, e'c509_cert'], / CWT Claims Set (CCS),
-                                           X.509 certificate,
-                                           and C509 certificate /
-  e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
-                                                      x5t, x5chain,
-                                                      c5t, and c5c /
-       e'app_prof' : e'APP-PROF-INTERMEDIATE-CS-2'
+         e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+   e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
+      e'cred_types' : [1, 2, e'c509_cert'], / CWT Claims Set (CCS),
+                                            X.509 certificate,
+                                            and C509 certificate /
+   e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
+                                                       x5t, x5chain,
+                                                       c5t, and c5c /
+  e'app_prof_param' : e'APP-PROF-INTERMEDIATE-CS-2'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1072,15 +1072,15 @@ This application profile is aligned with the example trace of LAKE compiled in {
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
-        e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-  e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
-     e'cred_types' : [1, 2, e'c509_cert'], / CWT Claims Set (CCS),
-                                             X.509 certificate,
-                                             and C509 certificate /
-  e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
-                                                      x5t, x5chain,
-                                                      c5t, and c5c /
-       e'app_prof' : e'APP-PROF-INTERMEDIATE-CS-0'
+         e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+   e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
+      e'cred_types' : [1, 2, e'c509_cert'], / CWT Claims Set (CCS),
+                                            X.509 certificate,
+                                            and C509 certificate /
+   e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
+                                                       x5t, x5chain,
+                                                       c5t, and c5c /
+  e'app_prof_param' : e'APP-PROF-INTERMEDIATE-CS-0'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1092,20 +1092,20 @@ This application profile is aligned with the example trace of LAKE compiled in {
 
 ~~~~~~~~~~~~~~~~~~~~ cbor-diag
 {
-        e'methods' : [0, 1, 2, 3], / LAKE Method Types
-                                     0, 1, 2, and 3 /
-  e'cipher_suites' : [0, 1, 2, 3], / LAKE Cipher Suites
-                                     0, 1, 2, and 3 /
-     e'cred_types' : [1, 0, 2, e'c509_cert'], / CWT Claims Set (CCS),
-                                              CWT, X.509 certificate,
-                                              and C509 certificate /
-  e'id_cred_types' : [4, 14, 13, 34, 33, e'c5t', e'c5c'], / kid,
-                                                          kccs, kcwt,
-                                                          x5t,
-                                                          x5chain,
-                                                          c5t, and
-                                                          c5c /
-       e'app_prof' : e'APP-PROF-EXTENSIVE'
+         e'methods' : [0, 1, 2, 3], / LAKE Method Types
+                                    0, 1, 2, and 3 /
+   e'cipher_suites' : [0, 1, 2, 3], / LAKE Cipher Suites
+                                    0, 1, 2, and 3 /
+      e'cred_types' : [1, 0, 2, e'c509_cert'], / CWT Claims Set (CCS),
+                                               CWT, X.509 certificate,
+                                               and C509 certificate /
+   e'id_cred_types' : [4, 14, 13, 34, 33, e'c5t', e'c5c'], / kid,
+                                                           kccs, kcwt,
+                                                           x5t,
+                                                           x5chain,
+                                                           c5t, and
+                                                           c5c /
+  e'app_prof_param' : e'APP-PROF-EXTENSIVE'
 }
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1421,7 +1421,7 @@ cred_types = 6
 id_cred_types = 7
 eads = 8
 trust_anchors = 11
-app_prof = 23
+app_prof_param = 23
 
 ; LAKE Application Profiles
 APP-PROF-MINIMAL-CS-2 = 0
@@ -1454,6 +1454,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -06 to -07 ## {#sec-06-07}
+
+* Use "app_prof_param" in the CDDL model of abbreviations.
 
 * Fixed reference to BCP14/RFC2119/RFC8174.
 
