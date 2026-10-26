@@ -2055,11 +2055,13 @@ Table of Contents
                                        0, 1, 2, and 3 /
       e'cipher_suites' : [0, 1, 2, 3], / LAKE Cipher Suites
                                        0, 1, 2, and 3 /
-         e'cred_types' : [1, 0, 2, e'c509_cert'], / CWT Claims Set (CCS),
-                                                  CWT, X.509 certificate,
-                                                  and C509 certificate /
+         e'cred_types' : [1, 0, 2, e'c509_cert'], / CWT Claims Set
+                                                  (CCS), CWT, X.509
+                                                  certificate, and
+                                                  C509 certificate /
       e'id_cred_types' : [4, 14, 13, 34, 33, e'c5t', e'c5c'], / kid,
-                                                              kccs, kcwt,
+                                                              kccs,
+                                                              kcwt,
                                                               x5t,
                                                               x5chain,
                                                               c5t, and
