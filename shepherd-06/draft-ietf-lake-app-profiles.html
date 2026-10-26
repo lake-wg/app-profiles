@@ -1461,6 +1461,7 @@ LAKE_Application_Profile = {
 <a href="#name-cddl-definition-of-the-lake" class="selfRef">CDDL Definition of the LAKE_Application_Profile object</a>
         </figcaption></figure>
 </div>
+<p id="section-2-14"><a href="#iana-media-type" class="auto internal xref">Section 11.1</a> registers the media type "application/lake-app-profile+cbor-seq" and <a href="#iana-content-format" class="auto internal xref">Section 11.2</a> registers the corresponding CoAP Content-Format. Applications can use this media type to describe, distribute, and store a representation of a set of one or more LAKE application profiles. In particular, the media type can be used by messages whose payload conveys a set of one or more LAKE application profiles. When using this media type, the set of LAKE application profiles is encoded as a CBOR sequence <span>[<a href="#RFC8742" class="cite xref">RFC8742</a>]</span> of CBOR maps <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>. Each of the CBOR maps is a LAKE_Application_Profile object as defined in this section.<a href="#section-2-14" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="identifying-lake-application-profiles-by-profile-id">
@@ -2892,7 +2893,7 @@ It is encouraged that DNS is used with secure communication. Known threats for u
 <p id="section-11.1-7">Security considerations: See <a href="#sec-security-considerations" class="auto internal xref">Section 10</a> of [RFC-XXXX].<a href="#section-11.1-7" class="pilcrow">¶</a></p>
 <p id="section-11.1-8">Interoperability considerations: N/A<a href="#section-11.1-8" class="pilcrow">¶</a></p>
 <p id="section-11.1-9">Published specification: [RFC-XXXX]<a href="#section-11.1-9" class="pilcrow">¶</a></p>
-<p id="section-11.1-10">Applications that use this media type: Applications that need to describe, distribute, and store a representation of a LAKE application profile (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a> of [RFC-XXXX] and <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-11.1-10" class="pilcrow">¶</a></p>
+<p id="section-11.1-10">Applications that use this media type: Applications that need to describe, distribute, and store a representation of a set of one or more LAKE application profiles (see <a href="#sec-app-profile-cbor" class="auto internal xref">Section 2</a> of [RFC-XXXX] and <span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>).<a href="#section-11.1-10" class="pilcrow">¶</a></p>
 <p id="section-11.1-11">Fragment identifier considerations: N/A<a href="#section-11.1-11" class="pilcrow">¶</a></p>
 <p id="section-11.1-12">Additional information: N/A<a href="#section-11.1-12" class="pilcrow">¶</a></p>
 <p id="section-11.1-13">Person &amp; email address to contact for further information: LAKE WG mailing list (lake@ietf.org) or IETF Applications and Real-Time Area (art@ietf.org)<a href="#section-11.1-13" class="pilcrow">¶</a></p>
@@ -3504,13 +3505,16 @@ c509_cert = 3
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Use normative language on not storing hints until verified.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Relate the LAKE_Application_Profile object to the corresponding media type "application/lake-app-profile+cbor-seq".<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">Use "app_prof_param" in the CDDL model of abbreviations.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.2.1">Use normative language on not storing hints until verified.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">Fixed reference to BCP14/RFC2119/RFC8174.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.3.1">Use "app_prof_param" in the CDDL model of abbreviations.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.4">
+            <p id="appendix-B.1-1.4.1">Fixed reference to BCP14/RFC2119/RFC8174.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
