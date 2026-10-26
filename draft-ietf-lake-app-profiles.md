@@ -1185,7 +1185,7 @@ Different security guarantees can be achieved about the acquired information on 
 
   It is encouraged that DNS is used with secure communication. Known threats for unprotected DNS are described in {{RFC3833}} and {{RFC9076}}.
 
-If information about LAKE application profiles supported by a peer is distributed in an unprotected way (e.g., through unsecured communication), a consumer should treat such information as a hint and does not locally persist that information until verifying that it is reliable and authentic. For example, if the Responder receives a LAKE message_1 that includes the LAKE EAD item "Supported LAKE application profiles", the Responder will initially treat the information conveyed therein as a hint, and it is able to verify such information as reliable and authentic after receiving and successfully processing the later LAKE message_3 in the same LAKE session.
+If information about LAKE application profiles supported by a peer is distributed in an unprotected way (e.g., through unsecured communication), a consumer treats such information as a hint and MUST NOT locally persist that information until verifying that it is reliable and authentic. For example, if the Responder receives a LAKE message_1 that includes the LAKE EAD item "Supported LAKE application profiles", the Responder will initially treat the information conveyed therein as a hint, and it is able to verify such information as reliable and authentic after receiving and successfully processing the later LAKE message_3 in the same LAKE session.
 
 If the acquired information has been tampered with and does not reflect what a given peer supports and intends to advertise, this can set wrong expectations about what is effectively possible to do when running LAKE with that peer. Although this can still result in successfully running LAKE with a configuration that is commonly supported, such configuration would probably not have been selected, had reliable and authentic information been acquired. In the worst case, there might be the erroneous belief that there is not sufficient shared support with that peer.
 
@@ -1454,6 +1454,8 @@ c509_cert = 3
 {:removeinrfc}
 
 ## Version -06 to -07 ## {#sec-06-07}
+
+* Use normative language on not storing hints until verified.
 
 * Use "app_prof_param" in the CDDL model of abbreviations.
 
