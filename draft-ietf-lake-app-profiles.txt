@@ -5,7 +5,7 @@
 LAKE Working Group                                             M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 22 April 2027                                   19 October 2026
+Expires: 29 April 2027                                   26 October 2026
 
 
     Coordinating the Use of Application Profiles for the Lightweight
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 April 2027.
+   This Internet-Draft will expire on 29 April 2027.
 
 Copyright Notice
 
@@ -125,12 +125,13 @@ Table of Contents
      12.2.  Informative References
    Appendix A.  CDDL Model
    Appendix B.  Document Updates
-     B.1.  Version -05 to -06
-     B.2.  Version -04 to -05
-     B.3.  Version -03 to -04
-     B.4.  Version -02 to -03
-     B.5.  Version -01 to -02
-     B.6.  Version -00 to -01
+     B.1.  Version -06 to -07
+     B.2.  Version -05 to -06
+     B.3.  Version -04 to -05
+     B.4.  Version -03 to -04
+     B.5.  Version -02 to -03
+     B.6.  Version -01 to -02
+     B.7.  Version -00 to -01
    Acknowledgments
    Authors' Addresses
 
@@ -261,7 +262,7 @@ Table of Contents
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in
-   [BCP14] (RFC2119) (RFC8174) when, and only when, they appear in all
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
    The reader is expected to be familiar with terms and concepts defined
@@ -417,6 +418,17 @@ Table of Contents
    }
 
       Figure 1: CDDL Definition of the LAKE_Application_Profile object
+
+   Section 11.1 registers the media type "application/lake-app-
+   profile+cbor-seq" and Section 11.2 registers the corresponding CoAP
+   Content-Format.  Applications can use this media type to describe,
+   distribute, and store a representation of a set of one or more LAKE
+   application profiles.  In particular, the media type can be used by
+   messages whose payload conveys a set of one or more LAKE application
+   profiles.  When using this media type, the set of LAKE application
+   profiles is encoded as a CBOR sequence [RFC8742] of CBOR maps
+   [RFC8949].  Each of the CBOR maps is a LAKE_Application_Profile
+   object as defined in this section.
 
 3.  Identifying LAKE Application Profiles by Profile ID
 
@@ -1881,11 +1893,11 @@ Table of Contents
 7.1.  Well-Known Application Profile MINIMAL-CS-2
 
    {
-           e'methods' : 3, / LAKE Method Type 3 /
-     e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
-        e'cred_types' : 1, / CWT Claims Set (CCS) /
-     e'id_cred_types' : 4, / kid /
-          e'app_prof' : e'APP-PROF-MINIMAL-CS-2'
+            e'methods' : 3, / LAKE Method Type 3 /
+      e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
+         e'cred_types' : 1, / CWT Claims Set (CCS) /
+      e'id_cred_types' : 4, / kid /
+     e'app_prof_param' : e'APP-PROF-MINIMAL-CS-2'
    }
 
    This minimal application profile is suitable for LAKE peers with very
@@ -1901,11 +1913,11 @@ Table of Contents
 7.2.  Well-Known Application Profile MINIMAL-CS-0
 
    {
-           e'methods' : 3, / LAKE Method Type 3 /
-     e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
-        e'cred_types' : 1, / CWT Claims Set (CCS) /
-     e'id_cred_types' : 4, / kid /
-          e'app_prof' : e'APP-PROF-MINIMAL-CS-0'
+            e'methods' : 3, / LAKE Method Type 3 /
+      e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
+         e'cred_types' : 1, / CWT Claims Set (CCS) /
+      e'id_cred_types' : 4, / kid /
+     e'app_prof_param' : e'APP-PROF-MINIMAL-CS-0'
    }
 
    This minimal application profile is suitable for LAKE peers with very
@@ -1916,12 +1928,12 @@ Table of Contents
 7.3.  Well-Known Application Profile BASIC-CS-2-X509
 
    {
-           e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-     e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
-        e'cred_types' : [1, 2], / CWT Claims Set (CCS)
-                                and X.509 certificate /
-     e'id_cred_types' : [4, 34], / kid and x5t /
-          e'app_prof' : e'APP-PROF-BASIC-CS-2-X509'
+            e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+      e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
+         e'cred_types' : [1, 2], / CWT Claims Set (CCS)
+                                 and X.509 certificate /
+      e'id_cred_types' : [4, 34], / kid and x5t /
+     e'app_prof_param' : e'APP-PROF-BASIC-CS-2-X509'
    }
 
    This basic application profile is suitable for LAKE peers with fairly
@@ -1937,12 +1949,12 @@ Table of Contents
 7.4.  Well-Known Application Profile BASIC-CS-0-X509
 
    {
-           e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-     e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
-        e'cred_types' : [1, 2], / CWT Claims Set (CCS)
-                                and X.509 certificate /
-     e'id_cred_types' : [4, 34], / kid and x5t /
-          e'app_prof' : e'APP-PROF-BASIC-CS-0-X509'
+            e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+      e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
+         e'cred_types' : [1, 2], / CWT Claims Set (CCS)
+                                 and X.509 certificate /
+      e'id_cred_types' : [4, 34], / kid and x5t /
+     e'app_prof_param' : e'APP-PROF-BASIC-CS-0-X509'
    }
 
    This basic application profile is suitable for LAKE peers with fairly
@@ -1956,12 +1968,12 @@ Table of Contents
 7.5.  Well-Known Application Profile BASIC-CS-2-C509
 
    {
-           e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-     e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
-        e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
-                                           and C509 certificate /
-     e'id_cred_types' : [4, e'c5t'], / kid and c5t /
-          e'app_prof' : e'APP-PROF-BASIC-CS-2-C509'
+            e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+      e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
+         e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
+                                            and C509 certificate /
+      e'id_cred_types' : [4, e'c5t'], / kid and c5t /
+     e'app_prof_param' : e'APP-PROF-BASIC-CS-2-C509'
    }
 
    This basic application profile is suitable for LAKE peers with fairly
@@ -1973,12 +1985,12 @@ Table of Contents
 7.6.  Well-Known Application Profile BASIC-CS-0-C509
 
    {
-           e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-     e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
-        e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
-                                           and C509 certificate /
-     e'id_cred_types' : [4, e'c5t'], / kid and c5t /
-          e'app_prof' : e'APP-PROF-BASIC-CS-0-C509'
+            e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+      e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
+         e'cred_types' : [1, e'c509_cert'], / CWT Claims Set (CCS)
+                                            and C509 certificate /
+      e'id_cred_types' : [4, e'c5t'], / kid and c5t /
+     e'app_prof_param' : e'APP-PROF-BASIC-CS-0-C509'
    }
 
    This basic application profile is suitable for LAKE peers with fairly
@@ -1990,15 +2002,15 @@ Table of Contents
 7.7.  Well-Known Application Profile INTERMEDIATE-CS-2
 
    {
-           e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-     e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
-        e'cred_types' : [1, 2, e'c509_cert'], / CWT Claims Set (CCS),
-                                              X.509 certificate,
-                                              and C509 certificate /
-     e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
-                                                         x5t, x5chain,
-                                                         c5t, and c5c /
-          e'app_prof' : e'APP-PROF-INTERMEDIATE-CS-2'
+            e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+      e'cipher_suites' : 2, / LAKE Cipher Suite 2 /
+         e'cred_types' : [1, 2, e'c509_cert'], / CWT Claims Set (CCS),
+                                               X.509 certificate,
+                                               and C509 certificate /
+      e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
+                                                          x5t, x5chain,
+                                                          c5t, and c5c /
+     e'app_prof_param' : e'APP-PROF-INTERMEDIATE-CS-2'
    }
 
    This intermediate application profile is suitable for LAKE peers
@@ -2016,15 +2028,15 @@ Table of Contents
 7.8.  Well-Known Application Profile INTERMEDIATE-CS-0
 
    {
-           e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
-     e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
-        e'cred_types' : [1, 2, e'c509_cert'], / CWT Claims Set (CCS),
-                                                X.509 certificate,
-                                                and C509 certificate /
-     e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
-                                                         x5t, x5chain,
-                                                         c5t, and c5c /
-          e'app_prof' : e'APP-PROF-INTERMEDIATE-CS-0'
+            e'methods' : [0, 3], / LAKE Method Types 0 and 3 /
+      e'cipher_suites' : 0, / LAKE Cipher Suite 0 /
+         e'cred_types' : [1, 2, e'c509_cert'], / CWT Claims Set (CCS),
+                                               X.509 certificate,
+                                               and C509 certificate /
+      e'id_cred_types' : [4, 14, 34, 33, e'c5t', e'c5c'], / kid, kccs,
+                                                          x5t, x5chain,
+                                                          c5t, and c5c /
+     e'app_prof_param' : e'APP-PROF-INTERMEDIATE-CS-0'
    }
 
    This intermediate application profile is suitable for LAKE peers
@@ -2039,20 +2051,20 @@ Table of Contents
 7.9.  Well-Known Application Profile EXTENSIVE
 
    {
-           e'methods' : [0, 1, 2, 3], / LAKE Method Types
-                                        0, 1, 2, and 3 /
-     e'cipher_suites' : [0, 1, 2, 3], / LAKE Cipher Suites
-                                        0, 1, 2, and 3 /
-        e'cred_types' : [1, 0, 2, e'c509_cert'], / CWT Claims Set (CCS),
-                                                 CWT, X.509 certificate,
-                                                 and C509 certificate /
-     e'id_cred_types' : [4, 14, 13, 34, 33, e'c5t', e'c5c'], / kid,
-                                                             kccs, kcwt,
-                                                             x5t,
-                                                             x5chain,
-                                                             c5t, and
-                                                             c5c /
-          e'app_prof' : e'APP-PROF-EXTENSIVE'
+            e'methods' : [0, 1, 2, 3], / LAKE Method Types
+                                       0, 1, 2, and 3 /
+      e'cipher_suites' : [0, 1, 2, 3], / LAKE Cipher Suites
+                                       0, 1, 2, and 3 /
+         e'cred_types' : [1, 0, 2, e'c509_cert'], / CWT Claims Set (CCS),
+                                                  CWT, X.509 certificate,
+                                                  and C509 certificate /
+      e'id_cred_types' : [4, 14, 13, 34, 33, e'c5t', e'c5c'], / kid,
+                                                              kccs, kcwt,
+                                                              x5t,
+                                                              x5chain,
+                                                              c5t, and
+                                                              c5c /
+     e'app_prof_param' : e'APP-PROF-EXTENSIVE'
    }
 
    This extensive application profile is suitable for LAKE peers that,
@@ -2287,9 +2299,9 @@ Table of Contents
 
    If information about LAKE application profiles supported by a peer is
    distributed in an unprotected way (e.g., through unsecured
-   communication), a consumer should treat such information as a hint
-   and does not locally persist that information until verifying that it
-   is reliable and authentic.  For example, if the Responder receives a
+   communication), a consumer treats such information as a hint and MUST
+   NOT locally persist that information until verifying that it is
+   reliable and authentic.  For example, if the Responder receives a
    LAKE message_1 that includes the LAKE EAD item "Supported LAKE
    application profiles", the Responder will initially treat the
    information conveyed therein as a hint, and it is able to verify such
@@ -2350,9 +2362,9 @@ Table of Contents
    Published specification: [RFC-XXXX]
 
    Applications that use this media type: Applications that need to
-   describe, distribute, and store a representation of a LAKE
-   application profile (see Section 2 of [RFC-XXXX] and Section 3.9 of
-   [RFC9528]).
+   describe, distribute, and store a representation of a set of one or
+   more LAKE application profiles (see Section 2 of [RFC-XXXX] and
+   Section 3.9 of [RFC9528]).
 
    Fragment identifier considerations: N/A
 
@@ -2685,19 +2697,6 @@ Table of Contents
 
 12.1.  Normative References
 
-   [BCP14]    Best Current Practice 14,
-              <https://www.rfc-editor.org/info/bcp14>.
-              At the time of writing, this BCP comprises the following:
-
-              Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/info/rfc2119>.
-
-              Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
    [CoAP.Content.Formats]
               IANA, "CoAP Content-Formats",
               <https://www.iana.org/assignments/core-parameters/core-
@@ -2725,13 +2724,14 @@ Table of Contents
 
    [I-D.ietf-ace-edhoc-oscore-profile]
               Selander, G., Mattsson, J. P., Tiloca, M., and R. Höglund,
-              "Ephemeral Diffie-Hellman Over COSE (EDHOC) and Object
-              Security for Constrained Environments (OSCORE) Profile for
-              Authentication and Authorization for Constrained
-              Environments (ACE)", Work in Progress, Internet-Draft,
-              draft-ietf-ace-edhoc-oscore-profile-11, 6 July 2026,
+              "Lightweight Authenticated Key Exchange (LAKE) and Object
+              Security for Constrained RESTful Environments (OSCORE)
+              Profile of the Authentication and Authorization for
+              Constrained Environments (ACE) Framework", Work in
+              Progress, Internet-Draft, draft-ietf-ace-edhoc-oscore-
+              profile-12, 22 October 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
-              edhoc-oscore-profile-11>.
+              edhoc-oscore-profile-12>.
 
    [I-D.ietf-cose-cbor-encoded-cert]
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J.,
@@ -2748,6 +2748,11 @@ Table of Contents
               draft-ietf-lake-edhoc-psk-10, 5 October 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
               edhoc-psk-10>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
 
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
@@ -2786,6 +2791,10 @@ Table of Contents
               Writing an IANA Considerations Section in RFCs", BCP 26,
               RFC 8126, DOI 10.17487/RFC8126, June 2017,
               <https://www.rfc-editor.org/rfc/rfc8126>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
    [RFC8288]  Nottingham, M., "Web Linking", RFC 8288,
               DOI 10.17487/RFC8288, October 2017,
@@ -2901,7 +2910,7 @@ Appendix A.  CDDL Model
    id_cred_types = 7
    eads = 8
    trust_anchors = 11
-   app_prof = 23
+   app_prof_param = 23
 
    ; LAKE Application Profiles
    APP-PROF-MINIMAL-CS-2 = 0
@@ -2934,7 +2943,18 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -05 to -06
+B.1.  Version -06 to -07
+
+   *  Relate the LAKE_Application_Profile object to the corresponding
+      media type "application/lake-app-profile+cbor-seq".
+
+   *  Use normative language on not storing hints until verified.
+
+   *  Use "app_prof_param" in the CDDL model of abbreviations.
+
+   *  Fixed reference to BCP14/RFC2119/RFC8174.
+
+B.2.  Version -05 to -06
 
    *  Renamed EDHOC to LAKE as appropriate.  This also includes:
 
@@ -2966,7 +2986,7 @@ B.1.  Version -05 to -06
 
    *  Editorial fixes.
 
-B.2.  Version -04 to -05
+B.3.  Version -04 to -05
 
    *  Fixed CDDL definitions of the EDHOC_Application_Profile object and
       of the ead_value for the new EAD Item.
@@ -3019,7 +3039,7 @@ B.2.  Version -04 to -05
 
    *  Editorial fixes and improvements.
 
-B.3.  Version -03 to -04
+B.4.  Version -03 to -04
 
    *  Removed parameters that were removed from draft-ietf-ace-edhoc-
       oscore-profile.
@@ -3068,7 +3088,7 @@ B.3.  Version -03 to -04
 
    *  Editorial fixes and improvements.
 
-B.4.  Version -02 to -03
+B.5.  Version -02 to -03
 
    *  Removed restrictions on the scope of the EDHOC_Application_Profile
       object.
@@ -3092,7 +3112,7 @@ B.4.  Version -02 to -03
 
    *  Clarifications and editorial improvements.
 
-B.5.  Version -01 to -02
+B.6.  Version -01 to -02
 
    *  Revised order of sections.
 
@@ -3147,7 +3167,7 @@ B.5.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.6.  Version -00 to -01
+B.7.  Version -00 to -01
 
    *  Clarified motivation in the abstract and introduction.
 
