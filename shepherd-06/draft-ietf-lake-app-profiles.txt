@@ -2288,9 +2288,9 @@ Table of Contents
 
    If information about LAKE application profiles supported by a peer is
    distributed in an unprotected way (e.g., through unsecured
-   communication), a consumer should treat such information as a hint
-   and does not locally persist that information until verifying that it
-   is reliable and authentic.  For example, if the Responder receives a
+   communication), a consumer treats such information as a hint and MUST
+   NOT locally persist that information until verifying that it is
+   reliable and authentic.  For example, if the Responder receives a
    LAKE message_1 that includes the LAKE EAD item "Supported LAKE
    application profiles", the Responder will initially treat the
    information conveyed therein as a hint, and it is able to verify such
@@ -2933,6 +2933,8 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -06 to -07
+
+   *  Use normative language on not storing hints until verified.
 
    *  Use "app_prof_param" in the CDDL model of abbreviations.
 
